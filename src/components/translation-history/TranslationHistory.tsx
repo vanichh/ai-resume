@@ -1,5 +1,7 @@
 import { RESUME_TRANSLATION_LANGUAGE_LABELS, RESUME_TRANSLATION_TONE_LABELS } from '@common/constants';
 
+import { Button } from '@components/ui';
+
 import { useResumeStore } from '@store/resumeStore';
 
 import styles from './TranslationHistory.module.scss';
@@ -18,14 +20,18 @@ export function TranslationHistory() {
       <h2 className={styles.translationHistory__title}>История переводов</h2>
       <ul className={styles.translationHistory__list}>
         {history.map((translation) => {
-          const buttonClassName = `${styles.translationHistory__button} ${translation.id === activeId ? styles.translationHistory__button_active : ''}`;
+          const isActive = translation.id === activeId;
 
           return (
             <li key={translation.id}>
-              <button className={buttonClassName} type="button" onClick={() => selectTranslation(translation.id)}>
+              <Button
+                size="medium"
+                variant={isActive ? 'primary' : 'secondary'}
+                onClick={() => selectTranslation(translation.id)}
+              >
                 {RESUME_TRANSLATION_LANGUAGE_LABELS[translation.language]} ·{' '}
                 {RESUME_TRANSLATION_TONE_LABELS[translation.tone]}
-              </button>
+              </Button>
             </li>
           );
         })}

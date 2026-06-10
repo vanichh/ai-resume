@@ -68,6 +68,27 @@ export type ResumeAdvice = {
   actions: string[];
 };
 
+export type ResumeAnalysisHistoryItem = {
+  id: string;
+  advice: ResumeAdvice;
+  createdAt: string;
+  fileName: string;
+  resumeText: string;
+  targetRole: string;
+  vacancyText: string;
+};
+
+export type VacancyComparisonStatus = 'idle' | 'analyzing' | 'done' | 'error';
+
+export type VacancyComparisonItem = {
+  id: string;
+  advice: ResumeAdvice | null;
+  error: string;
+  status: VacancyComparisonStatus;
+  title: string;
+  vacancyText: string;
+};
+
 export type ResumeTranslation = {
   id: string;
   language: ResumeTranslationLanguage;

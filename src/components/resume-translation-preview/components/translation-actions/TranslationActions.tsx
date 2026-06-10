@@ -1,5 +1,7 @@
 import { copyToClipboard } from '@common/utils/copyToClipboard';
 
+import { Button } from '@components/ui';
+
 import {
   downloadResumeDoc,
   downloadResumePrintHtml,
@@ -13,41 +15,21 @@ import type { TranslationActionsProps } from './types';
 export function TranslationActions({ translation }: TranslationActionsProps) {
   return (
     <div className={styles.translationActions}>
-      <button
-        className={styles.translationActions__button}
-        type="button"
-        onClick={() => void copyToClipboard(translation.text)}
-      >
+      <Button size="small" onClick={() => void copyToClipboard(translation.text)}>
         Копировать
-      </button>
-      <button
-        className={styles.translationActions__button}
-        type="button"
-        onClick={() => downloadTranslationText(translation)}
-      >
+      </Button>
+      <Button size="small" onClick={() => downloadTranslationText(translation)}>
         TXT
-      </button>
-      <button
-        className={styles.translationActions__button}
-        type="button"
-        onClick={() => downloadTranslationMarkdown(translation)}
-      >
+      </Button>
+      <Button size="small" onClick={() => downloadTranslationMarkdown(translation)}>
         MD
-      </button>
-      <button
-        className={styles.translationActions__button}
-        type="button"
-        onClick={() => downloadResumeDoc(translation.text, 'translated-resume.doc')}
-      >
+      </Button>
+      <Button size="small" onClick={() => downloadResumeDoc(translation.text, 'translated-resume.doc')}>
         DOC
-      </button>
-      <button
-        className={styles.translationActions__button}
-        type="button"
-        onClick={() => downloadResumePrintHtml(translation.text, 'translated-resume-print.html')}
-      >
+      </Button>
+      <Button size="small" onClick={() => downloadResumePrintHtml(translation.text, 'translated-resume-print.html')}>
         PDF HTML
-      </button>
+      </Button>
     </div>
   );
 }

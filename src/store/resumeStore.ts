@@ -1,19 +1,30 @@
 import { create } from 'zustand';
 
-import { loadResumeWorkspace, saveResumeWorkspace } from '@common/utils/resumeWorkspaceStorage';
+import { createId } from '@common/utils/createId';
+import { loadResumeWorkspace } from '@common/utils/resumeWorkspaceStorage';
 
 import { analyzeResume, getLanguageModelStatus } from '@services/resume-advisor';
 import { parseResumeFile } from '@services/resume-parser';
 import { translateResume } from '@services/resume-translator';
 
-import { MIN_RESUME_TEXT_LENGTH, MODEL_HINTS } from './common/constants';
+import {
+  ANALYSIS_HISTORY_LIMIT,
+  COMPARISON_VACANCY_LIMIT,
+  MIN_RESUME_TEXT_LENGTH,
+  MODEL_HINTS,
+} from './common/constants';
 import { canUseModel } from './common/utils/canUseModel';
+import { getAnalysisTarget } from './common/utils/getAnalysisTarget';
 import { getErrorMessage } from './common/utils/getErrorMessage';
+import { persistWorkspace } from './common/utils/persistWorkspace';
+import { resetComparisonResults } from './common/utils/resetComparisonResults';
 
 import type { ResumeState, ResumeStore } from './types';
 
 const initialState: ResumeState = {
   advice: null,
+  analysisHistory: [],
+  comparisonVacancies: [],
   downloadProgress: null,
   error: '',
   fileName: '',
@@ -29,24 +40,33 @@ const initialState: ResumeState = {
   vacancyText: '',
 };
 
-function persistWorkspace(state: ResumeStore): void {
-  saveResumeWorkspace({
-    advice: state.advice,
-    resumeText: state.resumeText,
-    targetRole: state.targetRole,
-    translation: state.translation,
-    translationHistory: state.translationHistory,
-    translationLanguage: state.translationLanguage,
-    translationTone: state.translationTone,
-    vacancyText: state.vacancyText,
-  });
-}
-
 export const useResumeStore = create<ResumeStore>((set, get) => ({
   ...initialState,
 
+  addComparisonVacancy() {
+    const { comparisonVacancies } = get();
+    if (comparisonVacancies.length >= COMPARISON_VACANCY_LIMIT) {
+      return;
+    }
+
+    set({
+      comparisonVacancies: [
+        ...comparisonVacancies,
+        {
+          id: createId(),
+          advice: null,
+          error: '',
+          status: 'idle',
+          title: `Вакансия ${comparisonVacancies.length + 1}`,
+          vacancyText: '',
+        },
+      ],
+    });
+    persistWorkspace(get());
+  },
+
   async analyze() {
-    const { resumeText, targetRole } = get();
+    const { fileName, resumeText, targetRole, vacancyText } = get();
 
     set({
       advice: null,
@@ -56,12 +76,28 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
     });
 
     try {
-      const advice = await analyzeResume(resumeText, targetRole, (downloadProgress) => {
+      const advice = await analyzeResume(resumeText, getAnalysisTarget(targetRole, vacancyText), (downloadProgress) => {
         set({ downloadProgress });
       });
+      const historyItem = {
+        id: createId(),
+        advice,
+        createdAt: new Date().toISOString(),
+        fileName,
+        resumeText,
+        targetRole,
+        vacancyText,
+      };
 
       set({
         advice,
+        analysisHistory: [
+          historyItem,
+          ...get().analysisHistory.filter(
+            (item) =>
+              item.resumeText !== resumeText || item.targetRole !== targetRole || item.vacancyText !== vacancyText,
+          ),
+        ].slice(0, ANALYSIS_HISTORY_LIMIT),
         status: 'done',
       });
       persistWorkspace(get());
@@ -70,6 +106,67 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
         error: getErrorMessage(caught, 'Не удалось получить рекомендации.'),
         status: 'error',
       });
+    }
+  },
+
+  async analyzeComparison() {
+    const { comparisonVacancies, modelStatus, resumeText, targetRole } = get();
+    if (!resumeText || !canUseModel(modelStatus)) {
+      return;
+    }
+
+    const vacanciesToAnalyze = comparisonVacancies.filter((vacancy) => vacancy.vacancyText.trim());
+    if (vacanciesToAnalyze.length === 0) {
+      return;
+    }
+
+    set({
+      error: '',
+      comparisonVacancies: comparisonVacancies.map((vacancy) =>
+        vacancy.vacancyText.trim()
+          ? {
+              ...vacancy,
+              advice: null,
+              error: '',
+              status: 'analyzing',
+            }
+          : vacancy,
+      ),
+    });
+
+    for (const vacancy of vacanciesToAnalyze) {
+      try {
+        const advice = await analyzeResume(
+          resumeText,
+          getAnalysisTarget(targetRole || vacancy.title, vacancy.vacancyText),
+        );
+        set({
+          comparisonVacancies: get().comparisonVacancies.map((item) =>
+            item.id === vacancy.id
+              ? {
+                  ...item,
+                  advice,
+                  error: '',
+                  status: 'done',
+                }
+              : item,
+          ),
+        });
+      } catch (caught) {
+        set({
+          comparisonVacancies: get().comparisonVacancies.map((item) =>
+            item.id === vacancy.id
+              ? {
+                  ...item,
+                  advice: null,
+                  error: getErrorMessage(caught, 'Не удалось сравнить с вакансией.'),
+                  status: 'error',
+                }
+              : item,
+          ),
+        });
+      }
+      persistWorkspace(get());
     }
   },
 
@@ -93,6 +190,25 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
     set({ error: '' });
   },
 
+  clearAnalysisHistory() {
+    set({ analysisHistory: [] });
+    persistWorkspace(get());
+  },
+
+  removeAnalysisHistoryItem(id) {
+    set({
+      analysisHistory: get().analysisHistory.filter((item) => item.id !== id),
+    });
+    persistWorkspace(get());
+  },
+
+  removeComparisonVacancy(id) {
+    set({
+      comparisonVacancies: get().comparisonVacancies.filter((vacancy) => vacancy.id !== id),
+    });
+    persistWorkspace(get());
+  },
+
   async parseFile(file) {
     set({
       advice: null,
@@ -112,6 +228,7 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
       set({
         resumeText,
         status: 'ready',
+        comparisonVacancies: resetComparisonResults(get()),
       });
       persistWorkspace(get());
     } catch (caught) {
@@ -126,8 +243,10 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
   restoreWorkspace() {
     const stored = loadResumeWorkspace();
     set({
+      analysisHistory: stored.analysisHistory ?? [],
       resumeText: stored.resumeText ?? '',
       advice: stored.advice ?? null,
+      comparisonVacancies: stored.comparisonVacancies ?? [],
       status: stored.advice ? 'done' : stored.resumeText ? 'ready' : 'idle',
       targetRole: stored.targetRole ?? '',
       translation: stored.translation ?? null,
@@ -136,6 +255,38 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
       translationTone: stored.translationTone ?? 'atsFriendly',
       vacancyText: stored.vacancyText ?? '',
     });
+  },
+
+  selectAnalysisHistoryItem(id) {
+    const item = get().analysisHistory.find((historyItem) => historyItem.id === id);
+    if (!item) {
+      return;
+    }
+
+    set({
+      advice: item.advice,
+      fileName: item.fileName,
+      resumeText: item.resumeText,
+      status: 'done',
+      targetRole: item.targetRole,
+      translation: null,
+      vacancyText: item.vacancyText,
+    });
+    persistWorkspace(get());
+  },
+
+  selectComparisonVacancy(id) {
+    const vacancy = get().comparisonVacancies.find((item) => item.id === id);
+    if (!vacancy?.advice) {
+      return;
+    }
+
+    set({
+      advice: vacancy.advice,
+      status: 'done',
+      vacancyText: vacancy.vacancyText,
+    });
+    persistWorkspace(get());
   },
 
   selectTranslation(id) {
@@ -147,6 +298,7 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
   setResumeText(resumeText) {
     set({
       advice: null,
+      comparisonVacancies: resetComparisonResults(get()),
       resumeText,
       status: resumeText ? 'ready' : 'idle',
       translation: null,
@@ -154,8 +306,43 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
     persistWorkspace(get());
   },
 
+  setComparisonVacancyText(id, vacancyText) {
+    set({
+      comparisonVacancies: get().comparisonVacancies.map((vacancy) =>
+        vacancy.id === id
+          ? {
+              ...vacancy,
+              advice: null,
+              error: '',
+              status: 'idle',
+              vacancyText,
+            }
+          : vacancy,
+      ),
+    });
+    persistWorkspace(get());
+  },
+
+  setComparisonVacancyTitle(id, title) {
+    set({
+      comparisonVacancies: get().comparisonVacancies.map((vacancy) =>
+        vacancy.id === id
+          ? {
+              ...vacancy,
+              title,
+            }
+          : vacancy,
+      ),
+    });
+    persistWorkspace(get());
+  },
+
   setTargetRole(targetRole) {
-    set({ targetRole });
+    set({
+      advice: null,
+      status: get().resumeText ? 'ready' : 'idle',
+      targetRole,
+    });
     persistWorkspace(get());
   },
 
@@ -190,7 +377,11 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
   },
 
   setVacancyText(vacancyText) {
-    set({ vacancyText });
+    set({
+      advice: null,
+      status: get().resumeText ? 'ready' : 'idle',
+      vacancyText,
+    });
     persistWorkspace(get());
   },
 
@@ -233,17 +424,3 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
     }
   },
 }));
-
-export function selectCanAnalyze({ modelStatus, resumeText, status }: ResumeStore) {
-  return status === 'ready' && resumeText.length > 0 && canUseModel(modelStatus);
-}
-
-export function selectCanTranslate({ modelStatus, resumeText, status }: ResumeStore) {
-  return (
-    resumeText.length > 0 &&
-    status !== 'parsing' &&
-    status !== 'analyzing' &&
-    status !== 'translating' &&
-    canUseModel(modelStatus)
-  );
-}

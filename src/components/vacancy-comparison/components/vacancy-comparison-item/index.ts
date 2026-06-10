@@ -1,0 +1,1 @@
+export { VacancyComparisonItem } from './VacancyComparisonItem';

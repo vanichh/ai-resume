@@ -8,23 +8,8 @@
 
   &__row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-top: 12px;
-  }
-
-  &__button {
-    min-height: 40px;
-    border: 1px solid #b9c4d4;
-    border-radius: 8px;
-    color: #24405f;
-    background: #ffffff;
-    font-weight: 800;
-    cursor: pointer;
-
-    &:hover {
-      border-color: #2563eb;
-      color: #1d4ed8;
-    }
   }
 }

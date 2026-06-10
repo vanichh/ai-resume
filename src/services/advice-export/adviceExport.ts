@@ -2,6 +2,7 @@ import type { ResumeAdvice, ResumeTranslation } from '@common/types';
 
 import { downloadFile } from './common/utils/downloadFile';
 import { formatAdviceMarkdown } from './common/utils/formatAdviceMarkdown';
+import { formatAdviceReportHtml } from './common/utils/formatAdviceReportHtml';
 import { formatResumeDocument } from './common/utils/formatResumeDocument';
 
 export function downloadAdviceJson(advice: ResumeAdvice, fileName = 'resume-advice.json'): void {
@@ -10,6 +11,10 @@ export function downloadAdviceJson(advice: ResumeAdvice, fileName = 'resume-advi
 
 export function downloadAdviceMarkdown(advice: ResumeAdvice, fileName = 'resume-advice.md'): void {
   downloadFile(formatAdviceMarkdown(advice), fileName, 'text/markdown');
+}
+
+export function downloadAdviceReportHtml(advice: ResumeAdvice, fileName = 'resume-advice-report.html'): void {
+  downloadFile(formatAdviceReportHtml(advice), fileName, 'text/html');
 }
 
 export function downloadResumeDoc(text: string, fileName = 'resume.doc'): void {

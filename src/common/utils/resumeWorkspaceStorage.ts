@@ -1,8 +1,17 @@
 import { RESUME_WORKSPACE_STORAGE_KEY } from '@common/constants';
-import type { ResumeAdvice, ResumeTranslation, ResumeTranslationLanguage, ResumeTranslationTone } from '@common/types';
+import type {
+  ResumeAdvice,
+  ResumeAnalysisHistoryItem,
+  ResumeTranslation,
+  ResumeTranslationLanguage,
+  ResumeTranslationTone,
+  VacancyComparisonItem,
+} from '@common/types';
 
 export type StoredResumeWorkspace = {
   advice: ResumeAdvice | null;
+  analysisHistory: ResumeAnalysisHistoryItem[];
+  comparisonVacancies: VacancyComparisonItem[];
   resumeText: string;
   targetRole: string;
   translation: ResumeTranslation | null;

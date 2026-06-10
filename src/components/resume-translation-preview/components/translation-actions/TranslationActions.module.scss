@@ -2,21 +2,4 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-
-  &__button {
-    min-height: 32px;
-    padding: 0 10px;
-    border: 1px solid #b9c4d4;
-    border-radius: 8px;
-    color: #24405f;
-    background: #ffffff;
-    font-size: 12px;
-    font-weight: 800;
-    cursor: pointer;
-
-    &:hover {
-      border-color: #2563eb;
-      color: #1d4ed8;
-    }
-  }
 }

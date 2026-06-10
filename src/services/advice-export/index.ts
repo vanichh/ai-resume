@@ -1,1 +1,1 @@
-export { downloadAdviceJson, downloadAdviceMarkdown } from './adviceExport';
+export { downloadAdviceJson, downloadAdviceMarkdown, downloadAdviceReportHtml } from './adviceExport';

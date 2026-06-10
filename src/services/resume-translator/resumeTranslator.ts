@@ -6,6 +6,7 @@ import type { ResumeTranslation, ResumeTranslationLanguage, ResumeTranslationTon
 import { createId } from '@common/utils/createId';
 
 import { TRANSLATION_SYSTEM_PROMPT } from './common/constants';
+import { splitResumeForTranslation } from './common/utils/splitResumeForTranslation';
 
 export async function translateResume(
   resumeText: string,
@@ -35,25 +36,33 @@ export async function translateResume(
   try {
     const targetLanguage = RESUME_TRANSLATION_LANGUAGE_PROMPT_NAMES[language];
     const toneInstruction = RESUME_TRANSLATION_TONE_PROMPT_INSTRUCTIONS[tone];
-    const text = await session.prompt([
-      {
-        role: 'user',
-        content: [
-          `Translate this resume into ${targetLanguage}.`,
-          toneInstruction,
-          'Return only the translated resume text.',
-          'Keep headings, bullet structure, numbers, company names, product names, technical terms, URLs, emails, and phone numbers intact where appropriate.',
-          '',
-          resumeText,
-        ].join('\n'),
-      },
-    ]);
+    const resumeChunks = splitResumeForTranslation(resumeText);
+    const translatedChunks: string[] = [];
+
+    for (const [chunkIndex, resumeChunk] of resumeChunks.entries()) {
+      const text = await session.prompt([
+        {
+          role: 'user',
+          content: [
+            `Translate resume fragment ${chunkIndex + 1} of ${resumeChunks.length} into ${targetLanguage}.`,
+            toneInstruction,
+            'Return only the translated fragment text.',
+            'Translate every line and bullet from this fragment. Do not skip, shorten, summarize, merge, reorder, or add content.',
+            'Keep headings, bullet structure, numbers, company names, product names, technical terms, URLs, emails, and phone numbers intact where appropriate.',
+            '',
+            resumeChunk,
+          ].join('\n'),
+        },
+      ]);
+
+      translatedChunks.push(text.trim());
+    }
 
     return {
       id: createId(),
       language,
       tone,
-      text: text.trim(),
+      text: translatedChunks.join('\n\n'),
       createdAt: new Date().toISOString(),
     };
   } finally {

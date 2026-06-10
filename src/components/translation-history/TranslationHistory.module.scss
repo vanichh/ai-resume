@@ -20,22 +20,4 @@
     padding: 0;
     list-style: none;
   }
-
-  &__button {
-    min-height: 34px;
-    padding: 0 10px;
-    border: 1px solid #b9c4d4;
-    border-radius: 8px;
-    color: #24405f;
-    background: #ffffff;
-    font-size: 12px;
-    font-weight: 800;
-    cursor: pointer;
-
-    &_active {
-      color: #ffffff;
-      border-color: #165bd8;
-      background: #165bd8;
-    }
-  }
 }

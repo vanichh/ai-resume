@@ -1,4 +1,5 @@
-import { selectCanAnalyze, selectCanTranslate, useResumeStore } from '@store/resumeStore';
+import { useResumeStore } from '@store/resumeStore';
+import { selectCanAnalyze, selectCanTranslate } from '@store/selectors';
 
 import { STATUS_LABELS } from './common/constants';
 import { getSubmitButtonStatusClassName } from './common/utils/getSubmitButtonStatusClassName';
