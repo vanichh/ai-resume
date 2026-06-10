@@ -1,0 +1,30 @@
+.resumeInputHeader {
+  display: block;
+  min-width: 0;
+  margin-bottom: 22px;
+
+  &__eyebrow {
+    margin: 0 0 8px;
+    color: #5d6f86;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    max-width: 640px;
+    margin: 20px 0 0;
+    color: #111827;
+    font-size: 26px;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  &__subtitle {
+    margin: 10px 0 0;
+    color: #617086;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}

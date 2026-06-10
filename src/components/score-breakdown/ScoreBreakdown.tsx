@@ -1,0 +1,49 @@
+import { useAtsMatch } from '@common/hooks/useAtsMatch';
+import { getResumeSectionTitle } from '@common/utils/getResumeSectionTitle';
+
+import { useResumeStore } from '@store/resumeStore';
+
+import styles from './ScoreBreakdown.module.scss';
+
+export function ScoreBreakdown() {
+  const advice = useResumeStore((state) => state.advice);
+  const atsMatch = useAtsMatch();
+
+  const items = [
+    ...(advice?.sectionScores.map((score) => ({
+      label: getResumeSectionTitle(score.title),
+      value: score.score,
+    })) ?? []),
+    ...(atsMatch.keywords.length > 0
+      ? [
+          {
+            label: 'Ключевые слова ATS',
+            value: atsMatch.score,
+          },
+        ]
+      : []),
+  ];
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className={styles.scoreBreakdown}>
+      <h2 className={styles.scoreBreakdown__title}>Детализация оценки</h2>
+      <ul className={styles.scoreBreakdown__list}>
+        {items.map((item) => (
+          <li className={styles.scoreBreakdown__item} key={item.label}>
+            <div className={styles.scoreBreakdown__header}>
+              <span>{item.label}</span>
+              <strong>{item.value}/100</strong>
+            </div>
+            <div className={styles.scoreBreakdown__track} aria-hidden="true">
+              <span className={styles.scoreBreakdown__bar} style={{ width: `${item.value}%` }} />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}

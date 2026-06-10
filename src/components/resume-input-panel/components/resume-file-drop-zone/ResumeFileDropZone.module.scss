@@ -1,0 +1,51 @@
+.resumeFileDropZone {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  min-height: 144px;
+  margin-bottom: 14px;
+  padding: 22px;
+  place-content: center;
+  border: 1px dashed #9aabc0;
+  border-radius: 8px;
+  color: #4f6074;
+  background: #f7f9fc;
+  text-align: center;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background 150ms ease;
+
+  &:hover {
+    border-color: #1f65d6;
+    background: #f1f6ff;
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.12);
+  }
+
+  &__input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    justify-self: center;
+    border-radius: 999px;
+    color: #1d4ed8;
+    background: #e5edff;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  &__fileName {
+    color: #18212f;
+    overflow-wrap: anywhere;
+  }
+}

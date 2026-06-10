@@ -1,0 +1,98 @@
+.resumePreview {
+  min-height: 440px;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fbfcfe;
+  border: 1px solid #d9e0ea;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(24, 33, 47, 0.07);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 58px;
+    padding: 0 20px;
+    border-bottom: 1px solid #e1e7f0;
+    color: #64748b;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    color: #111827;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__actionButton {
+    min-height: 32px;
+    padding: 0 10px;
+    border: 1px solid #b9c4d4;
+    border-radius: 8px;
+    color: #24405f;
+    background: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+
+    &:disabled {
+      color: #728095;
+      background: #eef2f7;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      border-color: #2563eb;
+      color: #1d4ed8;
+    }
+  }
+
+  &__text {
+    width: 100%;
+    border: 0;
+    height: 380px;
+    margin: 0;
+    padding: 22px;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #253348;
+    background:
+      linear-gradient(#f8fafc 31px, transparent 31px) 0 0 / 100% 32px,
+      #fbfcfe;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 640px) {
+  .resumePreview {
+    width: min(100%, calc(100vw - 28px));
+    max-width: 100%;
+    min-height: 420px;
+
+    &__header {
+      display: grid;
+      gap: 8px;
+      padding: 14px 16px;
+    }
+
+    &__text {
+      height: 320px;
+      padding: 16px;
+    }
+  }
+}

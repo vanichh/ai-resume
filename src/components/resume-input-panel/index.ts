@@ -1,0 +1,1 @@
+export { ResumeInputPanel } from './ResumeInputPanel';

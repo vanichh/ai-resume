@@ -1,0 +1,1 @@
+export { parseResumeFile } from './resumeParser';

@@ -1,0 +1,41 @@
+.atsKeywordMatcher {
+  padding: 18px;
+  border: 1px solid #d9e0ea;
+  border-radius: 8px;
+  background: #fbfcfe;
+  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.055);
+
+  &__title {
+    margin: 0 0 8px;
+    color: #111827;
+    font-size: 16px;
+  }
+
+  &__summary {
+    margin: 0 0 12px;
+    color: #64748b;
+    line-height: 1.45;
+  }
+
+  &__keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__keyword {
+    padding: 6px 9px;
+    border: 1px solid #f1b8b2;
+    border-radius: 999px;
+    color: #b42318;
+    background: #fff1f0;
+    font-size: 12px;
+    font-weight: 800;
+
+    &_matched {
+      color: #0f766e;
+      border-color: #b7e4d5;
+      background: #ecfdf5;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.translationHistory {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #d9e0ea;
+  border-radius: 8px;
+  background: #fbfcfe;
+  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.055);
+
+  &__title {
+    margin: 0 0 12px;
+    color: #111827;
+    font-size: 16px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__button {
+    min-height: 34px;
+    padding: 0 10px;
+    border: 1px solid #b9c4d4;
+    border-radius: 8px;
+    color: #24405f;
+    background: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+
+    &_active {
+      color: #ffffff;
+      border-color: #165bd8;
+      background: #165bd8;
+    }
+  }
+}

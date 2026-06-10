@@ -1,0 +1,1 @@
+export { ResumeComparisonView } from './ResumeComparisonView';

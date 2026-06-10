@@ -1,0 +1,70 @@
+.sectionScoreList {
+  grid-column: 1 / -1;
+  padding: 18px;
+  border: 1px solid #d9e0ea;
+  border-radius: 8px;
+  background: #fbfcfe;
+  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.055);
+
+  &__title {
+    margin: 0 0 14px;
+    color: #111827;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  &__list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  &__name {
+    min-width: 0;
+    color: #263449;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  &__value {
+    color: #0f766e;
+    white-space: nowrap;
+  }
+
+  &__track {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #dde5f0;
+  }
+
+  &__bar {
+    display: block;
+    height: 100%;
+    min-width: 4px;
+    border-radius: inherit;
+    background: #0f766e;
+  }
+
+  &__comment {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+}

@@ -1,0 +1,1 @@
+export { ResumeTranslationPreview } from './ResumeTranslationPreview';
