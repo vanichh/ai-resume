@@ -1,13 +1,16 @@
 .translationHistory {
   min-width: 0;
   padding: 18px;
+
   border: 1px solid #d9e0ea;
   border-radius: 8px;
   background: #fbfcfe;
-  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.055);
+
+  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
 
   &__title {
     margin: 0 0 12px;
+
     color: #111827;
     font-size: 16px;
   }
@@ -16,8 +19,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+
     margin: 0;
     padding: 0;
+
     list-style: none;
   }
 }

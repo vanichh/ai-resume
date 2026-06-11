@@ -1,7 +1,9 @@
 import { AdviceBlock } from '@components/advice-block';
+import { ScoreBreakdown } from '@components/score-breakdown';
 
 import { useResumeStore } from '@store/resumeStore';
 
+import { AdviceScoreCard } from './components/advice-score-card';
 import { RewriteComparisonList } from './components/rewrite-comparison-list';
 import { SectionScoreList } from './components/section-score-list';
 
@@ -12,18 +14,8 @@ export function AdviceView() {
 
   return (
     <section className={styles.adviceView}>
-      <article className={styles.adviceView__scoreCard}>
-        <h2 className={styles.adviceView__scoreTitle}>Оценка</h2>
-        {advice ? (
-          <>
-            <strong className={styles.adviceView__scoreValue}>{advice.score}/100</strong>
-            <p className={styles.adviceView__scoreDescription}>{advice.targetRole}</p>
-          </>
-        ) : (
-          <p className={styles.adviceView__scoreDescription}>Оценка появится после анализа.</p>
-        )}
-      </article>
-
+      <AdviceScoreCard advice={advice} />
+      <ScoreBreakdown />
       <SectionScoreList scores={advice?.sectionScores ?? []} />
       <AdviceBlock
         title="Кратко"

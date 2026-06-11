@@ -1,13 +1,16 @@
-import { copyToClipboard } from '@common/utils/copyToClipboard';
+import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
 import { Button } from '@components/ui';
 
 import { downloadAdviceJson, downloadAdviceMarkdown, downloadAdviceReportHtml } from '@services/advice-export';
 
-import styles from './ExportActions.module.scss';
 import type { ExportActionsProps } from './types';
 
+import styles from './ExportActions.module.scss';
+
 export function ExportActions({ advice }: ExportActionsProps) {
+  const copyToClipboardWithNotification = useCopyToClipboardNotification();
+
   return (
     <>
       <p className={styles.exportActions__title}>Скачать рекомендации</p>
@@ -21,7 +24,13 @@ export function ExportActions({ advice }: ExportActionsProps) {
         <Button fullWidth size="large" onClick={() => downloadAdviceReportHtml(advice)}>
           PDF HTML
         </Button>
-        <Button fullWidth size="large" onClick={() => void copyToClipboard(JSON.stringify(advice, null, 2))}>
+        <Button
+          fullWidth
+          size="large"
+          onClick={() =>
+            void copyToClipboardWithNotification(JSON.stringify(advice, null, 2), 'Рекомендации скопированы.')
+          }
+        >
           Копировать
         </Button>
       </div>

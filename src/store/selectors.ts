@@ -26,3 +26,14 @@ export function selectCanCompareVacancies({ comparisonVacancies, modelStatus, re
     canUseModel(modelStatus)
   );
 }
+
+export function selectCanGenerateCoverLetter({ coverLetterStatus, modelStatus, resumeText, status }: ResumeStore) {
+  return (
+    resumeText.length > 0 &&
+    coverLetterStatus !== 'generating' &&
+    status !== 'parsing' &&
+    status !== 'analyzing' &&
+    status !== 'translating' &&
+    canUseModel(modelStatus)
+  );
+}

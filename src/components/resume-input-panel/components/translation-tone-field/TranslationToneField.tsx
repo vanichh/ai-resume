@@ -1,8 +1,9 @@
 import { RESUME_TRANSLATION_TONE_OPTIONS } from '@common/constants';
 import type { ResumeTranslationTone } from '@common/types';
 
-import styles from './TranslationToneField.module.scss';
 import type { TranslationToneFieldProps } from './types';
+
+import styles from './TranslationToneField.module.scss';
 
 export function TranslationToneField({ tone, onToneChange }: TranslationToneFieldProps) {
   return (

@@ -1,7 +1,8 @@
-import styles from './UnsupportedModelActions.module.scss';
 import type { UnsupportedModelActionsProps } from './types';
 
 import { CHROME_APP_URL, CHROME_DOWNLOAD_URL } from '../../common/constants';
+
+import styles from './UnsupportedModelActions.module.scss';
 
 export function UnsupportedModelActions({ modelStatus }: UnsupportedModelActionsProps) {
   if (modelStatus !== 'unsupported' && modelStatus !== 'unavailable') {

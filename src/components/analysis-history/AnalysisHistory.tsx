@@ -11,6 +11,7 @@ export function AnalysisHistory() {
   const history = useResumeStore((state) => state.analysisHistory);
   const removeAnalysisHistoryItem = useResumeStore((state) => state.removeAnalysisHistoryItem);
   const selectAnalysisHistoryItem = useResumeStore((state) => state.selectAnalysisHistoryItem);
+  const setAnalysisHistoryNote = useResumeStore((state) => state.setAnalysisHistoryNote);
 
   if (history.length === 0) {
     return null;
@@ -29,6 +30,7 @@ export function AnalysisHistory() {
           <AnalysisHistoryItem
             item={item}
             key={item.id}
+            onNoteChange={setAnalysisHistoryNote}
             onRemove={removeAnalysisHistoryItem}
             onSelect={selectAnalysisHistoryItem}
           />

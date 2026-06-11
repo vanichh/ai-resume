@@ -73,9 +73,20 @@ export type ResumeAnalysisHistoryItem = {
   advice: ResumeAdvice;
   createdAt: string;
   fileName: string;
+  note: string;
   resumeText: string;
   targetRole: string;
   vacancyText: string;
+};
+
+export type CoverLetterStatus = 'idle' | 'generating' | 'done' | 'error';
+
+export type CoverLetter = {
+  id: string;
+  createdAt: string;
+  targetRole: string;
+  vacancyText: string;
+  text: string;
 };
 
 export type VacancyComparisonStatus = 'idle' | 'analyzing' | 'done' | 'error';

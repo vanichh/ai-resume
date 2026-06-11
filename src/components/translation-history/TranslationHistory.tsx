@@ -20,13 +20,11 @@ export function TranslationHistory() {
       <h2 className={styles.translationHistory__title}>История переводов</h2>
       <ul className={styles.translationHistory__list}>
         {history.map((translation) => {
-          const isActive = translation.id === activeId;
-
           return (
             <li key={translation.id}>
               <Button
                 size="medium"
-                variant={isActive ? 'primary' : 'secondary'}
+                variant={translation.id === activeId ? 'primary' : 'secondary'}
                 onClick={() => selectTranslation(translation.id)}
               >
                 {RESUME_TRANSLATION_LANGUAGE_LABELS[translation.language]} ·{' '}

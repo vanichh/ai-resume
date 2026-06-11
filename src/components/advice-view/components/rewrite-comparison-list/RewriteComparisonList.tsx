@@ -1,5 +1,6 @@
-import styles from './RewriteComparisonList.module.scss';
 import type { RewriteComparisonListProps } from './types';
+
+import styles from './RewriteComparisonList.module.scss';
 
 export function RewriteComparisonList({ suggestions }: RewriteComparisonListProps) {
   if (suggestions.length === 0) {

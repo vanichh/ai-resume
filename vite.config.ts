@@ -9,6 +9,14 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/ai-resume/' : '/',
   plugins: [react()],
 
+  build: {
+    chunkSizeWarningLimit: 550,
+  },
+
+  css: {
+    devSourcemap: true,
+  },
+
   resolve: {
     alias: {
       '@common': getSourcePath('./src/common'),

@@ -1,0 +1,38 @@
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 0;
+
+  color: #5d6f86;
+  font-size: 13px;
+  font-weight: 800;
+
+  &__spinner {
+    flex: 0 0 auto;
+
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid #d9e0ea;
+    border-radius: 50%;
+
+    animation: loader-spin 0.72s linear infinite;
+
+    border-top-color: #165bd8;
+  }
+
+  &__label {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

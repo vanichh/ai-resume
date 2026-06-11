@@ -1,5 +1,6 @@
 import { RESUME_WORKSPACE_STORAGE_KEY } from '@common/constants';
 import type {
+  CoverLetter,
   ResumeAdvice,
   ResumeAnalysisHistoryItem,
   ResumeTranslation,
@@ -12,6 +13,7 @@ export type StoredResumeWorkspace = {
   advice: ResumeAdvice | null;
   analysisHistory: ResumeAnalysisHistoryItem[];
   comparisonVacancies: VacancyComparisonItem[];
+  coverLetter: CoverLetter | null;
   resumeText: string;
   targetRole: string;
   translation: ResumeTranslation | null;
@@ -36,4 +38,12 @@ export function loadResumeWorkspace(): Partial<StoredResumeWorkspace> {
 
 export function saveResumeWorkspace(value: StoredResumeWorkspace): void {
   localStorage.setItem(RESUME_WORKSPACE_STORAGE_KEY, JSON.stringify(value));
+}
+
+export function clearResumeWorkspace(): void {
+  localStorage.removeItem(RESUME_WORKSPACE_STORAGE_KEY);
+}
+
+export function getResumeWorkspaceStorageSize(): number {
+  return new Blob([localStorage.getItem(RESUME_WORKSPACE_STORAGE_KEY) ?? '']).size;
 }

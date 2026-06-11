@@ -1,9 +1,11 @@
 .adviceBlock {
   padding: 18px;
-  background: #fbfcfe;
+
   border: 1px solid #d9e0ea;
   border-radius: 8px;
-  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.055);
+  background: #fbfcfe;
+
+  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
 
   &_wide {
     grid-column: span 2;
@@ -11,6 +13,7 @@
 
   &__title {
     margin: 0 0 14px;
+
     color: #111827;
     font-size: 16px;
     line-height: 1.25;
@@ -19,38 +22,46 @@
   &__list {
     display: grid;
     gap: 11px;
+
     margin: 0;
     padding: 0;
+
     list-style: none;
   }
 
   &__item {
     position: relative;
+
     padding-left: 18px;
+
     color: #263449;
     line-height: 1.45;
 
     &::before {
-      content: '';
       position: absolute;
       top: 0.62em;
       left: 0;
+
       width: 6px;
       height: 6px;
+
       border-radius: 999px;
       background: #2f6fdd;
+
+      content: '';
     }
   }
 
   &__empty {
     margin: 0;
+
     color: #64748b;
     line-height: 1.45;
     overflow-wrap: anywhere;
   }
 }
 
-@media (max-width: 1020px) {
+@media (width <= 1020px) {
   .adviceBlock {
     &_wide {
       grid-column: auto;

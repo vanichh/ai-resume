@@ -1,5 +1,6 @@
-import styles from './AdviceBlock.module.scss';
 import type { AdviceBlockProps } from './types';
+
+import styles from './AdviceBlock.module.scss';
 
 export function AdviceBlock({ title, values, empty, wide = false }: AdviceBlockProps) {
   const blockClassName = `${styles.adviceBlock} ${wide ? styles.adviceBlock_wide : ''}`;

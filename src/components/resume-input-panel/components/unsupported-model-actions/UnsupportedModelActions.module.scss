@@ -2,18 +2,22 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+
   margin-bottom: 14px;
 
   &__action {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     min-height: 38px;
     padding: 0 12px;
+
     border: 1px solid #b9c4d4;
     border-radius: 8px;
+    background: #fff;
+
     color: #24405f;
-    background: #ffffff;
     font-size: 13px;
     font-weight: 800;
     text-align: center;
@@ -22,6 +26,7 @@
 
     &:hover {
       border-color: #2563eb;
+
       color: #1d4ed8;
     }
   }

@@ -1,0 +1,53 @@
+.coverLetterGenerator {
+  min-width: 0;
+  padding: 18px;
+
+  border: 1px solid #d9e0ea;
+  border-radius: 8px;
+  background: #fbfcfe;
+
+  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: #111827;
+    font-size: 16px;
+  }
+
+  &__subtitle {
+    margin: 4px 0 0;
+
+    color: #5d6f86;
+    font-size: 13px;
+  }
+
+  &__textarea {
+    margin-top: 14px;
+
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 10px;
+  }
+}
+
+@media (width <= 640px) {
+  .coverLetterGenerator {
+    &__header {
+      display: grid;
+    }
+  }
+}

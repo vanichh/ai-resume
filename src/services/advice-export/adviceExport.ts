@@ -17,6 +17,10 @@ export function downloadAdviceReportHtml(advice: ResumeAdvice, fileName = 'resum
   downloadFile(formatAdviceReportHtml(advice), fileName, 'text/html');
 }
 
+export function downloadCoverLetterText(text: string, fileName = 'cover-letter.txt'): void {
+  downloadFile(text, fileName, 'text/plain');
+}
+
 export function downloadResumeDoc(text: string, fileName = 'resume.doc'): void {
   downloadFile(formatResumeDocument('Resume', text), fileName, 'application/msword');
 }

@@ -1,9 +1,10 @@
 import type { ChangeEvent } from 'react';
 
-import styles from './ResumeFileDropZone.module.scss';
 import type { ResumeFileDropZoneProps } from './types';
 
 import { RESUME_FILE_ACCEPT } from '../../common/constants';
+
+import styles from './ResumeFileDropZone.module.scss';
 
 export function ResumeFileDropZone({ fileName, onFileChange }: ResumeFileDropZoneProps) {
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {

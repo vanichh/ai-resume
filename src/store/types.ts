@@ -1,5 +1,7 @@
 import type {
   AppStatus,
+  CoverLetter,
+  CoverLetterStatus,
   ModelStatus,
   ResumeAdvice,
   ResumeAnalysisHistoryItem,
@@ -13,6 +15,8 @@ export type ResumeState = {
   advice: ResumeAdvice | null;
   analysisHistory: ResumeAnalysisHistoryItem[];
   comparisonVacancies: VacancyComparisonItem[];
+  coverLetter: CoverLetter | null;
+  coverLetterStatus: CoverLetterStatus;
   downloadProgress: number | null;
   error: string;
   fileName: string;
@@ -20,6 +24,7 @@ export type ResumeState = {
   modelStatus: ModelStatus;
   resumeText: string;
   status: AppStatus;
+  successMessage: string;
   targetRole: string;
   translation: ResumeTranslation | null;
   translationHistory: ResumeTranslation[];
@@ -28,29 +33,56 @@ export type ResumeState = {
   vacancyText: string;
 };
 
-export type ResumeActions = {
-  addComparisonVacancy: () => void;
-  analyze: () => Promise<void>;
-  analyzeComparison: () => Promise<void>;
+export type AppActions = {
   checkModelStatus: () => Promise<void>;
   clearError: () => void;
-  clearAnalysisHistory: () => void;
-  removeAnalysisHistoryItem: (id: string) => void;
-  removeComparisonVacancy: (id: string) => void;
-  parseFile: (file: File) => Promise<void>;
+  clearSuccessMessage: () => void;
+  clearWorkspace: () => void;
   restoreWorkspace: () => void;
-  selectAnalysisHistoryItem: (id: string) => void;
-  selectComparisonVacancy: (id: string) => void;
-  selectTranslation: (id: string) => void;
-  setComparisonVacancyText: (id: string, value: string) => void;
-  setComparisonVacancyTitle: (id: string, value: string) => void;
+  showSuccessMessage: (message: string) => void;
+};
+
+export type ResumeActions = {
+  analyze: () => Promise<void>;
+  parseFile: (file: File) => Promise<void>;
   setResumeText: (value: string) => void;
   setTargetRole: (value: string) => void;
+  setVacancyText: (value: string) => void;
+};
+
+export type HistoryActions = {
+  clearAnalysisHistory: () => void;
+  removeAnalysisHistoryItem: (id: string) => void;
+  selectAnalysisHistoryItem: (id: string) => void;
+  setAnalysisHistoryNote: (id: string, value: string) => void;
+};
+
+export type ComparisonActions = {
+  addComparisonVacancy: () => void;
+  analyzeComparison: () => Promise<void>;
+  removeComparisonVacancy: (id: string) => void;
+  selectComparisonVacancy: (id: string) => void;
+  setComparisonVacancyText: (id: string, value: string) => void;
+  setComparisonVacancyTitle: (id: string, value: string) => void;
+};
+
+export type CoverLetterActions = {
+  generateCoverLetter: () => Promise<void>;
+  setCoverLetterText: (value: string) => void;
+};
+
+export type TranslationActions = {
+  selectTranslation: (id: string) => void;
   setTranslationText: (value: string) => void;
   setTranslationLanguage: (value: ResumeTranslationLanguage) => void;
   setTranslationTone: (value: ResumeTranslationTone) => void;
-  setVacancyText: (value: string) => void;
   translate: () => Promise<void>;
 };
 
-export type ResumeStore = ResumeState & ResumeActions;
+export type ResumeStore = ResumeState &
+  AppActions &
+  ResumeActions &
+  HistoryActions &
+  ComparisonActions &
+  CoverLetterActions &
+  TranslationActions;

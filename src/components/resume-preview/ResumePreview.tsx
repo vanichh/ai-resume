@@ -1,4 +1,6 @@
-import { copyToClipboard } from '@common/utils/copyToClipboard';
+import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
+
+import { Textarea } from '@components/ui';
 
 import { downloadResumeDoc, downloadResumePrintHtml } from '@services/advice-export/adviceExport';
 
@@ -7,6 +9,7 @@ import { useResumeStore } from '@store/resumeStore';
 import styles from './ResumePreview.module.scss';
 
 export function ResumePreview() {
+  const copyToClipboardWithNotification = useCopyToClipboardNotification();
   const resumeText = useResumeStore((state) => state.resumeText);
   const setResumeText = useResumeStore((state) => state.setResumeText);
 
@@ -20,7 +23,7 @@ export function ResumePreview() {
             className={styles.resumePreview__actionButton}
             type="button"
             disabled={!resumeText}
-            onClick={() => void copyToClipboard(resumeText)}
+            onClick={() => void copyToClipboardWithNotification(resumeText, 'Резюме скопировано.')}
           >
             Копировать
           </button>
@@ -42,9 +45,11 @@ export function ResumePreview() {
           </button>
         </div>
       </div>
-      <textarea
+      <Textarea
         className={styles.resumePreview__text}
+        minHeight={380}
         placeholder="После загрузки здесь появится извлеченный текст."
+        variant="code"
         value={resumeText}
         onChange={(event) => setResumeText(event.target.value)}
       />

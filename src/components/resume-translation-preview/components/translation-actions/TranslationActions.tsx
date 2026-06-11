@@ -1,4 +1,4 @@
-import { copyToClipboard } from '@common/utils/copyToClipboard';
+import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
 import { Button } from '@components/ui';
 
@@ -9,13 +9,19 @@ import {
   downloadTranslationText,
 } from '@services/advice-export/adviceExport';
 
-import styles from './TranslationActions.module.scss';
 import type { TranslationActionsProps } from './types';
 
+import styles from './TranslationActions.module.scss';
+
 export function TranslationActions({ translation }: TranslationActionsProps) {
+  const copyToClipboardWithNotification = useCopyToClipboardNotification();
+
   return (
     <div className={styles.translationActions}>
-      <Button size="small" onClick={() => void copyToClipboard(translation.text)}>
+      <Button
+        size="small"
+        onClick={() => void copyToClipboardWithNotification(translation.text, 'Перевод скопирован.')}
+      >
         Копировать
       </Button>
       <Button size="small" onClick={() => downloadTranslationText(translation)}>

@@ -7,6 +7,7 @@ export function persistWorkspace(state: ResumeStore): void {
     advice: state.advice,
     analysisHistory: state.analysisHistory,
     comparisonVacancies: state.comparisonVacancies,
+    coverLetter: state.coverLetter,
     resumeText: state.resumeText,
     targetRole: state.targetRole,
     translation: state.translation,

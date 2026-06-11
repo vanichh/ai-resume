@@ -1,9 +1,10 @@
-import { Button } from '@components/ui';
+import { Button, Textarea } from '@components/ui';
 
 import type { VacancyComparisonItemProps } from './types';
 
-import styles from '../../VacancyComparison.module.scss';
 import { VACANCY_COMPARISON_STATUS_LABELS } from '../../common/constants';
+
+import styles from '../../VacancyComparison.module.scss';
 
 export function VacancyComparisonItem({
   item,
@@ -28,8 +29,9 @@ export function VacancyComparisonItem({
           Удалить
         </Button>
       </div>
-      <textarea
+      <Textarea
         className={styles.vacancyComparison__textarea}
+        minHeight={130}
         placeholder="Вставьте текст вакансии"
         value={item.vacancyText}
         onChange={(event) => onTextChange(item.id, event.target.value)}

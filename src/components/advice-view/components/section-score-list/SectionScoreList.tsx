@@ -1,7 +1,8 @@
 import { getResumeSectionTitle } from '@common/utils/getResumeSectionTitle';
 
-import styles from './SectionScoreList.module.scss';
 import type { SectionScoreListProps } from './types';
+
+import styles from './SectionScoreList.module.scss';
 
 export function SectionScoreList({ scores }: SectionScoreListProps) {
   if (scores.length === 0) {

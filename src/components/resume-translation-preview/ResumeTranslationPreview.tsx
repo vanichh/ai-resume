@@ -1,5 +1,7 @@
 import { RESUME_TRANSLATION_LANGUAGE_LABELS } from '@common/constants';
 
+import { Textarea } from '@components/ui';
+
 import { useResumeStore } from '@store/resumeStore';
 
 import { TranslationActions } from './components/translation-actions';
@@ -23,8 +25,10 @@ export function ResumeTranslationPreview() {
           <TranslationActions translation={translation} />
         </div>
       </div>
-      <textarea
+      <Textarea
         className={styles.resumeTranslationPreview__text}
+        minHeight={300}
+        variant="code"
         value={translation.text}
         onChange={(event) => setTranslationText(event.target.value)}
       />

@@ -1,29 +1,19 @@
 .vacancyField {
   &__label {
     display: block;
+
     margin-bottom: 8px;
+
     color: #344256;
     font-size: 14px;
     font-weight: 800;
   }
 
   &__input {
-    width: 100%;
     max-width: 100%;
-    min-height: 104px;
     margin-bottom: 14px;
-    padding: 13px 14px;
-    resize: vertical;
-    border: 1px solid #bac6d6;
-    border-radius: 8px;
-    color: #18212f;
-    background: #ffffff;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
 
-    &:focus {
-      outline: 3px solid rgba(37, 99, 235, 0.18);
-      border-color: #2563eb;
-    }
+    color: #18212f;
+    line-height: 1.4;
   }
 }

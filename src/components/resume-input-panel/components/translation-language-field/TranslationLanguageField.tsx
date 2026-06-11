@@ -1,8 +1,9 @@
 import { RESUME_TRANSLATION_LANGUAGE_OPTIONS } from '@common/constants';
 import type { ResumeTranslationLanguage } from '@common/types';
 
-import styles from './TranslationLanguageField.module.scss';
 import type { TranslationLanguageFieldProps } from './types';
+
+import styles from './TranslationLanguageField.module.scss';
 
 export function TranslationLanguageField({ language, onLanguageChange }: TranslationLanguageFieldProps) {
   return (

@@ -1,15 +1,21 @@
-import { AdviceView } from '@components/advice-view';
-import { AnalysisHistory } from '@components/analysis-history';
-import { AtsKeywordMatcher } from '@components/ats-keyword-matcher';
-import { ResumeComparisonView } from '@components/resume-comparison-view';
+import { Suspense } from 'react';
+
 import { ResumeInputPanel } from '@components/resume-input-panel';
-import { ResumePreview } from '@components/resume-preview';
-import { ResumeTranslationPreview } from '@components/resume-translation-preview';
-import { ScoreBreakdown } from '@components/score-breakdown';
-import { TranslationHistory } from '@components/translation-history';
-import { VacancyComparison } from '@components/vacancy-comparison';
+import { Loader } from '@components/ui';
 
 import { useAppBootstrap } from './common/hooks/useAppBootstrap';
+import {
+  AdviceView,
+  AnalysisHistory,
+  AtsKeywordMatcher,
+  CoverLetterGenerator,
+  PrivacyCenter,
+  ResumeComparisonView,
+  ResumePreview,
+  ResumeTranslationPreview,
+  TranslationHistory,
+  VacancyComparison,
+} from './common/lazyComponents';
 
 import { AppToast } from './components/app-toast';
 
@@ -23,15 +29,24 @@ export function App() {
       <section className={styles.app__workspace}>
         <ResumeInputPanel />
         <div className={styles.app__content}>
-          <ResumePreview />
-          <AnalysisHistory />
-          <VacancyComparison />
-          <ResumeTranslationPreview />
-          <TranslationHistory />
-          <ResumeComparisonView />
-          <AtsKeywordMatcher />
-          <ScoreBreakdown />
-          <AdviceView />
+          <Suspense
+            fallback={
+              <div className={styles.app__loader}>
+                <Loader label="Загрузка рабочей области" />
+              </div>
+            }
+          >
+            <ResumePreview />
+            <PrivacyCenter />
+            <AnalysisHistory />
+            <VacancyComparison />
+            <CoverLetterGenerator />
+            <ResumeTranslationPreview />
+            <TranslationHistory />
+            <ResumeComparisonView />
+            <AtsKeywordMatcher />
+            <AdviceView />
+          </Suspense>
         </div>
       </section>
       <AppToast />

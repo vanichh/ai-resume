@@ -1,7 +1,8 @@
 import { useAtsMatch } from '@common/hooks/useAtsMatch';
-import { getResumeSectionTitle } from '@common/utils/getResumeSectionTitle';
 
 import { useResumeStore } from '@store/resumeStore';
+
+import { getScoreBreakdownItems } from './common/utils/getScoreBreakdownItems';
 
 import styles from './ScoreBreakdown.module.scss';
 
@@ -9,27 +10,14 @@ export function ScoreBreakdown() {
   const advice = useResumeStore((state) => state.advice);
   const atsMatch = useAtsMatch();
 
-  const items = [
-    ...(advice?.sectionScores.map((score) => ({
-      label: getResumeSectionTitle(score.title),
-      value: score.score,
-    })) ?? []),
-    ...(atsMatch.keywords.length > 0
-      ? [
-          {
-            label: 'Ключевые слова ATS',
-            value: atsMatch.score,
-          },
-        ]
-      : []),
-  ];
+  const items = getScoreBreakdownItems(advice, atsMatch);
 
   if (items.length === 0) {
     return null;
   }
 
   return (
-    <section className={styles.scoreBreakdown}>
+    <article className={styles.scoreBreakdown}>
       <h2 className={styles.scoreBreakdown__title}>Детализация оценки</h2>
       <ul className={styles.scoreBreakdown__list}>
         {items.map((item) => (
@@ -44,6 +32,6 @@ export function ScoreBreakdown() {
           </li>
         ))}
       </ul>
-    </section>
+    </article>
   );
 }

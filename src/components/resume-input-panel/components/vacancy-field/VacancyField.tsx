@@ -1,5 +1,8 @@
-import styles from './VacancyField.module.scss';
+import { Textarea } from '@components/ui';
+
 import type { VacancyFieldProps } from './types';
+
+import styles from './VacancyField.module.scss';
 
 export function VacancyField({ vacancyText, onVacancyTextChange }: VacancyFieldProps) {
   return (
@@ -7,9 +10,10 @@ export function VacancyField({ vacancyText, onVacancyTextChange }: VacancyFieldP
       <label className={styles.vacancyField__label} htmlFor="vacancy-text">
         Текст вакансии
       </label>
-      <textarea
+      <Textarea
         className={styles.vacancyField__input}
         id="vacancy-text"
+        minHeight={104}
         placeholder="Вставьте описание вакансии для сверки ключевых слов ATS"
         rows={4}
         value={vacancyText}

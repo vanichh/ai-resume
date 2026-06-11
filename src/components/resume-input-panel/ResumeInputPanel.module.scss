@@ -1,13 +1,19 @@
 .resumeInput {
-  align-self: start;
-  min-width: 0;
-  padding: 22px;
   position: sticky;
   top: 28px;
-  background: #fbfcfe;
+
+  align-self: start;
+
+  min-width: 0;
+  max-height: 90vh;
+  padding: 22px;
+  overflow: auto;
+
   border: 1px solid #d9e0ea;
   border-radius: 8px;
-  box-shadow: 0 16px 40px rgba(24, 33, 47, 0.08);
+  background: #fbfcfe;
+
+  box-shadow: 0 16px 40px rgb(24 33 47 / 8%);
 
   &__primaryButton {
     display: inline-flex;
@@ -15,35 +21,44 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
+
     width: 100%;
     min-height: 48px;
     padding: 10px 12px;
+
     border: 0;
     border-radius: 8px;
-    color: #ffffff;
     background: #165bd8;
+
+    color: #fff;
     font-weight: 800;
-    cursor: pointer;
+
     transition:
       background 150ms ease,
       transform 150ms ease,
       box-shadow 150ms ease;
 
+    cursor: pointer;
+
     &:not(:disabled):hover {
       background: #1248b0;
-      box-shadow: 0 10px 18px rgba(22, 91, 216, 0.22);
+
+      box-shadow: 0 10px 18px rgb(22 91 216 / 22%);
       transform: translateY(-1px);
     }
 
     &:disabled {
-      color: #728095;
       background: #d7dee8;
+
+      color: #728095;
+
       cursor: not-allowed;
 
       .resumeInput__primaryButtonStatus {
+        border-color: rgb(111 125 144 / 24%);
+        background: rgb(255 255 255 / 32%);
+
         color: #6f7d90;
-        border-color: rgba(111, 125, 144, 0.24);
-        background: rgba(255, 255, 255, 0.32);
       }
     }
   }
@@ -56,45 +71,54 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
+
     max-width: 100%;
     padding: 4px 8px;
-    border: 1px solid rgba(219, 234, 254, 0.44);
+
+    border: 1px solid rgb(219 234 254 / 44%);
     border-radius: 999px;
+    background: rgb(18 72 176 / 24%);
+
     color: #dbeafe;
-    background: rgba(18, 72, 176, 0.24);
     font-size: 11px;
     font-weight: 700;
     line-height: 1.1;
     white-space: nowrap;
 
     &::before {
-      content: '';
       flex: 0 0 auto;
+
       width: 6px;
       height: 6px;
+
       border-radius: 999px;
-      background: currentColor;
+      background: currentcolor;
+
+      content: '';
     }
 
     &_ready,
     &_done {
+      border-color: rgb(239 246 255 / 58%);
+      background: rgb(255 255 255 / 14%);
+
       color: #eff6ff;
-      border-color: rgba(239, 246, 255, 0.58);
-      background: rgba(255, 255, 255, 0.14);
     }
 
     &_error {
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.64);
-      background: rgba(15, 48, 128, 0.34);
+      border-color: rgb(255 255 255 / 64%);
+      background: rgb(15 48 128 / 34%);
+
+      color: #fff;
     }
 
     &_parsing,
     &_analyzing,
     &_translating {
+      border-color: rgb(191 219 254 / 54%);
+      background: rgb(29 78 216 / 32%);
+
       color: #bfdbfe;
-      border-color: rgba(191, 219, 254, 0.54);
-      background: rgba(29, 78, 216, 0.32);
     }
   }
 
@@ -102,22 +126,35 @@
     width: 100%;
     min-height: 42px;
     margin-top: 10px;
+
     border: 1px solid #b9c4d4;
     border-radius: 8px;
+    background: #fff;
+
     color: #24405f;
-    background: #ffffff;
     font-weight: 800;
+
     cursor: pointer;
 
     &:not(:disabled):hover {
       border-color: #2563eb;
+
       color: #1d4ed8;
     }
 
     &:disabled {
-      color: #728095;
       background: #eef2f7;
+
+      color: #728095;
+
       cursor: not-allowed;
     }
+  }
+}
+
+@media (width <= 1020px) {
+  .resumeInput {
+    position: static;
+    top: auto;
   }
 }

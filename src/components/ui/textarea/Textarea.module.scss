@@ -1,0 +1,45 @@
+.textarea {
+  box-sizing: border-box;
+  min-width: 0;
+  resize: vertical;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+
+  color: #253348;
+  font: inherit;
+  overflow-wrap: anywhere;
+
+  outline: none;
+
+  &:focus {
+    border-color: #165bd8;
+
+    box-shadow: 0 0 0 3px rgb(22 91 216 / 12%);
+  }
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &_default {
+    padding: 12px;
+
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  &_code {
+    padding: 22px;
+    overflow: auto;
+
+    background: #fbfcfe;
+
+    color: #253348;
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+}

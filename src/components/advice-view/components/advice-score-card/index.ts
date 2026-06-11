@@ -1,0 +1,1 @@
+export { AdviceScoreCard } from './AdviceScoreCard';

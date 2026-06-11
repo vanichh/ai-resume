@@ -1,27 +1,32 @@
 .vacancyComparison {
   min-width: 0;
   padding: 18px;
+
   border: 1px solid #d9e0ea;
   border-radius: 8px;
   background: #fbfcfe;
-  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.055);
+
+  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
 
   &__header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
+
     margin-bottom: 14px;
   }
 
   &__title {
     margin: 0;
+
     color: #111827;
     font-size: 16px;
   }
 
   &__subtitle {
     margin: 4px 0 0;
+
     color: #5d6f86;
     font-size: 13px;
   }
@@ -34,17 +39,20 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
+
     margin-bottom: 14px;
   }
 
   &__item {
     display: grid;
     gap: 10px;
+
     min-width: 0;
     padding: 12px;
+
     border: 1px solid #d9e0ea;
     border-radius: 8px;
-    background: #ffffff;
+    background: #fff;
   }
 
   &__itemHeader {
@@ -53,34 +61,33 @@
     gap: 8px;
   }
 
-  &__titleInput,
-  &__textarea {
+  &__titleInput {
     width: 100%;
     min-width: 0;
+    height: 36px;
+    padding: 0 10px;
+
     border: 1px solid #cbd5e1;
     border-radius: 8px;
+    background: #fff;
+
     color: #1f2937;
-    background: #ffffff;
     font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+
     outline: none;
 
     &:focus {
       border-color: #165bd8;
-      box-shadow: 0 0 0 3px rgba(22, 91, 216, 0.12);
+
+      box-shadow: 0 0 0 3px rgb(22 91 216 / 12%);
     }
   }
 
-  &__titleInput {
-    height: 36px;
-    padding: 0 10px;
-    font-size: 13px;
-    font-weight: 800;
-  }
-
   &__textarea {
-    min-height: 130px;
-    resize: vertical;
     padding: 10px;
+
     font-size: 13px;
     line-height: 1.5;
   }
@@ -88,15 +95,18 @@
   &__result {
     display: grid;
     gap: 8px;
+
     min-width: 0;
   }
 
   &__status {
     width: fit-content;
     padding: 4px 8px;
+
     border-radius: 999px;
-    color: #24405f;
     background: #eef4ff;
+
+    color: #24405f;
     font-size: 12px;
     font-weight: 800;
   }
@@ -110,6 +120,7 @@
   &__keywords,
   &__error {
     margin: 0;
+
     color: #253348;
     font-size: 13px;
     line-height: 1.5;
@@ -124,7 +135,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .vacancyComparison {
     &__list {
       grid-template-columns: minmax(0, 1fr);
@@ -132,7 +143,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .vacancyComparison {
     &__header,
     &__itemHeader {
