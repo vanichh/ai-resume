@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vanichh.github.io/ai-resume/sitemap.xml
