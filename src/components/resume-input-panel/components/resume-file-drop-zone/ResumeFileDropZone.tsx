@@ -1,5 +1,7 @@
 import type { ChangeEvent } from 'react';
 
+import { Upload } from 'lucide-react';
+
 import type { ResumeFileDropZoneProps } from './types';
 
 import { RESUME_FILE_ACCEPT } from '../../common/constants';
@@ -25,7 +27,7 @@ export function ResumeFileDropZone({ fileName, onFileChange }: ResumeFileDropZon
         onChange={handleFileChange}
       />
       <span className={styles.resumeFileDropZone__icon} aria-hidden="true">
-        +
+        <Upload aria-hidden size={18} />
       </span>
       <span>Выберите PDF, DOCX, TXT или MD</span>
       <strong className={styles.resumeFileDropZone__fileName}>{fileName || 'Файл не выбран'}</strong>

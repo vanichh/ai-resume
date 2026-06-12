@@ -1,8 +1,10 @@
-export type AppStatus = 'idle' | 'parsing' | 'ready' | 'analyzing' | 'translating' | 'done' | 'error';
+export type AppStatusType = 'idle' | 'parsing' | 'ready' | 'analyzing' | 'translating' | 'done' | 'error';
 
-export type ModelStatus = 'available' | 'checking' | 'downloadable' | 'downloading' | 'unavailable' | 'unsupported';
+export type LanguageModelLanguageCodeType = 'de' | 'en' | 'es' | 'fr' | 'ja';
 
-export type ResumeTranslationLanguage =
+export type ModelStatusType = 'available' | 'checking' | 'downloadable' | 'downloading' | 'unavailable' | 'unsupported';
+
+export type ResumeTranslationLanguageType =
   | 'arabic'
   | 'bulgarian'
   | 'chineseSimplified'
@@ -40,37 +42,37 @@ export type ResumeTranslationLanguage =
   | 'ukrainian'
   | 'vietnamese';
 
-export type ResumeTranslationTone = 'atsFriendly' | 'concise' | 'formal' | 'recruiterFriendly';
+export type ResumeTranslationToneType = 'atsFriendly' | 'concise' | 'formal' | 'recruiterFriendly';
 
-export type ResumeSectionScore = {
+export type ResumeSectionScoreType = {
   title: string;
   score: number;
   comment: string;
 };
 
-export type ResumeRewriteSuggestion = {
+export type ResumeRewriteSuggestionType = {
   original: string;
   improved: string;
   reason: string;
 };
 
-export type ResumeAdvice = {
+export type ResumeAdviceType = {
   score: number;
   targetRole: string;
-  sectionScores: ResumeSectionScore[];
+  sectionScores: ResumeSectionScoreType[];
   summary: string;
   strengths: string[];
   gaps: string[];
   missingKeywords: string[];
   rewrittenSummary: string;
-  rewriteSuggestions: ResumeRewriteSuggestion[];
+  rewriteSuggestions: ResumeRewriteSuggestionType[];
   bulletImprovements: string[];
   actions: string[];
 };
 
-export type ResumeAnalysisHistoryItem = {
+export type ResumeAnalysisHistoryItemType = {
   id: string;
-  advice: ResumeAdvice;
+  advice: ResumeAdviceType;
   createdAt: string;
   fileName: string;
   note: string;
@@ -79,9 +81,9 @@ export type ResumeAnalysisHistoryItem = {
   vacancyText: string;
 };
 
-export type CoverLetterStatus = 'idle' | 'generating' | 'done' | 'error';
+export type CoverLetterStatusType = 'idle' | 'generating' | 'done' | 'error';
 
-export type CoverLetter = {
+export type CoverLetterType = {
   id: string;
   createdAt: string;
   targetRole: string;
@@ -89,32 +91,32 @@ export type CoverLetter = {
   text: string;
 };
 
-export type VacancyComparisonStatus = 'idle' | 'analyzing' | 'done' | 'error';
+export type VacancyComparisonStatusType = 'idle' | 'analyzing' | 'done' | 'error';
 
-export type VacancyComparisonItem = {
+export type VacancyComparisonItemType = {
   id: string;
-  advice: ResumeAdvice | null;
+  advice: ResumeAdviceType | null;
   error: string;
-  status: VacancyComparisonStatus;
+  status: VacancyComparisonStatusType;
   title: string;
   vacancyText: string;
 };
 
-export type ResumeTranslation = {
+export type ResumeTranslationType = {
   id: string;
-  language: ResumeTranslationLanguage;
-  tone: ResumeTranslationTone;
+  language: ResumeTranslationLanguageType;
+  tone: ResumeTranslationToneType;
   text: string;
   createdAt: string;
 };
 
-export type AtsKeywordMatch = {
+export type AtsKeywordMatchType = {
   keyword: string;
   matched: boolean;
 };
 
-export type AtsMatch = {
-  keywords: AtsKeywordMatch[];
+export type AtsMatchType = {
+  keywords: AtsKeywordMatchType[];
   matchedCount: number;
   missingCount: number;
   score: number;

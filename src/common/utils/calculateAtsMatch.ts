@@ -1,4 +1,4 @@
-import type { AtsMatch } from '@common/types';
+import type { AtsMatchType } from '@common/types';
 
 const MIN_KEYWORD_LENGTH = 3;
 const MAX_KEYWORDS = 32;
@@ -19,7 +19,7 @@ const STOP_WORDS = new Set([
   'the',
 ]);
 
-export function calculateAtsMatch(resumeText: string, vacancyText: string): AtsMatch {
+export function calculateAtsMatch(resumeText: string, vacancyText: string): AtsMatchType {
   const normalizedResume = normalize(resumeText);
   const keywords = extractKeywords(vacancyText);
   const matches = keywords.map((keyword) => ({

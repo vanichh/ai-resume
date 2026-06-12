@@ -1,5 +1,5 @@
-import type { ResumeRewriteSuggestion } from '@common/types';
+import type { ResumeRewriteSuggestionType } from '@common/types';
 
 export type RewriteComparisonListProps = {
-  suggestions: ResumeRewriteSuggestion[];
+  suggestions: ResumeRewriteSuggestionType[];
 };

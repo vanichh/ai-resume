@@ -1,39 +1,39 @@
 import type {
-  AppStatus,
-  CoverLetter,
-  CoverLetterStatus,
-  ModelStatus,
-  ResumeAdvice,
-  ResumeAnalysisHistoryItem,
-  ResumeTranslation,
-  ResumeTranslationLanguage,
-  ResumeTranslationTone,
-  VacancyComparisonItem,
+  AppStatusType,
+  CoverLetterStatusType,
+  CoverLetterType,
+  ModelStatusType,
+  ResumeAdviceType,
+  ResumeAnalysisHistoryItemType,
+  ResumeTranslationLanguageType,
+  ResumeTranslationToneType,
+  ResumeTranslationType,
+  VacancyComparisonItemType,
 } from '@common/types';
 
-export type ResumeState = {
-  advice: ResumeAdvice | null;
-  analysisHistory: ResumeAnalysisHistoryItem[];
-  comparisonVacancies: VacancyComparisonItem[];
-  coverLetter: CoverLetter | null;
-  coverLetterStatus: CoverLetterStatus;
+export type ResumeStateType = {
+  advice: ResumeAdviceType | null;
+  analysisHistory: ResumeAnalysisHistoryItemType[];
+  comparisonVacancies: VacancyComparisonItemType[];
+  coverLetter: CoverLetterType | null;
+  coverLetterStatus: CoverLetterStatusType;
   downloadProgress: number | null;
   error: string;
   fileName: string;
   modelHint: string;
-  modelStatus: ModelStatus;
+  modelStatus: ModelStatusType;
   resumeText: string;
-  status: AppStatus;
+  status: AppStatusType;
   successMessage: string;
   targetRole: string;
-  translation: ResumeTranslation | null;
-  translationHistory: ResumeTranslation[];
-  translationLanguage: ResumeTranslationLanguage;
-  translationTone: ResumeTranslationTone;
+  translation: ResumeTranslationType | null;
+  translationHistory: ResumeTranslationType[];
+  translationLanguage: ResumeTranslationLanguageType;
+  translationTone: ResumeTranslationToneType;
   vacancyText: string;
 };
 
-export type AppActions = {
+export type AppActionsType = {
   checkModelStatus: () => Promise<void>;
   clearError: () => void;
   clearSuccessMessage: () => void;
@@ -42,7 +42,7 @@ export type AppActions = {
   showSuccessMessage: (message: string) => void;
 };
 
-export type ResumeActions = {
+export type ResumeActionsType = {
   analyze: () => Promise<void>;
   parseFile: (file: File) => Promise<void>;
   setResumeText: (value: string) => void;
@@ -50,14 +50,14 @@ export type ResumeActions = {
   setVacancyText: (value: string) => void;
 };
 
-export type HistoryActions = {
+export type HistoryActionsType = {
   clearAnalysisHistory: () => void;
   removeAnalysisHistoryItem: (id: string) => void;
   selectAnalysisHistoryItem: (id: string) => void;
   setAnalysisHistoryNote: (id: string, value: string) => void;
 };
 
-export type ComparisonActions = {
+export type ComparisonActionsType = {
   addComparisonVacancy: () => void;
   analyzeComparison: () => Promise<void>;
   removeComparisonVacancy: (id: string) => void;
@@ -66,23 +66,23 @@ export type ComparisonActions = {
   setComparisonVacancyTitle: (id: string, value: string) => void;
 };
 
-export type CoverLetterActions = {
+export type CoverLetterActionsType = {
   generateCoverLetter: () => Promise<void>;
   setCoverLetterText: (value: string) => void;
 };
 
-export type TranslationActions = {
+export type TranslationActionsType = {
   selectTranslation: (id: string) => void;
   setTranslationText: (value: string) => void;
-  setTranslationLanguage: (value: ResumeTranslationLanguage) => void;
-  setTranslationTone: (value: ResumeTranslationTone) => void;
+  setTranslationLanguage: (value: ResumeTranslationLanguageType) => void;
+  setTranslationTone: (value: ResumeTranslationToneType) => void;
   translate: () => Promise<void>;
 };
 
-export type ResumeStore = ResumeState &
-  AppActions &
-  ResumeActions &
-  HistoryActions &
-  ComparisonActions &
-  CoverLetterActions &
-  TranslationActions;
+export type ResumeStoreType = ResumeStateType &
+  AppActionsType &
+  ResumeActionsType &
+  HistoryActionsType &
+  ComparisonActionsType &
+  CoverLetterActionsType &
+  TranslationActionsType;

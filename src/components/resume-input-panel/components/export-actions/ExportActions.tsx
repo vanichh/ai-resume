@@ -1,3 +1,5 @@
+import { Copy } from 'lucide-react';
+
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
 import { Button } from '@components/ui';
@@ -25,13 +27,14 @@ export function ExportActions({ advice }: ExportActionsProps) {
           PDF HTML
         </Button>
         <Button
+          aria-label="Копировать рекомендации"
           fullWidth
           size="large"
           onClick={() =>
             void copyToClipboardWithNotification(JSON.stringify(advice, null, 2), 'Рекомендации скопированы.')
           }
         >
-          Копировать
+          <Copy aria-hidden size={18} />
         </Button>
       </div>
     </>

@@ -1,9 +1,9 @@
-import type { ResumeSliceCreator } from './types';
+import type { ResumeSliceCreatorType } from './types';
 
 import { persistWorkspace } from '../common/utils/persistWorkspace';
-import type { HistoryActions } from '../types';
+import type { HistoryActionsType } from '../types';
 
-export const createHistorySlice: ResumeSliceCreator<HistoryActions> = (set, get) => ({
+export const createHistorySlice: ResumeSliceCreatorType<HistoryActionsType> = (set, get) => ({
   clearAnalysisHistory() {
     set({ analysisHistory: [] });
     persistWorkspace(get());

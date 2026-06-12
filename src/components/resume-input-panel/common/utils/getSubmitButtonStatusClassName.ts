@@ -1,8 +1,8 @@
-import type { AppStatus } from '@common/types';
+import type { AppStatusType } from '@common/types';
 
 import styles from '../../ResumeInputPanel.module.scss';
 
-const statusClassNames: Record<AppStatus, string> = {
+const statusClassNames: Record<AppStatusType, string> = {
   analyzing: styles.resumeInput__primaryButtonStatus_analyzing,
   done: styles.resumeInput__primaryButtonStatus_done,
   error: styles.resumeInput__primaryButtonStatus_error,
@@ -12,6 +12,6 @@ const statusClassNames: Record<AppStatus, string> = {
   translating: styles.resumeInput__primaryButtonStatus_translating,
 };
 
-export function getSubmitButtonStatusClassName(status: AppStatus): string {
+export function getSubmitButtonStatusClassName(status: AppStatusType): string {
   return `${styles.resumeInput__primaryButtonStatus} ${statusClassNames[status]}`.trim();
 }

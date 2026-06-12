@@ -1,7 +1,7 @@
-import type { VacancyComparisonItem as VacancyComparisonItemModel } from '@common/types';
+import type { VacancyComparisonItemType as VacancyComparisonItemModelType } from '@common/types';
 
 export type VacancyComparisonItemProps = {
-  item: VacancyComparisonItemModel;
+  item: VacancyComparisonItemModelType;
   onRemove: (id: string) => void;
   onSelect: (id: string) => void;
   onTextChange: (id: string, value: string) => void;

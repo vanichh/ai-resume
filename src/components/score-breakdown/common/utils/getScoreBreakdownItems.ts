@@ -1,18 +1,21 @@
-import type { AtsMatch, ResumeAdvice } from '@common/types';
+import type { AtsMatchType, ResumeAdviceType } from '@common/types';
 import { getResumeSectionTitle } from '@common/utils/getResumeSectionTitle';
 
-import type { ScoreBreakdownItem } from '../../types';
+import type { ScoreBreakdownItemType } from '../../types';
 
 const ATS_KEYWORDS_LABEL = 'Ключевые слова ATS';
 
-export function getScoreBreakdownItems(advice: ResumeAdvice | null, atsMatch: AtsMatch): ScoreBreakdownItem[] {
+export function getScoreBreakdownItems(
+  advice: ResumeAdviceType | null,
+  atsMatch: AtsMatchType,
+): ScoreBreakdownItemType[] {
   const sectionScoreItems = getSectionScoreItems(advice);
   const atsScoreItem = getAtsScoreItem(atsMatch);
 
   return atsScoreItem ? [...sectionScoreItems, atsScoreItem] : sectionScoreItems;
 }
 
-function getSectionScoreItems(advice: ResumeAdvice | null): ScoreBreakdownItem[] {
+function getSectionScoreItems(advice: ResumeAdviceType | null): ScoreBreakdownItemType[] {
   if (!advice) {
     return [];
   }
@@ -23,7 +26,7 @@ function getSectionScoreItems(advice: ResumeAdvice | null): ScoreBreakdownItem[]
   }));
 }
 
-function getAtsScoreItem(atsMatch: AtsMatch): ScoreBreakdownItem | null {
+function getAtsScoreItem(atsMatch: AtsMatchType): ScoreBreakdownItemType | null {
   if (atsMatch.keywords.length === 0) {
     return null;
   }

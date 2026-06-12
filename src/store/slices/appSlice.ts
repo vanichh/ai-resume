@@ -2,12 +2,12 @@ import { clearResumeWorkspace, loadResumeWorkspace } from '@common/utils/resumeW
 
 import { getLanguageModelStatus } from '@services/resume-advisor';
 
-import type { ResumeSliceCreator } from './types';
+import type { ResumeSliceCreatorType } from './types';
 
 import { MODEL_HINTS } from '../common/constants';
-import type { AppActions, ResumeState } from '../types';
+import type { AppActionsType, ResumeStateType } from '../types';
 
-const clearedWorkspaceState: Omit<ResumeState, 'modelHint' | 'modelStatus'> = {
+const clearedWorkspaceState: Omit<ResumeStateType, 'modelHint' | 'modelStatus'> = {
   advice: null,
   analysisHistory: [],
   comparisonVacancies: [],
@@ -27,7 +27,7 @@ const clearedWorkspaceState: Omit<ResumeState, 'modelHint' | 'modelStatus'> = {
   vacancyText: '',
 };
 
-export const createAppSlice: ResumeSliceCreator<AppActions> = (set) => ({
+export const createAppSlice: ResumeSliceCreatorType<AppActionsType> = (set) => ({
   async checkModelStatus() {
     try {
       const modelStatus = await getLanguageModelStatus();

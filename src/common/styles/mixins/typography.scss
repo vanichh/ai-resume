@@ -1,0 +1,20 @@
+@use 'sass:map';
+
+$font-sizes: (
+  12px: 12px,
+  14px: 14px,
+  16px: 16px,
+  18px: 18px,
+  22px: 22px,
+  24px: 24px,
+  26px: 26px,
+  42px: 42px,
+);
+
+@function fontSize($size) {
+  @if not map.has-key($font-sizes, $size) {
+    @error 'Unknown font size token: #{$size}.';
+  }
+
+  @return map.get($font-sizes, $size);
+}

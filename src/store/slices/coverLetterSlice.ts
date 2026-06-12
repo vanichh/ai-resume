@@ -1,13 +1,13 @@
 import { generateCoverLetter as createCoverLetter } from '@services/cover-letter-generator';
 
-import type { ResumeSliceCreator } from './types';
+import type { ResumeSliceCreatorType } from './types';
 
 import { canUseModel } from '../common/utils/canUseModel';
 import { getErrorMessage } from '../common/utils/getErrorMessage';
 import { persistWorkspace } from '../common/utils/persistWorkspace';
-import type { CoverLetterActions } from '../types';
+import type { CoverLetterActionsType } from '../types';
 
-export const createCoverLetterSlice: ResumeSliceCreator<CoverLetterActions> = (set, get) => ({
+export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsType> = (set, get) => ({
   async generateCoverLetter() {
     const { advice, modelStatus, resumeText, targetRole, vacancyText } = get();
     if (!resumeText || !canUseModel(modelStatus)) {

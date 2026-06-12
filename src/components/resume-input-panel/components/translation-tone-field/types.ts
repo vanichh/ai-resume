@@ -1,6 +1,6 @@
-import type { ResumeTranslationTone } from '@common/types';
+import type { ResumeTranslationToneType } from '@common/types';
 
 export type TranslationToneFieldProps = {
-  tone: ResumeTranslationTone;
-  onToneChange: (value: ResumeTranslationTone) => void;
+  tone: ResumeTranslationToneType;
+  onToneChange: (value: ResumeTranslationToneType) => void;
 };

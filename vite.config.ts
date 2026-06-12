@@ -15,6 +15,12 @@ export default defineConfig(({ mode }) => ({
 
   css: {
     devSourcemap: true,
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "@common/styles/mixins" as *;\n',
+        quietDeps: true,
+      },
+    },
   },
 
   resolve: {

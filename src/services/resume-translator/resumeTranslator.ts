@@ -1,8 +1,10 @@
 import {
+  DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE,
+  RESUME_TRANSLATION_LANGUAGE_MODEL_OUTPUT_CODES,
   RESUME_TRANSLATION_LANGUAGE_PROMPT_NAMES,
   RESUME_TRANSLATION_TONE_PROMPT_INSTRUCTIONS,
 } from '@common/constants';
-import type { ResumeTranslation, ResumeTranslationLanguage, ResumeTranslationTone } from '@common/types';
+import type { ResumeTranslationLanguageType, ResumeTranslationToneType, ResumeTranslationType } from '@common/types';
 import { createId } from '@common/utils/createId';
 
 import { TRANSLATION_SYSTEM_PROMPT } from './common/constants';
@@ -10,15 +12,21 @@ import { splitResumeForTranslation } from './common/utils/splitResumeForTranslat
 
 export async function translateResume(
   resumeText: string,
-  language: ResumeTranslationLanguage,
-  tone: ResumeTranslationTone,
+  language: ResumeTranslationLanguageType,
+  tone: ResumeTranslationToneType,
   onDownloadProgress?: (progress: number) => void,
-): Promise<ResumeTranslation> {
+): Promise<ResumeTranslationType> {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
 
   const session = await globalThis.LanguageModel.create({
+    expectedOutputs: [
+      {
+        type: 'text',
+        languages: [RESUME_TRANSLATION_LANGUAGE_MODEL_OUTPUT_CODES[language] ?? DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE],
+      },
+    ],
     initialPrompts: [
       {
         role: 'system',

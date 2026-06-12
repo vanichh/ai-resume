@@ -1,18 +1,18 @@
 .resumeComparisonView {
   min-width: 0;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__title {
     margin: 0;
     padding: 18px 18px 0;
 
-    color: #111827;
-    font-size: 16px;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__columns {
@@ -27,9 +27,9 @@
     min-width: 0;
     padding: 14px;
 
-    border: 1px solid #d9e0ea;
+    border: 1px solid get-color(border);
     border-radius: 8px;
-    background: #fff;
+    background: get-color(whiteText);
   }
 
   &__label {
@@ -37,8 +37,8 @@
 
     margin-bottom: 10px;
 
-    color: #5d6f86;
-    font-size: 12px;
+    color: get-color(mutedText);
+    font-size: fontSize(12px);
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -48,16 +48,17 @@
     margin: 0;
     overflow: auto;
 
-    color: #253348;
+    @include innerScrollbar;
+
+    color: get-color(secondaryText);
     font-family: SFMono-Regular, Consolas, 'Liberation Mono', monospace;
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: fontSize(14px);
     white-space: pre-wrap;
     overflow-wrap: anywhere;
   }
 }
 
-@media (width <= 760px) {
+@include mediaMax(tablet) {
   .resumeComparisonView {
     &__columns {
       grid-template-columns: 1fr;

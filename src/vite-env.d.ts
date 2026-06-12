@@ -1,8 +1,10 @@
 /// <reference types="vite/client" />
 
-type LanguageModelAvailability = 'unavailable' | 'downloadable' | 'downloading' | 'available';
+type LanguageModelAvailabilityType = 'unavailable' | 'downloadable' | 'downloading' | 'available';
 
-type LanguageModelMessage =
+type LanguageModelLanguageCodeType = 'de' | 'en' | 'es' | 'fr' | 'ja';
+
+type LanguageModelMessageType =
   | string
   | Array<{
       role: 'system' | 'user' | 'assistant';
@@ -10,19 +12,20 @@ type LanguageModelMessage =
       prefix?: boolean;
     }>;
 
-type LanguageModelSession = EventTarget & {
+type LanguageModelSessionType = EventTarget & {
   prompt(
-    input: LanguageModelMessage,
+    input: LanguageModelMessageType,
     options?: { signal?: AbortSignal; responseConstraint?: unknown },
   ): Promise<string>;
   promptStreaming(
-    input: LanguageModelMessage,
+    input: LanguageModelMessageType,
     options?: { signal?: AbortSignal; responseConstraint?: unknown },
   ): ReadableStream<string>;
   destroy(): void;
 };
 
-type LanguageModelCreateOptions = {
+type LanguageModelCreateOptionsType = {
+  expectedOutputs?: Array<{ type: 'text'; languages: LanguageModelLanguageCodeType[] }>;
   initialPrompts?: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
   signal?: AbortSignal;
   monitor?: (monitor: EventTarget) => void;
@@ -31,8 +34,8 @@ type LanguageModelCreateOptions = {
 declare global {
   var LanguageModel:
     | {
-        availability(options?: unknown): Promise<LanguageModelAvailability>;
-        create(options?: LanguageModelCreateOptions): Promise<LanguageModelSession>;
+        availability(options?: LanguageModelCreateOptionsType): Promise<LanguageModelAvailabilityType>;
+        create(options?: LanguageModelCreateOptionsType): Promise<LanguageModelSessionType>;
       }
     | undefined;
 }

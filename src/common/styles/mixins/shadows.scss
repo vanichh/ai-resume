@@ -1,0 +1,5 @@
+@use './colors' as *;
+
+@mixin panelShadow {
+  box-shadow: 0 12px 30px get-color(workspaceShadow);
+}

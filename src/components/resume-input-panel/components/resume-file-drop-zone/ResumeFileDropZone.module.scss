@@ -8,11 +8,11 @@
   margin-bottom: 14px;
   padding: 22px;
 
-  border: 1px dashed #9aabc0;
+  border: 1px dashed get-color(borderDrop);
   border-radius: 8px;
-  background: #f7f9fc;
+  background: get-color(dropSurface);
 
-  color: #4f6074;
+  color: get-color(slateMuted);
   text-align: center;
   overflow-wrap: anywhere;
 
@@ -24,10 +24,10 @@
   cursor: pointer;
 
   &:hover {
-    border-color: #1f65d6;
-    background: #f1f6ff;
+    border-color: get-color(accentDrop);
+    background: get-color(accentSurfaceHover);
 
-    box-shadow: inset 0 0 0 1px rgb(37 99 235 / 12%);
+    box-shadow: inset 0 0 0 1px get-color(accentInset);
   }
 
   &__input {
@@ -48,15 +48,13 @@
     height: 34px;
 
     border-radius: 999px;
-    background: #e5edff;
+    background: get-color(accentSurfaceSoft);
 
-    color: #1d4ed8;
-    font-size: 24px;
-    line-height: 1;
+    color: get-color(accentText);
   }
 
   &__fileName {
-    color: #18212f;
+    color: get-color(slateInput);
     overflow-wrap: anywhere;
   }
 }

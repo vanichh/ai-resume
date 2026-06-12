@@ -1,7 +1,7 @@
 {
   "name": "ai-resume",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,6 +17,9 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@fontsource-utils/scss": "^0.2.2",
+    "@fontsource/inter": "^5.2.8",
+    "lucide-react": "^1.17.0",
     "mammoth": "^1.9.0",
     "pdfjs-dist": "^5.4.0",
     "react": "^19.1.0",

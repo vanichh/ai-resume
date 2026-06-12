@@ -1,5 +1,5 @@
-import type { ResumeSectionScore } from '@common/types';
+import type { ResumeSectionScoreType } from '@common/types';
 
 export type SectionScoreListProps = {
-  scores: ResumeSectionScore[];
+  scores: ResumeSectionScoreType[];
 };

@@ -1,8 +1,8 @@
 import { saveResumeWorkspace } from '@common/utils/resumeWorkspaceStorage';
 
-import type { ResumeStore } from '../../types';
+import type { ResumeStoreType } from '../../types';
 
-export function persistWorkspace(state: ResumeStore): void {
+export function persistWorkspace(state: ResumeStoreType): void {
   saveResumeWorkspace({
     advice: state.advice,
     analysisHistory: state.analysisHistory,

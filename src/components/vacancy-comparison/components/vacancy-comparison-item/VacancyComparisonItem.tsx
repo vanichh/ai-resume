@@ -1,4 +1,8 @@
-import { Button, Textarea } from '@components/ui';
+import { useState } from 'react';
+
+import { Trash2 } from 'lucide-react';
+
+import { Button, Modal, Textarea } from '@components/ui';
 
 import type { VacancyComparisonItemProps } from './types';
 
@@ -13,6 +17,7 @@ export function VacancyComparisonItem({
   onTextChange,
   onTitleChange,
 }: VacancyComparisonItemProps) {
+  const [isRemoveConfirmOpen, setIsRemoveConfirmOpen] = useState(false);
   const canSelectResult = Boolean(item.advice);
 
   return (
@@ -25,8 +30,8 @@ export function VacancyComparisonItem({
           value={item.title}
           onChange={(event) => onTitleChange(item.id, event.target.value)}
         />
-        <Button size="medium" onClick={() => onRemove(item.id)}>
-          Удалить
+        <Button aria-label="Удалить вакансию" size="medium" onClick={() => setIsRemoveConfirmOpen(true)}>
+          <Trash2 aria-hidden size={16} />
         </Button>
       </div>
       <Textarea
@@ -59,6 +64,17 @@ export function VacancyComparisonItem({
         )}
         {item.error && <p className={styles.vacancyComparison__error}>{item.error}</p>}
       </div>
+      <Modal
+        confirmLabel="Удалить"
+        description="Вакансия и результат сравнения будут удалены без возможности восстановления."
+        isOpen={isRemoveConfirmOpen}
+        title="Удалить вакансию?"
+        onClose={() => setIsRemoveConfirmOpen(false)}
+        onConfirm={() => {
+          onRemove(item.id);
+          setIsRemoveConfirmOpen(false);
+        }}
+      />
     </article>
   );
 }

@@ -2,11 +2,11 @@
   min-width: 0;
   padding: 18px;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__header {
     display: flex;
@@ -20,15 +20,15 @@
   &__title {
     margin: 0;
 
-    color: #111827;
-    font-size: 16px;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__subtitle {
     margin: 4px 0 0;
 
-    color: #5d6f86;
-    font-size: 13px;
+    color: get-color(mutedText);
+    font-size: fontSize(14px);
   }
 
   &__selectButton {
@@ -50,9 +50,9 @@
     min-width: 0;
     padding: 12px;
 
-    border: 1px solid #d9e0ea;
+    border: 1px solid get-color(border);
     border-radius: 8px;
-    background: #fff;
+    background: get-color(whiteText);
   }
 
   &__itemHeader {
@@ -67,29 +67,28 @@
     height: 36px;
     padding: 0 10px;
 
-    border: 1px solid #cbd5e1;
+    border: 1px solid get-color(borderInput);
     border-radius: 8px;
-    background: #fff;
+    background: get-color(whiteText);
 
-    color: #1f2937;
+    color: get-color(slateInputStrong);
     font: inherit;
-    font-size: 13px;
+    font-size: fontSize(14px);
     font-weight: 800;
 
     outline: none;
 
     &:focus {
-      border-color: #165bd8;
+      border-color: get-color(accent);
 
-      box-shadow: 0 0 0 3px rgb(22 91 216 / 12%);
+      box-shadow: 0 0 0 3px get-color(accentShadow);
     }
   }
 
   &__textarea {
     padding: 10px;
 
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: fontSize(14px);
   }
 
   &__result {
@@ -104,16 +103,16 @@
     padding: 4px 8px;
 
     border-radius: 999px;
-    background: #eef4ff;
+    background: get-color(accentSurface);
 
-    color: #24405f;
-    font-size: 12px;
+    color: get-color(slateText);
+    font-size: fontSize(12px);
     font-weight: 800;
   }
 
   &__score {
-    color: #111827;
-    font-size: 22px;
+    color: get-color(primaryText);
+    font-size: fontSize(22px);
   }
 
   &__summary,
@@ -121,21 +120,20 @@
   &__error {
     margin: 0;
 
-    color: #253348;
-    font-size: 13px;
-    line-height: 1.5;
+    color: get-color(secondaryText);
+    font-size: fontSize(14px);
   }
 
   &__keywords {
-    color: #5d6f86;
+    color: get-color(mutedText);
   }
 
   &__error {
-    color: #b42318;
+    color: get-color(danger);
   }
 }
 
-@media (width <= 900px) {
+@include mediaMax(compact) {
   .vacancyComparison {
     &__list {
       grid-template-columns: minmax(0, 1fr);
@@ -143,7 +141,7 @@
   }
 }
 
-@media (width <= 640px) {
+@include mediaMax(mobile) {
   .vacancyComparison {
     &__header,
     &__itemHeader {

@@ -2,8 +2,8 @@
   &__title {
     margin: 14px 0 8px;
 
-    color: #344256;
-    font-size: 14px;
+    color: get-color(slateLabel);
+    font-size: fontSize(14px);
     font-weight: 800;
   }
 

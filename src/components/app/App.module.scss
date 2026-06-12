@@ -3,7 +3,8 @@
   padding: 28px;
   overflow-x: clip;
 
-  background: linear-gradient(180deg, rgb(255 255 255 / 76%) 0, rgb(255 255 255 / 0%) 260px), #eef2f7;
+  background:
+    linear-gradient(180deg, get-color(whiteAlpha76) 0, get-color(whiteAlpha0) 260px), get-color(appBackground);
 
   &__workspace {
     display: grid;
@@ -27,15 +28,15 @@
     min-height: 160px;
     padding: 18px;
 
-    border: 1px solid #d9e0ea;
+    border: 1px solid get-color(border);
     border-radius: 8px;
-    background: #fbfcfe;
+    background: get-color(surface);
 
-    box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+    @include panelShadow;
   }
 }
 
-@media (width <= 1020px) {
+@include mediaMax(desktop) {
   .app {
     &__workspace {
       grid-template-columns: minmax(0, 1fr);
@@ -43,7 +44,7 @@
   }
 }
 
-@media (width <= 640px) {
+@include mediaMax(mobile) {
   .app {
     padding: 12px;
 

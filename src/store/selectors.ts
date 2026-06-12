@@ -1,12 +1,12 @@
 import { canUseModel } from './common/utils/canUseModel';
 
-import type { ResumeStore } from './types';
+import type { ResumeStoreType } from './types';
 
-export function selectCanAnalyze({ modelStatus, resumeText, status }: ResumeStore) {
+export function selectCanAnalyze({ modelStatus, resumeText, status }: ResumeStoreType) {
   return status === 'ready' && resumeText.length > 0 && canUseModel(modelStatus);
 }
 
-export function selectCanTranslate({ modelStatus, resumeText, status }: ResumeStore) {
+export function selectCanTranslate({ modelStatus, resumeText, status }: ResumeStoreType) {
   return (
     resumeText.length > 0 &&
     status !== 'parsing' &&
@@ -16,7 +16,7 @@ export function selectCanTranslate({ modelStatus, resumeText, status }: ResumeSt
   );
 }
 
-export function selectCanCompareVacancies({ comparisonVacancies, modelStatus, resumeText, status }: ResumeStore) {
+export function selectCanCompareVacancies({ comparisonVacancies, modelStatus, resumeText, status }: ResumeStoreType) {
   return (
     resumeText.length > 0 &&
     status !== 'parsing' &&
@@ -27,7 +27,7 @@ export function selectCanCompareVacancies({ comparisonVacancies, modelStatus, re
   );
 }
 
-export function selectCanGenerateCoverLetter({ coverLetterStatus, modelStatus, resumeText, status }: ResumeStore) {
+export function selectCanGenerateCoverLetter({ coverLetterStatus, modelStatus, resumeText, status }: ResumeStoreType) {
   return (
     resumeText.length > 0 &&
     coverLetterStatus !== 'generating' &&

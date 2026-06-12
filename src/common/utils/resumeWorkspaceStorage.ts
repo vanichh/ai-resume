@@ -1,42 +1,42 @@
 import { RESUME_WORKSPACE_STORAGE_KEY } from '@common/constants';
 import type {
-  CoverLetter,
-  ResumeAdvice,
-  ResumeAnalysisHistoryItem,
-  ResumeTranslation,
-  ResumeTranslationLanguage,
-  ResumeTranslationTone,
-  VacancyComparisonItem,
+  CoverLetterType,
+  ResumeAdviceType,
+  ResumeAnalysisHistoryItemType,
+  ResumeTranslationLanguageType,
+  ResumeTranslationToneType,
+  ResumeTranslationType,
+  VacancyComparisonItemType,
 } from '@common/types';
 
-export type StoredResumeWorkspace = {
-  advice: ResumeAdvice | null;
-  analysisHistory: ResumeAnalysisHistoryItem[];
-  comparisonVacancies: VacancyComparisonItem[];
-  coverLetter: CoverLetter | null;
+export type StoredResumeWorkspaceType = {
+  advice: ResumeAdviceType | null;
+  analysisHistory: ResumeAnalysisHistoryItemType[];
+  comparisonVacancies: VacancyComparisonItemType[];
+  coverLetter: CoverLetterType | null;
   resumeText: string;
   targetRole: string;
-  translation: ResumeTranslation | null;
-  translationHistory: ResumeTranslation[];
-  translationLanguage: ResumeTranslationLanguage;
-  translationTone: ResumeTranslationTone;
+  translation: ResumeTranslationType | null;
+  translationHistory: ResumeTranslationType[];
+  translationLanguage: ResumeTranslationLanguageType;
+  translationTone: ResumeTranslationToneType;
   vacancyText: string;
 };
 
-export function loadResumeWorkspace(): Partial<StoredResumeWorkspace> {
+export function loadResumeWorkspace(): Partial<StoredResumeWorkspaceType> {
   try {
     const rawValue = localStorage.getItem(RESUME_WORKSPACE_STORAGE_KEY);
     if (!rawValue) {
       return {};
     }
 
-    return JSON.parse(rawValue) as Partial<StoredResumeWorkspace>;
+    return JSON.parse(rawValue) as Partial<StoredResumeWorkspaceType>;
   } catch {
     return {};
   }
 }
 
-export function saveResumeWorkspace(value: StoredResumeWorkspace): void {
+export function saveResumeWorkspace(value: StoredResumeWorkspaceType): void {
   localStorage.setItem(RESUME_WORKSPACE_STORAGE_KEY, JSON.stringify(value));
 }
 

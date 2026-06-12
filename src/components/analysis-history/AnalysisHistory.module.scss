@@ -2,11 +2,11 @@
   min-width: 0;
   padding: 18px;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__header {
     display: flex;
@@ -20,8 +20,8 @@
   &__title {
     margin: 0;
 
-    color: #111827;
-    font-size: 16px;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__removeButton {
@@ -50,11 +50,11 @@
     min-width: 0;
     padding: 10px;
 
-    border: 1px solid #d9e0ea;
+    border: 1px solid get-color(border);
     border-radius: 8px;
-    background: #fff;
+    background: get-color(whiteText);
 
-    color: #253348;
+    color: get-color(secondaryText);
     text-align: left;
 
     cursor: pointer;
@@ -67,8 +67,8 @@
 
     min-width: 0;
 
-    color: #111827;
-    font-size: 13px;
+    color: get-color(primaryText);
+    font-size: fontSize(14px);
   }
 
   &__itemHeader strong {
@@ -84,8 +84,8 @@
     margin-top: 4px;
     overflow: hidden;
 
-    color: #5d6f86;
-    font-size: 12px;
+    color: get-color(mutedText);
+    font-size: fontSize(12px);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -93,11 +93,11 @@
   &__note {
     grid-column: 1 / -1;
 
-    font-size: 13px;
+    font-size: fontSize(14px);
   }
 }
 
-@media (width <= 640px) {
+@include mediaMax(mobile) {
   .analysisHistory {
     &__item {
       grid-template-columns: minmax(0, 1fr);

@@ -2,16 +2,16 @@ import { createId } from '@common/utils/createId';
 
 import { analyzeResume } from '@services/resume-advisor';
 
-import type { ResumeSliceCreator } from './types';
+import type { ResumeSliceCreatorType } from './types';
 
 import { ANALYSIS_HISTORY_LIMIT, MIN_RESUME_TEXT_LENGTH } from '../common/constants';
 import { getAnalysisTarget } from '../common/utils/getAnalysisTarget';
 import { getErrorMessage } from '../common/utils/getErrorMessage';
 import { persistWorkspace } from '../common/utils/persistWorkspace';
 import { resetComparisonResults } from '../common/utils/resetComparisonResults';
-import type { ResumeActions } from '../types';
+import type { ResumeActionsType } from '../types';
 
-export const createResumeSlice: ResumeSliceCreator<ResumeActions> = (set, get) => ({
+export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set, get) => ({
   async analyze() {
     const { fileName, resumeText, targetRole, vacancyText } = get();
 

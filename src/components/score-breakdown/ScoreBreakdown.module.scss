@@ -3,17 +3,17 @@
 
   padding: 18px;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__title {
     margin: 0 0 12px;
 
-    color: #111827;
-    font-size: 16px;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__list {
@@ -36,7 +36,7 @@
     justify-content: space-between;
     gap: 12px;
 
-    color: #263449;
+    color: get-color(secondaryTextStrong);
     font-weight: 800;
   }
 
@@ -45,7 +45,7 @@
     overflow: hidden;
 
     border-radius: 999px;
-    background: #dde5f0;
+    background: get-color(surfaceTrack);
   }
 
   &__bar {
@@ -55,6 +55,6 @@
     height: 100%;
 
     border-radius: inherit;
-    background: #0f766e;
+    background: get-color(success);
   }
 }

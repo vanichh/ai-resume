@@ -1,6 +1,6 @@
-import type { ResumeAdvice } from '@common/types';
+import type { ResumeAdviceType } from '@common/types';
 
-export function formatAdviceReportHtml(advice: ResumeAdvice): string {
+export function formatAdviceReportHtml(advice: ResumeAdviceType): string {
   return [
     '<!doctype html>',
     '<html lang="ru">',
@@ -38,7 +38,7 @@ function reportSection(title: string, content: string): string {
   return `<section class="section"><h2>${escapeHtml(title)}</h2>${content}</section>`;
 }
 
-function formatSectionScores(advice: ResumeAdvice): string {
+function formatSectionScores(advice: ResumeAdviceType): string {
   return `<div class="scoreGrid">${advice.sectionScores
     .map(
       (sectionScore) =>
@@ -49,7 +49,7 @@ function formatSectionScores(advice: ResumeAdvice): string {
     .join('')}</div>`;
 }
 
-function formatRewriteSuggestions(advice: ResumeAdvice): string {
+function formatRewriteSuggestions(advice: ResumeAdviceType): string {
   return `<div class="rewriteList">${advice.rewriteSuggestions
     .map(
       (suggestion) =>

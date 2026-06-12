@@ -1,5 +1,7 @@
 import { RESUME_TRANSLATION_TONE_OPTIONS } from '@common/constants';
-import type { ResumeTranslationTone } from '@common/types';
+import type { ResumeTranslationToneType } from '@common/types';
+
+import { Select } from '@components/ui';
 
 import type { TranslationToneFieldProps } from './types';
 
@@ -11,18 +13,13 @@ export function TranslationToneField({ tone, onToneChange }: TranslationToneFiel
       <label className={styles.translationToneField__label} htmlFor="translation-tone">
         Тон перевода
       </label>
-      <select
+      <Select
         className={styles.translationToneField__select}
         id="translation-tone"
+        options={RESUME_TRANSLATION_TONE_OPTIONS}
         value={tone}
-        onChange={(event) => onToneChange(event.target.value as ResumeTranslationTone)}
-      >
-        {RESUME_TRANSLATION_TONE_OPTIONS.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        onChange={(event) => onToneChange(event.target.value as ResumeTranslationToneType)}
+      />
     </>
   );
 }

@@ -1,7 +1,11 @@
 export { Button } from './button';
-export type { ButtonProps, ButtonSize, ButtonVariant } from './button';
+export type { ButtonProps, ButtonSizeType, ButtonVariantType } from './button';
 export { Loader } from './loader';
 export type { LoaderProps } from './loader';
+export { Modal } from './modal';
+export type { ModalProps } from './modal';
+export { Select } from './select';
+export type { SelectOptionType, SelectProps, SelectSizeType } from './select';
 export { Textarea } from './textarea';
-export type { TextareaProps, TextareaVariant } from './textarea';
+export type { TextareaProps, TextareaVariantType } from './textarea';
 export { Toast } from './toast';

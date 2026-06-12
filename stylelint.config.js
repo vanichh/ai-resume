@@ -1,10 +1,24 @@
 export default {
   extends: ['stylelint-config-standard-scss'],
+  customSyntax: 'postcss-scss',
   plugins: ['stylelint-order'],
   rules: {
     'declaration-empty-line-before': null,
+    'declaration-property-value-allowed-list': {
+      'font-size': [/^fontSize\(\d+px\)$/],
+    },
+    'declaration-property-value-disallowed-list': {
+      'line-height': [/.+/],
+    },
+    'color-no-hex': true,
+    'function-disallowed-list': ['rgb', 'rgba', 'hsl', 'hsla'],
+    'function-name-case': null,
     'no-descending-specificity': null,
+    'scss/at-function-pattern': '^[a-z][a-zA-Z0-9-]+$',
+    'scss/at-mixin-pattern': '^[a-z][a-zA-Z0-9]+$',
     'selector-class-pattern': null,
+    'value-keyword-case': null,
+    'media-feature-name-disallowed-list': ['width'],
     'order/properties-order': [
       [
         {
@@ -102,7 +116,6 @@ export default {
             'font-size',
             'font-style',
             'font-weight',
-            'line-height',
             'letter-spacing',
             'text-align',
             'text-decoration',
@@ -129,4 +142,22 @@ export default {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['src/common/styles/mixins/colors.scss'],
+      rules: {
+        'color-no-hex': null,
+        'function-disallowed-list': null,
+      },
+    },
+    {
+      files: ['src/common/styles/mixins/typography.scss'],
+      rules: {
+        'declaration-property-value-allowed-list': null,
+        'declaration-property-value-disallowed-list': {
+          'line-height': [/.+/],
+        },
+      },
+    },
+  ],
 };

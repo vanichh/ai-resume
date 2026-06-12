@@ -46,6 +46,17 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-misused-promises': 'error',
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'typeLike',
+          format: ['PascalCase'],
+          custom: {
+            regex: '(Type|Props)$',
+            match: true,
+          },
+        },
+      ],
       '@typescript-eslint/no-unused-vars': [
         'error',
         {

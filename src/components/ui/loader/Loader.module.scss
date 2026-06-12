@@ -5,8 +5,8 @@
 
   min-width: 0;
 
-  color: #5d6f86;
-  font-size: 13px;
+  color: get-color(mutedText);
+  font-size: fontSize(14px);
   font-weight: 800;
 
   &__spinner {
@@ -15,12 +15,12 @@
     width: 18px;
     height: 18px;
 
-    border: 2px solid #d9e0ea;
+    border: 2px solid get-color(border);
     border-radius: 50%;
 
     animation: loader-spin 0.72s linear infinite;
 
-    border-top-color: #165bd8;
+    border-top-color: get-color(accent);
   }
 
   &__label {

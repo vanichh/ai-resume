@@ -3,18 +3,17 @@
 
   padding: 18px;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__title {
     margin: 0 0 14px;
 
-    color: #111827;
-    font-size: 16px;
-    line-height: 1.25;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__list {
@@ -45,13 +44,13 @@
   &__name {
     min-width: 0;
 
-    color: #263449;
+    color: get-color(secondaryTextStrong);
     font-weight: 800;
     overflow-wrap: anywhere;
   }
 
   &__value {
-    color: #0f766e;
+    color: get-color(success);
     white-space: nowrap;
   }
 
@@ -60,7 +59,7 @@
     overflow: hidden;
 
     border-radius: 999px;
-    background: #dde5f0;
+    background: get-color(surfaceTrack);
   }
 
   &__bar {
@@ -70,14 +69,13 @@
     height: 100%;
 
     border-radius: inherit;
-    background: #0f766e;
+    background: get-color(success);
   }
 
   &__comment {
     margin: 0;
 
-    color: #64748b;
-    line-height: 1.45;
+    color: get-color(muted);
     overflow-wrap: anywhere;
   }
 }

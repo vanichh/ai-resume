@@ -3,18 +3,17 @@
 
   padding: 18px;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__title {
     margin: 0 0 14px;
 
-    color: #111827;
-    font-size: 16px;
-    line-height: 1.25;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__list {
@@ -34,7 +33,7 @@
     min-width: 0;
     padding-top: 12px;
 
-    border-top: 1px solid #e3e9f2;
+    border-top: 1px solid get-color(borderDividerSoft);
 
     &:first-child {
       padding-top: 0;
@@ -55,9 +54,9 @@
     min-width: 0;
     padding: 12px;
 
-    border: 1px solid #d9e0ea;
+    border: 1px solid get-color(border);
     border-radius: 8px;
-    background: #fff;
+    background: get-color(whiteText);
   }
 
   &__label {
@@ -65,8 +64,8 @@
 
     margin-bottom: 8px;
 
-    color: #5d6f86;
-    font-size: 12px;
+    color: get-color(mutedText);
+    font-size: fontSize(12px);
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -74,21 +73,19 @@
   &__text {
     margin: 0;
 
-    color: #263449;
-    line-height: 1.45;
+    color: get-color(secondaryTextStrong);
     overflow-wrap: anywhere;
   }
 
   &__reason {
     margin: 0;
 
-    color: #64748b;
-    line-height: 1.45;
+    color: get-color(muted);
     overflow-wrap: anywhere;
   }
 }
 
-@media (width <= 1020px) {
+@include mediaMax(desktop) {
   .rewriteComparisonList {
     &__columns {
       grid-template-columns: 1fr;

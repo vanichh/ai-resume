@@ -1,6 +1,6 @@
-import type { AppStatus } from '@common/types';
+import type { AppStatusType } from '@common/types';
 
-export const STATUS_LABELS: Record<AppStatus, string> = {
+export const STATUS_LABELS: Record<AppStatusType, string> = {
   idle: 'Загрузите резюме',
   parsing: 'Читаю файл',
   ready: 'Готово к анализу',

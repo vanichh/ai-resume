@@ -2,16 +2,16 @@ import { createId } from '@common/utils/createId';
 
 import { analyzeResume } from '@services/resume-advisor';
 
-import type { ResumeSliceCreator } from './types';
+import type { ResumeSliceCreatorType } from './types';
 
 import { COMPARISON_VACANCY_LIMIT } from '../common/constants';
 import { canUseModel } from '../common/utils/canUseModel';
 import { getAnalysisTarget } from '../common/utils/getAnalysisTarget';
 import { getErrorMessage } from '../common/utils/getErrorMessage';
 import { persistWorkspace } from '../common/utils/persistWorkspace';
-import type { ComparisonActions } from '../types';
+import type { ComparisonActionsType } from '../types';
 
-export const createComparisonSlice: ResumeSliceCreator<ComparisonActions> = (set, get) => ({
+export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType> = (set, get) => ({
   addComparisonVacancy() {
     const { comparisonVacancies } = get();
     if (comparisonVacancies.length >= COMPARISON_VACANCY_LIMIT) {

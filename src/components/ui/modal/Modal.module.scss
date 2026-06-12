@@ -1,0 +1,99 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  background: get-color(modalOverlay);
+
+  &__content {
+    width: min(420px, 100%);
+    padding: 18px;
+
+    border: 1px solid get-color(borderDivider);
+    border-radius: 8px;
+    background: get-color(whiteText);
+
+    @include panelShadow;
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: get-color(primaryText);
+    font-size: fontSize(18px);
+    font-weight: 900;
+  }
+
+  &__closeButton {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    border: 1px solid get-color(transparent);
+    border-radius: 8px;
+    background: get-color(transparent);
+
+    color: get-color(slateText);
+
+    cursor: pointer;
+
+    &:hover {
+      background: get-color(accentSurface);
+
+      color: get-color(accentText);
+    }
+  }
+
+  &__description {
+    margin: 12px 0 0;
+
+    color: get-color(mutedText);
+    font-size: fontSize(14px);
+  }
+
+  &__body {
+    margin-top: 14px;
+
+    color: get-color(secondaryText);
+    font-size: fontSize(14px);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 20px;
+  }
+}
+
+@include mediaMax(mobile) {
+  .modal {
+    align-items: end;
+    padding: 12px;
+
+    &__content {
+      width: 100%;
+    }
+
+    &__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

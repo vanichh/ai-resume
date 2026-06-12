@@ -1,20 +1,22 @@
-import type { CoverLetter, ResumeAdvice } from '@common/types';
+import { DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE } from '@common/constants';
+import type { CoverLetterType, ResumeAdviceType } from '@common/types';
 import { createId } from '@common/utils/createId';
 
 import { COVER_LETTER_SYSTEM_PROMPT } from './common/constants';
 
 export async function generateCoverLetter(
   resumeText: string,
-  advice: ResumeAdvice | null,
+  advice: ResumeAdviceType | null,
   targetRole: string,
   vacancyText: string,
   onDownloadProgress?: (progress: number) => void,
-): Promise<CoverLetter> {
+): Promise<CoverLetterType> {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
 
   const session = await globalThis.LanguageModel.create({
+    expectedOutputs: [{ type: 'text', languages: [DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE] }],
     initialPrompts: [
       {
         role: 'system',

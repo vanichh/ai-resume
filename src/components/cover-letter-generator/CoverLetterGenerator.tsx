@@ -1,3 +1,5 @@
+import { Copy } from 'lucide-react';
+
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
 import { Button, Textarea } from '@components/ui';
@@ -39,10 +41,11 @@ export function CoverLetterGenerator() {
           />
           <div className={styles.coverLetterGenerator__actions}>
             <Button
+              aria-label="Копировать сопроводительное письмо"
               size="small"
               onClick={() => void copyToClipboardWithNotification(coverLetter.text, 'Письмо скопировано.')}
             >
-              Копировать
+              <Copy aria-hidden size={16} />
             </Button>
             <Button size="small" onClick={() => downloadCoverLetterText(coverLetter.text)}>
               TXT

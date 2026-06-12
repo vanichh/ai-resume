@@ -1,6 +1,6 @@
-import type { ResumeTranslationLanguage } from '@common/types';
+import type { ResumeTranslationLanguageType } from '@common/types';
 
 export type TranslationLanguageFieldProps = {
-  language: ResumeTranslationLanguage;
-  onLanguageChange: (value: ResumeTranslationLanguage) => void;
+  language: ResumeTranslationLanguageType;
+  onLanguageChange: (value: ResumeTranslationLanguageType) => void;
 };

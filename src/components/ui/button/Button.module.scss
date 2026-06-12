@@ -26,21 +26,21 @@
     min-height: 32px;
     padding: 0 10px;
 
-    font-size: 12px;
+    font-size: fontSize(12px);
   }
 
   &_medium {
     min-height: 34px;
     padding: 0 10px;
 
-    font-size: 12px;
+    font-size: fontSize(12px);
   }
 
   &_large {
     min-height: 42px;
     padding: 0 14px;
 
-    font-size: 14px;
+    font-size: fontSize(14px);
     font-weight: 900;
   }
 
@@ -49,52 +49,52 @@
   }
 
   &_secondary {
-    border: 1px solid #b9c4d4;
-    background: #fff;
+    border: 1px solid get-color(borderDark);
+    background: get-color(whiteText);
 
-    color: #24405f;
+    color: get-color(slateText);
 
     &:hover:not(:disabled) {
-      border-color: #2563eb;
+      border-color: get-color(accentBorder);
 
-      color: #1d4ed8;
+      color: get-color(accentText);
     }
 
     &:disabled {
-      color: #8b9bb0;
+      color: get-color(disabledTextSoft);
     }
   }
 
   &_primary {
-    border: 1px solid #165bd8;
-    background: #165bd8;
+    border: 1px solid get-color(accent);
+    background: get-color(accent);
 
-    color: #fff;
+    color: get-color(whiteText);
 
     &:hover:not(:disabled) {
-      background: #134fbd;
+      background: get-color(accentStrong);
     }
 
     &:disabled {
-      border-color: #9aa8bd;
-      background: #9aa8bd;
+      border-color: get-color(disabledBorder);
+      background: get-color(disabledBorder);
     }
   }
 
   &_ghost {
-    border: 1px solid transparent;
-    background: transparent;
+    border: 1px solid get-color(transparent);
+    background: get-color(transparent);
 
-    color: #24405f;
+    color: get-color(slateText);
 
     &:hover:not(:disabled) {
-      background: #eef4ff;
+      background: get-color(accentSurface);
 
-      color: #1d4ed8;
+      color: get-color(accentText);
     }
 
     &:disabled {
-      color: #8b9bb0;
+      color: get-color(disabledTextSoft);
     }
   }
 }

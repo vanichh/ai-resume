@@ -1,4 +1,4 @@
-export type ScoreBreakdownItem = {
+export type ScoreBreakdownItemType = {
   label: string;
   value: number;
 };

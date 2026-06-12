@@ -13,21 +13,21 @@
     min-height: 38px;
     padding: 0 12px;
 
-    border: 1px solid #b9c4d4;
+    border: 1px solid get-color(borderDark);
     border-radius: 8px;
-    background: #fff;
+    background: get-color(whiteText);
 
-    color: #24405f;
-    font-size: 13px;
+    color: get-color(slateText);
+    font-size: fontSize(14px);
     font-weight: 800;
     text-align: center;
     text-decoration: none;
     overflow-wrap: anywhere;
 
     &:hover {
-      border-color: #2563eb;
+      border-color: get-color(accentBorder);
 
-      color: #1d4ed8;
+      color: get-color(accentText);
     }
   }
 }

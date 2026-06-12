@@ -1,6 +1,6 @@
-import type { ResumeStore } from '../../types';
+import type { ResumeStoreType } from '../../types';
 
-export function resetComparisonResults(state: ResumeStore) {
+export function resetComparisonResults(state: ResumeStoreType) {
   return state.comparisonVacancies.map((vacancy) => ({
     ...vacancy,
     advice: null,

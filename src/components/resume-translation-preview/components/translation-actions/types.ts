@@ -1,5 +1,5 @@
-import type { ResumeTranslation } from '@common/types';
+import type { ResumeTranslationType } from '@common/types';
 
 export type TranslationActionsProps = {
-  translation: ResumeTranslation;
+  translation: ResumeTranslationType;
 };

@@ -1,10 +1,15 @@
-import { Button, Textarea } from '@components/ui';
+import { useState } from 'react';
+
+import { Trash2 } from 'lucide-react';
+
+import { Button, Modal, Textarea } from '@components/ui';
 
 import type { AnalysisHistoryItemProps } from './types';
 
 import styles from '../../AnalysisHistory.module.scss';
 
 export function AnalysisHistoryItem({ item, onNoteChange, onRemove, onSelect }: AnalysisHistoryItemProps) {
+  const [isRemoveConfirmOpen, setIsRemoveConfirmOpen] = useState(false);
   const createdAt = new Intl.DateTimeFormat('ru-RU', {
     day: '2-digit',
     hour: '2-digit',
@@ -23,8 +28,13 @@ export function AnalysisHistoryItem({ item, onNoteChange, onRemove, onSelect }: 
         <span className={styles.analysisHistory__meta}>{createdAt}</span>
         {item.fileName && <span className={styles.analysisHistory__meta}>{item.fileName}</span>}
       </button>
-      <Button className={styles.analysisHistory__removeButton} size="small" onClick={() => onRemove(item.id)}>
-        Удалить
+      <Button
+        aria-label="Удалить анализ"
+        className={styles.analysisHistory__removeButton}
+        size="small"
+        onClick={() => setIsRemoveConfirmOpen(true)}
+      >
+        <Trash2 aria-hidden size={16} />
       </Button>
       <Textarea
         className={styles.analysisHistory__note}
@@ -32,6 +42,17 @@ export function AnalysisHistoryItem({ item, onNoteChange, onRemove, onSelect }: 
         placeholder="Заметка к анализу"
         value={item.note}
         onChange={(event) => onNoteChange(item.id, event.target.value)}
+      />
+      <Modal
+        confirmLabel="Удалить"
+        description="Анализ будет удален из истории без возможности восстановления."
+        isOpen={isRemoveConfirmOpen}
+        title="Удалить анализ?"
+        onClose={() => setIsRemoveConfirmOpen(false)}
+        onConfirm={() => {
+          onRemove(item.id);
+          setIsRemoveConfirmOpen(false);
+        }}
       />
     </li>
   );

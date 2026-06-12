@@ -1,8 +1,8 @@
-export type ToastVariant = 'error' | 'success';
+export type ToastVariantType = 'error' | 'success';
 
 export type ToastProps = {
   autoCloseDelay?: number;
   message: string;
-  variant: ToastVariant;
+  variant: ToastVariantType;
   onClose: () => void;
 };

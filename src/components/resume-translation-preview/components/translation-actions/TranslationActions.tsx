@@ -1,3 +1,5 @@
+import { Copy } from 'lucide-react';
+
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
 import { Button } from '@components/ui';
@@ -19,10 +21,11 @@ export function TranslationActions({ translation }: TranslationActionsProps) {
   return (
     <div className={styles.translationActions}>
       <Button
+        aria-label="Копировать перевод"
         size="small"
         onClick={() => void copyToClipboardWithNotification(translation.text, 'Перевод скопирован.')}
       >
-        Копировать
+        <Copy aria-hidden size={16} />
       </Button>
       <Button size="small" onClick={() => downloadTranslationText(translation)}>
         TXT

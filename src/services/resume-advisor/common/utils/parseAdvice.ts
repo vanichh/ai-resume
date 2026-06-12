@@ -1,7 +1,7 @@
-import type { ResumeAdvice } from '@common/types';
+import type { ResumeAdviceType } from '@common/types';
 
-export function parseAdvice(response: string): ResumeAdvice {
-  const parsed = JSON.parse(response) as Partial<ResumeAdvice>;
+export function parseAdvice(response: string): ResumeAdviceType {
+  const parsed = JSON.parse(response) as Partial<ResumeAdviceType>;
 
   if (
     typeof parsed.score !== 'number' ||

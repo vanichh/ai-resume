@@ -1,11 +1,13 @@
-import type { ResumeTranslationLanguage, ResumeTranslationTone } from './types';
+import type { LanguageModelLanguageCodeType, ResumeTranslationLanguageType, ResumeTranslationToneType } from './types';
+
+export const DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE: LanguageModelLanguageCodeType = 'en';
 
 export const RESUME_WORKSPACE_STORAGE_KEY = 'ai-resume-workspace';
 
 export const RESUME_TRANSLATION_LANGUAGE_OPTIONS: Array<{
   label: string;
   promptName: string;
-  value: ResumeTranslationLanguage;
+  value: ResumeTranslationLanguageType;
 }> = [
   {
     label: 'Арабский',
@@ -191,16 +193,26 @@ export const RESUME_TRANSLATION_LANGUAGE_OPTIONS: Array<{
 
 export const RESUME_TRANSLATION_LANGUAGE_LABELS = Object.fromEntries(
   RESUME_TRANSLATION_LANGUAGE_OPTIONS.map((option) => [option.value, option.label]),
-) as Record<ResumeTranslationLanguage, string>;
+) as Record<ResumeTranslationLanguageType, string>;
 
 export const RESUME_TRANSLATION_LANGUAGE_PROMPT_NAMES = Object.fromEntries(
   RESUME_TRANSLATION_LANGUAGE_OPTIONS.map((option) => [option.value, option.promptName]),
-) as Record<ResumeTranslationLanguage, string>;
+) as Record<ResumeTranslationLanguageType, string>;
+
+export const RESUME_TRANSLATION_LANGUAGE_MODEL_OUTPUT_CODES: Partial<
+  Record<ResumeTranslationLanguageType, LanguageModelLanguageCodeType>
+> = {
+  english: 'en',
+  french: 'fr',
+  german: 'de',
+  japanese: 'ja',
+  spanish: 'es',
+};
 
 export const RESUME_TRANSLATION_TONE_OPTIONS: Array<{
   label: string;
   promptInstruction: string;
-  value: ResumeTranslationTone;
+  value: ResumeTranslationToneType;
 }> = [
   {
     label: 'Для ATS',
@@ -226,8 +238,8 @@ export const RESUME_TRANSLATION_TONE_OPTIONS: Array<{
 
 export const RESUME_TRANSLATION_TONE_LABELS = Object.fromEntries(
   RESUME_TRANSLATION_TONE_OPTIONS.map((option) => [option.value, option.label]),
-) as Record<ResumeTranslationTone, string>;
+) as Record<ResumeTranslationToneType, string>;
 
 export const RESUME_TRANSLATION_TONE_PROMPT_INSTRUCTIONS = Object.fromEntries(
   RESUME_TRANSLATION_TONE_OPTIONS.map((option) => [option.value, option.promptInstruction]),
-) as Record<ResumeTranslationTone, string>;
+) as Record<ResumeTranslationToneType, string>;

@@ -3,20 +3,20 @@
   min-width: 0;
   resize: vertical;
 
-  border: 1px solid #cbd5e1;
+  border: 1px solid get-color(borderInput);
   border-radius: 8px;
-  background: #fff;
+  background: get-color(whiteText);
 
-  color: #253348;
+  color: get-color(secondaryText);
   font: inherit;
   overflow-wrap: anywhere;
 
   outline: none;
 
   &:focus {
-    border-color: #165bd8;
+    border-color: get-color(accent);
 
-    box-shadow: 0 0 0 3px rgb(22 91 216 / 12%);
+    box-shadow: 0 0 0 3px get-color(accentShadow);
   }
 
   &_fullWidth {
@@ -26,20 +26,20 @@
   &_default {
     padding: 12px;
 
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: fontSize(14px);
   }
 
   &_code {
     padding: 22px;
     overflow: auto;
 
-    background: #fbfcfe;
+    @include innerScrollbar;
 
-    color: #253348;
+    background: get-color(surface);
+
+    color: get-color(secondaryText);
     font-family: SFMono-Regular, Consolas, 'Liberation Mono', monospace;
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: fontSize(14px);
     white-space: pre-wrap;
   }
 }

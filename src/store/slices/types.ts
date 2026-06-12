@@ -1,5 +1,5 @@
 import type { StateCreator } from 'zustand';
 
-import type { ResumeStore } from '../types';
+import type { ResumeStoreType } from '../types';
 
-export type ResumeSliceCreator<TSlice> = StateCreator<ResumeStore, [], [], TSlice>;
+export type ResumeSliceCreatorType<TSliceType> = StateCreator<ResumeStoreType, [], [], TSliceType>;

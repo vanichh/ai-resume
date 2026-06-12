@@ -2,11 +2,11 @@
   min-width: 0;
   padding: 18px;
 
-  border: 1px solid #d9e0ea;
+  border: 1px solid get-color(border);
   border-radius: 8px;
-  background: #fbfcfe;
+  background: get-color(surface);
 
-  box-shadow: 0 12px 30px rgb(24 33 47 / 5.5%);
+  @include panelShadow;
 
   &__header {
     display: flex;
@@ -18,21 +18,19 @@
   &__title {
     margin: 0;
 
-    color: #111827;
-    font-size: 16px;
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
   }
 
   &__subtitle {
     margin: 4px 0 0;
 
-    color: #5d6f86;
-    font-size: 13px;
+    color: get-color(mutedText);
+    font-size: fontSize(14px);
   }
 
   &__textarea {
     margin-top: 14px;
-
-    line-height: 1.6;
   }
 
   &__actions {
@@ -44,7 +42,7 @@
   }
 }
 
-@media (width <= 640px) {
+@include mediaMax(mobile) {
   .coverLetterGenerator {
     &__header {
       display: grid;

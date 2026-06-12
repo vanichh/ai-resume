@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { X } from 'lucide-react';
+
 import type { ToastProps } from './types';
 
 import styles from './Toast.module.scss';
@@ -25,7 +27,7 @@ export function Toast({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onCl
     <div className={`${styles.toast} ${styles[`toast_${variant}`]}`} role="alert">
       <p className={styles.toast__message}>{message}</p>
       <button className={styles.toast__closeButton} type="button" aria-label="Закрыть уведомление" onClick={onClose}>
-        ×
+        <X aria-hidden size={18} />
       </button>
     </div>
   );

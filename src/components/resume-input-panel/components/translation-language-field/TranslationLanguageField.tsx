@@ -1,5 +1,7 @@
 import { RESUME_TRANSLATION_LANGUAGE_OPTIONS } from '@common/constants';
-import type { ResumeTranslationLanguage } from '@common/types';
+import type { ResumeTranslationLanguageType } from '@common/types';
+
+import { Select } from '@components/ui';
 
 import type { TranslationLanguageFieldProps } from './types';
 
@@ -11,18 +13,13 @@ export function TranslationLanguageField({ language, onLanguageChange }: Transla
       <label className={styles.translationLanguageField__label} htmlFor="translation-language">
         Язык перевода
       </label>
-      <select
+      <Select
         className={styles.translationLanguageField__select}
         id="translation-language"
+        options={RESUME_TRANSLATION_LANGUAGE_OPTIONS}
         value={language}
-        onChange={(event) => onLanguageChange(event.target.value as ResumeTranslationLanguage)}
-      >
-        {RESUME_TRANSLATION_LANGUAGE_OPTIONS.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        onChange={(event) => onLanguageChange(event.target.value as ResumeTranslationLanguageType)}
+      />
     </>
   );
 }

@@ -1,0 +1,17 @@
+@use '@fontsource-utils/scss' as fontsource;
+@use '@fontsource/inter/scss' as inter;
+@include fontsource.faces(
+  $metadata: inter.$metadata,
+  $formats: woff2,
+  $subsets: (
+    cyrillic,
+    latin,
+  ),
+  $weights: (
+    400,
+    700,
+    800,
+    900,
+  ),
+  $styles: normal
+);

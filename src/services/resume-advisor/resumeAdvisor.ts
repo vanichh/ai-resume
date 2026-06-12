@@ -1,22 +1,25 @@
-import type { ModelStatus, ResumeAdvice } from '@common/types';
+import { DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE } from '@common/constants';
+import type { ModelStatusType, ResumeAdviceType } from '@common/types';
 
 import { DEFAULT_TARGET_ROLE, RESPONSE_SCHEMA, SYSTEM_PROMPT } from './common/constants';
 import { parseAdvice } from './common/utils/parseAdvice';
 import { prepareResumeForPrompt } from './common/utils/prepareResumeForPrompt';
 
-export async function getLanguageModelStatus(): Promise<ModelStatus> {
+export async function getLanguageModelStatus(): Promise<ModelStatusType> {
   if (!globalThis.LanguageModel) {
     return 'unsupported';
   }
 
-  return globalThis.LanguageModel.availability();
+  return globalThis.LanguageModel.availability({
+    expectedOutputs: [{ type: 'text', languages: [DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE] }],
+  });
 }
 
 export async function analyzeResume(
   resumeText: string,
   targetInput: string,
   onDownloadProgress?: (progress: number) => void,
-): Promise<ResumeAdvice> {
+): Promise<ResumeAdviceType> {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
@@ -25,6 +28,7 @@ export async function analyzeResume(
   const preparedResume = prepareResumeForPrompt(resumeText);
 
   const session = await globalThis.LanguageModel.create({
+    expectedOutputs: [{ type: 'text', languages: [DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE] }],
     initialPrompts: [
       {
         role: 'system',

@@ -1,0 +1,87 @@
+.select {
+  position: relative;
+
+  display: inline-grid;
+
+  min-width: 0;
+
+  color: get-color(secondaryText);
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &_small {
+    .select__control {
+      min-height: 34px;
+      padding: 0 34px 0 10px;
+
+      font-size: fontSize(12px);
+    }
+  }
+
+  &_medium {
+    .select__control {
+      min-height: 38px;
+      padding: 0 38px 0 12px;
+
+      font-size: fontSize(14px);
+    }
+  }
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+
+    width: 8px;
+    height: 8px;
+
+    border-right: 2px solid get-color(mutedText);
+    border-bottom: 2px solid get-color(mutedText);
+
+    transform: translateY(-65%) rotate(45deg);
+
+    pointer-events: none;
+    content: '';
+  }
+
+  &:has(&__control:disabled)::after {
+    border-color: get-color(disabledTextSoft);
+  }
+
+  &__control {
+    width: 100%;
+    min-width: 0;
+
+    border: 1px solid get-color(borderInput);
+    border-radius: 8px;
+    background: get-color(whiteText);
+
+    color: inherit;
+    font: inherit;
+
+    transition:
+      border-color 0.16s ease,
+      box-shadow 0.16s ease,
+      background 0.16s ease;
+
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+
+    &:focus {
+      border-color: get-color(accent);
+
+      box-shadow: 0 0 0 3px get-color(accentShadow);
+    }
+
+    &:disabled {
+      background: get-color(appBackground);
+
+      color: get-color(disabledText);
+
+      cursor: not-allowed;
+    }
+  }
+}

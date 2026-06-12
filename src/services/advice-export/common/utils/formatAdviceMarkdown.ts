@@ -1,6 +1,6 @@
-import type { ResumeAdvice } from '@common/types';
+import type { ResumeAdviceType } from '@common/types';
 
-export function formatAdviceMarkdown(advice: ResumeAdvice): string {
+export function formatAdviceMarkdown(advice: ResumeAdviceType): string {
   return [
     `# Рекомендации по резюме: ${advice.targetRole}`,
     '',

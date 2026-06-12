@@ -1,3 +1,5 @@
+import { Copy } from 'lucide-react';
+
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
 import { Textarea } from '@components/ui';
@@ -20,12 +22,13 @@ export function ResumePreview() {
         <div className={styles.resumePreview__actions}>
           <span>{resumeText.length.toLocaleString('ru-RU')} символов</span>
           <button
+            aria-label="Копировать резюме"
             className={styles.resumePreview__actionButton}
             type="button"
             disabled={!resumeText}
             onClick={() => void copyToClipboardWithNotification(resumeText, 'Резюме скопировано.')}
           >
-            Копировать
+            <Copy aria-hidden size={16} />
           </button>
           <button
             className={styles.resumePreview__actionButton}

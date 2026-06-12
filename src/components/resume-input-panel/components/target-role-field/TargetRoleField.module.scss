@@ -4,8 +4,8 @@
 
     margin-bottom: 8px;
 
-    color: #344256;
-    font-size: 14px;
+    color: get-color(slateLabel);
+    font-size: fontSize(14px);
     font-weight: 800;
   }
 
@@ -13,7 +13,6 @@
     max-width: 100%;
     margin-bottom: 14px;
 
-    color: #18212f;
-    line-height: 1.4;
+    color: get-color(slateInput);
   }
 }

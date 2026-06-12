@@ -1,6 +1,10 @@
+import { useState } from 'react';
+
+import { Trash2 } from 'lucide-react';
+
 import { getResumeWorkspaceStorageSize } from '@common/utils/resumeWorkspaceStorage';
 
-import { Button } from '@components/ui';
+import { Button, Modal } from '@components/ui';
 
 import { useResumeStore } from '@store/resumeStore';
 
@@ -15,6 +19,7 @@ function formatStorageSize(bytes: number): string {
 }
 
 export function PrivacyCenter() {
+  const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
   const analysisHistoryCount = useResumeStore((state) => state.analysisHistory.length);
   const clearWorkspace = useResumeStore((state) => state.clearWorkspace);
   const comparisonVacanciesCount = useResumeStore((state) => state.comparisonVacancies.length);
@@ -30,8 +35,8 @@ export function PrivacyCenter() {
           <h2 className={styles.privacyCenter__title}>Приватность</h2>
           <p className={styles.privacyCenter__subtitle}>Данные сохраняются только в локальном хранилище браузера.</p>
         </div>
-        <Button size="small" onClick={clearWorkspace}>
-          Очистить все
+        <Button aria-label="Очистить все данные" size="small" onClick={() => setIsClearConfirmOpen(true)}>
+          <Trash2 aria-hidden size={16} />
         </Button>
       </div>
       <dl className={styles.privacyCenter__list}>
@@ -60,6 +65,17 @@ export function PrivacyCenter() {
           <dd>{storageSize}</dd>
         </div>
       </dl>
+      <Modal
+        confirmLabel="Очистить"
+        description="Все локальные данные приложения будут удалены без возможности восстановления."
+        isOpen={isClearConfirmOpen}
+        title="Очистить все данные?"
+        onClose={() => setIsClearConfirmOpen(false)}
+        onConfirm={() => {
+          clearWorkspace();
+          setIsClearConfirmOpen(false);
+        }}
+      />
     </section>
   );
 }

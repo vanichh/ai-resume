@@ -6,9 +6,9 @@ import { createCoverLetterSlice } from './slices/coverLetterSlice';
 import { createHistorySlice } from './slices/historySlice';
 import { createResumeSlice } from './slices/resumeSlice';
 import { createTranslationSlice } from './slices/translationSlice';
-import type { ResumeState, ResumeStore } from './types';
+import type { ResumeStateType, ResumeStoreType } from './types';
 
-const initialState: ResumeState = {
+const initialState: ResumeStateType = {
   advice: null,
   analysisHistory: [],
   comparisonVacancies: [],
@@ -30,7 +30,7 @@ const initialState: ResumeState = {
   vacancyText: '',
 };
 
-export const useResumeStore = create<ResumeStore>((...storeApi) => ({
+export const useResumeStore = create<ResumeStoreType>((...storeApi) => ({
   ...initialState,
   ...createAppSlice(...storeApi),
   ...createResumeSlice(...storeApi),
