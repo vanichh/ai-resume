@@ -1,21 +1,6 @@
 .rewriteComparisonList {
   grid-column: 1 / -1;
 
-  padding: 18px;
-
-  border: 1px solid get-color(border);
-  border-radius: 8px;
-  background: get-color(surface);
-
-  @include panelShadow;
-
-  &__title {
-    margin: 0 0 14px;
-
-    color: get-color(primaryText);
-    font-size: fontSize(16px);
-  }
-
   &__list {
     display: grid;
     gap: 12px;

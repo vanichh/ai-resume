@@ -1,5 +1,9 @@
 export { Button } from './button';
 export type { ButtonProps, ButtonSizeType, ButtonVariantType } from './button';
+export { CollapsibleBlock } from './collapsible-block';
+export type { CollapsibleBlockProps } from './collapsible-block';
+export { EmptyState } from './empty-state';
+export type { EmptyStateProps } from './empty-state';
 export { Loader } from './loader';
 export type { LoaderProps } from './loader';
 export { Modal } from './modal';

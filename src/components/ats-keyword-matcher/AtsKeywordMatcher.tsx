@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import { useAtsMatch } from '@common/hooks/useAtsMatch';
 
 import styles from './AtsKeywordMatcher.module.scss';
@@ -16,15 +18,16 @@ export function AtsKeywordMatcher() {
         {match.score}/100 · найдено {match.matchedCount} · не хватает {match.missingCount}
       </p>
       <div className={styles.atsKeywordMatcher__keywords}>
-        {match.keywords.map((keyword) => {
-          const keywordClassName = `${styles.atsKeywordMatcher__keyword} ${keyword.matched ? styles.atsKeywordMatcher__keyword_matched : ''}`;
-
-          return (
-            <span className={keywordClassName} key={keyword.keyword}>
-              {keyword.keyword}
-            </span>
-          );
-        })}
+        {match.keywords.map((keyword) => (
+          <span
+            className={clsx(styles.atsKeywordMatcher__keyword, {
+              [styles.atsKeywordMatcher__keyword_matched]: keyword.matched,
+            })}
+            key={keyword.keyword}
+          >
+            {keyword.keyword}
+          </span>
+        ))}
       </div>
     </section>
   );

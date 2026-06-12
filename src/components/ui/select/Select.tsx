@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import type { SelectProps } from './types';
 
 import styles from './Select.module.scss';
@@ -10,12 +12,12 @@ export function Select({
   size = 'medium',
   ...props
 }: SelectProps) {
-  const classNames = [styles.select, styles[`select_${size}`], fullWidth ? styles.select_fullWidth : '', className]
-    .filter(Boolean)
-    .join(' ');
-
   return (
-    <span className={classNames}>
+    <span
+      className={clsx(styles.select, styles[`select_${size}`], className, {
+        [styles.select_fullWidth]: fullWidth,
+      })}
+    >
       <select className={styles.select__control} {...props}>
         {placeholder ? (
           <option disabled hidden value="">

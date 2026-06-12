@@ -1,0 +1,66 @@
+.collapsibleBlock {
+  padding: 18px;
+
+  border: 1px solid get-color(border);
+  border-radius: 8px;
+  background: get-color(surface);
+
+  @include panelShadow;
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__title {
+    min-width: 0;
+    margin: 0;
+
+    color: get-color(primaryText);
+    font-size: fontSize(16px);
+    font-weight: 800;
+  }
+
+  &__actions {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+
+    border: 1px solid get-color(borderDark);
+    border-radius: 8px;
+    background: get-color(whiteText);
+
+    color: get-color(slateText);
+
+    cursor: pointer;
+
+    &:hover {
+      border-color: get-color(accentBorder);
+
+      color: get-color(accentText);
+    }
+
+    svg {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__content {
+    margin-top: 14px;
+  }
+}

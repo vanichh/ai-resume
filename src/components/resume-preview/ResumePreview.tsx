@@ -2,7 +2,7 @@ import { Copy } from 'lucide-react';
 
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 
-import { Textarea } from '@components/ui';
+import { CollapsibleBlock, Textarea } from '@components/ui';
 
 import { downloadResumeDoc, downloadResumePrintHtml } from '@services/advice-export/adviceExport';
 
@@ -16,9 +16,9 @@ export function ResumePreview() {
   const setResumeText = useResumeStore((state) => state.setResumeText);
 
   return (
-    <div className={styles.resumePreview}>
-      <div className={styles.resumePreview__header}>
-        <h2 className={styles.resumePreview__title}>Текст резюме</h2>
+    <CollapsibleBlock
+      className={styles.resumePreview}
+      headerAction={
         <div className={styles.resumePreview__actions}>
           <span>{resumeText.length.toLocaleString('ru-RU')} символов</span>
           <button
@@ -47,7 +47,9 @@ export function ResumePreview() {
             PDF HTML
           </button>
         </div>
-      </div>
+      }
+      title="Текст резюме"
+    >
       <Textarea
         className={styles.resumePreview__text}
         minHeight={380}
@@ -56,6 +58,6 @@ export function ResumePreview() {
         value={resumeText}
         onChange={(event) => setResumeText(event.target.value)}
       />
-    </div>
+    </CollapsibleBlock>
   );
 }

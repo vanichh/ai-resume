@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import type { AppStatusType } from '@common/types';
 
 import styles from '../../ResumeInputPanel.module.scss';
@@ -13,5 +15,5 @@ const statusClassNames: Record<AppStatusType, string> = {
 };
 
 export function getSubmitButtonStatusClassName(status: AppStatusType): string {
-  return `${styles.resumeInput__primaryButtonStatus} ${statusClassNames[status]}`.trim();
+  return clsx(styles.resumeInput__primaryButtonStatus, statusClassNames[status]);
 }

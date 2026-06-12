@@ -1,4 +1,4 @@
-import { Button } from '@components/ui';
+import { Button, CollapsibleBlock } from '@components/ui';
 
 import { useResumeStore } from '@store/resumeStore';
 import { selectCanCompareVacancies } from '@store/selectors';
@@ -18,16 +18,16 @@ export function VacancyComparison() {
   const setComparisonVacancyTitle = useResumeStore((state) => state.setComparisonVacancyTitle);
 
   return (
-    <section className={styles.vacancyComparison}>
-      <div className={styles.vacancyComparison__header}>
-        <div>
-          <h2 className={styles.vacancyComparison__title}>Сравнение вакансий</h2>
-          <p className={styles.vacancyComparison__subtitle}>До 4 вакансий для одного резюме.</p>
-        </div>
+    <CollapsibleBlock
+      className={styles.vacancyComparison}
+      headerAction={
         <Button disabled={comparisonVacancies.length >= 4} size="medium" onClick={addComparisonVacancy}>
           Добавить
         </Button>
-      </div>
+      }
+      title="Сравнение вакансий"
+    >
+      <p className={styles.vacancyComparison__subtitle}>До 4 вакансий для одного резюме.</p>
       {comparisonVacancies.length > 0 && (
         <div className={styles.vacancyComparison__list}>
           {comparisonVacancies.map((item) => (
@@ -45,6 +45,6 @@ export function VacancyComparison() {
       <Button disabled={!canCompare} fullWidth size="large" variant="primary" onClick={() => void analyzeComparison()}>
         Сравнить с вакансиями
       </Button>
-    </section>
+    </CollapsibleBlock>
   );
 }

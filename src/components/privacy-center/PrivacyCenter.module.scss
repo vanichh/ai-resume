@@ -1,31 +1,8 @@
 .privacyCenter {
   min-width: 0;
-  padding: 18px;
-
-  border: 1px solid get-color(border);
-  border-radius: 8px;
-  background: get-color(surface);
-
-  @include panelShadow;
-
-  &__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-
-    margin-bottom: 14px;
-  }
-
-  &__title {
-    margin: 0;
-
-    color: get-color(primaryText);
-    font-size: fontSize(16px);
-  }
 
   &__subtitle {
-    margin: 4px 0 0;
+    margin: 0 0 14px;
 
     color: get-color(mutedText);
     font-size: fontSize(14px);
@@ -68,10 +45,6 @@
 
 @include mediaMax(mobile) {
   .privacyCenter {
-    &__header {
-      display: grid;
-    }
-
     &__item {
       display: grid;
     }

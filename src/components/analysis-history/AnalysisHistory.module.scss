@@ -1,28 +1,5 @@
 .analysisHistory {
   min-width: 0;
-  padding: 18px;
-
-  border: 1px solid get-color(border);
-  border-radius: 8px;
-  background: get-color(surface);
-
-  @include panelShadow;
-
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-
-    margin-bottom: 12px;
-  }
-
-  &__title {
-    margin: 0;
-
-    color: get-color(primaryText);
-    font-size: fontSize(16px);
-  }
 
   &__removeButton {
     align-self: stretch;

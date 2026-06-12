@@ -1,0 +1,46 @@
+.emptyState {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  padding: 12px;
+
+  border: 1px dashed get-color(borderDark);
+  border-radius: 8px;
+  background: get-color(whiteText);
+
+  &__icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+    background: get-color(accentSurface);
+
+    color: get-color(accentText);
+  }
+
+  &__content {
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: get-color(primaryText);
+    font-size: fontSize(14px);
+    font-weight: 800;
+  }
+
+  &__description {
+    margin: 4px 0 0;
+
+    color: get-color(mutedText);
+    font-size: fontSize(12px);
+    overflow-wrap: anywhere;
+  }
+}

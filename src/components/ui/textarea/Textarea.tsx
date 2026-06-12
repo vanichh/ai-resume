@@ -1,5 +1,7 @@
 import type { CSSProperties } from 'react';
 
+import clsx from 'clsx';
+
 import type { TextareaProps } from './types';
 
 import styles from './Textarea.module.scss';
@@ -12,18 +14,18 @@ export function Textarea({
   variant = 'default',
   ...props
 }: TextareaProps) {
-  const classNames = [
-    styles.textarea,
-    styles[`textarea_${variant}`],
-    fullWidth ? styles.textarea_fullWidth : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
   const textareaStyle: CSSProperties = {
     ...style,
     ...(minHeight ? { minHeight } : null),
   };
 
-  return <textarea className={classNames} style={textareaStyle} {...props} />;
+  return (
+    <textarea
+      className={clsx(styles.textarea, styles[`textarea_${variant}`], className, {
+        [styles.textarea_fullWidth]: fullWidth,
+      })}
+      style={textareaStyle}
+      {...props}
+    />
+  );
 }

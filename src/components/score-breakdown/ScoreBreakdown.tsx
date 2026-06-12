@@ -1,4 +1,8 @@
+import { Gauge } from 'lucide-react';
+
 import { useAtsMatch } from '@common/hooks/useAtsMatch';
+
+import { CollapsibleBlock, EmptyState } from '@components/ui';
 
 import { useResumeStore } from '@store/resumeStore';
 
@@ -12,26 +16,29 @@ export function ScoreBreakdown() {
 
   const items = getScoreBreakdownItems(advice, atsMatch);
 
-  if (items.length === 0) {
-    return null;
-  }
-
   return (
-    <article className={styles.scoreBreakdown}>
-      <h2 className={styles.scoreBreakdown__title}>Детализация оценки</h2>
-      <ul className={styles.scoreBreakdown__list}>
-        {items.map((item) => (
-          <li className={styles.scoreBreakdown__item} key={item.label}>
-            <div className={styles.scoreBreakdown__header}>
-              <span>{item.label}</span>
-              <strong>{item.value}/100</strong>
-            </div>
-            <div className={styles.scoreBreakdown__track} aria-hidden="true">
-              <span className={styles.scoreBreakdown__bar} style={{ width: `${item.value}%` }} />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </article>
+    <CollapsibleBlock className={styles.scoreBreakdown} title="Детализация оценки">
+      {items.length > 0 ? (
+        <ul className={styles.scoreBreakdown__list}>
+          {items.map((item) => (
+            <li className={styles.scoreBreakdown__item} key={item.label}>
+              <div className={styles.scoreBreakdown__header}>
+                <span>{item.label}</span>
+                <strong>{item.value}/100</strong>
+              </div>
+              <div className={styles.scoreBreakdown__track} aria-hidden="true">
+                <span className={styles.scoreBreakdown__bar} style={{ width: `${item.value}%` }} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <EmptyState
+          description="Добавьте резюме и описание вакансии, чтобы увидеть вклад ATS и качества текста."
+          icon={<Gauge aria-hidden size={18} />}
+          title="Детализация появится после анализа"
+        />
+      )}
+    </CollapsibleBlock>
   );
 }

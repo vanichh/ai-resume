@@ -1,13 +1,28 @@
+import clsx from 'clsx';
+
+import { CollapsibleBlock, EmptyState } from '@components/ui';
+
 import type { AdviceBlockProps } from './types';
 
 import styles from './AdviceBlock.module.scss';
 
-export function AdviceBlock({ title, values, empty, wide = false }: AdviceBlockProps) {
-  const blockClassName = `${styles.adviceBlock} ${wide ? styles.adviceBlock_wide : ''}`;
-
+export function AdviceBlock({
+  title,
+  values,
+  defaultCollapsed = false,
+  empty,
+  headerAction,
+  wide = false,
+}: AdviceBlockProps) {
   return (
-    <article className={blockClassName}>
-      <h2 className={styles.adviceBlock__title}>{title}</h2>
+    <CollapsibleBlock
+      className={clsx(styles.adviceBlock, {
+        [styles.adviceBlock_wide]: wide,
+      })}
+      defaultCollapsed={defaultCollapsed}
+      headerAction={headerAction}
+      title={title}
+    >
       {values.length > 0 ? (
         <ul className={styles.adviceBlock__list}>
           {values.map((value) => (
@@ -17,8 +32,8 @@ export function AdviceBlock({ title, values, empty, wide = false }: AdviceBlockP
           ))}
         </ul>
       ) : (
-        <p className={styles.adviceBlock__empty}>{empty}</p>
+        <EmptyState description={empty} title="Данных пока нет" />
       )}
-    </article>
+    </CollapsibleBlock>
   );
 }
