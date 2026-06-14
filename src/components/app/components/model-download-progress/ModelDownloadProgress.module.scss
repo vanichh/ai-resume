@@ -1,0 +1,64 @@
+.modelDownloadProgress {
+  display: grid;
+  gap: 8px;
+
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto 14px;
+  padding: 12px 14px;
+
+  border: 1px solid get-color(accentBorder);
+  border-radius: 8px;
+  background: get-color(accentSurface);
+
+  color: get-color(slateText);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__title {
+    min-width: 0;
+
+    font-size: fontSize(14px);
+    font-weight: 800;
+  }
+
+  &__value {
+    flex: 0 0 auto;
+
+    color: get-color(accentText);
+    font-size: fontSize(14px);
+  }
+
+  &__bar {
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    border: 0;
+    border-radius: 999px;
+    background: get-color(surfaceTrack);
+
+    appearance: none;
+
+    &::-webkit-progress-bar {
+      border-radius: 999px;
+      background: get-color(surfaceTrack);
+    }
+
+    &::-webkit-progress-value {
+      border-radius: 999px;
+      background: get-color(accent);
+    }
+
+    &::-moz-progress-bar {
+      border-radius: 999px;
+      background: get-color(accent);
+    }
+  }
+}

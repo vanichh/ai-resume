@@ -1,6 +1,6 @@
 import styles from './ResumeInputHeader.module.scss';
 
-export function ResumeInputHeader() {
+export const ResumeInputHeader = () => {
   return (
     <header className={styles.resumeInputHeader}>
       <div>
@@ -12,4 +12,4 @@ export function ResumeInputHeader() {
       </div>
     </header>
   );
-}
+};

@@ -1,5 +1,4 @@
 import { clearResumeWorkspace, loadResumeWorkspace } from '@common/utils/resumeWorkspaceStorage';
-
 import { getLanguageModelStatus } from '@services/resume-advisor';
 
 import type { ResumeSliceCreatorType } from './types';

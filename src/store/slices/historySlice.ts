@@ -5,39 +5,80 @@ import type { HistoryActionsType } from '../types';
 
 export const createHistorySlice: ResumeSliceCreatorType<HistoryActionsType> = (set, get) => ({
   clearAnalysisHistory() {
-    set({ analysisHistory: [] });
-    persistWorkspace(get());
+    set((state) => {
+      const nextState = {
+        ...state,
+        analysisHistory: [],
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        analysisHistory: nextState.analysisHistory,
+      };
+    });
   },
 
   removeAnalysisHistoryItem(id) {
-    set({
-      analysisHistory: get().analysisHistory.filter((item) => item.id !== id),
+    set((state) => {
+      const nextState = {
+        ...state,
+        analysisHistory: state.analysisHistory.filter((item) => item.id !== id),
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        analysisHistory: nextState.analysisHistory,
+      };
     });
-    persistWorkspace(get());
   },
 
   selectAnalysisHistoryItem(id) {
-    const item = get().analysisHistory.find((historyItem) => historyItem.id === id);
+    const state = get();
+    const item = state.analysisHistory.find((historyItem) => historyItem.id === id);
     if (!item) {
       return;
     }
 
-    set({
-      advice: item.advice,
-      fileName: item.fileName,
-      resumeText: item.resumeText,
-      status: 'done',
-      targetRole: item.targetRole,
-      translation: null,
-      vacancyText: item.vacancyText,
+    set((state) => {
+      const nextState = {
+        ...state,
+        advice: item.advice,
+        fileName: item.fileName,
+        resumeText: item.resumeText,
+        status: 'done' as const,
+        targetRole: item.targetRole,
+        translation: null,
+        vacancyText: item.vacancyText,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        advice: nextState.advice,
+        fileName: nextState.fileName,
+        resumeText: nextState.resumeText,
+        status: nextState.status,
+        targetRole: nextState.targetRole,
+        translation: nextState.translation,
+        vacancyText: nextState.vacancyText,
+      };
     });
-    persistWorkspace(get());
   },
 
   setAnalysisHistoryNote(id, note) {
-    set({
-      analysisHistory: get().analysisHistory.map((item) => (item.id === id ? { ...item, note } : item)),
+    set((state) => {
+      const nextState = {
+        ...state,
+        analysisHistory: state.analysisHistory.map((item) => (item.id === id ? { ...item, note } : item)),
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        analysisHistory: nextState.analysisHistory,
+      };
     });
-    persistWorkspace(get());
   },
 });

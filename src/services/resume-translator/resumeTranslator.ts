@@ -10,12 +10,12 @@ import { createId } from '@common/utils/createId';
 import { TRANSLATION_SYSTEM_PROMPT } from './common/constants';
 import { splitResumeForTranslation } from './common/utils/splitResumeForTranslation';
 
-export async function translateResume(
+export const translateResume = async (
   resumeText: string,
   language: ResumeTranslationLanguageType,
   tone: ResumeTranslationToneType,
   onDownloadProgress?: (progress: number) => void,
-): Promise<ResumeTranslationType> {
+): Promise<ResumeTranslationType> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
@@ -76,4 +76,4 @@ export async function translateResume(
   } finally {
     session.destroy();
   }
-}
+};

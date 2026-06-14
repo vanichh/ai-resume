@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import { useEffect } from 'react';
 
 import { X } from 'lucide-react';
@@ -9,7 +10,7 @@ import { Button } from '../button';
 
 import styles from './Modal.module.scss';
 
-export function Modal({
+export const Modal = ({
   cancelLabel = 'Отмена',
   children,
   confirmLabel = 'Подтвердить',
@@ -19,21 +20,25 @@ export function Modal({
   title,
   onClose,
   onConfirm,
-}: ModalProps) {
+}: ModalProps) => {
+  const onContentMouseDown = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+  };
+
   useEffect(() => {
     if (!isOpen) {
       return;
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', onKeyDown);
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [isOpen, onClose]);
 
   if (!isOpen) {
@@ -47,7 +52,7 @@ export function Modal({
         className={styles.modal__content}
         role="dialog"
         aria-labelledby="modal-title"
-        onMouseDown={(event) => event.stopPropagation()}
+        onMouseDown={onContentMouseDown}
       >
         <header className={styles.modal__header}>
           <h2 className={styles.modal__title} id="modal-title">
@@ -73,4 +78,4 @@ export function Modal({
     </div>,
     document.body,
   );
-}
+};

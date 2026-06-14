@@ -1,4 +1,4 @@
-export function formatResumeDocument(title: string, text: string): string {
+export const formatResumeDocument = (title: string, text: string): string => {
   return [
     '<!doctype html>',
     '<html>',
@@ -13,8 +13,8 @@ export function formatResumeDocument(title: string, text: string): string {
     '</body>',
     '</html>',
   ].join('');
-}
+};
 
-function escapeHtml(value: string): string {
+const escapeHtml = (value: string): string => {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-}
+};

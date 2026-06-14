@@ -1,6 +1,6 @@
 import { MAX_PROMPT_RESUME_LENGTH } from '../constants';
 
-export function prepareResumeForPrompt(resumeText: string): string {
+export const prepareResumeForPrompt = (resumeText: string): string => {
   const normalized = resumeText.replace(/\n{3,}/g, '\n\n').trim();
   if (normalized.length <= MAX_PROMPT_RESUME_LENGTH) {
     return normalized;
@@ -26,9 +26,9 @@ export function prepareResumeForPrompt(resumeText: string): string {
   }
 
   return selected.join('\n\n');
-}
+};
 
-function splitIntoLikelySections(text: string): string[] {
+const splitIntoLikelySections = (text: string): string[] => {
   const lines = text.split('\n');
   const sections: string[] = [];
   let current: string[] = [];
@@ -51,9 +51,9 @@ function splitIntoLikelySections(text: string): string[] {
   }
 
   return sections.filter(Boolean);
-}
+};
 
-function sectionPriority(section: string): number {
+const sectionPriority = (section: string): number => {
   const lower = section.toLowerCase();
   const rules: Array<[RegExp, number]> = [
     [/(experience|work|employment|projects|опыт|работа|проекты)/, 10],
@@ -64,4 +64,4 @@ function sectionPriority(section: string): number {
   ];
 
   return rules.find(([pattern]) => pattern.test(lower))?.[1] ?? 1;
-}
+};

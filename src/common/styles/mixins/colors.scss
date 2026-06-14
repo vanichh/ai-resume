@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:string';
 
 $colors: (
   accent: #165bd8,
@@ -94,7 +95,13 @@ $colors: (
     @error 'Unknown color token: #{$token}.';
   }
 
-  @return map.get($colors, $token);
+  @return var(--color-#{string.unquote('#{$token}')});
+}
+
+@mixin colorVariables($theme-colors: $colors) {
+  @each $token, $value in $theme-colors {
+    --color-#{$token}: #{$value};
+  }
 }
 
 @mixin colorRule($property, $token) {

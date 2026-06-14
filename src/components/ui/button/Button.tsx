@@ -4,7 +4,7 @@ import type { ButtonProps } from './types';
 
 import styles from './Button.module.scss';
 
-export function Button({
+export const Button = ({
   children,
   className = '',
   fullWidth = false,
@@ -12,7 +12,7 @@ export function Button({
   type = 'button',
   variant = 'secondary',
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   return (
     <button
       className={clsx(styles.button, styles[`button_${variant}`], styles[`button_${size}`], className, {
@@ -24,4 +24,4 @@ export function Button({
       {children}
     </button>
   );
-}
+};

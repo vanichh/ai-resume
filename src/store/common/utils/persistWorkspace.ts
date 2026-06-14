@@ -2,7 +2,7 @@ import { saveResumeWorkspace } from '@common/utils/resumeWorkspaceStorage';
 
 import type { ResumeStoreType } from '../../types';
 
-export function persistWorkspace(state: ResumeStoreType): void {
+export const persistWorkspace = (state: ResumeStoreType): void => {
   saveResumeWorkspace({
     advice: state.advice,
     analysisHistory: state.analysisHistory,
@@ -16,4 +16,4 @@ export function persistWorkspace(state: ResumeStoreType): void {
     translationTone: state.translationTone,
     vacancyText: state.vacancyText,
   });
-}
+};

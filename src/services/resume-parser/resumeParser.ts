@@ -1,7 +1,7 @@
 import { TEXT_LIKE_EXTENSIONS } from './common/constants';
 import { normalizeText } from './common/utils/normalizeText';
 
-export async function parseResumeFile(file: File): Promise<string> {
+export const parseResumeFile = async (file: File): Promise<string> => {
   const extension = file.name.split('.').pop()?.toLowerCase() ?? '';
 
   if (file.type === 'application/pdf' || extension === 'pdf') {
@@ -21,4 +21,4 @@ export async function parseResumeFile(file: File): Promise<string> {
   }
 
   throw new Error('Поддерживаются PDF, DOCX, TXT и MD.');
-}
+};

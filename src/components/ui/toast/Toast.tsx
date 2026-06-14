@@ -9,7 +9,7 @@ import styles from './Toast.module.scss';
 
 const DEFAULT_AUTO_CLOSE_DELAY = 3000;
 
-export function Toast({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onClose, variant }: ToastProps) {
+export const Toast = ({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onClose, variant }: ToastProps) => {
   useEffect(() => {
     if (!message || autoCloseDelay <= 0) {
       return;
@@ -32,4 +32,4 @@ export function Toast({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onCl
       </button>
     </div>
   );
-}
+};

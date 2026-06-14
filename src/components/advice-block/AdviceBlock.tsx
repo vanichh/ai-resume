@@ -6,14 +6,14 @@ import type { AdviceBlockProps } from './types';
 
 import styles from './AdviceBlock.module.scss';
 
-export function AdviceBlock({
+export const AdviceBlock = ({
   title,
   values,
   defaultCollapsed = false,
   empty,
   headerAction,
   wide = false,
-}: AdviceBlockProps) {
+}: AdviceBlockProps) => {
   return (
     <CollapsibleBlock
       className={clsx(styles.adviceBlock, {
@@ -36,4 +36,4 @@ export function AdviceBlock({
       )}
     </CollapsibleBlock>
   );
-}
+};

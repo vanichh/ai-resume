@@ -4,14 +4,14 @@ import type { SelectProps } from './types';
 
 import styles from './Select.module.scss';
 
-export function Select({
+export const Select = ({
   className = '',
   fullWidth = true,
   options,
   placeholder,
   size = 'medium',
   ...props
-}: SelectProps) {
+}: SelectProps) => {
   return (
     <span
       className={clsx(styles.select, styles[`select_${size}`], className, {
@@ -32,4 +32,4 @@ export function Select({
       </select>
     </span>
   );
-}
+};

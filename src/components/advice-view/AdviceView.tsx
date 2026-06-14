@@ -1,11 +1,9 @@
 import { Copy } from 'lucide-react';
 
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
-
 import { AdviceBlock } from '@components/advice-block';
 import { ScoreBreakdown } from '@components/score-breakdown';
 import { Button } from '@components/ui';
-
 import { useResumeStore } from '@store/resumeStore';
 
 import { AdviceScoreCard } from './components/advice-score-card';
@@ -14,10 +12,14 @@ import { SectionScoreList } from './components/section-score-list';
 
 import styles from './AdviceView.module.scss';
 
-export function AdviceView() {
+export const AdviceView = () => {
   const advice = useResumeStore((state) => state.advice);
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
   const missingKeywords = advice?.missingKeywords ?? [];
+
+  const onMissingKeywordsCopyClick = () => {
+    void copyToClipboardWithNotification(missingKeywords.join(', '), 'Ключевые слова скопированы.');
+  };
 
   return (
     <section className={styles.adviceView}>
@@ -58,9 +60,7 @@ export function AdviceView() {
             <Button
               aria-label="Скопировать недостающие ключевые слова"
               size="small"
-              onClick={() =>
-                void copyToClipboardWithNotification(missingKeywords.join(', '), 'Ключевые слова скопированы.')
-              }
+              onClick={onMissingKeywordsCopyClick}
             >
               <Copy aria-hidden size={16} />
             </Button>
@@ -82,4 +82,4 @@ export function AdviceView() {
       />
     </section>
   );
-}
+};

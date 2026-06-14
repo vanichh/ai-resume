@@ -1,19 +1,36 @@
+import type { ChangeEvent } from 'react';
+
 import { Copy } from 'lucide-react';
+import { useShallow } from 'zustand/react/shallow';
 
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
-
 import { CollapsibleBlock, Textarea } from '@components/ui';
-
 import { downloadResumeDoc, downloadResumePrintHtml } from '@services/advice-export/adviceExport';
-
 import { useResumeStore } from '@store/resumeStore';
+
+import { selectResumePreviewState } from './common/selectors';
 
 import styles from './ResumePreview.module.scss';
 
-export function ResumePreview() {
+export const ResumePreview = () => {
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
-  const resumeText = useResumeStore((state) => state.resumeText);
-  const setResumeText = useResumeStore((state) => state.setResumeText);
+  const { resumeText, setResumeText } = useResumeStore(useShallow(selectResumePreviewState));
+
+  const onCopyClick = () => {
+    void copyToClipboardWithNotification(resumeText, 'Резюме скопировано.');
+  };
+
+  const onDocDownloadClick = () => {
+    downloadResumeDoc(resumeText);
+  };
+
+  const onPrintHtmlDownloadClick = () => {
+    downloadResumePrintHtml(resumeText);
+  };
+
+  const onResumeTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setResumeText(event.target.value);
+  };
 
   return (
     <CollapsibleBlock
@@ -26,7 +43,7 @@ export function ResumePreview() {
             className={styles.resumePreview__actionButton}
             type="button"
             disabled={!resumeText}
-            onClick={() => void copyToClipboardWithNotification(resumeText, 'Резюме скопировано.')}
+            onClick={onCopyClick}
           >
             <Copy aria-hidden size={16} />
           </button>
@@ -34,7 +51,7 @@ export function ResumePreview() {
             className={styles.resumePreview__actionButton}
             type="button"
             disabled={!resumeText}
-            onClick={() => downloadResumeDoc(resumeText)}
+            onClick={onDocDownloadClick}
           >
             DOC
           </button>
@@ -42,7 +59,7 @@ export function ResumePreview() {
             className={styles.resumePreview__actionButton}
             type="button"
             disabled={!resumeText}
-            onClick={() => downloadResumePrintHtml(resumeText)}
+            onClick={onPrintHtmlDownloadClick}
           >
             PDF HTML
           </button>
@@ -56,8 +73,8 @@ export function ResumePreview() {
         placeholder="После загрузки здесь появится извлеченный текст."
         variant="code"
         value={resumeText}
-        onChange={(event) => setResumeText(event.target.value)}
+        onChange={onResumeTextChange}
       />
     </CollapsibleBlock>
   );
-}
+};

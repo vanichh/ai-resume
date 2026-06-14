@@ -1,3 +1,4 @@
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 import { Trash2 } from 'lucide-react';
@@ -10,15 +11,40 @@ import { VACANCY_COMPARISON_STATUS_LABELS } from '../../common/constants';
 
 import styles from '../../VacancyComparison.module.scss';
 
-export function VacancyComparisonItem({
+export const VacancyComparisonItem = ({
   item,
   onRemove,
   onSelect,
   onTextChange,
   onTitleChange,
-}: VacancyComparisonItemProps) {
+}: VacancyComparisonItemProps) => {
   const [isRemoveConfirmOpen, setIsRemoveConfirmOpen] = useState(false);
   const canSelectResult = Boolean(item.advice);
+
+  const onTitleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onTitleChange(item.id, event.target.value);
+  };
+
+  const onRemoveConfirmOpen = () => {
+    setIsRemoveConfirmOpen(true);
+  };
+
+  const onTextInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onTextChange(item.id, event.target.value);
+  };
+
+  const onSelectClick = () => {
+    onSelect(item.id);
+  };
+
+  const onRemoveConfirmClose = () => {
+    setIsRemoveConfirmOpen(false);
+  };
+
+  const onRemoveConfirm = () => {
+    onRemove(item.id);
+    setIsRemoveConfirmOpen(false);
+  };
 
   return (
     <article className={styles.vacancyComparison__item}>
@@ -28,9 +54,9 @@ export function VacancyComparisonItem({
           placeholder="Название вакансии"
           type="text"
           value={item.title}
-          onChange={(event) => onTitleChange(item.id, event.target.value)}
+          onChange={onTitleInputChange}
         />
-        <Button aria-label="Удалить вакансию" size="medium" onClick={() => setIsRemoveConfirmOpen(true)}>
+        <Button aria-label="Удалить вакансию" size="medium" onClick={onRemoveConfirmOpen}>
           <Trash2 aria-hidden size={16} />
         </Button>
       </div>
@@ -39,7 +65,7 @@ export function VacancyComparisonItem({
         minHeight={130}
         placeholder="Вставьте текст вакансии"
         value={item.vacancyText}
-        onChange={(event) => onTextChange(item.id, event.target.value)}
+        onChange={onTextInputChange}
       />
       <div className={styles.vacancyComparison__result}>
         <span className={styles.vacancyComparison__status}>{VACANCY_COMPARISON_STATUS_LABELS[item.status]}</span>
@@ -56,7 +82,7 @@ export function VacancyComparisonItem({
               className={styles.vacancyComparison__selectButton}
               disabled={!canSelectResult}
               size="medium"
-              onClick={() => onSelect(item.id)}
+              onClick={onSelectClick}
             >
               Открыть результат
             </Button>
@@ -69,12 +95,9 @@ export function VacancyComparisonItem({
         description="Вакансия и результат сравнения будут удалены без возможности восстановления."
         isOpen={isRemoveConfirmOpen}
         title="Удалить вакансию?"
-        onClose={() => setIsRemoveConfirmOpen(false)}
-        onConfirm={() => {
-          onRemove(item.id);
-          setIsRemoveConfirmOpen(false);
-        }}
+        onClose={onRemoveConfirmClose}
+        onConfirm={onRemoveConfirm}
       />
     </article>
   );
-}
+};

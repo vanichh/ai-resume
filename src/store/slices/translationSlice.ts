@@ -8,43 +8,83 @@ import type { TranslationActionsType } from '../types';
 
 export const createTranslationSlice: ResumeSliceCreatorType<TranslationActionsType> = (set, get) => ({
   selectTranslation(id) {
-    const translation = get().translationHistory.find((item) => item.id === id) ?? null;
-    set({ translation });
-    persistWorkspace(get());
+    const state = get();
+    const translation = state.translationHistory.find((item) => item.id === id) ?? null;
+    set((currentState) => {
+      const nextState = {
+        ...currentState,
+        translation,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        translation: nextState.translation,
+      };
+    });
   },
 
   setTranslationText(text) {
-    const { translation, translationHistory } = get();
-    if (!translation) {
-      return;
-    }
+    set((state) => {
+      if (!state.translation) {
+        return state;
+      }
 
-    const updatedTranslation = {
-      ...translation,
-      text,
-    };
+      const updatedTranslation = {
+        ...state.translation,
+        text,
+      };
 
-    set({
-      translation: updatedTranslation,
-      translationHistory: translationHistory.map((item) =>
-        item.id === updatedTranslation.id ? updatedTranslation : item,
-      ),
+      const nextState = {
+        ...state,
+        translation: updatedTranslation,
+        translationHistory: state.translationHistory.map((item) =>
+          item.id === updatedTranslation.id ? updatedTranslation : item,
+        ),
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        translation: nextState.translation,
+        translationHistory: nextState.translationHistory,
+      };
     });
-    persistWorkspace(get());
   },
 
   setTranslationLanguage(translationLanguage) {
-    set({ translationLanguage });
-    persistWorkspace(get());
+    set((state) => {
+      const nextState = {
+        ...state,
+        translationLanguage,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        translationLanguage: nextState.translationLanguage,
+      };
+    });
   },
 
   setTranslationTone(translationTone) {
-    set({ translationTone });
-    persistWorkspace(get());
+    set((state) => {
+      const nextState = {
+        ...state,
+        translationTone,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        translationTone: nextState.translationTone,
+      };
+    });
   },
 
   async translate() {
-    const { advice, resumeText, translationLanguage, translationTone } = get();
+    const state = get();
+    const { advice, resumeText, translationLanguage, translationTone } = state;
 
     set({
       downloadProgress: null,
@@ -63,19 +103,29 @@ export const createTranslationSlice: ResumeSliceCreatorType<TranslationActionsTy
         },
       );
 
-      const translationHistory = [
-        translation,
-        ...get().translationHistory.filter((item) => item.id !== translation.id),
-      ].slice(0, 12);
+      set((state) => {
+        const nextState = {
+          ...state,
+          status: advice ? ('done' as const) : ('ready' as const),
+          translation,
+          translationHistory: [
+            translation,
+            ...state.translationHistory.filter((item) => item.id !== translation.id),
+          ].slice(0, 12),
+        };
 
-      set({
-        status: advice ? 'done' : 'ready',
-        translation,
-        translationHistory,
+        persistWorkspace(nextState);
+
+        return {
+          downloadProgress: null,
+          status: nextState.status,
+          translation: nextState.translation,
+          translationHistory: nextState.translationHistory,
+        };
       });
-      persistWorkspace(get());
     } catch (caught) {
       set({
+        downloadProgress: null,
         error: getErrorMessage(caught, 'Не удалось перевести резюме.'),
         status: 'error',
       });

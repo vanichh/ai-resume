@@ -14,6 +14,6 @@ const statusClassNames: Record<AppStatusType, string> = {
   translating: styles.resumeInput__primaryButtonStatus_translating,
 };
 
-export function getSubmitButtonStatusClassName(status: AppStatusType): string {
+export const getSubmitButtonStatusClassName = (status: AppStatusType): string => {
   return clsx(styles.resumeInput__primaryButtonStatus, statusClassNames[status]);
-}
+};

@@ -4,7 +4,7 @@ import { useAtsMatch } from '@common/hooks/useAtsMatch';
 
 import styles from './AtsKeywordMatcher.module.scss';
 
-export function AtsKeywordMatcher() {
+export const AtsKeywordMatcher = () => {
   const match = useAtsMatch();
 
   if (match.keywords.length === 0) {
@@ -31,4 +31,4 @@ export function AtsKeywordMatcher() {
       </div>
     </section>
   );
-}
+};

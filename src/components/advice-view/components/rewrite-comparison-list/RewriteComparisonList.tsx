@@ -6,7 +6,7 @@ import type { RewriteComparisonListProps } from './types';
 
 import styles from './RewriteComparisonList.module.scss';
 
-export function RewriteComparisonList({ suggestions }: RewriteComparisonListProps) {
+export const RewriteComparisonList = ({ suggestions }: RewriteComparisonListProps) => {
   return (
     <CollapsibleBlock className={styles.rewriteComparisonList} title="До / после">
       {suggestions.length > 0 ? (
@@ -36,4 +36,4 @@ export function RewriteComparisonList({ suggestions }: RewriteComparisonListProp
       )}
     </CollapsibleBlock>
   );
-}
+};

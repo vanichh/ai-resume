@@ -1,6 +1,6 @@
 import type { ResumeAdviceType } from '@common/types';
 
-export function parseAdvice(response: string): ResumeAdviceType {
+export const parseAdvice = (response: string): ResumeAdviceType => {
   const parsed = JSON.parse(response) as Partial<ResumeAdviceType>;
 
   if (
@@ -40,4 +40,4 @@ export function parseAdvice(response: string): ResumeAdviceType {
     bulletImprovements: parsed.bulletImprovements,
     actions: parsed.actions,
   };
-}
+};

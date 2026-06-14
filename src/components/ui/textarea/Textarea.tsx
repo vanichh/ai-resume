@@ -6,14 +6,14 @@ import type { TextareaProps } from './types';
 
 import styles from './Textarea.module.scss';
 
-export function Textarea({
+export const Textarea = ({
   className = '',
   fullWidth = true,
   minHeight,
   style,
   variant = 'default',
   ...props
-}: TextareaProps) {
+}: TextareaProps) => {
   const textareaStyle: CSSProperties = {
     ...style,
     ...(minHeight ? { minHeight } : null),
@@ -28,4 +28,4 @@ export function Textarea({
       {...props}
     />
   );
-}
+};

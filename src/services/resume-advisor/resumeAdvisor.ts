@@ -5,7 +5,7 @@ import { DEFAULT_TARGET_ROLE, RESPONSE_SCHEMA, SYSTEM_PROMPT } from './common/co
 import { parseAdvice } from './common/utils/parseAdvice';
 import { prepareResumeForPrompt } from './common/utils/prepareResumeForPrompt';
 
-export async function getLanguageModelStatus(): Promise<ModelStatusType> {
+export const getLanguageModelStatus = async (): Promise<ModelStatusType> => {
   if (!globalThis.LanguageModel) {
     return 'unsupported';
   }
@@ -13,13 +13,13 @@ export async function getLanguageModelStatus(): Promise<ModelStatusType> {
   return globalThis.LanguageModel.availability({
     expectedOutputs: [{ type: 'text', languages: [DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE] }],
   });
-}
+};
 
-export async function analyzeResume(
+export const analyzeResume = async (
   resumeText: string,
   targetInput: string,
   onDownloadProgress?: (progress: number) => void,
-): Promise<ResumeAdviceType> {
+): Promise<ResumeAdviceType> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
@@ -69,4 +69,4 @@ export async function analyzeResume(
   } finally {
     session.destroy();
   }
-}
+};

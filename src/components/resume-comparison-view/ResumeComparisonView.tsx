@@ -1,10 +1,13 @@
+import { useShallow } from 'zustand/react/shallow';
+
 import { useResumeStore } from '@store/resumeStore';
+
+import { selectResumeComparisonViewState } from './common/selectors';
 
 import styles from './ResumeComparisonView.module.scss';
 
-export function ResumeComparisonView() {
-  const resumeText = useResumeStore((state) => state.resumeText);
-  const translation = useResumeStore((state) => state.translation);
+export const ResumeComparisonView = () => {
+  const { resumeText, translation } = useResumeStore(useShallow(selectResumeComparisonViewState));
 
   if (!translation || !resumeText) {
     return null;
@@ -25,4 +28,4 @@ export function ResumeComparisonView() {
       </div>
     </section>
   );
-}
+};

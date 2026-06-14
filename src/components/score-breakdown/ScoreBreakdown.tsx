@@ -1,16 +1,14 @@
 import { Gauge } from 'lucide-react';
 
 import { useAtsMatch } from '@common/hooks/useAtsMatch';
-
 import { CollapsibleBlock, EmptyState } from '@components/ui';
-
 import { useResumeStore } from '@store/resumeStore';
 
 import { getScoreBreakdownItems } from './common/utils/getScoreBreakdownItems';
 
 import styles from './ScoreBreakdown.module.scss';
 
-export function ScoreBreakdown() {
+export const ScoreBreakdown = () => {
   const advice = useResumeStore((state) => state.advice);
   const atsMatch = useAtsMatch();
 
@@ -41,4 +39,4 @@ export function ScoreBreakdown() {
       )}
     </CollapsibleBlock>
   );
-}
+};

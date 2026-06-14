@@ -9,7 +9,8 @@ import type { CoverLetterActionsType } from '../types';
 
 export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsType> = (set, get) => ({
   async generateCoverLetter() {
-    const { advice, modelStatus, resumeText, targetRole, vacancyText } = get();
+    const state = get();
+    const { advice, modelStatus, resumeText, targetRole, vacancyText } = state;
     if (!resumeText || !canUseModel(modelStatus)) {
       return;
     }
@@ -26,31 +27,49 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
         set({ downloadProgress });
       });
 
-      set({
-        coverLetter,
-        coverLetterStatus: 'done',
+      set((state) => {
+        const nextState = {
+          ...state,
+          coverLetter,
+          coverLetterStatus: 'done' as const,
+        };
+
+        persistWorkspace(nextState);
+
+        return {
+          coverLetter: nextState.coverLetter,
+          coverLetterStatus: nextState.coverLetterStatus,
+          downloadProgress: null,
+        };
       });
-      persistWorkspace(get());
     } catch (caught) {
       set({
         coverLetterStatus: 'error',
+        downloadProgress: null,
         error: getErrorMessage(caught, 'Не удалось сгенерировать сопроводительное письмо.'),
       });
     }
   },
 
   setCoverLetterText(text) {
-    const { coverLetter } = get();
-    if (!coverLetter) {
-      return;
-    }
+    set((state) => {
+      if (!state.coverLetter) {
+        return state;
+      }
 
-    set({
-      coverLetter: {
-        ...coverLetter,
-        text,
-      },
+      const nextState = {
+        ...state,
+        coverLetter: {
+          ...state.coverLetter,
+          text,
+        },
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetter: nextState.coverLetter,
+      };
     });
-    persistWorkspace(get());
   },
 });

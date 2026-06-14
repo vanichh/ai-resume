@@ -1,5 +1,4 @@
 import { createId } from '@common/utils/createId';
-
 import { analyzeResume } from '@services/resume-advisor';
 
 import type { ResumeSliceCreatorType } from './types';
@@ -13,7 +12,8 @@ import type { ResumeActionsType } from '../types';
 
 export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set, get) => ({
   async analyze() {
-    const { fileName, resumeText, targetRole, vacancyText } = get();
+    const state = get();
+    const { fileName, resumeText, targetRole, vacancyText } = state;
 
     set({
       advice: null,
@@ -39,20 +39,32 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
         vacancyText,
       };
 
-      set({
-        advice,
-        analysisHistory: [
-          historyItem,
-          ...get().analysisHistory.filter(
-            (item) =>
-              item.resumeText !== resumeText || item.targetRole !== targetRole || item.vacancyText !== vacancyText,
-          ),
-        ].slice(0, ANALYSIS_HISTORY_LIMIT),
-        status: 'done',
+      set((state) => {
+        const nextState = {
+          ...state,
+          advice,
+          analysisHistory: [
+            historyItem,
+            ...state.analysisHistory.filter(
+              (item) =>
+                item.resumeText !== resumeText || item.targetRole !== targetRole || item.vacancyText !== vacancyText,
+            ),
+          ].slice(0, ANALYSIS_HISTORY_LIMIT),
+          status: 'done' as const,
+        };
+
+        persistWorkspace(nextState);
+
+        return {
+          advice: nextState.advice,
+          analysisHistory: nextState.analysisHistory,
+          downloadProgress: null,
+          status: nextState.status,
+        };
       });
-      persistWorkspace(get());
     } catch (caught) {
       set({
+        downloadProgress: null,
         error: getErrorMessage(caught, 'Не удалось получить рекомендации.'),
         status: 'error',
       });
@@ -78,12 +90,22 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
         throw new Error('В файле слишком мало текста для нормального анализа.');
       }
 
-      set({
-        resumeText,
-        status: 'ready',
-        comparisonVacancies: resetComparisonResults(get()),
+      set((currentState) => {
+        const nextState = {
+          ...currentState,
+          resumeText,
+          status: 'ready' as const,
+          comparisonVacancies: resetComparisonResults(currentState),
+        };
+
+        persistWorkspace(nextState);
+
+        return {
+          resumeText: nextState.resumeText,
+          status: nextState.status,
+          comparisonVacancies: nextState.comparisonVacancies,
+        };
       });
-      persistWorkspace(get());
     } catch (caught) {
       set({
         error: getErrorMessage(caught, 'Не удалось прочитать файл.'),
@@ -94,37 +116,75 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
   },
 
   setResumeText(resumeText) {
-    set({
-      advice: null,
-      comparisonVacancies: resetComparisonResults(get()),
-      coverLetter: null,
-      coverLetterStatus: 'idle',
-      resumeText,
-      status: resumeText ? 'ready' : 'idle',
-      translation: null,
+    set((state) => {
+      const nextState = {
+        ...state,
+        advice: null,
+        comparisonVacancies: resetComparisonResults(state),
+        coverLetter: null,
+        coverLetterStatus: 'idle' as const,
+        resumeText,
+        status: resumeText ? ('ready' as const) : ('idle' as const),
+        translation: null,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        advice: nextState.advice,
+        comparisonVacancies: nextState.comparisonVacancies,
+        coverLetter: nextState.coverLetter,
+        coverLetterStatus: nextState.coverLetterStatus,
+        resumeText: nextState.resumeText,
+        status: nextState.status,
+        translation: nextState.translation,
+      };
     });
-    persistWorkspace(get());
   },
 
   setTargetRole(targetRole) {
-    set({
-      advice: null,
-      coverLetter: null,
-      coverLetterStatus: 'idle',
-      status: get().resumeText ? 'ready' : 'idle',
-      targetRole,
+    set((state) => {
+      const nextState = {
+        ...state,
+        advice: null,
+        coverLetter: null,
+        coverLetterStatus: 'idle' as const,
+        status: state.resumeText ? ('ready' as const) : ('idle' as const),
+        targetRole,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        advice: nextState.advice,
+        coverLetter: nextState.coverLetter,
+        coverLetterStatus: nextState.coverLetterStatus,
+        status: nextState.status,
+        targetRole: nextState.targetRole,
+      };
     });
-    persistWorkspace(get());
   },
 
   setVacancyText(vacancyText) {
-    set({
-      advice: null,
-      coverLetter: null,
-      coverLetterStatus: 'idle',
-      status: get().resumeText ? 'ready' : 'idle',
-      vacancyText,
+    set((state) => {
+      const nextState = {
+        ...state,
+        advice: null,
+        coverLetter: null,
+        coverLetterStatus: 'idle' as const,
+        status: state.resumeText ? ('ready' as const) : ('idle' as const),
+        vacancyText,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        advice: nextState.advice,
+        coverLetter: nextState.coverLetter,
+        coverLetterStatus: nextState.coverLetterStatus,
+        status: nextState.status,
+        vacancyText: nextState.vacancyText,
+      };
     });
-    persistWorkspace(get());
   },
 });

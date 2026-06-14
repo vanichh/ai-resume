@@ -5,17 +5,17 @@ import type { ScoreBreakdownItemType } from '../../types';
 
 const ATS_KEYWORDS_LABEL = 'Ключевые слова ATS';
 
-export function getScoreBreakdownItems(
+export const getScoreBreakdownItems = (
   advice: ResumeAdviceType | null,
   atsMatch: AtsMatchType,
-): ScoreBreakdownItemType[] {
+): ScoreBreakdownItemType[] => {
   const sectionScoreItems = getSectionScoreItems(advice);
   const atsScoreItem = getAtsScoreItem(atsMatch);
 
   return atsScoreItem ? [...sectionScoreItems, atsScoreItem] : sectionScoreItems;
-}
+};
 
-function getSectionScoreItems(advice: ResumeAdviceType | null): ScoreBreakdownItemType[] {
+const getSectionScoreItems = (advice: ResumeAdviceType | null): ScoreBreakdownItemType[] => {
   if (!advice) {
     return [];
   }
@@ -24,9 +24,9 @@ function getSectionScoreItems(advice: ResumeAdviceType | null): ScoreBreakdownIt
     label: getResumeSectionTitle(score.title),
     value: score.score,
   }));
-}
+};
 
-function getAtsScoreItem(atsMatch: AtsMatchType): ScoreBreakdownItemType | null {
+const getAtsScoreItem = (atsMatch: AtsMatchType): ScoreBreakdownItemType | null => {
   if (atsMatch.keywords.length === 0) {
     return null;
   }
@@ -35,4 +35,4 @@ function getAtsScoreItem(atsMatch: AtsMatchType): ScoreBreakdownItemType | null 
     label: ATS_KEYWORDS_LABEL,
     value: atsMatch.score,
   };
-}
+};

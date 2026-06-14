@@ -1,39 +1,55 @@
 import { useState } from 'react';
 
 import { Trash2 } from 'lucide-react';
+import { useShallow } from 'zustand/react/shallow';
 
 import { getResumeWorkspaceStorageSize } from '@common/utils/resumeWorkspaceStorage';
-
 import { Button, CollapsibleBlock, Modal } from '@components/ui';
-
 import { useResumeStore } from '@store/resumeStore';
+
+import { selectPrivacyCenterState } from './common/selectors';
 
 import styles from './PrivacyCenter.module.scss';
 
-function formatStorageSize(bytes: number): string {
+const formatStorageSize = (bytes: number): string => {
   if (bytes < 1024) {
     return `${bytes} B`;
   }
 
   return `${(bytes / 1024).toFixed(1)} KB`;
-}
+};
 
-export function PrivacyCenter() {
+export const PrivacyCenter = () => {
   const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
-  const analysisHistoryCount = useResumeStore((state) => state.analysisHistory.length);
-  const clearWorkspace = useResumeStore((state) => state.clearWorkspace);
-  const comparisonVacanciesCount = useResumeStore((state) => state.comparisonVacancies.length);
-  const coverLetter = useResumeStore((state) => state.coverLetter);
-  const resumeText = useResumeStore((state) => state.resumeText);
-  const translationHistoryCount = useResumeStore((state) => state.translationHistory.length);
+  const {
+    analysisHistoryCount,
+    clearWorkspace,
+    comparisonVacanciesCount,
+    coverLetter,
+    resumeText,
+    translationHistoryCount,
+  } = useResumeStore(useShallow(selectPrivacyCenterState));
   const storageSize = formatStorageSize(getResumeWorkspaceStorageSize());
+
+  const onClearConfirmOpen = () => {
+    setIsClearConfirmOpen(true);
+  };
+
+  const onClearConfirmClose = () => {
+    setIsClearConfirmOpen(false);
+  };
+
+  const onClearConfirm = () => {
+    clearWorkspace();
+    setIsClearConfirmOpen(false);
+  };
 
   return (
     <>
       <CollapsibleBlock
         className={styles.privacyCenter}
         headerAction={
-          <Button aria-label="Очистить все данные" size="small" onClick={() => setIsClearConfirmOpen(true)}>
+          <Button aria-label="Очистить все данные" size="small" onClick={onClearConfirmOpen}>
             <Trash2 aria-hidden size={16} />
           </Button>
         }
@@ -72,12 +88,9 @@ export function PrivacyCenter() {
         description="Все локальные данные приложения будут удалены без возможности восстановления."
         isOpen={isClearConfirmOpen}
         title="Очистить все данные?"
-        onClose={() => setIsClearConfirmOpen(false)}
-        onConfirm={() => {
-          clearWorkspace();
-          setIsClearConfirmOpen(false);
-        }}
+        onClose={onClearConfirmClose}
+        onConfirm={onClearConfirm}
       />
     </>
   );
-}
+};

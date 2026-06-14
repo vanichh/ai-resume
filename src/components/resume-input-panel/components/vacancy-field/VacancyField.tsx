@@ -1,10 +1,16 @@
+import type { ChangeEvent } from 'react';
+
 import { Textarea } from '@components/ui';
 
 import type { VacancyFieldProps } from './types';
 
 import styles from './VacancyField.module.scss';
 
-export function VacancyField({ vacancyText, onVacancyTextChange }: VacancyFieldProps) {
+export const VacancyField = ({ vacancyText, onVacancyTextChange }: VacancyFieldProps) => {
+  const onVacancyTextInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onVacancyTextChange(event.target.value);
+  };
+
   return (
     <>
       <label className={styles.vacancyField__label} htmlFor="vacancy-text">
@@ -17,8 +23,8 @@ export function VacancyField({ vacancyText, onVacancyTextChange }: VacancyFieldP
         placeholder="Вставьте описание вакансии для сверки ключевых слов ATS"
         rows={4}
         value={vacancyText}
-        onChange={(event) => onVacancyTextChange(event.target.value)}
+        onChange={onVacancyTextInputChange}
       />
     </>
   );
-}
+};

@@ -23,7 +23,7 @@ export type StoredResumeWorkspaceType = {
   vacancyText: string;
 };
 
-export function loadResumeWorkspace(): Partial<StoredResumeWorkspaceType> {
+export const loadResumeWorkspace = (): Partial<StoredResumeWorkspaceType> => {
   try {
     const rawValue = localStorage.getItem(RESUME_WORKSPACE_STORAGE_KEY);
     if (!rawValue) {
@@ -34,16 +34,16 @@ export function loadResumeWorkspace(): Partial<StoredResumeWorkspaceType> {
   } catch {
     return {};
   }
-}
+};
 
-export function saveResumeWorkspace(value: StoredResumeWorkspaceType): void {
+export const saveResumeWorkspace = (value: StoredResumeWorkspaceType): void => {
   localStorage.setItem(RESUME_WORKSPACE_STORAGE_KEY, JSON.stringify(value));
-}
+};
 
-export function clearResumeWorkspace(): void {
+export const clearResumeWorkspace = (): void => {
   localStorage.removeItem(RESUME_WORKSPACE_STORAGE_KEY);
-}
+};
 
-export function getResumeWorkspaceStorageSize(): number {
+export const getResumeWorkspaceStorageSize = (): number => {
   return new Blob([localStorage.getItem(RESUME_WORKSPACE_STORAGE_KEY) ?? '']).size;
-}
+};

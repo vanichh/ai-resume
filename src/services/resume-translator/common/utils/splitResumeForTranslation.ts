@@ -1,6 +1,6 @@
 import { TRANSLATION_CHUNK_MAX_LENGTH } from '../constants';
 
-function splitLongLine(line: string): string[] {
+const splitLongLine = (line: string): string[] => {
   const chunks: string[] = [];
 
   for (let startIndex = 0; startIndex < line.length; startIndex += TRANSLATION_CHUNK_MAX_LENGTH) {
@@ -8,9 +8,9 @@ function splitLongLine(line: string): string[] {
   }
 
   return chunks;
-}
+};
 
-export function splitResumeForTranslation(resumeText: string): string[] {
+export const splitResumeForTranslation = (resumeText: string): string[] => {
   const blocks = resumeText
     .split(/\n{2,}/)
     .map((block) => block.trim())
@@ -18,14 +18,14 @@ export function splitResumeForTranslation(resumeText: string): string[] {
   const chunks: string[] = [];
   let currentChunk = '';
 
-  function pushChunk(): void {
+  const pushChunk = (): void => {
     if (!currentChunk.trim()) {
       return;
     }
 
     chunks.push(currentChunk.trim());
     currentChunk = '';
-  }
+  };
 
   for (const block of blocks) {
     if (block.length > TRANSLATION_CHUNK_MAX_LENGTH) {
@@ -59,4 +59,4 @@ export function splitResumeForTranslation(resumeText: string): string[] {
   pushChunk();
 
   return chunks.length > 0 ? chunks : [resumeText];
-}
+};

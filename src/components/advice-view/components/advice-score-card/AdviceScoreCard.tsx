@@ -2,7 +2,7 @@ import type { AdviceScoreCardProps } from './types';
 
 import styles from '../../AdviceView.module.scss';
 
-export function AdviceScoreCard({ advice }: AdviceScoreCardProps) {
+export const AdviceScoreCard = ({ advice }: AdviceScoreCardProps) => {
   return (
     <article className={styles.adviceView__scoreCard}>
       <h2 className={styles.adviceView__scoreTitle}>Оценка</h2>
@@ -16,4 +16,4 @@ export function AdviceScoreCard({ advice }: AdviceScoreCardProps) {
       )}
     </article>
   );
-}
+};

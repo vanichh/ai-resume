@@ -1,4 +1,4 @@
-export function downloadFile(content: string, fileName: string, mimeType: string): void {
+export const downloadFile = (content: string, fileName: string, mimeType: string): void => {
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -7,4 +7,4 @@ export function downloadFile(content: string, fileName: string, mimeType: string
   link.download = fileName;
   link.click();
   URL.revokeObjectURL(url);
-}
+};

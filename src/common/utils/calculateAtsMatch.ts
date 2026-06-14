@@ -19,7 +19,7 @@ const STOP_WORDS = new Set([
   'the',
 ]);
 
-export function calculateAtsMatch(resumeText: string, vacancyText: string): AtsMatchType {
+export const calculateAtsMatch = (resumeText: string, vacancyText: string): AtsMatchType => {
   const normalizedResume = normalize(resumeText);
   const keywords = extractKeywords(vacancyText);
   const matches = keywords.map((keyword) => ({
@@ -35,19 +35,19 @@ export function calculateAtsMatch(resumeText: string, vacancyText: string): AtsM
     missingCount,
     score: keywords.length === 0 ? 0 : Math.round((matchedCount / keywords.length) * 100),
   };
-}
+};
 
-function extractKeywords(value: string): string[] {
+const extractKeywords = (value: string): string[] => {
   const words = normalize(value)
     .split(' ')
     .filter((word) => word.length >= MIN_KEYWORD_LENGTH && !STOP_WORDS.has(word));
 
   return [...new Set(words)].slice(0, MAX_KEYWORDS);
-}
+};
 
-function normalize(value: string): string {
+const normalize = (value: string): string => {
   return value
     .toLocaleLowerCase()
     .replace(/[^\p{L}\p{N}+#.]+/gu, ' ')
     .trim();
-}
+};

@@ -4,13 +4,13 @@ import { createId } from '@common/utils/createId';
 
 import { COVER_LETTER_SYSTEM_PROMPT } from './common/constants';
 
-export async function generateCoverLetter(
+export const generateCoverLetter = async (
   resumeText: string,
   advice: ResumeAdviceType | null,
   targetRole: string,
   vacancyText: string,
   onDownloadProgress?: (progress: number) => void,
-): Promise<CoverLetterType> {
+): Promise<CoverLetterType> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
@@ -79,4 +79,4 @@ export async function generateCoverLetter(
   } finally {
     session.destroy();
   }
-}
+};

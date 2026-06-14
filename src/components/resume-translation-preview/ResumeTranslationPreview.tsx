@@ -1,16 +1,23 @@
+import type { ChangeEvent } from 'react';
+
+import { useShallow } from 'zustand/react/shallow';
+
 import { RESUME_TRANSLATION_LANGUAGE_LABELS } from '@common/constants';
-
 import { Textarea } from '@components/ui';
-
 import { useResumeStore } from '@store/resumeStore';
+
+import { selectResumeTranslationPreviewState } from './common/selectors';
 
 import { TranslationActions } from './components/translation-actions';
 
 import styles from './ResumeTranslationPreview.module.scss';
 
-export function ResumeTranslationPreview() {
-  const setTranslationText = useResumeStore((state) => state.setTranslationText);
-  const translation = useResumeStore((state) => state.translation);
+export const ResumeTranslationPreview = () => {
+  const { setTranslationText, translation } = useResumeStore(useShallow(selectResumeTranslationPreviewState));
+
+  const onTranslationTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setTranslationText(event.target.value);
+  };
 
   if (!translation) {
     return null;
@@ -30,8 +37,8 @@ export function ResumeTranslationPreview() {
         minHeight={300}
         variant="code"
         value={translation.text}
-        onChange={(event) => setTranslationText(event.target.value)}
+        onChange={onTranslationTextChange}
       />
     </div>
   );
-}
+};

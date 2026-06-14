@@ -1,6 +1,6 @@
 import type { ResumeAdviceType } from '@common/types';
 
-export function formatAdviceMarkdown(advice: ResumeAdviceType): string {
+export const formatAdviceMarkdown = (advice: ResumeAdviceType): string => {
   return [
     `# Рекомендации по резюме: ${advice.targetRole}`,
     '',
@@ -30,8 +30,8 @@ export function formatAdviceMarkdown(advice: ResumeAdviceType): string {
     section('Правки пунктов опыта', advice.bulletImprovements),
     section('Действия', advice.actions),
   ].join('\n');
-}
+};
 
-function section(title: string, values: string[]): string {
+const section = (title: string, values: string[]): string => {
   return [`## ${title}`, ...values.map((value) => `- ${value}`), ''].join('\n');
-}
+};

@@ -7,6 +7,6 @@ const RESUME_SECTION_TITLES: Record<string, string> = {
   summary: 'Профиль',
 };
 
-export function getResumeSectionTitle(title: string): string {
+export const getResumeSectionTitle = (title: string): string => {
   return RESUME_SECTION_TITLES[title.trim().toLowerCase()] ?? title;
-}
+};

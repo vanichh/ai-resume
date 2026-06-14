@@ -1,6 +1,6 @@
 import type { ResumeAdviceType } from '@common/types';
 
-export function formatAdviceReportHtml(advice: ResumeAdviceType): string {
+export const formatAdviceReportHtml = (advice: ResumeAdviceType): string => {
   return [
     '<!doctype html>',
     '<html lang="ru">',
@@ -32,13 +32,13 @@ export function formatAdviceReportHtml(advice: ResumeAdviceType): string {
     '</body>',
     '</html>',
   ].join('');
-}
+};
 
-function reportSection(title: string, content: string): string {
+const reportSection = (title: string, content: string): string => {
   return `<section class="section"><h2>${escapeHtml(title)}</h2>${content}</section>`;
-}
+};
 
-function formatSectionScores(advice: ResumeAdviceType): string {
+const formatSectionScores = (advice: ResumeAdviceType): string => {
   return `<div class="scoreGrid">${advice.sectionScores
     .map(
       (sectionScore) =>
@@ -47,9 +47,9 @@ function formatSectionScores(advice: ResumeAdviceType): string {
         )}</p></div><strong>${sectionScore.score}/100</strong></article>`,
     )
     .join('')}</div>`;
-}
+};
 
-function formatRewriteSuggestions(advice: ResumeAdviceType): string {
+const formatRewriteSuggestions = (advice: ResumeAdviceType): string => {
   return `<div class="rewriteList">${advice.rewriteSuggestions
     .map(
       (suggestion) =>
@@ -60,21 +60,21 @@ function formatRewriteSuggestions(advice: ResumeAdviceType): string {
         )}</p></article>`,
     )
     .join('')}</div>`;
-}
+};
 
-function formatList(values: string[]): string {
+const formatList = (values: string[]): string => {
   return `<ul>${values.map((value) => `<li>${escapeHtml(value)}</li>`).join('')}</ul>`;
-}
+};
 
-function formatTags(values: string[]): string {
+const formatTags = (values: string[]): string => {
   return `<div class="tags">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join('')}</div>`;
-}
+};
 
-function escapeHtml(value: string): string {
+const escapeHtml = (value: string): string => {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-}
+};
 
-function getReportStyles(): string {
+const getReportStyles = (): string => {
   return `
     @page { margin: 18mm; }
     * { box-sizing: border-box; }
@@ -170,4 +170,4 @@ function getReportStyles(): string {
       .report { max-width: none; padding: 0; }
     }
   `;
-}
+};

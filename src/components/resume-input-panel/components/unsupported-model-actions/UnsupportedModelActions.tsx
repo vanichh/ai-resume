@@ -4,7 +4,7 @@ import { CHROME_APP_URL, CHROME_DOWNLOAD_URL } from '../../common/constants';
 
 import styles from './UnsupportedModelActions.module.scss';
 
-export function UnsupportedModelActions({ modelStatus }: UnsupportedModelActionsProps) {
+export const UnsupportedModelActions = ({ modelStatus }: UnsupportedModelActionsProps) => {
   if (modelStatus !== 'unsupported' && modelStatus !== 'unavailable') {
     return null;
   }
@@ -19,4 +19,4 @@ export function UnsupportedModelActions({ modelStatus }: UnsupportedModelActions
       </a>
     </div>
   );
-}
+};

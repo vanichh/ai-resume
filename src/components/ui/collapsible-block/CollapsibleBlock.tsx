@@ -7,15 +7,19 @@ import type { CollapsibleBlockProps } from './types';
 
 import styles from './CollapsibleBlock.module.scss';
 
-export function CollapsibleBlock({
+export const CollapsibleBlock = ({
   children,
   className = '',
   defaultCollapsed = false,
   headerAction,
   title,
-}: CollapsibleBlockProps) {
+}: CollapsibleBlockProps) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
   const contentId = useId();
+
+  const onToggleClick = () => {
+    setIsCollapsed((currentValue) => !currentValue);
+  };
 
   return (
     <article className={clsx(styles.collapsibleBlock, className)}>
@@ -29,7 +33,7 @@ export function CollapsibleBlock({
             aria-expanded={!isCollapsed}
             className={styles.collapsibleBlock__toggle}
             type="button"
-            onClick={() => setIsCollapsed((currentValue) => !currentValue)}
+            onClick={onToggleClick}
           >
             {isCollapsed ? <ChevronDown aria-hidden size={18} /> : <ChevronUp aria-hidden size={18} />}
           </button>
@@ -42,4 +46,4 @@ export function CollapsibleBlock({
       )}
     </article>
   );
-}
+};

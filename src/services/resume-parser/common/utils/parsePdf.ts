@@ -5,7 +5,7 @@ import { normalizeText } from './normalizeText';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
-export async function parsePdf(file: File): Promise<string> {
+export const parsePdf = async (file: File): Promise<string> => {
   const data = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data }).promise;
   const pages: string[] = [];
@@ -22,4 +22,4 @@ export async function parsePdf(file: File): Promise<string> {
   }
 
   return normalizeText(pages.join('\n\n'));
-}
+};

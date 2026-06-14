@@ -18,14 +18,16 @@ import {
 } from './common/lazyComponents';
 
 import { AppToast } from './components/app-toast';
+import { ModelDownloadProgress } from './components/model-download-progress';
 
 import styles from './App.module.scss';
 
-export function App() {
+export const App = () => {
   useAppBootstrap();
 
   return (
     <main className={styles.app}>
+      <ModelDownloadProgress />
       <section className={styles.app__workspace}>
         <ResumeInputPanel />
         <div className={styles.app__content}>
@@ -52,4 +54,4 @@ export function App() {
       <AppToast />
     </main>
   );
-}
+};

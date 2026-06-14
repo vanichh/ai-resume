@@ -1,21 +1,29 @@
-import { Button, CollapsibleBlock } from '@components/ui';
+import { useShallow } from 'zustand/react/shallow';
 
+import { Button, CollapsibleBlock } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
-import { selectCanCompareVacancies } from '@store/selectors';
+
+import { selectVacancyComparisonState } from './common/selectors';
 
 import { VacancyComparisonItem } from './components/vacancy-comparison-item';
 
 import styles from './VacancyComparison.module.scss';
 
-export function VacancyComparison() {
-  const addComparisonVacancy = useResumeStore((state) => state.addComparisonVacancy);
-  const analyzeComparison = useResumeStore((state) => state.analyzeComparison);
-  const canCompare = useResumeStore(selectCanCompareVacancies);
-  const comparisonVacancies = useResumeStore((state) => state.comparisonVacancies);
-  const removeComparisonVacancy = useResumeStore((state) => state.removeComparisonVacancy);
-  const selectComparisonVacancy = useResumeStore((state) => state.selectComparisonVacancy);
-  const setComparisonVacancyText = useResumeStore((state) => state.setComparisonVacancyText);
-  const setComparisonVacancyTitle = useResumeStore((state) => state.setComparisonVacancyTitle);
+export const VacancyComparison = () => {
+  const {
+    addComparisonVacancy,
+    analyzeComparison,
+    canCompare,
+    comparisonVacancies,
+    removeComparisonVacancy,
+    selectComparisonVacancy,
+    setComparisonVacancyText,
+    setComparisonVacancyTitle,
+  } = useResumeStore(useShallow(selectVacancyComparisonState));
+
+  const onAnalyzeComparisonClick = () => {
+    void analyzeComparison();
+  };
 
   return (
     <CollapsibleBlock
@@ -42,9 +50,9 @@ export function VacancyComparison() {
           ))}
         </div>
       )}
-      <Button disabled={!canCompare} fullWidth size="large" variant="primary" onClick={() => void analyzeComparison()}>
+      <Button disabled={!canCompare} fullWidth size="large" variant="primary" onClick={onAnalyzeComparisonClick}>
         Сравнить с вакансиями
       </Button>
     </CollapsibleBlock>
   );
-}
+};

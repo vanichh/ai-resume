@@ -1,5 +1,4 @@
 import { createId } from '@common/utils/createId';
-
 import { analyzeResume } from '@services/resume-advisor';
 
 import type { ResumeSliceCreatorType } from './types';
@@ -13,29 +12,37 @@ import type { ComparisonActionsType } from '../types';
 
 export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType> = (set, get) => ({
   addComparisonVacancy() {
-    const { comparisonVacancies } = get();
-    if (comparisonVacancies.length >= COMPARISON_VACANCY_LIMIT) {
-      return;
-    }
+    set((state) => {
+      if (state.comparisonVacancies.length >= COMPARISON_VACANCY_LIMIT) {
+        return state;
+      }
 
-    set({
-      comparisonVacancies: [
-        ...comparisonVacancies,
-        {
-          id: createId(),
-          advice: null,
-          error: '',
-          status: 'idle',
-          title: `Вакансия ${comparisonVacancies.length + 1}`,
-          vacancyText: '',
-        },
-      ],
+      const nextState = {
+        ...state,
+        comparisonVacancies: [
+          ...state.comparisonVacancies,
+          {
+            id: createId(),
+            advice: null,
+            error: '',
+            status: 'idle' as const,
+            title: `Вакансия ${state.comparisonVacancies.length + 1}`,
+            vacancyText: '',
+          },
+        ],
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        comparisonVacancies: nextState.comparisonVacancies,
+      };
     });
-    persistWorkspace(get());
   },
 
   async analyzeComparison() {
-    const { comparisonVacancies, modelStatus, resumeText, targetRole } = get();
+    const state = get();
+    const { comparisonVacancies, modelStatus, resumeText, targetRole } = state;
     if (!resumeText || !canUseModel(modelStatus)) {
       return;
     }
@@ -46,6 +53,7 @@ export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType
     }
 
     set({
+      downloadProgress: null,
       error: '',
       comparisonVacancies: comparisonVacancies.map((vacancy) =>
         vacancy.vacancyText.trim()
@@ -53,7 +61,7 @@ export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType
               ...vacancy,
               advice: null,
               error: '',
-              status: 'analyzing',
+              status: 'analyzing' as const,
             }
           : vacancy,
       ),
@@ -64,86 +72,143 @@ export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType
         const advice = await analyzeResume(
           resumeText,
           getAnalysisTarget(targetRole || vacancy.title, vacancy.vacancyText),
+          (downloadProgress) => {
+            set({ downloadProgress });
+          },
         );
-        set({
-          comparisonVacancies: get().comparisonVacancies.map((item) =>
-            item.id === vacancy.id
-              ? {
-                  ...item,
-                  advice,
-                  error: '',
-                  status: 'done',
-                }
-              : item,
-          ),
+        set((state) => {
+          const nextState = {
+            ...state,
+            comparisonVacancies: state.comparisonVacancies.map((item) =>
+              item.id === vacancy.id
+                ? {
+                    ...item,
+                    advice,
+                    error: '',
+                    status: 'done' as const,
+                  }
+                : item,
+            ),
+          };
+
+          persistWorkspace(nextState);
+
+          return {
+            comparisonVacancies: nextState.comparisonVacancies,
+            downloadProgress: null,
+          };
         });
       } catch (caught) {
-        set({
-          comparisonVacancies: get().comparisonVacancies.map((item) =>
-            item.id === vacancy.id
-              ? {
-                  ...item,
-                  advice: null,
-                  error: getErrorMessage(caught, 'Не удалось сравнить с вакансией.'),
-                  status: 'error',
-                }
-              : item,
-          ),
+        set((state) => {
+          const nextState = {
+            ...state,
+            comparisonVacancies: state.comparisonVacancies.map((item) =>
+              item.id === vacancy.id
+                ? {
+                    ...item,
+                    advice: null,
+                    error: getErrorMessage(caught, 'Не удалось сравнить с вакансией.'),
+                    status: 'error' as const,
+                  }
+                : item,
+            ),
+          };
+
+          persistWorkspace(nextState);
+
+          return {
+            comparisonVacancies: nextState.comparisonVacancies,
+            downloadProgress: null,
+          };
         });
       }
-      persistWorkspace(get());
     }
   },
 
   removeComparisonVacancy(id) {
-    set({
-      comparisonVacancies: get().comparisonVacancies.filter((vacancy) => vacancy.id !== id),
+    set((state) => {
+      const nextState = {
+        ...state,
+        comparisonVacancies: state.comparisonVacancies.filter((vacancy) => vacancy.id !== id),
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        comparisonVacancies: nextState.comparisonVacancies,
+      };
     });
-    persistWorkspace(get());
   },
 
   selectComparisonVacancy(id) {
-    const vacancy = get().comparisonVacancies.find((item) => item.id === id);
+    const state = get();
+    const vacancy = state.comparisonVacancies.find((item) => item.id === id);
     if (!vacancy?.advice) {
       return;
     }
 
-    set({
-      advice: vacancy.advice,
-      status: 'done',
-      vacancyText: vacancy.vacancyText,
+    set((state) => {
+      const nextState = {
+        ...state,
+        advice: vacancy.advice,
+        status: 'done' as const,
+        vacancyText: vacancy.vacancyText,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        advice: nextState.advice,
+        status: nextState.status,
+        vacancyText: nextState.vacancyText,
+      };
     });
-    persistWorkspace(get());
   },
 
   setComparisonVacancyText(id, vacancyText) {
-    set({
-      comparisonVacancies: get().comparisonVacancies.map((vacancy) =>
-        vacancy.id === id
-          ? {
-              ...vacancy,
-              advice: null,
-              error: '',
-              status: 'idle',
-              vacancyText,
-            }
-          : vacancy,
-      ),
+    set((state) => {
+      const nextState = {
+        ...state,
+        comparisonVacancies: state.comparisonVacancies.map((vacancy) =>
+          vacancy.id === id
+            ? {
+                ...vacancy,
+                advice: null,
+                error: '',
+                status: 'idle' as const,
+                vacancyText,
+              }
+            : vacancy,
+        ),
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        comparisonVacancies: nextState.comparisonVacancies,
+      };
     });
-    persistWorkspace(get());
   },
 
   setComparisonVacancyTitle(id, title) {
-    set({
-      comparisonVacancies: get().comparisonVacancies.map((vacancy) =>
-        vacancy.id === id
-          ? {
-              ...vacancy,
-              title,
-            }
-          : vacancy,
-      ),
+    set((state) => {
+      const nextState = {
+        ...state,
+        comparisonVacancies: state.comparisonVacancies.map((vacancy) =>
+          vacancy.id === id
+            ? {
+                ...vacancy,
+                title,
+              }
+            : vacancy,
+        ),
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        comparisonVacancies: nextState.comparisonVacancies,
+      };
     });
-    persistWorkspace(get());
   },
 });

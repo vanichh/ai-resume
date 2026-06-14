@@ -1,14 +1,13 @@
 import { BarChart3 } from 'lucide-react';
 
 import { getResumeSectionTitle } from '@common/utils/getResumeSectionTitle';
-
 import { CollapsibleBlock, EmptyState } from '@components/ui';
 
 import type { SectionScoreListProps } from './types';
 
 import styles from './SectionScoreList.module.scss';
 
-export function SectionScoreList({ scores }: SectionScoreListProps) {
+export const SectionScoreList = ({ scores }: SectionScoreListProps) => {
   return (
     <CollapsibleBlock className={styles.sectionScoreList} title="Оценка по секциям">
       {scores.length > 0 ? (
@@ -35,4 +34,4 @@ export function SectionScoreList({ scores }: SectionScoreListProps) {
       )}
     </CollapsibleBlock>
   );
-}
+};
