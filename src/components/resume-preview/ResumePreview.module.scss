@@ -17,8 +17,8 @@
 
     border: 0;
     background:
-      linear-gradient(get-color(surfaceCodeStripe) 31px, get-color(transparent) 31px) 0 0 / 100% 32px,
-      get-color(surface);
+      linear-gradient(getColor(surfaceCodeStripe) 31px, getColor(transparent) 31px) 0 0 / 100% 32px,
+      getColor(surface);
 
     &_expanded {
       overflow: hidden;

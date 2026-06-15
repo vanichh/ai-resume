@@ -3,8 +3,7 @@
   padding: 28px;
   overflow-x: clip;
 
-  background:
-    linear-gradient(180deg, get-color(whiteAlpha76) 0, get-color(whiteAlpha0) 260px), get-color(appBackground);
+  background: linear-gradient(180deg, getColor(whiteAlpha76) 0, getColor(whiteAlpha0) 260px), getColor(appBackground);
 }
 
 @include mediaMax(mobile) {

@@ -5,9 +5,9 @@
 
   padding: 12px;
 
-  border: 1px dashed get-color(borderDark);
+  border: 1px dashed getColor(borderDark);
   border-radius: 8px;
-  background: get-color(whiteText);
+  background: getColor(whiteText);
 
   &__icon {
     display: inline-flex;
@@ -19,9 +19,9 @@
     height: 28px;
 
     border-radius: 8px;
-    background: get-color(accentSurface);
+    background: getColor(accentSurface);
 
-    color: get-color(accentText);
+    color: getColor(accentText);
   }
 
   &__content {
@@ -31,7 +31,7 @@
   &__title {
     margin: 0;
 
-    color: get-color(primaryText);
+    color: getColor(primaryText);
     font-size: fontSize(14px);
     font-weight: 800;
   }
@@ -39,7 +39,7 @@
   &__description {
     margin: 4px 0 0;
 
-    color: get-color(mutedText);
+    color: getColor(mutedText);
     font-size: fontSize(12px);
     overflow-wrap: anywhere;
   }

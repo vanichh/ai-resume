@@ -8,15 +8,15 @@
 
   padding: 20px;
 
-  background: get-color(modalOverlay);
+  background: getColor(modalOverlay);
 
   &__content {
     width: min(420px, 100%);
     padding: 18px;
 
-    border: 1px solid get-color(borderDivider);
+    border: 1px solid getColor(borderDivider);
     border-radius: 8px;
-    background: get-color(whiteText);
+    background: getColor(whiteText);
 
     @include panelShadow;
   }
@@ -31,7 +31,7 @@
   &__title {
     margin: 0;
 
-    color: get-color(primaryText);
+    color: getColor(primaryText);
     font-size: fontSize(18px);
     font-weight: 900;
   }
@@ -45,29 +45,29 @@
     height: 34px;
     padding: 0;
 
-    border: 1px solid get-color(transparent);
-    background: get-color(transparent);
+    border: 1px solid getColor(transparent);
+    background: getColor(transparent);
 
-    color: get-color(slateText);
+    color: getColor(slateText);
 
     &:hover {
-      background: get-color(accentSurface);
+      background: getColor(accentSurface);
 
-      color: get-color(accentText);
+      color: getColor(accentText);
     }
   }
 
   &__description {
     margin: 12px 0 0;
 
-    color: get-color(mutedText);
+    color: getColor(mutedText);
     font-size: fontSize(14px);
   }
 
   &__body {
     margin-top: 14px;
 
-    color: get-color(secondaryText);
+    color: getColor(secondaryText);
     font-size: fontSize(14px);
   }
 

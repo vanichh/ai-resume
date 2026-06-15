@@ -3,7 +3,7 @@ import { APP_ROUTES } from '@common/constants/routes';
 export const APP_NAVIGATION_LINKS = [
   {
     label: 'Анализ',
-    path: APP_ROUTES.home,
+    path: APP_ROUTES.resumeAnalysis,
   },
   {
     label: 'История',

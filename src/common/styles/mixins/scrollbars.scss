@@ -1,7 +1,7 @@
 @use './colors' as *;
 
 @mixin innerScrollbar {
-  scrollbar-color: get-color(borderDark) get-color(surfaceTrack);
+  scrollbar-color: getColor(borderDark) getColor(surfaceTrack);
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -11,16 +11,16 @@
 
   &::-webkit-scrollbar-track {
     border-radius: 999px;
-    background: get-color(surfaceTrack);
+    background: getColor(surfaceTrack);
   }
 
   &::-webkit-scrollbar-thumb {
-    border: 2px solid get-color(surfaceTrack);
+    border: 2px solid getColor(surfaceTrack);
     border-radius: 999px;
-    background: get-color(borderDark);
+    background: getColor(borderDark);
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: get-color(slateMuted);
+    background: getColor(slateMuted);
   }
 }

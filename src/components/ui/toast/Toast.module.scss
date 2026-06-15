@@ -14,20 +14,20 @@
 
   border-radius: 8px;
 
-  box-shadow: 0 18px 44px get-color(workspaceShadowStrong);
+  box-shadow: 0 18px 44px getColor(workspaceShadowStrong);
 
   &_error {
-    border: 1px solid get-color(dangerBorder);
-    background: get-color(dangerSurface);
+    border: 1px solid getColor(dangerBorder);
+    background: getColor(dangerSurface);
 
-    color: get-color(danger);
+    color: getColor(danger);
   }
 
   &_success {
-    border: 1px solid get-color(successBorderStrong);
-    background: get-color(successSurfaceSoft);
+    border: 1px solid getColor(successBorderStrong);
+    background: getColor(successSurfaceSoft);
 
-    color: get-color(successDark);
+    color: getColor(successDark);
   }
 
   &__message {
@@ -49,14 +49,14 @@
 
     border: 0;
     border-radius: 8px;
-    background: get-color(transparent);
+    background: getColor(transparent);
 
     color: inherit;
     font-size: fontSize(22px);
     font-weight: 800;
 
     &:hover {
-      background: get-color(whiteAlpha50);
+      background: getColor(whiteAlpha50);
     }
   }
 }

@@ -1,0 +1,114 @@
+.vacancyComparison {
+  min-width: 0;
+
+  &__subtitle {
+    margin: 0 0 14px;
+
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+  }
+
+  &__selectButton {
+    justify-self: start;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    margin-bottom: 14px;
+  }
+
+  &__item {
+    display: grid;
+    gap: 10px;
+
+    min-width: 0;
+    padding: 12px;
+
+    border: 1px solid getColor(border);
+    border-radius: 8px;
+    background: getColor(whiteText);
+  }
+
+  &__itemHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  &__titleInput {
+    @include controlFieldBase;
+    @include controlFieldSizeMedium;
+
+    height: 36px;
+    min-height: 36px;
+
+    color: getColor(slateInputStrong);
+    font-weight: 800;
+  }
+
+  &__textarea {
+    padding: 10px;
+
+    font-size: fontSize(14px);
+  }
+
+  &__result {
+    display: grid;
+    gap: 8px;
+
+    min-width: 0;
+  }
+
+  &__status {
+    width: fit-content;
+    padding: 4px 8px;
+
+    border-radius: 999px;
+    background: getColor(accentSurface);
+
+    color: getColor(slateText);
+    font-size: fontSize(12px);
+    font-weight: 800;
+  }
+
+  &__score {
+    color: getColor(primaryText);
+    font-size: fontSize(22px);
+  }
+
+  &__summary,
+  &__keywords,
+  &__error {
+    margin: 0;
+
+    color: getColor(secondaryText);
+    font-size: fontSize(14px);
+  }
+
+  &__keywords {
+    color: getColor(mutedText);
+  }
+
+  &__error {
+    color: getColor(danger);
+  }
+}
+
+@include mediaMax(compact) {
+  .vacancyComparison {
+    &__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+
+@include mediaMax(mobile) {
+  .vacancyComparison {
+    &__itemHeader {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}

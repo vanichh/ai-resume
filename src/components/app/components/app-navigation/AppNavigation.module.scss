@@ -1,31 +1,85 @@
 .appNavigation {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 100;
 
   width: calc(100% + 56px);
   margin: -28px -28px 18px;
   padding: 10px 28px;
 
-  border-bottom: 1px solid get-color(borderDivider);
-  background: get-color(surface);
+  border-bottom: 1px solid getColor(borderDivider);
+  background: getColor(surface);
 
-  box-shadow: 0 10px 24px get-color(workspaceShadow);
+  box-shadow: 0 10px 24px getColor(workspaceShadow);
   backdrop-filter: blur(14px);
 
   &__inner {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    gap: 8px;
+    gap: 18px;
 
     width: 100%;
-    max-width: 1480px;
-    margin: 0 auto;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-self: start;
+
+    color: getColor(primaryText);
+    font-size: fontSize(16px);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  &__brandIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid getColor(accentOutline);
+    border-radius: 8px;
+    background: getColor(accentSurface);
+
+    color: getColor(accentText);
+  }
+
+  &__projectIcon {
+    flex: 0 0 auto;
+  }
+
+  &__menuButton {
+    display: none;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 8px;
+  }
+
+  &__menu {
+    display: contents;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-self: center;
+    gap: 8px;
   }
 
   &__link,
-  &__telegramLink {
+  &__desktopTelegramLink,
+  &__mobileTelegramLink,
+  &__themeButton {
     @include controlButtonBase;
     @include controlButtonSizeMedium;
     @include controlButtonSecondary;
@@ -39,17 +93,24 @@
     }
   }
 
-  &__telegramLink {
-    margin-left: auto;
+  &__desktopTelegramLink,
+  &__mobileTelegramLink {
+    border-color: getColor(borderDivider);
+    background: getColor(surfaceBase);
+  }
 
-    border-color: get-color(borderDivider);
-    background: get-color(surfaceBase);
+  &__mobileTelegramLink {
+    display: none;
+  }
+
+  &__themeButton {
+    padding: 0 10px;
   }
 
   &__telegramIcon {
     flex: 0 0 auto;
 
-    color: get-color(accentText);
+    color: getColor(accentText);
   }
 }
 
@@ -60,11 +121,93 @@
     padding: 8px 12px;
 
     &__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 6px;
     }
 
-    &__telegramLink {
-      margin-left: 0;
+    &__brand {
+      min-width: 0;
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__menuButton {
+      @include controlButtonBase;
+      @include controlButtonSizeMedium;
+      @include controlButtonSecondary;
+
+      display: inline-flex;
+
+      padding: 0 10px;
+    }
+
+    &__actions {
+      justify-self: end;
+    }
+
+    &__menu {
+      position: fixed;
+      inset: 55px 0 0;
+      z-index: 99;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      gap: 8px;
+
+      width: 100%;
+      height: calc(100dvh - 55px);
+      padding: 18px 12px;
+      overflow: auto;
+
+      border-top: 1px solid getColor(borderDivider);
+      background: getColor(surface);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.16s ease,
+        transform 0.16s ease,
+        visibility 0.16s ease;
+
+      pointer-events: none;
+
+      &_open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+
+        pointer-events: auto;
+      }
+    }
+
+    &__links {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+
+      justify-self: start;
+
+      width: 100%;
+    }
+
+    &__link,
+    &__mobileTelegramLink {
+      justify-content: flex-start;
+
+      width: 100%;
+      min-height: 44px;
+    }
+
+    &__desktopTelegramLink {
+      display: none;
+    }
+
+    &__mobileTelegramLink {
+      display: inline-flex;
+      justify-self: start;
     }
   }
 }

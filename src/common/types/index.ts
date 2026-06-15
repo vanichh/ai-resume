@@ -1,5 +1,7 @@
 export type AppStatusType = 'idle' | 'parsing' | 'ready' | 'analyzing' | 'translating' | 'done' | 'error';
 
+export type AppThemeType = 'dark' | 'light';
+
 export type LanguageModelLanguageCodeType = 'de' | 'en' | 'es' | 'fr' | 'ja';
 
 export type ModelStatusType = 'available' | 'checking' | 'downloadable' | 'downloading' | 'unavailable' | 'unsupported';

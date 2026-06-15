@@ -7,11 +7,11 @@
   margin: 0 auto 14px;
   padding: 12px 14px;
 
-  border: 1px solid get-color(accentBorder);
+  border: 1px solid getColor(accentBorder);
   border-radius: 8px;
-  background: get-color(accentSurface);
+  background: getColor(accentSurface);
 
-  color: get-color(slateText);
+  color: getColor(slateText);
 
   &__header {
     display: flex;
@@ -30,7 +30,7 @@
   &__value {
     flex: 0 0 auto;
 
-    color: get-color(accentText);
+    color: getColor(accentText);
     font-size: fontSize(14px);
   }
 
@@ -42,23 +42,23 @@
 
     border: 0;
     border-radius: 999px;
-    background: get-color(surfaceTrack);
+    background: getColor(surfaceTrack);
 
     appearance: none;
 
     &::-webkit-progress-bar {
       border-radius: 999px;
-      background: get-color(surfaceTrack);
+      background: getColor(surfaceTrack);
     }
 
     &::-webkit-progress-value {
       border-radius: 999px;
-      background: get-color(accent);
+      background: getColor(accent);
     }
 
     &::-moz-progress-bar {
       border-radius: 999px;
-      background: get-color(accent);
+      background: getColor(accent);
     }
   }
 }

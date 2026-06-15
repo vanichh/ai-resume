@@ -1,12 +1,19 @@
-import { ResumePreview } from '@components/resume-preview';
+import { Suspense } from 'react';
+
 import { SecondaryPageLayout } from '@components/secondary-page-layout';
-import { VacancyComparison } from '@components/vacancy-comparison';
+import { Loader } from '@components/ui';
+
+import { ResumePreview } from './common/lazyComponents';
+
+import { VacancyComparison } from './components/vacancy-comparison';
 
 export const VacancyComparisonPage = () => {
   return (
     <SecondaryPageLayout>
       <VacancyComparison />
-      <ResumePreview defaultTextExpanded />
+      <Suspense fallback={<Loader label="Загрузка текста резюме" />}>
+        <ResumePreview defaultTextExpanded />
+      </Suspense>
     </SecondaryPageLayout>
   );
 };

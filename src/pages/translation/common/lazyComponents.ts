@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 export const ResumeComparisonView = lazy(() =>
-  import('@components/resume-comparison-view').then((module) => ({ default: module.ResumeComparisonView })),
+  import('../components/resume-comparison-view').then((module) => ({ default: module.ResumeComparisonView })),
 );
 
 export const ResumePreview = lazy(() =>
@@ -9,9 +9,9 @@ export const ResumePreview = lazy(() =>
 );
 
 export const ResumeTranslationPreview = lazy(() =>
-  import('@components/resume-translation-preview').then((module) => ({ default: module.ResumeTranslationPreview })),
+  import('../components/resume-translation-preview').then((module) => ({ default: module.ResumeTranslationPreview })),
 );
 
 export const TranslationHistory = lazy(() =>
-  import('@components/translation-history').then((module) => ({ default: module.TranslationHistory })),
+  import('../components/translation-history').then((module) => ({ default: module.TranslationHistory })),
 );

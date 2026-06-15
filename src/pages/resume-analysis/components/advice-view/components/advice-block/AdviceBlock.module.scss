@@ -1,0 +1,45 @@
+.adviceBlock {
+  &_wide {
+    grid-column: span 2;
+  }
+
+  &__list {
+    display: grid;
+    gap: 11px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  &__item {
+    position: relative;
+
+    padding-left: 18px;
+
+    color: getColor(secondaryTextStrong);
+
+    &::before {
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 999px;
+      background: getColor(accentMarker);
+
+      content: '';
+    }
+  }
+}
+
+@include mediaMax(desktop) {
+  .adviceBlock {
+    &_wide {
+      grid-column: auto;
+    }
+  }
+}

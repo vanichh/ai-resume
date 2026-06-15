@@ -35,7 +35,6 @@ export const TranslationControlPanel = () => {
   return (
     <aside className={styles.translationControlPanel}>
       <div className={styles.translationControlPanel__header}>
-        <p className={styles.translationControlPanel__eyebrow}>Resume Translation</p>
         <h1 className={styles.translationControlPanel__title}>Перевод резюме</h1>
         <p className={styles.translationControlPanel__subtitle}>
           Загрузите резюме и выберите язык, тон и формат перевода для ATS и рекрутеров.

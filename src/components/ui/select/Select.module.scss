@@ -5,7 +5,7 @@
 
   min-width: 0;
 
-  color: get-color(secondaryText);
+  color: getColor(secondaryText);
 
   &_fullWidth {
     width: 100%;
@@ -35,8 +35,8 @@
     width: 8px;
     height: 8px;
 
-    border-right: 2px solid get-color(mutedText);
-    border-bottom: 2px solid get-color(mutedText);
+    border-right: 2px solid getColor(mutedText);
+    border-bottom: 2px solid getColor(mutedText);
 
     transform: translateY(-65%) rotate(45deg);
 
@@ -45,7 +45,7 @@
   }
 
   &:has(&__control:disabled)::after {
-    border-color: get-color(disabledTextSoft);
+    border-color: getColor(disabledTextSoft);
   }
 
   &__control {

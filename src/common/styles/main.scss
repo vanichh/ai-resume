@@ -4,10 +4,20 @@
   @include colorVariables;
   @include designSystemVariables;
 
-  background: get-color(appBackground);
+  background: getColor(appBackground);
 
-  color: get-color(appText);
+  color: getColor(appText);
   font-family: Inter, sans-serif;
+}
+
+:root[data-theme='dark'] {
+  @include colorVariables($dark-colors);
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 * {
@@ -29,5 +39,5 @@ textarea {
 button,
 label,
 textarea {
-  -webkit-tap-highlight-color: get-color(transparent);
+  -webkit-tap-highlight-color: getColor(transparent);
 }

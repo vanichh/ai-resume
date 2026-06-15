@@ -2,12 +2,14 @@ import { AnalysisHistoryPage } from '@pages/analysis-history';
 import { CoverLetterPage } from '@pages/cover-letter';
 import { HomePage } from '@pages/home';
 import { PrivacyPage } from '@pages/privacy';
+import { ResumeAnalysisPage } from '@pages/resume-analysis';
 import { TranslationPage } from '@pages/translation';
 import { UnsupportedBrowserPage } from '@pages/unsupported-browser';
 import { VacancyComparisonPage } from '@pages/vacancy-comparison';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { APP_ROUTES } from '@common/constants/routes';
+import { useAppTheme } from '@common/hooks/useAppTheme';
 
 import { useAppBootstrap } from './common/hooks/useAppBootstrap';
 
@@ -20,14 +22,16 @@ import styles from './App.module.scss';
 
 export const App = () => {
   useAppBootstrap();
+  const { onThemeToggle, theme } = useAppTheme();
 
   return (
     <main className={styles.app}>
-      <AppNavigation />
+      <AppNavigation theme={theme} onThemeToggle={onThemeToggle} />
       <ModelDownloadProgress />
       <Routes>
+        <Route path={APP_ROUTES.home} element={<HomePage />} />
         <Route element={<ModelGuardRoute />}>
-          <Route path={APP_ROUTES.home} element={<HomePage />} />
+          <Route path={APP_ROUTES.resumeAnalysis} element={<ResumeAnalysisPage />} />
           <Route path={APP_ROUTES.analysisHistory} element={<AnalysisHistoryPage />} />
           <Route path={APP_ROUTES.coverLetter} element={<CoverLetterPage />} />
           <Route path={APP_ROUTES.privacy} element={<PrivacyPage />} />

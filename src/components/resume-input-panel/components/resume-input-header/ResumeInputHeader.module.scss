@@ -4,21 +4,11 @@
   min-width: 0;
   margin-bottom: 22px;
 
-  &__eyebrow {
-    margin: 0 0 8px;
-
-    color: get-color(mutedText);
-    font-size: fontSize(12px);
-    font-weight: 700;
-    letter-spacing: 0;
-    text-transform: uppercase;
-  }
-
   &__title {
     max-width: 640px;
-    margin: 20px 0 0;
+    margin: 0;
 
-    color: get-color(primaryText);
+    color: getColor(primaryText);
     font-size: fontSize(26px);
     overflow-wrap: anywhere;
   }
@@ -26,7 +16,7 @@
   &__subtitle {
     margin: 10px 0 0;
 
-    color: get-color(mutedDark);
+    color: getColor(mutedDark);
     font-size: fontSize(14px);
   }
 }

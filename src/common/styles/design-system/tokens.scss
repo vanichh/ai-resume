@@ -9,6 +9,6 @@
   --control-padding-small: 0 10px;
   --control-padding-medium: 0 12px;
   --control-padding-large: 0 14px;
-  --control-focus-ring: 0 0 0 3px #{get-color(accentShadow)};
+  --control-focus-ring: 0 0 0 3px #{getColor(accentShadow)};
   --control-transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
 }

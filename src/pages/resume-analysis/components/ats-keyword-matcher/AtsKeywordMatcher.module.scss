@@ -1,0 +1,47 @@
+.atsKeywordMatcher {
+  padding: 18px;
+
+  border: 1px solid getColor(border);
+  border-radius: 8px;
+  background: getColor(surface);
+
+  @include panelShadow;
+
+  &__title {
+    margin: 0 0 8px;
+
+    color: getColor(primaryText);
+    font-size: fontSize(16px);
+  }
+
+  &__summary {
+    margin: 0 0 12px;
+
+    color: getColor(muted);
+  }
+
+  &__keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__keyword {
+    padding: 6px 9px;
+
+    border: 1px solid getColor(dangerBorder);
+    border-radius: 999px;
+    background: getColor(dangerSurface);
+
+    color: getColor(danger);
+    font-size: fontSize(12px);
+    font-weight: 800;
+
+    &_matched {
+      border-color: getColor(successBorder);
+      background: getColor(successSurface);
+
+      color: getColor(success);
+    }
+  }
+}

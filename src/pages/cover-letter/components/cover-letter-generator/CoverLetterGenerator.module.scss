@@ -1,0 +1,51 @@
+.coverLetterGenerator {
+  min-width: 0;
+  padding: 18px;
+
+  border: 1px solid getColor(border);
+  border-radius: 8px;
+  background: getColor(surface);
+
+  @include panelShadow;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: getColor(primaryText);
+    font-size: fontSize(16px);
+  }
+
+  &__subtitle {
+    margin: 4px 0 0;
+
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+  }
+
+  &__textarea {
+    margin-top: 14px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 10px;
+  }
+}
+
+@include mediaMax(mobile) {
+  .coverLetterGenerator {
+    &__header {
+      display: grid;
+    }
+  }
+}

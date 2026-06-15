@@ -5,7 +5,7 @@
   outline: none;
 
   &:focus-visible {
-    border-color: get-color(accent);
+    border-color: getColor(accent);
 
     box-shadow: var(--control-focus-ring);
   }
@@ -57,54 +57,54 @@
 }
 
 @mixin controlButtonPrimary {
-  border: 1px solid get-color(accent);
-  background: get-color(accent);
+  border: 1px solid getColor(accent);
+  background: getColor(accent);
 
-  color: get-color(whiteText);
+  color: getColor(whiteText);
 
   &:hover:not(:disabled) {
-    background: get-color(accentStrong);
+    background: getColor(accentStrong);
   }
 
   &:disabled {
-    border-color: get-color(disabledBorder);
-    background: get-color(disabledBorder);
+    border-color: getColor(disabledBorder);
+    background: getColor(disabledBorder);
   }
 }
 
 @mixin controlButtonSecondary {
-  border: 1px solid get-color(borderDark);
-  background: get-color(whiteText);
+  border: 1px solid getColor(borderDark);
+  background: getColor(whiteText);
 
-  color: get-color(slateText);
+  color: getColor(slateText);
 
   &:hover:not(:disabled) {
-    border-color: get-color(accentBorder);
+    border-color: getColor(accentBorder);
 
-    color: get-color(accentText);
+    color: getColor(accentText);
   }
 
   &:disabled {
-    background: get-color(appBackground);
+    background: getColor(appBackground);
 
-    color: get-color(disabledTextSoft);
+    color: getColor(disabledTextSoft);
   }
 }
 
 @mixin controlButtonGhost {
-  border: 1px solid get-color(transparent);
-  background: get-color(transparent);
+  border: 1px solid getColor(transparent);
+  background: getColor(transparent);
 
-  color: get-color(slateText);
+  color: getColor(slateText);
 
   &:hover:not(:disabled) {
-    background: get-color(accentSurface);
+    background: getColor(accentSurface);
 
-    color: get-color(accentText);
+    color: getColor(accentText);
   }
 
   &:disabled {
-    color: get-color(disabledTextSoft);
+    color: getColor(disabledTextSoft);
   }
 }
 
@@ -112,11 +112,11 @@
   width: 100%;
   min-width: 0;
 
-  border: 1px solid get-color(borderInput);
+  border: 1px solid getColor(borderInput);
   border-radius: var(--control-radius);
-  background: get-color(whiteText);
+  background: getColor(whiteText);
 
-  color: get-color(secondaryText);
+  color: getColor(secondaryText);
   font: inherit;
 
   transition: var(--control-transition);
@@ -124,9 +124,9 @@
   @include controlFocus;
 
   &:disabled {
-    background: get-color(appBackground);
+    background: getColor(appBackground);
 
-    color: get-color(disabledText);
+    color: getColor(disabledText);
 
     cursor: not-allowed;
   }

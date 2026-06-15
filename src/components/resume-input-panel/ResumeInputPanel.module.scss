@@ -12,11 +12,11 @@
 
   @include innerScrollbar;
 
-  border: 1px solid get-color(border);
+  border: 1px solid getColor(border);
   border-radius: 8px;
-  background: get-color(surface);
+  background: getColor(surface);
 
-  box-shadow: 0 16px 40px get-color(workspaceShadowMedium);
+  box-shadow: 0 16px 40px getColor(workspaceShadowMedium);
 
   &__primaryButton {
     @include controlButtonBase;
@@ -30,22 +30,22 @@
     padding: 10px 12px;
 
     &:not(:disabled):hover {
-      background: get-color(accentHover);
+      background: getColor(accentHover);
 
-      box-shadow: 0 10px 18px get-color(accentShadowStrong);
+      box-shadow: 0 10px 18px getColor(accentShadowStrong);
       transform: translateY(-1px);
     }
 
     &:disabled {
-      background: get-color(disabledSurface);
+      background: getColor(disabledSurface);
 
-      color: get-color(disabledText);
+      color: getColor(disabledText);
 
       .resumeInput__primaryButtonStatus {
-        border-color: get-color(focusPanelBorderDisabled);
-        background: get-color(whiteAlpha32);
+        border-color: getColor(focusPanelBorderDisabled);
+        background: getColor(whiteAlpha32);
 
-        color: get-color(slateStatus);
+        color: getColor(slateStatus);
       }
     }
   }
@@ -58,11 +58,11 @@
     max-width: 100%;
     padding: 4px 8px;
 
-    border: 1px solid get-color(focusPanelBorder);
+    border: 1px solid getColor(focusPanelBorder);
     border-radius: 999px;
-    background: get-color(focusPanelSurface);
+    background: getColor(focusPanelSurface);
 
-    color: get-color(focusPanelText);
+    color: getColor(focusPanelText);
     font-size: fontSize(12px);
     font-weight: 700;
     white-space: nowrap;
@@ -74,33 +74,33 @@
       height: 6px;
 
       border-radius: 999px;
-      background: get-color(current);
+      background: getColor(current);
 
       content: '';
     }
 
     &_ready,
     &_done {
-      border-color: get-color(focusPanelBorderActive);
-      background: get-color(whiteAlpha14);
+      border-color: getColor(focusPanelBorderActive);
+      background: getColor(whiteAlpha14);
 
-      color: get-color(focusPanelTextDone);
+      color: getColor(focusPanelTextDone);
     }
 
     &_error {
-      border-color: get-color(whiteAlpha64);
-      background: get-color(focusPanelSurfaceError);
+      border-color: getColor(whiteAlpha64);
+      background: getColor(focusPanelSurfaceError);
 
-      color: get-color(whiteText);
+      color: getColor(whiteText);
     }
 
     &_parsing,
     &_analyzing,
     &_translating {
-      border-color: get-color(focusPanelBorderProcess);
-      background: get-color(focusPanelSurfaceProcess);
+      border-color: getColor(focusPanelBorderProcess);
+      background: getColor(focusPanelSurfaceProcess);
 
-      color: get-color(focusPanelTextProcess);
+      color: getColor(focusPanelTextProcess);
     }
   }
 }

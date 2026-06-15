@@ -11,4 +11,4 @@ export {
   RESUME_TRANSLATION_TONE_OPTIONS,
   RESUME_TRANSLATION_TONE_PROMPT_INSTRUCTIONS,
 } from './resumeTranslationTones';
-export { RESUME_WORKSPACE_STORAGE_KEY } from './storage';
+export { APP_THEME_STORAGE_KEY, RESUME_WORKSPACE_STORAGE_KEY } from './storage';

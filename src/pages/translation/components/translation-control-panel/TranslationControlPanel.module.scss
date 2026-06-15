@@ -11,36 +11,27 @@
 
   @include innerScrollbar;
 
-  border: 1px solid get-color(border);
+  border: 1px solid getColor(border);
   border-radius: 8px;
-  background: get-color(surface);
+  background: getColor(surface);
 
-  box-shadow: 0 16px 40px get-color(workspaceShadowMedium);
+  box-shadow: 0 16px 40px getColor(workspaceShadowMedium);
 
   &__header {
     margin-bottom: 18px;
   }
 
-  &__eyebrow {
-    margin: 0 0 6px;
-
-    color: get-color(accentText);
-    font-size: fontSize(12px);
-    font-weight: 900;
-    text-transform: uppercase;
-  }
-
   &__title {
     margin: 0;
 
-    color: get-color(primaryText);
+    color: getColor(primaryText);
     font-size: fontSize(24px);
   }
 
   &__subtitle {
     margin: 8px 0 0;
 
-    color: get-color(mutedText);
+    color: getColor(mutedText);
     font-size: fontSize(14px);
   }
 }

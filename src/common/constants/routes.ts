@@ -1,5 +1,6 @@
 export const APP_ROUTES = {
   home: '/',
+  resumeAnalysis: '/resume-analysis',
   analysisHistory: '/analysis-history',
   coverLetter: '/cover-letter',
   translation: '/translation',

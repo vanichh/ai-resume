@@ -22,9 +22,9 @@
 
     @include innerScrollbar;
 
-    background: get-color(surface);
+    background: getColor(surface);
 
-    color: get-color(secondaryText);
+    color: getColor(secondaryText);
     font-family: SFMono-Regular, Consolas, 'Liberation Mono', monospace;
     font-size: fontSize(14px);
     white-space: pre-wrap;
