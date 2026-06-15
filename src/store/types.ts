@@ -1,6 +1,9 @@
 import type {
   AppStatusType,
+  CoverLetterCompanyType,
+  CoverLetterLengthType,
   CoverLetterStatusType,
+  CoverLetterToneType,
   CoverLetterType,
   ModelStatusType,
   ResumeAdviceType,
@@ -16,7 +19,11 @@ export type ResumeStateType = {
   analysisHistory: ResumeAnalysisHistoryItemType[];
   comparisonVacancies: VacancyComparisonItemType[];
   coverLetter: CoverLetterType | null;
+  coverLetterCompanyType: CoverLetterCompanyType;
+  coverLetterLength: CoverLetterLengthType;
   coverLetterStatus: CoverLetterStatusType;
+  coverLetterTone: CoverLetterToneType;
+  coverLetterVariantsCount: number;
   downloadProgress: number | null;
   error: string;
   fileName: string;
@@ -68,7 +75,11 @@ export type ComparisonActionsType = {
 
 export type CoverLetterActionsType = {
   generateCoverLetter: () => Promise<void>;
+  setCoverLetterCompanyType: (value: CoverLetterCompanyType) => void;
+  setCoverLetterLength: (value: CoverLetterLengthType) => void;
   setCoverLetterText: (value: string) => void;
+  setCoverLetterTone: (value: CoverLetterToneType) => void;
+  setCoverLetterVariantsCount: (value: number) => void;
 };
 
 export type TranslationActionsType = {

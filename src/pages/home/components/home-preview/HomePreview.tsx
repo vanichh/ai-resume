@@ -2,8 +2,15 @@ import clsx from 'clsx';
 import { Sparkles } from 'lucide-react';
 
 import { HOME_PREVIEW_STEPS } from '../../common/constants';
+import type { HomePreviewStepType } from '../../types';
 
 import styles from './HomePreview.module.scss';
+
+const HOME_PREVIEW_PROGRESS_CLASS_NAMES: Record<HomePreviewStepType['progress'], string> = {
+  high: styles.homePreview__progress_high,
+  low: styles.homePreview__progress_low,
+  medium: styles.homePreview__progress_medium,
+};
 
 export const HomePreview = () => {
   return (
@@ -21,7 +28,7 @@ export const HomePreview = () => {
               <strong>{score}</strong>
             </div>
             <div className={styles.homePreview__track}>
-              <span className={clsx(styles.homePreview__progress, styles[`homePreview__progress_${progress}`])} />
+              <span className={clsx(styles.homePreview__progress, HOME_PREVIEW_PROGRESS_CLASS_NAMES[progress])} />
             </div>
           </li>
         ))}

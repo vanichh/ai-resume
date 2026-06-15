@@ -85,12 +85,28 @@ export type ResumeAnalysisHistoryItemType = {
 
 export type CoverLetterStatusType = 'idle' | 'generating' | 'done' | 'error';
 
+export type CoverLetterToneType = 'business' | 'confident' | 'friendly' | 'formal' | 'short';
+
+export type CoverLetterLengthType = 'detailed' | 'short' | 'standard';
+
+export type CoverLetterCompanyType = 'bank' | 'enterprise' | 'outsourcing' | 'product' | 'startup';
+
+export type CoverLetterVariantType = {
+  id: string;
+  text: string;
+  title: string;
+};
+
 export type CoverLetterType = {
   id: string;
   createdAt: string;
+  companyType: CoverLetterCompanyType;
+  length: CoverLetterLengthType;
   targetRole: string;
+  tone: CoverLetterToneType;
   vacancyText: string;
   text: string;
+  variants: CoverLetterVariantType[];
 };
 
 export type VacancyComparisonStatusType = 'idle' | 'analyzing' | 'done' | 'error';

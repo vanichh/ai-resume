@@ -29,6 +29,60 @@
     font-size: fontSize(14px);
   }
 
+  &__settings {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+
+    margin-top: 14px;
+  }
+
+  &__field {
+    display: grid;
+    gap: 6px;
+
+    min-width: 0;
+  }
+
+  &__label {
+    color: getColor(slateText);
+    font-size: fontSize(12px);
+    font-weight: 800;
+  }
+
+  &__variants {
+    display: grid;
+    gap: 10px;
+
+    margin-top: 14px;
+  }
+
+  &__variant {
+    display: grid;
+    gap: 6px;
+
+    padding: 12px;
+
+    border: 1px solid getColor(border);
+    border-radius: 8px;
+    background: getColor(surfaceBase);
+  }
+
+  &__variantTitle {
+    margin: 0;
+
+    color: getColor(primaryText);
+    font-size: fontSize(14px);
+  }
+
+  &__variantText {
+    margin: 0;
+
+    color: getColor(secondaryText);
+    font-size: fontSize(14px);
+    white-space: pre-wrap;
+  }
+
   &__textarea {
     margin-top: 14px;
   }
@@ -46,6 +100,10 @@
   .coverLetterGenerator {
     &__header {
       display: grid;
+    }
+
+    &__settings {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 }

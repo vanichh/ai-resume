@@ -1,10 +1,6 @@
 .analysisHistory {
   min-width: 0;
 
-  &__removeButton {
-    align-self: stretch;
-  }
-
   &__list {
     display: grid;
     gap: 8px;
@@ -13,82 +9,5 @@
     padding: 0;
 
     list-style: none;
-  }
-
-  &__item {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 8px;
-
-    min-width: 0;
-  }
-
-  &__selectButton {
-    display: block;
-
-    width: 100%;
-    min-width: 0;
-    padding: 10px;
-
-    border: 1px solid getColor(border);
-    border-radius: var(--control-radius);
-    background: getColor(whiteText);
-
-    color: getColor(secondaryText);
-    text-align: left;
-
-    transition: var(--control-transition);
-
-    cursor: pointer;
-
-    @include controlFocus;
-
-    &:hover {
-      border-color: getColor(accentBorder);
-    }
-  }
-
-  &__itemHeader {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-
-    min-width: 0;
-
-    color: getColor(primaryText);
-    font-size: fontSize(14px);
-  }
-
-  &__itemHeader strong {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &__meta {
-    display: block;
-
-    margin-top: 4px;
-    overflow: hidden;
-
-    color: getColor(mutedText);
-    font-size: fontSize(12px);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &__note {
-    grid-column: 1 / -1;
-
-    font-size: fontSize(14px);
-  }
-}
-
-@include mediaMax(mobile) {
-  .analysisHistory {
-    &__item {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 }

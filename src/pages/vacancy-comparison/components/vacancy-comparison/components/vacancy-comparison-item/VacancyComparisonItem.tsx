@@ -9,7 +9,7 @@ import type { VacancyComparisonItemProps } from './types';
 
 import { VACANCY_COMPARISON_STATUS_LABELS } from '../../common/constants';
 
-import styles from '../../VacancyComparison.module.scss';
+import styles from './VacancyComparisonItem.module.scss';
 
 export const VacancyComparisonItem = ({
   item,
@@ -47,10 +47,10 @@ export const VacancyComparisonItem = ({
   };
 
   return (
-    <article className={styles.vacancyComparison__item}>
-      <div className={styles.vacancyComparison__itemHeader}>
+    <article className={styles.vacancyComparisonItem}>
+      <div className={styles.vacancyComparisonItem__header}>
         <input
-          className={styles.vacancyComparison__titleInput}
+          className={styles.vacancyComparisonItem__titleInput}
           placeholder="Название вакансии"
           type="text"
           value={item.title}
@@ -61,25 +61,25 @@ export const VacancyComparisonItem = ({
         </Button>
       </div>
       <Textarea
-        className={styles.vacancyComparison__textarea}
+        className={styles.vacancyComparisonItem__textarea}
         minHeight={130}
         placeholder="Вставьте текст вакансии"
         value={item.vacancyText}
         onChange={onTextInputChange}
       />
-      <div className={styles.vacancyComparison__result}>
-        <span className={styles.vacancyComparison__status}>{VACANCY_COMPARISON_STATUS_LABELS[item.status]}</span>
+      <div className={styles.vacancyComparisonItem__result}>
+        <span className={styles.vacancyComparisonItem__status}>{VACANCY_COMPARISON_STATUS_LABELS[item.status]}</span>
         {item.advice && (
           <>
-            <strong className={styles.vacancyComparison__score}>{item.advice.score}/100</strong>
-            <p className={styles.vacancyComparison__summary}>{item.advice.summary}</p>
+            <strong className={styles.vacancyComparisonItem__score}>{item.advice.score}/100</strong>
+            <p className={styles.vacancyComparisonItem__summary}>{item.advice.summary}</p>
             {item.advice.missingKeywords.length > 0 && (
-              <p className={styles.vacancyComparison__keywords}>
+              <p className={styles.vacancyComparisonItem__keywords}>
                 Нет ключевых слов: {item.advice.missingKeywords.slice(0, 6).join(', ')}
               </p>
             )}
             <Button
-              className={styles.vacancyComparison__selectButton}
+              className={styles.vacancyComparisonItem__selectButton}
               disabled={!canSelectResult}
               size="medium"
               onClick={onSelectClick}
@@ -88,7 +88,7 @@ export const VacancyComparisonItem = ({
             </Button>
           </>
         )}
-        {item.error && <p className={styles.vacancyComparison__error}>{item.error}</p>}
+        {item.error && <p className={styles.vacancyComparisonItem__error}>{item.error}</p>}
       </div>
       <Modal
         confirmLabel="Удалить"

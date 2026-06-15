@@ -13,6 +13,10 @@
 
   color: getColor(slateText);
 
+  &_narrow {
+    max-width: 960px;
+  }
+
   &__header {
     display: flex;
     align-items: center;

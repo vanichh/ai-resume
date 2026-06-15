@@ -1,4 +1,4 @@
-import { SecondaryPageLayout } from '@components/secondary-page-layout';
+import { SecondaryPageLayout } from '@components/layouts/secondary-page-layout';
 
 import { AnalysisHistory } from './components/analysis-history';
 

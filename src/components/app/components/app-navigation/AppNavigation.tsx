@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import { APP_ROUTES } from '@common/constants/routes';
 
-import { APP_NAVIGATION_LINKS, TELEGRAM_URL } from './common/constants';
+import { APP_NAVIGATION_ICONS, APP_NAVIGATION_LINKS, TELEGRAM_URL } from './common/constants';
 import { useLockDocumentScroll } from './common/hooks/useLockDocumentScroll';
 
 import { ProjectIcon } from './components/project-icon';
@@ -37,9 +37,12 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
     setIsMenuOpen(false);
   };
 
-  const renderNavigationLink = ({ label, path }: AppNavigationLinkType) => {
+  const renderNavigationLink = ({ icon, label, path }: AppNavigationLinkType) => {
+    const Icon = APP_NAVIGATION_ICONS[icon];
+
     return (
       <NavLink key={path} className={getLinkClassName} to={path} onClick={onNavigationLinkClick}>
+        <Icon aria-hidden size={18} />
         {label}
       </NavLink>
     );
@@ -52,7 +55,12 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
           <span className={styles.appNavigation__brandIcon}>
             <ProjectIcon className={styles.appNavigation__projectIcon} />
           </span>
-          AI Resume Review
+          <span className={styles.appNavigation__brandText}>
+            <span className={styles.appNavigation__brandTitle}>
+              AI <span className={styles.appNavigation__brandAccent}> Resume Review</span>
+            </span>
+            <span className={styles.appNavigation__brandSubtitle}>Анализ резюме и вакансий</span>
+          </span>
         </NavLink>
         <div
           className={clsx(styles.appNavigation__menu, {
@@ -61,16 +69,6 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
           id={menuId}
         >
           <div className={styles.appNavigation__links}>{APP_NAVIGATION_LINKS.map(renderNavigationLink)}</div>
-          <a
-            className={styles.appNavigation__mobileTelegramLink}
-            href={TELEGRAM_URL}
-            rel="noreferrer"
-            target="_blank"
-            onClick={onNavigationLinkClick}
-          >
-            <TelegramIcon className={styles.appNavigation__telegramIcon} />
-            @vanichh
-          </a>
         </div>
         <div className={styles.appNavigation__actions}>
           <button
@@ -80,7 +78,7 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
             type="button"
             onClick={onThemeToggle}
           >
-            {isDarkTheme ? <Sun aria-hidden size={16} /> : <Moon aria-hidden size={16} />}
+            {isDarkTheme ? <Sun aria-hidden size={18} /> : <Moon aria-hidden size={18} />}
           </button>
           <button
             aria-controls={menuId}
@@ -93,14 +91,14 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
             {isMenuOpen ? <X aria-hidden size={18} /> : <Menu aria-hidden size={18} />}
           </button>
           <a
-            className={styles.appNavigation__desktopTelegramLink}
+            className={styles.appNavigation__developerLink}
             href={TELEGRAM_URL}
             rel="noreferrer"
             target="_blank"
             onClick={onNavigationLinkClick}
           >
-            <TelegramIcon className={styles.appNavigation__telegramIcon} />
-            @vanichh
+            <TelegramIcon className={styles.appNavigation__developerIcon} />
+            Разработчик
           </a>
         </div>
       </div>

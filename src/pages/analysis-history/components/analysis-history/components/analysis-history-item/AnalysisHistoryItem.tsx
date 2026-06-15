@@ -9,7 +9,7 @@ import { formatAnalysisHistoryDate } from './common/utils/formatAnalysisHistoryD
 
 import type { AnalysisHistoryItemProps } from './types';
 
-import styles from '../../AnalysisHistory.module.scss';
+import styles from './AnalysisHistoryItem.module.scss';
 
 export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: AnalysisHistoryItemProps) => {
   const [isRemoveConfirmOpen, setIsRemoveConfirmOpen] = useState(false);
@@ -38,25 +38,25 @@ export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: 
   };
 
   return (
-    <li className={styles.analysisHistory__item}>
-      <Button className={styles.analysisHistory__selectButton} onClick={onSelectClick}>
-        <span className={styles.analysisHistory__itemHeader}>
+    <li className={styles.analysisHistoryItem}>
+      <Button className={styles.analysisHistoryItem__selectButton} onClick={onSelectClick}>
+        <span className={styles.analysisHistoryItem__header}>
           <strong>{title}</strong>
           <span>{item.advice.score}/100</span>
         </span>
-        <span className={styles.analysisHistory__meta}>{createdAt}</span>
-        {item.fileName && <span className={styles.analysisHistory__meta}>{item.fileName}</span>}
+        <span className={styles.analysisHistoryItem__meta}>{createdAt}</span>
+        {item.fileName && <span className={styles.analysisHistoryItem__meta}>{item.fileName}</span>}
       </Button>
       <Button
         aria-label="Удалить анализ"
-        className={styles.analysisHistory__removeButton}
+        className={styles.analysisHistoryItem__removeButton}
         size="small"
         onClick={onRemoveConfirmOpen}
       >
         <Trash2 aria-hidden size={16} />
       </Button>
       <Textarea
-        className={styles.analysisHistory__note}
+        className={styles.analysisHistoryItem__note}
         minHeight={72}
         placeholder="Заметка к анализу"
         value={item.note}

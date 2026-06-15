@@ -1,10 +1,12 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import cssModules from 'eslint-plugin-css-modules';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -22,11 +24,13 @@ export default tseslint.config(
       },
     },
     plugins: {
+      'css-modules': cssModules,
       import: importPlugin,
       'jsx-a11y': jsxA11y,
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'unused-imports': unusedImports,
     },
     settings: {
       react: {
@@ -65,6 +69,7 @@ export default tseslint.config(
         },
       ],
       curly: ['error', 'all'],
+      'css-modules/no-unused-class': 'error',
       eqeqeq: ['error', 'always'],
       'import/no-duplicates': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
@@ -100,6 +105,7 @@ export default tseslint.config(
       'react/no-unstable-nested-components': 'warn',
       'react/self-closing-comp': 'error',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'unused-imports/no-unused-imports': 'error',
     },
   },
   eslintConfigPrettier,

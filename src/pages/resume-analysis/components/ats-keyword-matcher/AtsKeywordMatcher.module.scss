@@ -36,12 +36,12 @@
     color: getColor(danger);
     font-size: fontSize(12px);
     font-weight: 800;
+  }
 
-    &_matched {
-      border-color: getColor(successBorder);
-      background: getColor(successSurface);
+  &__keyword_matched {
+    border-color: getColor(successBorder);
+    background: getColor(successSurface);
 
-      color: getColor(success);
-    }
+    color: getColor(success);
   }
 }

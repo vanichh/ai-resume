@@ -1,4 +1,4 @@
-import { SecondaryPageLayout } from '@components/secondary-page-layout';
+import { SecondaryPageLayout } from '@components/layouts/secondary-page-layout';
 
 import { PrivacyCenter } from './components/privacy-center';
 

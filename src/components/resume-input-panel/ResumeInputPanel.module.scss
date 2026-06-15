@@ -1,6 +1,6 @@
 .resumeInput {
   position: sticky;
-  top: 28px;
+  top: 98px;
 
   align-self: start;
 
@@ -78,30 +78,30 @@
 
       content: '';
     }
+  }
 
-    &_ready,
-    &_done {
-      border-color: getColor(focusPanelBorderActive);
-      background: getColor(whiteAlpha14);
+  &__primaryButtonStatus_ready,
+  &__primaryButtonStatus_done {
+    border-color: getColor(focusPanelBorderActive);
+    background: getColor(whiteAlpha14);
 
-      color: getColor(focusPanelTextDone);
-    }
+    color: getColor(focusPanelTextDone);
+  }
 
-    &_error {
-      border-color: getColor(whiteAlpha64);
-      background: getColor(focusPanelSurfaceError);
+  &__primaryButtonStatus_error {
+    border-color: getColor(whiteAlpha64);
+    background: getColor(focusPanelSurfaceError);
 
-      color: getColor(whiteText);
-    }
+    color: getColor(whiteText);
+  }
 
-    &_parsing,
-    &_analyzing,
-    &_translating {
-      border-color: getColor(focusPanelBorderProcess);
-      background: getColor(focusPanelSurfaceProcess);
+  &__primaryButtonStatus_parsing,
+  &__primaryButtonStatus_analyzing,
+  &__primaryButtonStatus_translating {
+    border-color: getColor(focusPanelBorderProcess);
+    background: getColor(focusPanelSurfaceProcess);
 
-      color: getColor(focusPanelTextProcess);
-    }
+    color: getColor(focusPanelTextProcess);
   }
 }
 

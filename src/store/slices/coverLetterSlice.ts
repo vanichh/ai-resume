@@ -10,7 +10,17 @@ import type { CoverLetterActionsType } from '../types';
 export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsType> = (set, get) => ({
   async generateCoverLetter() {
     const state = get();
-    const { advice, modelStatus, resumeText, targetRole, vacancyText } = state;
+    const {
+      advice,
+      coverLetterCompanyType,
+      coverLetterLength,
+      coverLetterTone,
+      coverLetterVariantsCount,
+      modelStatus,
+      resumeText,
+      targetRole,
+      vacancyText,
+    } = state;
     if (!resumeText || !canUseModel(modelStatus)) {
       return;
     }
@@ -23,9 +33,21 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
     });
 
     try {
-      const coverLetter = await createCoverLetter(resumeText, advice, targetRole, vacancyText, (downloadProgress) => {
-        set({ downloadProgress });
-      });
+      const coverLetter = await createCoverLetter(
+        resumeText,
+        advice,
+        targetRole,
+        vacancyText,
+        {
+          companyType: coverLetterCompanyType,
+          length: coverLetterLength,
+          tone: coverLetterTone,
+          variantsCount: coverLetterVariantsCount,
+        },
+        (downloadProgress) => {
+          set({ downloadProgress });
+        },
+      );
 
       set((state) => {
         const nextState = {
@@ -51,17 +73,62 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
     }
   },
 
+  setCoverLetterCompanyType(coverLetterCompanyType) {
+    set((state) => {
+      const nextState = {
+        ...state,
+        coverLetterCompanyType,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetterCompanyType: nextState.coverLetterCompanyType,
+      };
+    });
+  },
+
+  setCoverLetterLength(coverLetterLength) {
+    set((state) => {
+      const nextState = {
+        ...state,
+        coverLetterLength,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetterLength: nextState.coverLetterLength,
+      };
+    });
+  },
+
   setCoverLetterText(text) {
     set((state) => {
       if (!state.coverLetter) {
         return state;
       }
 
+      const variants = state.coverLetter.variants ?? [
+        {
+          id: state.coverLetter.id,
+          text: state.coverLetter.text,
+          title: 'Вариант 1',
+        },
+      ];
       const nextState = {
         ...state,
         coverLetter: {
           ...state.coverLetter,
           text,
+          variants: variants.map((variant, index) =>
+            index === 0
+              ? {
+                  ...variant,
+                  text,
+                }
+              : variant,
+          ),
         },
       };
 
@@ -69,6 +136,36 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
 
       return {
         coverLetter: nextState.coverLetter,
+      };
+    });
+  },
+
+  setCoverLetterTone(coverLetterTone) {
+    set((state) => {
+      const nextState = {
+        ...state,
+        coverLetterTone,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetterTone: nextState.coverLetterTone,
+      };
+    });
+  },
+
+  setCoverLetterVariantsCount(coverLetterVariantsCount) {
+    set((state) => {
+      const nextState = {
+        ...state,
+        coverLetterVariantsCount,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetterVariantsCount: nextState.coverLetterVariantsCount,
       };
     });
   },

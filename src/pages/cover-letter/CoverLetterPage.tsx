@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { SecondaryPageLayout } from '@components/secondary-page-layout';
+import { SecondaryPageLayout } from '@components/layouts/secondary-page-layout';
 import { Loader } from '@components/ui';
 
 import { ResumePreview } from './common/lazyComponents';

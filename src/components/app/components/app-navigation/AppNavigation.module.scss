@@ -3,21 +3,20 @@
   top: 0;
   z-index: 100;
 
-  width: calc(100% + 56px);
-  margin: -28px -28px 18px;
+  width: 100%;
+  margin-bottom: 30px;
   padding: 10px 28px;
 
-  border-bottom: 1px solid getColor(borderDivider);
   background: getColor(surface);
 
-  box-shadow: 0 10px 24px getColor(workspaceShadow);
+  box-shadow: 0 12px 28px getColor(workspaceShadow);
   backdrop-filter: blur(14px);
 
   &__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) auto;
     align-items: center;
-    gap: 18px;
+    gap: 24px;
 
     width: 100%;
   }
@@ -25,32 +24,59 @@
   &__brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
     justify-self: start;
+    gap: 10px;
+
+    min-width: 0;
 
     color: getColor(primaryText);
-    font-size: fontSize(16px);
-    font-weight: 700;
     text-decoration: none;
   }
 
   &__brandIcon {
     display: inline-flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
 
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
 
-    border: 1px solid getColor(accentOutline);
     border-radius: 8px;
-    background: getColor(accentSurface);
+    background: getColor(accent);
 
-    color: getColor(accentText);
+    color: getColor(whiteText);
   }
 
   &__projectIcon {
     flex: 0 0 auto;
+  }
+
+  &__brandText {
+    display: grid;
+    gap: 2px;
+
+    min-width: 0;
+  }
+
+  &__brandTitle {
+    color: getColor(primaryText);
+    font-size: fontSize(18px);
+    font-weight: 800;
+  }
+
+  &__brandAccent {
+    color: getColor(accentText);
+  }
+
+  &__brandSubtitle {
+    overflow: hidden;
+
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__menuButton {
@@ -61,7 +87,7 @@
     display: flex;
     align-items: center;
     justify-self: end;
-    gap: 8px;
+    gap: 10px;
   }
 
   &__menu {
@@ -71,85 +97,172 @@
   &__links {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 34px;
 
-    justify-self: center;
-    gap: 8px;
-  }
-
-  &__link,
-  &__desktopTelegramLink,
-  &__mobileTelegramLink,
-  &__themeButton {
-    @include controlButtonBase;
-    @include controlButtonSizeMedium;
-    @include controlButtonSecondary;
-
-    text-decoration: none;
+    min-width: 0;
   }
 
   &__link {
-    &_active {
-      @include controlButtonPrimary;
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    min-height: 48px;
+    padding: 0 0 8px;
+
+    border: 0;
+    background: transparent;
+
+    color: getColor(slateText);
+    font-size: fontSize(14px);
+    font-weight: 700;
+    text-decoration: none;
+
+    transition:
+      color 0.16s ease,
+      opacity 0.16s ease;
+
+    @include controlFocus;
+
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      height: 3px;
+
+      border-radius: 999px;
+      background: getColor(accent);
+
+      opacity: 0;
+      transform: scaleX(0.4);
+      transition:
+        opacity 0.16s ease,
+        transform 0.16s ease;
+
+      content: '';
+    }
+
+    &:hover {
+      color: getColor(accentText);
     }
   }
 
-  &__desktopTelegramLink,
-  &__mobileTelegramLink {
-    border-color: getColor(borderDivider);
-    background: getColor(surfaceBase);
+  &__link_active {
+    color: getColor(accentText);
+
+    &::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
   }
 
-  &__mobileTelegramLink {
-    display: none;
+  &__themeButton,
+  &__developerLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    height: 36px;
+    padding: 0 14px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: getColor(surfaceBase);
+
+    color: getColor(slateText);
+    font: inherit;
+    font-size: fontSize(14px);
+    font-weight: 800;
+
+    transition:
+      background 0.16s ease,
+      color 0.16s ease,
+      transform 0.16s ease;
+
+    cursor: pointer;
+
+    @include controlFocus;
+
+    &:hover {
+      background: getColor(accentSurface);
+
+      color: getColor(accentText);
+
+      transform: translateY(-1px);
+    }
   }
 
   &__themeButton {
-    padding: 0 10px;
+    width: 44px;
+    padding: 0;
   }
 
-  &__telegramIcon {
-    flex: 0 0 auto;
+  &__developerLink {
+    background: getColor(accent);
 
-    color: getColor(accentText);
+    color: getColor(whiteText);
+    text-decoration: none;
+
+    &:hover {
+      background: getColor(accentHover);
+
+      color: getColor(whiteText);
+    }
+  }
+
+  &__developerIcon {
+    flex: 0 0 auto;
   }
 }
 
-@include mediaMax(mobile) {
+@include mediaMax(desktop) {
   .appNavigation {
-    width: calc(100% + 24px);
-    margin: -12px -12px 14px;
-    padding: 8px 12px;
-
     &__inner {
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 6px;
+      gap: 12px;
     }
 
     &__brand {
-      min-width: 0;
       overflow: hidden;
-
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     &__menuButton {
-      @include controlButtonBase;
-      @include controlButtonSizeMedium;
-      @include controlButtonSecondary;
-
       display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-      padding: 0 10px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: getColor(surfaceBase);
+
+      color: getColor(slateText);
+
+      cursor: pointer;
+
+      @include controlFocus;
     }
 
     &__actions {
-      justify-self: end;
+      gap: 8px;
+    }
+
+    &__developerLink {
+      display: none;
     }
 
     &__menu {
       position: fixed;
-      inset: 55px 0 0;
+      inset: 76px 0 0;
       z-index: 99;
 
       display: grid;
@@ -158,11 +271,10 @@
       gap: 8px;
 
       width: 100%;
-      height: calc(100dvh - 55px);
+      height: calc(100dvh - 76px);
       padding: 18px 12px;
       overflow: auto;
 
-      border-top: 1px solid getColor(borderDivider);
       background: getColor(surface);
 
       opacity: 0;
@@ -174,40 +286,82 @@
         visibility 0.16s ease;
 
       pointer-events: none;
+    }
 
-      &_open {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+    &__menu_open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
 
-        pointer-events: auto;
-      }
+      pointer-events: auto;
     }
 
     &__links {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-
-      justify-self: start;
+      justify-content: stretch;
+      gap: 4px;
 
       width: 100%;
     }
 
-    &__link,
-    &__mobileTelegramLink {
+    &__link {
       justify-content: flex-start;
 
-      width: 100%;
-      min-height: 44px;
+      min-height: 46px;
+      padding: 0 12px;
+
+      border-radius: 8px;
+
+      &::after {
+        right: auto;
+        bottom: 10px;
+        left: 0;
+
+        width: 3px;
+        height: 26px;
+
+        transform: scaleY(0.4);
+      }
+
+      &.appNavigation__link_active {
+        background: getColor(accentSurface);
+
+        &::after {
+          transform: scaleY(1);
+        }
+      }
+    }
+  }
+}
+
+@include mediaMax(mobile) {
+  .appNavigation {
+    width: calc(100% + 24px);
+    margin: -12px -12px 16px;
+    padding: 10px 12px;
+
+    &__brandIcon {
+      width: 40px;
+      height: 40px;
     }
 
-    &__desktopTelegramLink {
+    &__brandTitle {
+      font-size: fontSize(18px);
+    }
+
+    &__brandSubtitle {
+      font-size: fontSize(12px);
+    }
+
+    &__themeButton {
       display: none;
     }
 
-    &__mobileTelegramLink {
-      display: inline-flex;
-      justify-self: start;
+    &__menu {
+      inset: 60px 0 0;
+
+      height: calc(100dvh - 60px);
     }
   }
 }

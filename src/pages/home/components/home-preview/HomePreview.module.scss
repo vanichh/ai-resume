@@ -78,18 +78,18 @@
 
     border-radius: inherit;
     background: getColor(success);
+  }
 
-    &_high {
-      width: 82%;
-    }
+  &__progress_high {
+    width: 82%;
+  }
 
-    &_medium {
-      width: 74%;
-    }
+  &__progress_medium {
+    width: 74%;
+  }
 
-    &_low {
-      width: 68%;
-    }
+  &__progress_low {
+    width: 68%;
   }
 
   &__advice {

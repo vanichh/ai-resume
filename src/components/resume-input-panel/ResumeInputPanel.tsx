@@ -1,11 +1,12 @@
+import clsx from 'clsx';
 import { useShallow } from 'zustand/react/shallow';
 
+import type { AppStatusType } from '@common/types';
 import { Button } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
 import { STATUS_LABELS } from './common/constants';
 import { selectResumeInputPanelState } from './common/selectors';
-import { getSubmitButtonStatusClassName } from './common/utils/getSubmitButtonStatusClassName';
 
 import { ExportActions } from './components/export-actions';
 import { ResumeFileDropZone } from './components/resume-file-drop-zone';
@@ -15,6 +16,16 @@ import { UnsupportedModelActions } from './components/unsupported-model-actions'
 import { VacancyField } from './components/vacancy-field';
 
 import styles from './ResumeInputPanel.module.scss';
+
+const STATUS_CLASS_NAMES: Record<AppStatusType, string> = {
+  analyzing: styles.resumeInput__primaryButtonStatus_analyzing,
+  done: styles.resumeInput__primaryButtonStatus_done,
+  error: styles.resumeInput__primaryButtonStatus_error,
+  idle: '',
+  parsing: styles.resumeInput__primaryButtonStatus_parsing,
+  ready: styles.resumeInput__primaryButtonStatus_ready,
+  translating: styles.resumeInput__primaryButtonStatus_translating,
+};
 
 export const ResumeInputPanel = () => {
   const {
@@ -56,7 +67,9 @@ export const ResumeInputPanel = () => {
         onClick={onAnalyzeClick}
       >
         <span className={styles.resumeInput__primaryButtonText}>Получить рекомендации</span>
-        <span className={getSubmitButtonStatusClassName(status)}>{STATUS_LABELS[status]}</span>
+        <span className={clsx(styles.resumeInput__primaryButtonStatus, STATUS_CLASS_NAMES[status])}>
+          {STATUS_LABELS[status]}
+        </span>
       </Button>
 
       {advice && <ExportActions advice={advice} />}

@@ -6,11 +6,12 @@ import { ResumeAnalysisPage } from '@pages/resume-analysis';
 import { TranslationPage } from '@pages/translation';
 import { UnsupportedBrowserPage } from '@pages/unsupported-browser';
 import { VacancyComparisonPage } from '@pages/vacancy-comparison';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { APP_ROUTES } from '@common/constants/routes';
 import { useAppTheme } from '@common/hooks/useAppTheme';
 
+import { NARROW_MODEL_PROGRESS_ROUTES } from './common/constants';
 import { useAppBootstrap } from './common/hooks/useAppBootstrap';
 
 import { AppNavigation } from './components/app-navigation';
@@ -22,12 +23,14 @@ import styles from './App.module.scss';
 
 export const App = () => {
   useAppBootstrap();
+  const { pathname } = useLocation();
   const { onThemeToggle, theme } = useAppTheme();
+  const modelProgressLayout = NARROW_MODEL_PROGRESS_ROUTES.has(pathname) ? 'narrow' : 'wide';
 
   return (
     <main className={styles.app}>
       <AppNavigation theme={theme} onThemeToggle={onThemeToggle} />
-      <ModelDownloadProgress />
+      <ModelDownloadProgress layout={modelProgressLayout} />
       <Routes>
         <Route path={APP_ROUTES.home} element={<HomePage />} />
         <Route element={<ModelGuardRoute />}>

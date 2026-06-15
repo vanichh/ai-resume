@@ -6,6 +6,11 @@ import type { TextareaProps } from './types';
 
 import styles from './Textarea.module.scss';
 
+const TEXTAREA_VARIANT_CLASS_NAMES = {
+  code: styles.textarea_code,
+  default: styles.textarea_default,
+};
+
 export const Textarea = ({
   className = '',
   fullWidth = true,
@@ -22,7 +27,7 @@ export const Textarea = ({
 
   return (
     <textarea
-      className={clsx(styles.textarea, styles[`textarea_${variant}`], className, {
+      className={clsx(styles.textarea, TEXTAREA_VARIANT_CLASS_NAMES[variant], className, {
         [styles.textarea_fullWidth]: fullWidth,
       })}
       ref={ref}

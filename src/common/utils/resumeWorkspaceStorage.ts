@@ -1,5 +1,8 @@
 import { RESUME_WORKSPACE_STORAGE_KEY } from '@common/constants';
 import type {
+  CoverLetterCompanyType,
+  CoverLetterLengthType,
+  CoverLetterToneType,
   CoverLetterType,
   ResumeAdviceType,
   ResumeAnalysisHistoryItemType,
@@ -14,6 +17,10 @@ export type StoredResumeWorkspaceType = {
   analysisHistory: ResumeAnalysisHistoryItemType[];
   comparisonVacancies: VacancyComparisonItemType[];
   coverLetter: CoverLetterType | null;
+  coverLetterCompanyType: CoverLetterCompanyType;
+  coverLetterLength: CoverLetterLengthType;
+  coverLetterTone: CoverLetterToneType;
+  coverLetterVariantsCount: number;
   resumeText: string;
   targetRole: string;
   translation: ResumeTranslationType | null;

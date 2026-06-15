@@ -4,6 +4,11 @@ import type { SelectProps } from './types';
 
 import styles from './Select.module.scss';
 
+const SELECT_SIZE_CLASS_NAMES = {
+  medium: styles.select_medium,
+  small: styles.select_small,
+};
+
 export const Select = ({
   className = '',
   fullWidth = true,
@@ -14,7 +19,7 @@ export const Select = ({
 }: SelectProps) => {
   return (
     <span
-      className={clsx(styles.select, styles[`select_${size}`], className, {
+      className={clsx(styles.select, SELECT_SIZE_CLASS_NAMES[size], className, {
         [styles.select_fullWidth]: fullWidth,
       })}
     >

@@ -7,7 +7,13 @@ import {
 import type { ResumeTranslationLanguageType, ResumeTranslationToneType, ResumeTranslationType } from '@common/types';
 import { createId } from '@common/utils/createId';
 
-import { TRANSLATION_SYSTEM_PROMPT } from './common/constants';
+import {
+  TRANSLATION_MAX_ATTEMPTS,
+  TRANSLATION_SYSTEM_PROMPT,
+  UNCHANGED_TRANSLATION_ERROR_MESSAGE,
+} from './common/constants';
+import { buildTranslationPromptContent } from './common/utils/buildTranslationPromptContent';
+import { isTranslationLikelyUnchanged } from './common/utils/isTranslationLikelyUnchanged';
 import { splitResumeForTranslation } from './common/utils/splitResumeForTranslation';
 
 export const translateResume = async (
@@ -48,22 +54,35 @@ export const translateResume = async (
     const translatedChunks: string[] = [];
 
     for (const [chunkIndex, resumeChunk] of resumeChunks.entries()) {
-      const text = await session.prompt([
-        {
-          role: 'user',
-          content: [
-            `Translate resume fragment ${chunkIndex + 1} of ${resumeChunks.length} into ${targetLanguage}.`,
-            toneInstruction,
-            'Return only the translated fragment text.',
-            'Translate every line and bullet from this fragment. Do not skip, shorten, summarize, merge, reorder, or add content.',
-            'Keep headings, bullet structure, numbers, company names, product names, technical terms, URLs, emails, and phone numbers intact where appropriate.',
-            '',
-            resumeChunk,
-          ].join('\n'),
-        },
-      ]);
+      let translatedChunk = '';
 
-      translatedChunks.push(text.trim());
+      for (let attemptIndex = 0; attemptIndex < TRANSLATION_MAX_ATTEMPTS; attemptIndex += 1) {
+        const text = await session.prompt([
+          {
+            role: 'user',
+            content: buildTranslationPromptContent(
+              resumeChunk,
+              chunkIndex,
+              resumeChunks.length,
+              targetLanguage,
+              toneInstruction,
+              attemptIndex > 0,
+            ),
+          },
+        ]);
+
+        translatedChunk = text.trim();
+
+        if (!isTranslationLikelyUnchanged(resumeChunk, translatedChunk, language)) {
+          break;
+        }
+      }
+
+      if (isTranslationLikelyUnchanged(resumeChunk, translatedChunk, language)) {
+        throw new Error(UNCHANGED_TRANSLATION_ERROR_MESSAGE);
+      }
+
+      translatedChunks.push(translatedChunk);
     }
 
     return {

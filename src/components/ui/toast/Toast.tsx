@@ -11,6 +11,11 @@ import styles from './Toast.module.scss';
 
 const DEFAULT_AUTO_CLOSE_DELAY = 3000;
 
+const TOAST_VARIANT_CLASS_NAMES = {
+  error: styles.toast_error,
+  success: styles.toast_success,
+};
+
 export const Toast = ({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onClose, variant }: ToastProps) => {
   useEffect(() => {
     if (!message || autoCloseDelay <= 0) {
@@ -27,7 +32,7 @@ export const Toast = ({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onCl
   }
 
   return (
-    <div className={clsx(styles.toast, styles[`toast_${variant}`])} role="alert">
+    <div className={clsx(styles.toast, TOAST_VARIANT_CLASS_NAMES[variant])} role="alert">
       <p className={styles.toast__message}>{message}</p>
       <Button
         aria-label="Закрыть уведомление"
