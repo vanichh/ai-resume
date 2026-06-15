@@ -1,11 +1,10 @@
 import { PrivacyCenter } from '@components/privacy-center';
-
-import styles from './PrivacyPage.module.scss';
+import { SecondaryPageLayout } from '@components/secondary-page-layout';
 
 export const PrivacyPage = () => {
   return (
-    <section className={styles.privacyPage}>
+    <SecondaryPageLayout>
       <PrivacyCenter />
-    </section>
+    </SecondaryPageLayout>
   );
 };

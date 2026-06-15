@@ -1,13 +1,12 @@
 import { CoverLetterGenerator } from '@components/cover-letter-generator';
 import { ResumePreview } from '@components/resume-preview';
-
-import styles from './CoverLetterPage.module.scss';
+import { SecondaryPageLayout } from '@components/secondary-page-layout';
 
 export const CoverLetterPage = () => {
   return (
-    <section className={styles.coverLetterPage}>
+    <SecondaryPageLayout>
       <CoverLetterGenerator />
-      <ResumePreview />
-    </section>
+      <ResumePreview defaultTextExpanded />
+    </SecondaryPageLayout>
   );
 };

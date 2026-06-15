@@ -12,13 +12,15 @@ import { useResumeStore } from '@store/resumeStore';
 
 import { selectResumePreviewState } from './common/selectors';
 
+import type { ResumePreviewProps } from './types';
+
 import styles from './ResumePreview.module.scss';
 
 const COMPACT_TEXT_HEIGHT = 240;
 
-export const ResumePreview = () => {
+export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProps) => {
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
-  const [isTextExpanded, setIsTextExpanded] = useState(false);
+  const [isTextExpanded, setIsTextExpanded] = useState(defaultTextExpanded);
   const [expandedTextHeight, setExpandedTextHeight] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { resumeText, setResumeText } = useResumeStore(useShallow(selectResumePreviewState));

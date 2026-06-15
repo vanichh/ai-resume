@@ -1,0 +1,15 @@
+.secondaryPageLayout {
+  display: grid;
+  gap: 16px;
+
+  width: 100%;
+  min-width: 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+@include mediaMax(mobile) {
+  .secondaryPageLayout {
+    max-width: 100%;
+  }
+}

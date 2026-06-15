@@ -1,11 +1,10 @@
 import { AnalysisHistory } from '@components/analysis-history';
-
-import styles from './AnalysisHistoryPage.module.scss';
+import { SecondaryPageLayout } from '@components/secondary-page-layout';
 
 export const AnalysisHistoryPage = () => {
   return (
-    <section className={styles.analysisHistoryPage}>
+    <SecondaryPageLayout>
       <AnalysisHistory />
-    </section>
+    </SecondaryPageLayout>
   );
 };

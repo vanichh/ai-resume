@@ -43,7 +43,7 @@ export const TranslationPage = () => {
           )}
           <TranslationHistory />
           <ResumeComparisonView />
-          <ResumePreview />
+          <ResumePreview defaultTextExpanded />
         </Suspense>
       </div>
     </section>

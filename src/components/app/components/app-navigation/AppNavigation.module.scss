@@ -1,20 +1,70 @@
 .appNavigation {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 
-  max-width: 1480px;
-  margin: 0 auto 14px;
+  width: calc(100% + 56px);
+  margin: -28px -28px 18px;
+  padding: 10px 28px;
 
-  &__link {
+  border-bottom: 1px solid get-color(borderDivider);
+  background: get-color(surface);
+
+  box-shadow: 0 10px 24px get-color(workspaceShadow);
+  backdrop-filter: blur(14px);
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+
+    width: 100%;
+    max-width: 1480px;
+    margin: 0 auto;
+  }
+
+  &__link,
+  &__telegramLink {
     @include controlButtonBase;
     @include controlButtonSizeMedium;
     @include controlButtonSecondary;
 
     text-decoration: none;
+  }
 
+  &__link {
     &_active {
       @include controlButtonPrimary;
+    }
+  }
+
+  &__telegramLink {
+    margin-left: auto;
+
+    border-color: get-color(borderDivider);
+    background: get-color(surfaceBase);
+  }
+
+  &__telegramIcon {
+    flex: 0 0 auto;
+
+    color: get-color(accentText);
+  }
+}
+
+@include mediaMax(mobile) {
+  .appNavigation {
+    width: calc(100% + 24px);
+    margin: -12px -12px 14px;
+    padding: 8px 12px;
+
+    &__inner {
+      gap: 6px;
+    }
+
+    &__telegramLink {
+      margin-left: 0;
     }
   }
 }

@@ -2,8 +2,8 @@
   display: grid;
   place-items: center;
 
-  min-height: calc(100vh - 56px);
   max-width: 1480px;
+  min-height: calc(100vh - 56px);
   margin: 0 auto;
 
   &__content {
@@ -31,7 +31,6 @@
 
     color: get-color(primaryText);
     font-size: fontSize(26px);
-    line-height: 1.15;
   }
 
   &__description {
@@ -39,7 +38,6 @@
 
     color: get-color(secondaryText);
     font-size: fontSize(16px);
-    line-height: 1.55;
   }
 
   &__actions {
@@ -75,7 +73,6 @@
 
     color: get-color(mutedText);
     font-size: fontSize(14px);
-    line-height: 1.5;
   }
 }
 

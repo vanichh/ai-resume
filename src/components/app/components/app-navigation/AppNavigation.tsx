@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 
-import { APP_ROUTES } from '@common/constants/routes';
+import { APP_NAVIGATION_LINKS, TELEGRAM_URL } from './common/constants';
+
+import { TelegramIcon } from './components/telegram-icon';
+
+import type { AppNavigationLinkStateType } from './types';
 
 import styles from './AppNavigation.module.scss';
-
-type AppNavigationLinkStateType = {
-  isActive: boolean;
-};
 
 export const AppNavigation = () => {
   const getLinkClassName = ({ isActive }: AppNavigationLinkStateType) => {
@@ -18,24 +18,17 @@ export const AppNavigation = () => {
 
   return (
     <nav className={styles.appNavigation} aria-label="Основная навигация">
-      <NavLink className={getLinkClassName} to={APP_ROUTES.home}>
-        Анализ
-      </NavLink>
-      <NavLink className={getLinkClassName} to={APP_ROUTES.analysisHistory}>
-        История
-      </NavLink>
-      <NavLink className={getLinkClassName} to={APP_ROUTES.vacancyComparison}>
-        Сравнение
-      </NavLink>
-      <NavLink className={getLinkClassName} to={APP_ROUTES.coverLetter}>
-        Письмо
-      </NavLink>
-      <NavLink className={getLinkClassName} to={APP_ROUTES.translation}>
-        Перевод
-      </NavLink>
-      <NavLink className={getLinkClassName} to={APP_ROUTES.privacy}>
-        Приватность
-      </NavLink>
+      <div className={styles.appNavigation__inner}>
+        {APP_NAVIGATION_LINKS.map(({ label, path }) => (
+          <NavLink key={path} className={getLinkClassName} to={path}>
+            {label}
+          </NavLink>
+        ))}
+        <a className={styles.appNavigation__telegramLink} href={TELEGRAM_URL} rel="noreferrer" target="_blank">
+          <TelegramIcon className={styles.appNavigation__telegramIcon} />
+          @vanichh
+        </a>
+      </div>
     </nav>
   );
 };

@@ -1,13 +1,12 @@
 import { ResumePreview } from '@components/resume-preview';
+import { SecondaryPageLayout } from '@components/secondary-page-layout';
 import { VacancyComparison } from '@components/vacancy-comparison';
-
-import styles from './VacancyComparisonPage.module.scss';
 
 export const VacancyComparisonPage = () => {
   return (
-    <section className={styles.vacancyComparisonPage}>
+    <SecondaryPageLayout>
       <VacancyComparison />
-      <ResumePreview />
-    </section>
+      <ResumePreview defaultTextExpanded />
+    </SecondaryPageLayout>
   );
 };

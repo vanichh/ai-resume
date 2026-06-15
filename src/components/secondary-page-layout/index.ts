@@ -1,0 +1,1 @@
+export { SecondaryPageLayout } from './SecondaryPageLayout';
