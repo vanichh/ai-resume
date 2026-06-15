@@ -1,0 +1,1 @@
+export { HomeDetails } from './HomeDetails';

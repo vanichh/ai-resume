@@ -1,0 +1,134 @@
+.homeHero {
+  display: grid;
+  gap: 24px;
+
+  min-width: 0;
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 8px;
+
+    margin: 0;
+    padding: 8px 12px;
+
+    border: 1px solid getColor(successBorder);
+    border-radius: 999px;
+    background: getColor(successSurface);
+
+    color: getColor(successDark);
+    font-size: fontSize(14px);
+    font-weight: 800;
+  }
+
+  &__title {
+    max-width: 780px;
+    margin: 0;
+
+    color: getColor(primaryText);
+    font-size: fontSize(42px);
+    font-weight: 900;
+    overflow-wrap: anywhere;
+  }
+
+  &__titleAccent {
+    color: getColor(success);
+  }
+
+  &__description {
+    max-width: 760px;
+    margin: 0;
+
+    color: getColor(secondaryText);
+    font-size: fontSize(16px);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  &__primaryLink,
+  &__secondaryLink {
+    @include controlButtonBase;
+    @include controlButtonSizeLarge;
+
+    text-decoration: none;
+  }
+
+  &__primaryLink {
+    @include controlButtonPrimary;
+  }
+
+  &__secondaryLink {
+    @include controlButtonSecondary;
+  }
+
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+
+    margin: 22px 0 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  &__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    min-width: 0;
+    min-height: 104px;
+    padding: 20px;
+
+    border: 1px solid getColor(border);
+    border-radius: 8px;
+    background: getColor(surface);
+  }
+
+  &__featureText {
+    display: grid;
+    gap: 8px;
+
+    min-width: 0;
+  }
+
+  &__featureTitle {
+    margin: 0;
+
+    color: getColor(primaryText);
+    font-size: fontSize(14px);
+  }
+
+  &__featureDescription {
+    margin: 0;
+
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+  }
+}
+
+@include mediaMax(mobile) {
+  .homeHero {
+    &__title {
+      font-size: fontSize(26px);
+    }
+
+    &__actions {
+      display: grid;
+    }
+
+    &__features {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &__feature {
+      padding: 18px;
+    }
+  }
+}

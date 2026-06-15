@@ -1,0 +1,140 @@
+.homePreview {
+  display: grid;
+  align-self: start;
+  gap: 26px;
+
+  min-width: 0;
+  max-width: 470px;
+  height: 100%;
+  margin-top: 8px;
+  padding: 34px;
+  overflow: hidden;
+
+  border: 1px solid getColor(border);
+  border-radius: 8px;
+  background: linear-gradient(180deg, getColor(surfaceBase) 0, getColor(surface) 100%), getColor(surface);
+
+  box-shadow: 0 28px 70px getColor(workspaceShadowMedium);
+
+  &__header,
+  &__stepHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__label {
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+    font-weight: 800;
+  }
+
+  &__score {
+    color: getColor(success);
+    font-size: fontSize(42px);
+  }
+
+  &__role {
+    margin: 0;
+
+    color: getColor(primaryText);
+    font-size: fontSize(18px);
+    font-weight: 800;
+  }
+
+  &__steps {
+    display: grid;
+    gap: 18px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  &__step {
+    display: grid;
+    gap: 8px;
+  }
+
+  &__stepHeader {
+    color: getColor(secondaryText);
+    font-size: fontSize(14px);
+  }
+
+  &__track {
+    height: 7px;
+    overflow: hidden;
+
+    border-radius: 999px;
+    background: getColor(surfaceTrack);
+  }
+
+  &__progress {
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+    background: getColor(success);
+
+    &_high {
+      width: 82%;
+    }
+
+    &_medium {
+      width: 74%;
+    }
+
+    &_low {
+      width: 68%;
+    }
+  }
+
+  &__advice {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+
+    padding: 18px;
+
+    border: 1px solid getColor(accentOutline);
+    border-radius: 8px;
+    background: getColor(accentSurface);
+
+    color: getColor(slateText);
+    font-size: fontSize(14px);
+  }
+
+  &__adviceIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 999px;
+    background: getColor(surfaceBase);
+
+    color: getColor(accentText);
+  }
+}
+
+@include mediaMax(desktop) {
+  .homePreview {
+    max-width: 100%;
+  }
+}
+
+@include mediaMax(mobile) {
+  .homePreview {
+    padding: 16px;
+
+    &__score {
+      font-size: fontSize(26px);
+    }
+  }
+}

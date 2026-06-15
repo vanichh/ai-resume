@@ -1,0 +1,1 @@
+export { HomeInfoItem } from './HomeInfoItem';

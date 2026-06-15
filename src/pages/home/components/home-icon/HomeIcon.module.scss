@@ -1,0 +1,14 @@
+.homeIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  border-radius: 8px;
+  background: getColor(accentSurface);
+
+  color: getColor(accentText);
+}
