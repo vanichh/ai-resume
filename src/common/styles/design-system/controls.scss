@@ -1,0 +1,147 @@
+@use '../mixins/colors' as *;
+@use '../mixins/typography' as *;
+
+@mixin controlFocus {
+  outline: none;
+
+  &:focus-visible {
+    border-color: get-color(accent);
+
+    box-shadow: var(--control-focus-ring);
+  }
+}
+
+@mixin controlButtonBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border-radius: var(--control-radius);
+
+  font: inherit;
+  font-weight: 800;
+  text-align: center;
+
+  transition: var(--control-transition);
+
+  cursor: pointer;
+
+  @include controlFocus;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@mixin controlButtonSizeSmall {
+  min-height: var(--control-height-small);
+  padding: var(--control-padding-small);
+
+  font-size: fontSize(12px);
+}
+
+@mixin controlButtonSizeMedium {
+  min-height: var(--control-height-medium);
+  padding: var(--control-padding-medium);
+
+  font-size: fontSize(12px);
+}
+
+@mixin controlButtonSizeLarge {
+  min-height: var(--control-height-large);
+  padding: var(--control-padding-large);
+
+  font-size: fontSize(14px);
+  font-weight: 900;
+}
+
+@mixin controlButtonPrimary {
+  border: 1px solid get-color(accent);
+  background: get-color(accent);
+
+  color: get-color(whiteText);
+
+  &:hover:not(:disabled) {
+    background: get-color(accentStrong);
+  }
+
+  &:disabled {
+    border-color: get-color(disabledBorder);
+    background: get-color(disabledBorder);
+  }
+}
+
+@mixin controlButtonSecondary {
+  border: 1px solid get-color(borderDark);
+  background: get-color(whiteText);
+
+  color: get-color(slateText);
+
+  &:hover:not(:disabled) {
+    border-color: get-color(accentBorder);
+
+    color: get-color(accentText);
+  }
+
+  &:disabled {
+    background: get-color(appBackground);
+
+    color: get-color(disabledTextSoft);
+  }
+}
+
+@mixin controlButtonGhost {
+  border: 1px solid get-color(transparent);
+  background: get-color(transparent);
+
+  color: get-color(slateText);
+
+  &:hover:not(:disabled) {
+    background: get-color(accentSurface);
+
+    color: get-color(accentText);
+  }
+
+  &:disabled {
+    color: get-color(disabledTextSoft);
+  }
+}
+
+@mixin controlFieldBase {
+  width: 100%;
+  min-width: 0;
+
+  border: 1px solid get-color(borderInput);
+  border-radius: var(--control-radius);
+  background: get-color(whiteText);
+
+  color: get-color(secondaryText);
+  font: inherit;
+
+  transition: var(--control-transition);
+
+  @include controlFocus;
+
+  &:disabled {
+    background: get-color(appBackground);
+
+    color: get-color(disabledText);
+
+    cursor: not-allowed;
+  }
+}
+
+@mixin controlFieldSizeSmall {
+  min-height: var(--control-height-small);
+  padding: var(--control-padding-small);
+
+  font-size: fontSize(12px);
+}
+
+@mixin controlFieldSizeMedium {
+  min-height: var(--control-height-medium);
+  padding: var(--control-padding-medium);
+
+  font-size: fontSize(14px);
+}

@@ -5,55 +5,10 @@
 
   background:
     linear-gradient(180deg, get-color(whiteAlpha76) 0, get-color(whiteAlpha0) 260px), get-color(appBackground);
-
-  &__workspace {
-    display: grid;
-    grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
-    align-items: start;
-    gap: 22px;
-
-    min-width: 0;
-    max-width: 1480px;
-    margin: 0 auto;
-  }
-
-  &__content {
-    display: grid;
-    gap: 16px;
-
-    min-width: 0;
-  }
-
-  &__loader {
-    min-height: 160px;
-    padding: 18px;
-
-    border: 1px solid get-color(border);
-    border-radius: 8px;
-    background: get-color(surface);
-
-    @include panelShadow;
-  }
-}
-
-@include mediaMax(desktop) {
-  .app {
-    &__workspace {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
 }
 
 @include mediaMax(mobile) {
   .app {
     padding: 12px;
-
-    &__workspace {
-      gap: 14px;
-
-      width: 100%;
-      min-width: 0;
-      max-width: 100%;
-    }
   }
 }

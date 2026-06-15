@@ -5,6 +5,8 @@ import { X } from 'lucide-react';
 
 import type { ToastProps } from './types';
 
+import { Button } from '../button';
+
 import styles from './Toast.module.scss';
 
 const DEFAULT_AUTO_CLOSE_DELAY = 3000;
@@ -27,9 +29,15 @@ export const Toast = ({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onCl
   return (
     <div className={clsx(styles.toast, styles[`toast_${variant}`])} role="alert">
       <p className={styles.toast__message}>{message}</p>
-      <button className={styles.toast__closeButton} type="button" aria-label="Закрыть уведомление" onClick={onClose}>
+      <Button
+        aria-label="Закрыть уведомление"
+        className={styles.toast__closeButton}
+        size="small"
+        variant="ghost"
+        onClick={onClose}
+      >
         <X aria-hidden size={18} />
-      </button>
+      </Button>
     </div>
   );
 };

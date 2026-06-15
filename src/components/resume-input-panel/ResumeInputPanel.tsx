@@ -1,5 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 
+import { Button } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
 import { STATUS_LABELS } from './common/constants';
@@ -10,8 +11,6 @@ import { ExportActions } from './components/export-actions';
 import { ResumeFileDropZone } from './components/resume-file-drop-zone';
 import { ResumeInputHeader } from './components/resume-input-header';
 import { TargetRoleField } from './components/target-role-field';
-import { TranslationLanguageField } from './components/translation-language-field';
-import { TranslationToneField } from './components/translation-tone-field';
 import { UnsupportedModelActions } from './components/unsupported-model-actions';
 import { VacancyField } from './components/vacancy-field';
 
@@ -22,19 +21,13 @@ export const ResumeInputPanel = () => {
     advice,
     analyze,
     canAnalyze,
-    canTranslate,
     fileName,
     modelStatus,
     parseFile,
     setTargetRole,
-    setTranslationLanguage,
-    setTranslationTone,
     setVacancyText,
     status,
     targetRole,
-    translate,
-    translationLanguage,
-    translationTone,
     vacancyText,
   } = useResumeStore(useShallow(selectResumeInputPanelState));
 
@@ -46,10 +39,6 @@ export const ResumeInputPanel = () => {
     void analyze();
   };
 
-  const onTranslateClick = () => {
-    void translate();
-  };
-
   return (
     <div className={styles.resumeInput}>
       <ResumeInputHeader />
@@ -57,26 +46,18 @@ export const ResumeInputPanel = () => {
       <VacancyField vacancyText={vacancyText} onVacancyTextChange={setVacancyText} />
       <ResumeFileDropZone fileName={fileName} onFileChange={onFileChange} />
       <UnsupportedModelActions modelStatus={modelStatus} />
-      <TranslationLanguageField language={translationLanguage} onLanguageChange={setTranslationLanguage} />
-      <TranslationToneField tone={translationTone} onToneChange={setTranslationTone} />
 
-      <button
+      <Button
         className={styles.resumeInput__primaryButton}
         disabled={!canAnalyze}
-        type="button"
+        fullWidth
+        size="large"
+        variant="primary"
         onClick={onAnalyzeClick}
       >
         <span className={styles.resumeInput__primaryButtonText}>Получить рекомендации</span>
         <span className={getSubmitButtonStatusClassName(status)}>{STATUS_LABELS[status]}</span>
-      </button>
-      <button
-        className={styles.resumeInput__secondaryButton}
-        disabled={!canTranslate}
-        type="button"
-        onClick={onTranslateClick}
-      >
-        Перевести резюме
-      </button>
+      </Button>
 
       {advice && <ExportActions advice={advice} />}
     </div>

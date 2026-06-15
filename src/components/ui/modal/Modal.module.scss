@@ -37,7 +37,8 @@
   }
 
   &__closeButton {
-    display: grid;
+    @include controlButtonBase;
+
     place-items: center;
 
     width: 34px;
@@ -45,12 +46,9 @@
     padding: 0;
 
     border: 1px solid get-color(transparent);
-    border-radius: 8px;
     background: get-color(transparent);
 
     color: get-color(slateText);
-
-    cursor: pointer;
 
     &:hover {
       background: get-color(accentSurface);
@@ -85,6 +83,7 @@
 @include mediaMax(mobile) {
   .modal {
     align-items: end;
+
     padding: 12px;
 
     &__content {

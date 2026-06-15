@@ -39,27 +39,14 @@
   }
 
   &__titleInput {
-    width: 100%;
-    min-width: 0;
-    height: 36px;
-    padding: 0 10px;
+    @include controlFieldBase;
+    @include controlFieldSizeMedium;
 
-    border: 1px solid get-color(borderInput);
-    border-radius: 8px;
-    background: get-color(whiteText);
+    height: 36px;
+    min-height: 36px;
 
     color: get-color(slateInputStrong);
-    font: inherit;
-    font-size: fontSize(14px);
     font-weight: 800;
-
-    outline: none;
-
-    &:focus {
-      border-color: get-color(accent);
-
-      box-shadow: 0 0 0 3px get-color(accentShadow);
-    }
   }
 
   &__textarea {

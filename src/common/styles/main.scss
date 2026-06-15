@@ -2,6 +2,7 @@
 
 :root {
   @include colorVariables;
+  @include designSystemVariables;
 
   background: get-color(appBackground);
 

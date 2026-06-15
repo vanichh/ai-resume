@@ -39,7 +39,8 @@
   }
 
   &__closeButton {
-    display: grid;
+    @include controlButtonBase;
+
     place-items: center;
 
     width: 34px;
@@ -53,8 +54,6 @@
     color: inherit;
     font-size: fontSize(22px);
     font-weight: 800;
-
-    cursor: pointer;
 
     &:hover {
       background: get-color(whiteAlpha50);

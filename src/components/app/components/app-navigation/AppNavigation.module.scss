@@ -1,0 +1,20 @@
+.appNavigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  max-width: 1480px;
+  margin: 0 auto 14px;
+
+  &__link {
+    @include controlButtonBase;
+    @include controlButtonSizeMedium;
+    @include controlButtonSecondary;
+
+    text-decoration: none;
+
+    &_active {
+      @include controlButtonPrimary;
+    }
+  }
+}

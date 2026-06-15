@@ -58,9 +58,15 @@ export const Modal = ({
           <h2 className={styles.modal__title} id="modal-title">
             {title}
           </h2>
-          <button className={styles.modal__closeButton} type="button" aria-label="Закрыть окно" onClick={onClose}>
+          <Button
+            aria-label="Закрыть окно"
+            className={styles.modal__closeButton}
+            size="small"
+            variant="ghost"
+            onClick={onClose}
+          >
             <X aria-hidden size={18} />
-          </button>
+          </Button>
         </header>
         {description && <p className={styles.modal__description}>{description}</p>}
         {children && <div className={styles.modal__body}>{children}</div>}

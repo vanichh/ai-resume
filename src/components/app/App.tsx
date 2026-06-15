@@ -1,24 +1,20 @@
-import { Suspense } from 'react';
+import { AnalysisHistoryPage } from '@pages/analysis-history';
+import { CoverLetterPage } from '@pages/cover-letter';
+import { HomePage } from '@pages/home';
+import { PrivacyPage } from '@pages/privacy';
+import { TranslationPage } from '@pages/translation';
+import { UnsupportedBrowserPage } from '@pages/unsupported-browser';
+import { VacancyComparisonPage } from '@pages/vacancy-comparison';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ResumeInputPanel } from '@components/resume-input-panel';
-import { Loader } from '@components/ui';
+import { APP_ROUTES } from '@common/constants/routes';
 
 import { useAppBootstrap } from './common/hooks/useAppBootstrap';
-import {
-  AdviceView,
-  AnalysisHistory,
-  AtsKeywordMatcher,
-  CoverLetterGenerator,
-  PrivacyCenter,
-  ResumeComparisonView,
-  ResumePreview,
-  ResumeTranslationPreview,
-  TranslationHistory,
-  VacancyComparison,
-} from './common/lazyComponents';
 
+import { AppNavigation } from './components/app-navigation';
 import { AppToast } from './components/app-toast';
 import { ModelDownloadProgress } from './components/model-download-progress';
+import { ModelGuardRoute } from './components/model-guard-route';
 
 import styles from './App.module.scss';
 
@@ -27,30 +23,20 @@ export const App = () => {
 
   return (
     <main className={styles.app}>
+      <AppNavigation />
       <ModelDownloadProgress />
-      <section className={styles.app__workspace}>
-        <ResumeInputPanel />
-        <div className={styles.app__content}>
-          <Suspense
-            fallback={
-              <div className={styles.app__loader}>
-                <Loader label="Загрузка рабочей области" />
-              </div>
-            }
-          >
-            <ResumePreview />
-            <PrivacyCenter />
-            <AnalysisHistory />
-            <VacancyComparison />
-            <CoverLetterGenerator />
-            <ResumeTranslationPreview />
-            <TranslationHistory />
-            <ResumeComparisonView />
-            <AtsKeywordMatcher />
-            <AdviceView />
-          </Suspense>
-        </div>
-      </section>
+      <Routes>
+        <Route element={<ModelGuardRoute />}>
+          <Route path={APP_ROUTES.home} element={<HomePage />} />
+          <Route path={APP_ROUTES.analysisHistory} element={<AnalysisHistoryPage />} />
+          <Route path={APP_ROUTES.coverLetter} element={<CoverLetterPage />} />
+          <Route path={APP_ROUTES.privacy} element={<PrivacyPage />} />
+          <Route path={APP_ROUTES.translation} element={<TranslationPage />} />
+          <Route path={APP_ROUTES.vacancyComparison} element={<VacancyComparisonPage />} />
+        </Route>
+        <Route path={APP_ROUTES.unsupportedBrowser} element={<UnsupportedBrowserPage />} />
+        <Route path="*" element={<Navigate replace to={APP_ROUTES.home} />} />
+      </Routes>
       <AppToast />
     </main>
   );

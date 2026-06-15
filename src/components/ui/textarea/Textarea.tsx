@@ -10,6 +10,7 @@ export const Textarea = ({
   className = '',
   fullWidth = true,
   minHeight,
+  ref,
   style,
   variant = 'default',
   ...props
@@ -24,6 +25,7 @@ export const Textarea = ({
       className={clsx(styles.textarea, styles[`textarea_${variant}`], className, {
         [styles.textarea_fullWidth]: fullWidth,
       })}
+      ref={ref}
       style={textareaStyle}
       {...props}
     />

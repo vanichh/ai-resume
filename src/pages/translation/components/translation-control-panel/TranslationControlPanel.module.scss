@@ -1,0 +1,54 @@
+.translationControlPanel {
+  position: sticky;
+  top: 28px;
+
+  align-self: start;
+
+  min-width: 0;
+  max-height: calc(100vh - 30px);
+  padding: 22px;
+  overflow: auto;
+
+  @include innerScrollbar;
+
+  border: 1px solid get-color(border);
+  border-radius: 8px;
+  background: get-color(surface);
+
+  box-shadow: 0 16px 40px get-color(workspaceShadowMedium);
+
+  &__header {
+    margin-bottom: 18px;
+  }
+
+  &__eyebrow {
+    margin: 0 0 6px;
+
+    color: get-color(accentText);
+    font-size: fontSize(12px);
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: get-color(primaryText);
+    font-size: fontSize(24px);
+  }
+
+  &__subtitle {
+    margin: 8px 0 0;
+
+    color: get-color(mutedText);
+    font-size: fontSize(14px);
+    line-height: 1.45;
+  }
+}
+
+@include mediaMax(desktop) {
+  .translationControlPanel {
+    position: static;
+    top: auto;
+  }
+}

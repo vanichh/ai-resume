@@ -1,6 +1,6 @@
-import type { UnsupportedModelActionsProps } from './types';
+import { CHROME_APP_URL, CHROME_DOWNLOAD_URL } from '@common/constants';
 
-import { CHROME_APP_URL, CHROME_DOWNLOAD_URL } from '../../common/constants';
+import type { UnsupportedModelActionsProps } from './types';
 
 import styles from './UnsupportedModelActions.module.scss';
 

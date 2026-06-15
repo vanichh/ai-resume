@@ -1,0 +1,94 @@
+.unsupportedBrowserPage {
+  display: grid;
+  place-items: center;
+
+  min-height: calc(100vh - 56px);
+  max-width: 1480px;
+  margin: 0 auto;
+
+  &__content {
+    width: min(680px, 100%);
+    padding: 28px;
+
+    border: 1px solid get-color(border);
+    border-radius: 8px;
+    background: get-color(surface);
+
+    @include panelShadow;
+  }
+
+  &__eyebrow {
+    margin: 0 0 10px;
+
+    color: get-color(accentText);
+    font-size: fontSize(12px);
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: get-color(primaryText);
+    font-size: fontSize(26px);
+    line-height: 1.15;
+  }
+
+  &__description {
+    margin: 14px 0 0;
+
+    color: get-color(secondaryText);
+    font-size: fontSize(16px);
+    line-height: 1.55;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 22px;
+  }
+
+  &__primaryLink,
+  &__secondaryLink {
+    @include controlButtonBase;
+    @include controlButtonSizeLarge;
+
+    text-decoration: none;
+  }
+
+  &__primaryLink {
+    @include controlButtonPrimary;
+  }
+
+  &__secondaryLink {
+    @include controlButtonSecondary;
+  }
+
+  &__checkButton {
+    flex: 0 0 auto;
+  }
+
+  &__note {
+    margin: 18px 0 0;
+
+    color: get-color(mutedText);
+    font-size: fontSize(14px);
+    line-height: 1.5;
+  }
+}
+
+@include mediaMax(mobile) {
+  .unsupportedBrowserPage {
+    min-height: calc(100vh - 24px);
+
+    &__content {
+      padding: 20px;
+    }
+
+    &__actions {
+      display: grid;
+    }
+  }
+}

@@ -39,14 +39,14 @@ export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: 
 
   return (
     <li className={styles.analysisHistory__item}>
-      <button className={styles.analysisHistory__selectButton} type="button" onClick={onSelectClick}>
+      <Button className={styles.analysisHistory__selectButton} onClick={onSelectClick}>
         <span className={styles.analysisHistory__itemHeader}>
           <strong>{title}</strong>
           <span>{item.advice.score}/100</span>
         </span>
         <span className={styles.analysisHistory__meta}>{createdAt}</span>
         {item.fileName && <span className={styles.analysisHistory__meta}>{item.fileName}</span>}
-      </button>
+      </Button>
       <Button
         aria-label="Удалить анализ"
         className={styles.analysisHistory__removeButton}

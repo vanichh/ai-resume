@@ -1,0 +1,14 @@
+@use '../mixins/colors' as *;
+
+@mixin designSystemVariables {
+  --control-radius: 8px;
+  --control-radius-pill: 999px;
+  --control-height-small: 32px;
+  --control-height-medium: 38px;
+  --control-height-large: 42px;
+  --control-padding-small: 0 10px;
+  --control-padding-medium: 0 12px;
+  --control-padding-large: 0 14px;
+  --control-focus-ring: 0 0 0 3px #{get-color(accentShadow)};
+  --control-transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}

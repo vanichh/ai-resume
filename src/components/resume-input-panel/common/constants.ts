@@ -12,7 +12,3 @@ export const STATUS_LABELS: Record<AppStatusType, string> = {
 
 export const RESUME_FILE_ACCEPT =
   '.pdf,.docx,.txt,.md,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-
-export const CHROME_DOWNLOAD_URL = 'https://www.google.com/chrome/';
-
-export const CHROME_APP_URL = 'googlechrome://';

@@ -1,47 +1,16 @@
 .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  border-radius: 8px;
-
-  font: inherit;
-  font-weight: 800;
-  text-align: center;
-
-  transition:
-    border-color 0.16s ease,
-    color 0.16s ease,
-    background 0.16s ease,
-    box-shadow 0.16s ease;
-
-  cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
+  @include controlButtonBase;
 
   &_small {
-    min-height: 32px;
-    padding: 0 10px;
-
-    font-size: fontSize(12px);
+    @include controlButtonSizeSmall;
   }
 
   &_medium {
-    min-height: 34px;
-    padding: 0 10px;
-
-    font-size: fontSize(12px);
+    @include controlButtonSizeMedium;
   }
 
   &_large {
-    min-height: 42px;
-    padding: 0 14px;
-
-    font-size: fontSize(14px);
-    font-weight: 900;
+    @include controlButtonSizeLarge;
   }
 
   &_fullWidth {
@@ -49,52 +18,14 @@
   }
 
   &_secondary {
-    border: 1px solid get-color(borderDark);
-    background: get-color(whiteText);
-
-    color: get-color(slateText);
-
-    &:hover:not(:disabled) {
-      border-color: get-color(accentBorder);
-
-      color: get-color(accentText);
-    }
-
-    &:disabled {
-      color: get-color(disabledTextSoft);
-    }
+    @include controlButtonSecondary;
   }
 
   &_primary {
-    border: 1px solid get-color(accent);
-    background: get-color(accent);
-
-    color: get-color(whiteText);
-
-    &:hover:not(:disabled) {
-      background: get-color(accentStrong);
-    }
-
-    &:disabled {
-      border-color: get-color(disabledBorder);
-      background: get-color(disabledBorder);
-    }
+    @include controlButtonPrimary;
   }
 
   &_ghost {
-    border: 1px solid get-color(transparent);
-    background: get-color(transparent);
-
-    color: get-color(slateText);
-
-    &:hover:not(:disabled) {
-      background: get-color(accentSurface);
-
-      color: get-color(accentText);
-    }
-
-    &:disabled {
-      color: get-color(disabledTextSoft);
-    }
+    @include controlButtonGhost;
   }
 }

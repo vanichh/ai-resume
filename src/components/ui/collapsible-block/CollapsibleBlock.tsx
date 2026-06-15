@@ -5,6 +5,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 
 import type { CollapsibleBlockProps } from './types';
 
+import { Button } from '../button';
+
 import styles from './CollapsibleBlock.module.scss';
 
 export const CollapsibleBlock = ({
@@ -27,16 +29,16 @@ export const CollapsibleBlock = ({
         <h2 className={styles.collapsibleBlock__title}>{title}</h2>
         <div className={styles.collapsibleBlock__actions}>
           {headerAction}
-          <button
+          <Button
             aria-label={isCollapsed ? 'Развернуть блок' : 'Свернуть блок'}
             aria-controls={contentId}
             aria-expanded={!isCollapsed}
             className={styles.collapsibleBlock__toggle}
-            type="button"
+            size="small"
             onClick={onToggleClick}
           >
             {isCollapsed ? <ChevronDown aria-hidden size={18} /> : <ChevronUp aria-hidden size={18} />}
-          </button>
+          </Button>
         </div>
       </header>
       {!isCollapsed && (

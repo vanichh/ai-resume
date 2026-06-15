@@ -32,28 +32,13 @@
   }
 
   &__toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    @include controlButtonBase;
+    @include controlButtonSecondary;
 
     width: 32px;
     min-width: 32px;
     height: 32px;
     padding: 0;
-
-    border: 1px solid get-color(borderDark);
-    border-radius: 8px;
-    background: get-color(whiteText);
-
-    color: get-color(slateText);
-
-    cursor: pointer;
-
-    &:hover {
-      border-color: get-color(accentBorder);
-
-      color: get-color(accentText);
-    }
 
     svg {
       flex: 0 0 auto;

@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => ({
     alias: {
       '@common': getSourcePath('./src/common'),
       '@components': getSourcePath('./src/components'),
+      '@pages': getSourcePath('./src/pages'),
       '@services': getSourcePath('./src/services'),
       '@store': getSourcePath('./src/store'),
     },

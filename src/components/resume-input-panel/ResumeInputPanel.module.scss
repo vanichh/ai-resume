@@ -19,29 +19,15 @@
   box-shadow: 0 16px 40px get-color(workspaceShadowMedium);
 
   &__primaryButton {
-    display: inline-flex;
+    @include controlButtonBase;
+    @include controlButtonPrimary;
+
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 6px;
 
     width: 100%;
     min-height: 48px;
     padding: 10px 12px;
-
-    border: 0;
-    border-radius: 8px;
-    background: get-color(accent);
-
-    color: get-color(whiteText);
-    font-weight: 800;
-
-    transition:
-      background 150ms ease,
-      transform 150ms ease,
-      box-shadow 150ms ease;
-
-    cursor: pointer;
 
     &:not(:disabled):hover {
       background: get-color(accentHover);
@@ -54,8 +40,6 @@
       background: get-color(disabledSurface);
 
       color: get-color(disabledText);
-
-      cursor: not-allowed;
 
       .resumeInput__primaryButtonStatus {
         border-color: get-color(focusPanelBorderDisabled);
@@ -117,35 +101,6 @@
       background: get-color(focusPanelSurfaceProcess);
 
       color: get-color(focusPanelTextProcess);
-    }
-  }
-
-  &__secondaryButton {
-    width: 100%;
-    min-height: 42px;
-    margin-top: 10px;
-
-    border: 1px solid get-color(borderDark);
-    border-radius: 8px;
-    background: get-color(whiteText);
-
-    color: get-color(slateText);
-    font-weight: 800;
-
-    cursor: pointer;
-
-    &:not(:disabled):hover {
-      border-color: get-color(accentBorder);
-
-      color: get-color(accentText);
-    }
-
-    &:disabled {
-      background: get-color(appBackground);
-
-      color: get-color(disabledText);
-
-      cursor: not-allowed;
     }
   }
 }

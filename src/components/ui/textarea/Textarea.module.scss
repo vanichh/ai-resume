@@ -1,23 +1,10 @@
 .textarea {
+  @include controlFieldBase;
+
   box-sizing: border-box;
-  min-width: 0;
   resize: vertical;
 
-  border: 1px solid get-color(borderInput);
-  border-radius: 8px;
-  background: get-color(whiteText);
-
-  color: get-color(secondaryText);
-  font: inherit;
   overflow-wrap: anywhere;
-
-  outline: none;
-
-  &:focus {
-    border-color: get-color(accent);
-
-    box-shadow: 0 0 0 3px get-color(accentShadow);
-  }
 
   &_fullWidth {
     width: 100%;

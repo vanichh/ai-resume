@@ -1,0 +1,44 @@
+.translationPage {
+  display: grid;
+  grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+  align-items: start;
+  gap: 22px;
+
+  min-width: 0;
+  max-width: 1480px;
+  margin: 0 auto;
+
+  &__content {
+    display: grid;
+    gap: 16px;
+
+    min-width: 0;
+  }
+
+  &__loader {
+    min-height: 160px;
+    padding: 18px;
+
+    border: 1px solid get-color(border);
+    border-radius: 8px;
+    background: get-color(surface);
+
+    @include panelShadow;
+  }
+}
+
+@include mediaMax(desktop) {
+  .translationPage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@include mediaMax(mobile) {
+  .translationPage {
+    gap: 14px;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}

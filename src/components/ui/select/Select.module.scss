@@ -13,19 +13,17 @@
 
   &_small {
     .select__control {
-      min-height: 34px;
-      padding: 0 34px 0 10px;
+      @include controlFieldSizeSmall;
 
-      font-size: fontSize(12px);
+      padding: 0 34px 0 10px;
     }
   }
 
   &_medium {
     .select__control {
-      min-height: 38px;
-      padding: 0 38px 0 12px;
+      @include controlFieldSizeMedium;
 
-      font-size: fontSize(14px);
+      padding: 0 38px 0 12px;
     }
   }
 
@@ -51,37 +49,11 @@
   }
 
   &__control {
-    width: 100%;
-    min-width: 0;
-
-    border: 1px solid get-color(borderInput);
-    border-radius: 8px;
-    background: get-color(whiteText);
+    @include controlFieldBase;
 
     color: inherit;
-    font: inherit;
-
-    transition:
-      border-color 0.16s ease,
-      box-shadow 0.16s ease,
-      background 0.16s ease;
 
     appearance: none;
     cursor: pointer;
-    outline: none;
-
-    &:focus {
-      border-color: get-color(accent);
-
-      box-shadow: 0 0 0 3px get-color(accentShadow);
-    }
-
-    &:disabled {
-      background: get-color(appBackground);
-
-      color: get-color(disabledText);
-
-      cursor: not-allowed;
-    }
   }
 }
