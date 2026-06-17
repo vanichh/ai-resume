@@ -85,43 +85,43 @@ export const CoverLetterGenerator = () => {
 
   const renderCoverLetterVariant = ({ id, text, title }: CoverLetterVariantType) => {
     return (
-      <article className={styles.coverLetterGenerator__variant} key={id}>
-        <h3 className={styles.coverLetterGenerator__variantTitle}>{title}</h3>
-        <p className={styles.coverLetterGenerator__variantText}>{text}</p>
+      <article className={styles.root__variant} key={id}>
+        <h3 className={styles.root__variantTitle}>{title}</h3>
+        <p className={styles.root__variantText}>{text}</p>
       </article>
     );
   };
 
   return (
-    <section className={styles.coverLetterGenerator}>
-      <div className={styles.coverLetterGenerator__header}>
+    <section className={styles.root}>
+      <div className={styles.root__header}>
         <div>
-          <h2 className={styles.coverLetterGenerator__title}>Сопроводительное письмо</h2>
-          <p className={styles.coverLetterGenerator__subtitle}>Генерация под текущую роль, вакансию и анализ резюме.</p>
+          <h2 className={styles.root__title}>Сопроводительное письмо</h2>
+          <p className={styles.root__subtitle}>Генерация под текущую роль, вакансию и анализ резюме.</p>
         </div>
         <Button disabled={!canGenerateCoverLetter} size="medium" onClick={onGenerateClick}>
           {coverLetterStatus === 'generating' ? 'Генерация...' : 'Сгенерировать'}
         </Button>
       </div>
-      <div className={styles.coverLetterGenerator__settings}>
-        <label className={styles.coverLetterGenerator__field}>
-          <span className={styles.coverLetterGenerator__label}>Тон письма</span>
+      <div className={styles.root__settings}>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>Тон письма</span>
           <Select options={COVER_LETTER_TONE_OPTIONS} value={coverLetterTone} onChange={onToneChange} />
         </label>
-        <label className={styles.coverLetterGenerator__field}>
-          <span className={styles.coverLetterGenerator__label}>Длина письма</span>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>Длина письма</span>
           <Select options={COVER_LETTER_LENGTH_OPTIONS} value={coverLetterLength} onChange={onLengthChange} />
         </label>
-        <label className={styles.coverLetterGenerator__field}>
-          <span className={styles.coverLetterGenerator__label}>Тип компании</span>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>Тип компании</span>
           <Select
             options={COVER_LETTER_COMPANY_OPTIONS}
             value={coverLetterCompanyType}
             onChange={onCompanyTypeChange}
           />
         </label>
-        <label className={styles.coverLetterGenerator__field}>
-          <span className={styles.coverLetterGenerator__label}>Варианты</span>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>Варианты</span>
           <Select
             options={COVER_LETTER_VARIANTS_COUNT_OPTIONS}
             value={String(coverLetterVariantsCount)}
@@ -133,17 +133,15 @@ export const CoverLetterGenerator = () => {
       {coverLetter && (
         <>
           {coverLetterVariants.length > 1 && (
-            <div className={styles.coverLetterGenerator__variants}>
-              {coverLetterVariants.map(renderCoverLetterVariant)}
-            </div>
+            <div className={styles.root__variants}>{coverLetterVariants.map(renderCoverLetterVariant)}</div>
           )}
           <Textarea
-            className={styles.coverLetterGenerator__textarea}
+            className={styles.root__textarea}
             minHeight={260}
             value={coverLetter.text}
             onChange={onCoverLetterTextChange}
           />
-          <div className={styles.coverLetterGenerator__actions}>
+          <div className={styles.root__actions}>
             <Button aria-label="Копировать сопроводительное письмо" size="small" onClick={onCopyClick}>
               <Copy aria-hidden size={16} />
             </Button>

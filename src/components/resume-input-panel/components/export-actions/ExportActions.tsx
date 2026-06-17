@@ -29,8 +29,8 @@ export const ExportActions = ({ advice }: ExportActionsProps) => {
 
   return (
     <>
-      <p className={styles.exportActions__title}>Скачать рекомендации</p>
-      <div className={styles.exportActions__row}>
+      <p className={styles.root__title}>Скачать рекомендации</p>
+      <div className={styles.root__row}>
         <Button fullWidth size="large" onClick={onMarkdownDownloadClick}>
           MD
         </Button>

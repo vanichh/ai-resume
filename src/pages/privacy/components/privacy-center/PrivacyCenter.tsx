@@ -8,6 +8,7 @@ import { Button, CollapsibleBlock, Modal } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
 import { selectPrivacyCenterState } from './common/selectors';
+import { getPrivacyStorageItems } from './common/utils/getPrivacyStorageItems';
 
 import styles from './PrivacyCenter.module.scss';
 
@@ -30,6 +31,14 @@ export const PrivacyCenter = () => {
     translationHistoryCount,
   } = useResumeStore(useShallow(selectPrivacyCenterState));
   const storageSize = formatStorageSize(getResumeWorkspaceStorageSize());
+  const storageItems = getPrivacyStorageItems({
+    analysisHistoryCount,
+    comparisonVacanciesCount,
+    hasCoverLetter: Boolean(coverLetter),
+    resumeText,
+    storageSize,
+    translationHistoryCount,
+  });
 
   const onClearConfirmOpen = () => {
     setIsClearConfirmOpen(true);
@@ -47,7 +56,7 @@ export const PrivacyCenter = () => {
   return (
     <>
       <CollapsibleBlock
-        className={styles.privacyCenter}
+        className={styles.root}
         headerAction={
           <Button aria-label="Очистить все данные" size="small" onClick={onClearConfirmOpen}>
             <Trash2 aria-hidden size={16} />
@@ -55,32 +64,14 @@ export const PrivacyCenter = () => {
         }
         title="Приватность"
       >
-        <p className={styles.privacyCenter__subtitle}>Данные сохраняются только в локальном хранилище браузера.</p>
-        <dl className={styles.privacyCenter__list}>
-          <div className={styles.privacyCenter__item}>
-            <dt>Текст резюме</dt>
-            <dd>{resumeText ? 'сохранен' : 'не сохранен'}</dd>
-          </div>
-          <div className={styles.privacyCenter__item}>
-            <dt>История анализов</dt>
-            <dd>{analysisHistoryCount}</dd>
-          </div>
-          <div className={styles.privacyCenter__item}>
-            <dt>Переводы</dt>
-            <dd>{translationHistoryCount}</dd>
-          </div>
-          <div className={styles.privacyCenter__item}>
-            <dt>Сравнения вакансий</dt>
-            <dd>{comparisonVacanciesCount}</dd>
-          </div>
-          <div className={styles.privacyCenter__item}>
-            <dt>Сопроводительное письмо</dt>
-            <dd>{coverLetter ? 'сохранено' : 'не сохранено'}</dd>
-          </div>
-          <div className={styles.privacyCenter__item}>
-            <dt>Размер данных</dt>
-            <dd>{storageSize}</dd>
-          </div>
+        <p className={styles.root__subtitle}>Данные сохраняются только в локальном хранилище браузера.</p>
+        <dl className={styles.root__list}>
+          {storageItems.map(({ label, value }) => (
+            <div className={styles.root__item} key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
         </dl>
       </CollapsibleBlock>
       <Modal

@@ -24,16 +24,16 @@ export const CollapsibleBlock = ({
   };
 
   return (
-    <article className={clsx(styles.collapsibleBlock, className)}>
-      <header className={styles.collapsibleBlock__header}>
-        <h2 className={styles.collapsibleBlock__title}>{title}</h2>
-        <div className={styles.collapsibleBlock__actions}>
+    <article className={clsx(styles.root, className)}>
+      <header className={styles.root__header}>
+        <h2 className={styles.root__title}>{title}</h2>
+        <div className={styles.root__actions}>
           {headerAction}
           <Button
             aria-label={isCollapsed ? 'Развернуть блок' : 'Свернуть блок'}
             aria-controls={contentId}
             aria-expanded={!isCollapsed}
-            className={styles.collapsibleBlock__toggle}
+            className={styles.root__toggle}
             size="small"
             onClick={onToggleClick}
           >
@@ -42,7 +42,7 @@ export const CollapsibleBlock = ({
         </div>
       </header>
       {!isCollapsed && (
-        <div className={styles.collapsibleBlock__content} id={contentId}>
+        <div className={styles.root__content} id={contentId}>
           {children}
         </div>
       )}

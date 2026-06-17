@@ -1,4 +1,4 @@
-.select {
+.root {
   position: relative;
 
   display: inline-grid;
@@ -12,7 +12,7 @@
   }
 
   &_small {
-    .select__control {
+    .root__control {
       @include controlFieldSizeSmall;
 
       padding: 0 34px 0 10px;
@@ -20,7 +20,7 @@
   }
 
   &_medium {
-    .select__control {
+    .root__control {
       @include controlFieldSizeMedium;
 
       padding: 0 38px 0 12px;

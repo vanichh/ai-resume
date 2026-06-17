@@ -16,17 +16,17 @@ export const AdviceBlock = ({
 }: AdviceBlockProps) => {
   return (
     <CollapsibleBlock
-      className={clsx(styles.adviceBlock, {
-        [styles.adviceBlock_wide]: wide,
+      className={clsx(styles.root, {
+        [styles.root_wide]: wide,
       })}
       defaultCollapsed={defaultCollapsed}
       headerAction={headerAction}
       title={title}
     >
       {values.length > 0 ? (
-        <ul className={styles.adviceBlock__list}>
+        <ul className={styles.root__list}>
           {values.map((value) => (
-            <li className={styles.adviceBlock__item} key={value}>
+            <li className={styles.root__item} key={value}>
               {value}
             </li>
           ))}

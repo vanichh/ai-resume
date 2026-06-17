@@ -1,4 +1,4 @@
-.adviceBlock {
+.root {
   &_wide {
     grid-column: span 2;
   }
@@ -37,7 +37,7 @@
 }
 
 @include mediaMax(desktop) {
-  .adviceBlock {
+  .root {
     &_wide {
       grid-column: auto;
     }

@@ -1,4 +1,4 @@
-.app {
+.root {
   min-height: 100vh;
   overflow-x: clip;
 
@@ -6,7 +6,7 @@
 }
 
 @include mediaMax(mobile) {
-  .app {
+  .root {
     padding: 12px;
   }
 }

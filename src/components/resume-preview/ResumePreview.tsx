@@ -57,9 +57,9 @@ export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProp
 
   return (
     <CollapsibleBlock
-      className={styles.resumePreview}
+      className={styles.root}
       headerAction={
-        <div className={styles.resumePreview__actions}>
+        <div className={styles.root__actions}>
           <span>{resumeText.length.toLocaleString('ru-RU')} символов</span>
           <Button
             aria-label={isTextExpanded ? 'Свернуть текст резюме' : 'Раскрыть текст резюме полностью'}
@@ -83,8 +83,8 @@ export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProp
       title="Текст резюме"
     >
       <Textarea
-        className={clsx(styles.resumePreview__text, {
-          [styles.resumePreview__text_expanded]: isTextExpanded,
+        className={clsx(styles.root__text, {
+          [styles.root__text_expanded]: isTextExpanded,
         })}
         placeholder="После загрузки здесь появится извлеченный текст."
         ref={textareaRef}

@@ -1,4 +1,4 @@
-.rewriteComparisonList {
+.root {
   grid-column: 1 / -1;
 
   &__list {
@@ -71,7 +71,7 @@
 }
 
 @include mediaMax(desktop) {
-  .rewriteComparisonList {
+  .root {
     &__columns {
       grid-template-columns: 1fr;
     }

@@ -1,4 +1,4 @@
-.homeDetails {
+.root {
   display: grid;
   grid-column: 1 / -1;
   gap: 64px;
@@ -57,7 +57,7 @@
 }
 
 @include mediaMax(desktop) {
-  .homeDetails {
+  .root {
     &__infoGrid,
     &__workflow,
     &__useCases {
@@ -67,7 +67,7 @@
 }
 
 @include mediaMax(mobile) {
-  .homeDetails {
+  .root {
     gap: 36px;
 
     padding-top: 8px;

@@ -38,25 +38,25 @@ export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: 
   };
 
   return (
-    <li className={styles.analysisHistoryItem}>
-      <Button className={styles.analysisHistoryItem__selectButton} onClick={onSelectClick}>
-        <span className={styles.analysisHistoryItem__header}>
+    <li className={styles.root}>
+      <Button className={styles.root__selectButton} onClick={onSelectClick}>
+        <span className={styles.root__header}>
           <strong>{title}</strong>
           <span>{item.advice.score}/100</span>
         </span>
-        <span className={styles.analysisHistoryItem__meta}>{createdAt}</span>
-        {item.fileName && <span className={styles.analysisHistoryItem__meta}>{item.fileName}</span>}
+        <span className={styles.root__meta}>{createdAt}</span>
+        {item.fileName && <span className={styles.root__meta}>{item.fileName}</span>}
       </Button>
       <Button
         aria-label="Удалить анализ"
-        className={styles.analysisHistoryItem__removeButton}
+        className={styles.root__removeButton}
         size="small"
         onClick={onRemoveConfirmOpen}
       >
         <Trash2 aria-hidden size={16} />
       </Button>
       <Textarea
-        className={styles.analysisHistoryItem__note}
+        className={styles.root__note}
         minHeight={72}
         placeholder="Заметка к анализу"
         value={item.note}

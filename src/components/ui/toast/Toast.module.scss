@@ -1,4 +1,4 @@
-.toast {
+.root {
   position: fixed;
   top: 24px;
   right: 24px;
@@ -62,7 +62,7 @@
 }
 
 @include mediaMax(mobile) {
-  .toast {
+  .root {
     top: 12px;
     right: 12px;
 

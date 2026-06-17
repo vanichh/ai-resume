@@ -8,22 +8,22 @@ import styles from './RewriteComparisonList.module.scss';
 
 export const RewriteComparisonList = ({ suggestions }: RewriteComparisonListProps) => {
   return (
-    <CollapsibleBlock className={styles.rewriteComparisonList} title="До / после">
+    <CollapsibleBlock className={styles.root} title="До / после">
       {suggestions.length > 0 ? (
-        <ul className={styles.rewriteComparisonList__list}>
+        <ul className={styles.root__list}>
           {suggestions.map((suggestion) => (
-            <li className={styles.rewriteComparisonList__item} key={`${suggestion.original}-${suggestion.improved}`}>
-              <div className={styles.rewriteComparisonList__columns}>
-                <div className={styles.rewriteComparisonList__column}>
-                  <span className={styles.rewriteComparisonList__label}>До</span>
-                  <p className={styles.rewriteComparisonList__text}>{suggestion.original}</p>
+            <li className={styles.root__item} key={`${suggestion.original}-${suggestion.improved}`}>
+              <div className={styles.root__columns}>
+                <div className={styles.root__column}>
+                  <span className={styles.root__label}>До</span>
+                  <p className={styles.root__text}>{suggestion.original}</p>
                 </div>
-                <div className={styles.rewriteComparisonList__column}>
-                  <span className={styles.rewriteComparisonList__label}>После</span>
-                  <p className={styles.rewriteComparisonList__text}>{suggestion.improved}</p>
+                <div className={styles.root__column}>
+                  <span className={styles.root__label}>После</span>
+                  <p className={styles.root__text}>{suggestion.improved}</p>
                 </div>
               </div>
-              <p className={styles.rewriteComparisonList__reason}>{suggestion.reason}</p>
+              <p className={styles.root__reason}>{suggestion.reason}</p>
             </li>
           ))}
         </ul>

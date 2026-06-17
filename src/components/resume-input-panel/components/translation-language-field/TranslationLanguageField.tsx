@@ -15,11 +15,11 @@ export const TranslationLanguageField = ({ language, onLanguageChange }: Transla
 
   return (
     <>
-      <label className={styles.translationLanguageField__label} htmlFor="translation-language">
+      <label className={styles.root__label} htmlFor="translation-language">
         Язык перевода
       </label>
       <Select
-        className={styles.translationLanguageField__select}
+        className={styles.root__select}
         id="translation-language"
         options={RESUME_TRANSLATION_LANGUAGE_OPTIONS}
         value={language}

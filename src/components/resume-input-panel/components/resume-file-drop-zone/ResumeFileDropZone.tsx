@@ -19,18 +19,13 @@ export const ResumeFileDropZone = ({ fileName, onFileChange }: ResumeFileDropZon
   };
 
   return (
-    <label className={styles.resumeFileDropZone}>
-      <input
-        className={styles.resumeFileDropZone__input}
-        accept={RESUME_FILE_ACCEPT}
-        type="file"
-        onChange={onFileInputChange}
-      />
-      <span className={styles.resumeFileDropZone__icon} aria-hidden="true">
+    <label className={styles.root}>
+      <input className={styles.root__input} accept={RESUME_FILE_ACCEPT} type="file" onChange={onFileInputChange} />
+      <span className={styles.root__icon} aria-hidden="true">
         <Upload aria-hidden size={18} />
       </span>
       <span>Выберите PDF, DOCX, TXT или MD</span>
-      <strong className={styles.resumeFileDropZone__fileName}>{fileName || 'Файл не выбран'}</strong>
+      <strong className={styles.root__fileName}>{fileName || 'Файл не выбран'}</strong>
     </label>
   );
 };

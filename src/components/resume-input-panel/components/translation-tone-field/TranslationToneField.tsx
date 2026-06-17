@@ -15,11 +15,11 @@ export const TranslationToneField = ({ tone, onToneChange }: TranslationToneFiel
 
   return (
     <>
-      <label className={styles.translationToneField__label} htmlFor="translation-tone">
+      <label className={styles.root__label} htmlFor="translation-tone">
         Тон перевода
       </label>
       <Select
-        className={styles.translationToneField__select}
+        className={styles.root__select}
         id="translation-tone"
         options={RESUME_TRANSLATION_TONE_OPTIONS}
         value={tone}

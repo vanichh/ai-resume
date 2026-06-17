@@ -9,19 +9,19 @@ import styles from './SectionScoreList.module.scss';
 
 export const SectionScoreList = ({ scores }: SectionScoreListProps) => {
   return (
-    <CollapsibleBlock className={styles.sectionScoreList} title="Оценка по секциям">
+    <CollapsibleBlock className={styles.root} title="Оценка по секциям">
       {scores.length > 0 ? (
-        <ul className={styles.sectionScoreList__list}>
+        <ul className={styles.root__list}>
           {scores.map((score) => (
-            <li className={styles.sectionScoreList__item} key={score.title}>
-              <div className={styles.sectionScoreList__header}>
-                <span className={styles.sectionScoreList__name}>{getResumeSectionTitle(score.title)}</span>
-                <strong className={styles.sectionScoreList__value}>{score.score}/100</strong>
+            <li className={styles.root__item} key={score.title}>
+              <div className={styles.root__header}>
+                <span className={styles.root__name}>{getResumeSectionTitle(score.title)}</span>
+                <strong className={styles.root__value}>{score.score}/100</strong>
               </div>
-              <div className={styles.sectionScoreList__track} aria-hidden="true">
-                <span className={styles.sectionScoreList__bar} style={{ width: `${score.score}%` }} />
+              <div className={styles.root__track} aria-hidden="true">
+                <span className={styles.root__bar} style={{ width: `${score.score}%` }} />
               </div>
-              <p className={styles.sectionScoreList__comment}>{score.comment}</p>
+              <p className={styles.root__comment}>{score.comment}</p>
             </li>
           ))}
         </ul>

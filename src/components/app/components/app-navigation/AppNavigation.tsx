@@ -17,9 +17,7 @@ import type { AppNavigationLinkStateType, AppNavigationLinkType, AppNavigationPr
 import styles from './AppNavigation.module.scss';
 
 const getLinkClassName = ({ isActive }: AppNavigationLinkStateType) => {
-  return clsx(styles.appNavigation__link, {
-    [styles.appNavigation__link_active]: isActive,
-  });
+  return clsx(styles.root__link, { [styles.root__link_active]: isActive });
 };
 
 export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
@@ -49,32 +47,32 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
   };
 
   return (
-    <nav className={styles.appNavigation} aria-label="Основная навигация">
-      <div className={styles.appNavigation__inner}>
-        <NavLink className={styles.appNavigation__brand} to={APP_ROUTES.home} onClick={onNavigationLinkClick}>
-          <span className={styles.appNavigation__brandIcon}>
-            <ProjectIcon className={styles.appNavigation__projectIcon} />
+    <nav className={styles.root} aria-label="Основная навигация">
+      <div className={styles.root__inner}>
+        <NavLink className={styles.root__brand} to={APP_ROUTES.home} onClick={onNavigationLinkClick}>
+          <span className={styles.root__brandIcon}>
+            <ProjectIcon className={styles.root__projectIcon} />
           </span>
-          <span className={styles.appNavigation__brandText}>
-            <span className={styles.appNavigation__brandTitle}>
-              AI <span className={styles.appNavigation__brandAccent}> Resume Review</span>
+          <span className={styles.root__brandText}>
+            <span className={styles.root__brandTitle}>
+              AI <span className={styles.root__brandAccent}> Resume Review</span>
             </span>
-            <span className={styles.appNavigation__brandSubtitle}>Анализ резюме и вакансий</span>
+            <span className={styles.root__brandSubtitle}>Анализ резюме и вакансий</span>
           </span>
         </NavLink>
         <div
-          className={clsx(styles.appNavigation__menu, {
-            [styles.appNavigation__menu_open]: isMenuOpen,
+          className={clsx(styles.root__menu, {
+            [styles.root__menu_open]: isMenuOpen,
           })}
           id={menuId}
         >
-          <div className={styles.appNavigation__links}>{APP_NAVIGATION_LINKS.map(renderNavigationLink)}</div>
+          <div className={styles.root__links}>{APP_NAVIGATION_LINKS.map(renderNavigationLink)}</div>
         </div>
-        <div className={styles.appNavigation__actions}>
+        <div className={styles.root__actions}>
           <button
             aria-label={isDarkTheme ? 'Включить светлую тему' : 'Включить темную тему'}
             aria-pressed={isDarkTheme}
-            className={styles.appNavigation__themeButton}
+            className={styles.root__themeButton}
             type="button"
             onClick={onThemeToggle}
           >
@@ -84,20 +82,20 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
             aria-controls={menuId}
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
-            className={styles.appNavigation__menuButton}
+            className={styles.root__menuButton}
             type="button"
             onClick={onMenuToggleClick}
           >
             {isMenuOpen ? <X aria-hidden size={18} /> : <Menu aria-hidden size={18} />}
           </button>
           <a
-            className={styles.appNavigation__developerLink}
+            className={styles.root__developerLink}
             href={TELEGRAM_URL}
             rel="noreferrer"
             target="_blank"
             onClick={onNavigationLinkClick}
           >
-            <TelegramIcon className={styles.appNavigation__developerIcon} />
+            <TelegramIcon className={styles.root__developerIcon} />
             Разработчик
           </a>
         </div>

@@ -27,7 +27,7 @@ export const VacancyComparison = () => {
 
   return (
     <CollapsibleBlock
-      className={styles.vacancyComparison}
+      className={styles.root}
       headerAction={
         <Button disabled={comparisonVacancies.length >= 4} size="medium" onClick={addComparisonVacancy}>
           Добавить
@@ -35,9 +35,9 @@ export const VacancyComparison = () => {
       }
       title="Сравнение вакансий"
     >
-      <p className={styles.vacancyComparison__subtitle}>До 4 вакансий для одного резюме.</p>
+      <p className={styles.root__subtitle}>До 4 вакансий для одного резюме.</p>
       {comparisonVacancies.length > 0 && (
-        <div className={styles.vacancyComparison__list}>
+        <div className={styles.root__list}>
           {comparisonVacancies.map((item) => (
             <VacancyComparisonItem
               item={item}

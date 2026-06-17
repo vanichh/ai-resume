@@ -7,18 +7,18 @@ import { AdviceView, AtsKeywordMatcher, ResumePreview } from './common/lazyCompo
 
 import styles from './ResumeAnalysisPage.module.scss';
 
+const loader = (
+  <div className={styles.root__loader}>
+    <Loader label="Загрузка рабочей области" />
+  </div>
+);
+
 export const ResumeAnalysisPage = () => {
   return (
-    <section className={styles.resumeAnalysisPage}>
+    <section className={styles.root}>
       <ResumeInputPanel />
-      <div className={styles.resumeAnalysisPage__content}>
-        <Suspense
-          fallback={
-            <div className={styles.resumeAnalysisPage__loader}>
-              <Loader label="Загрузка рабочей области" />
-            </div>
-          }
-        >
+      <div className={styles.root__content}>
+        <Suspense fallback={loader}>
           <ResumePreview />
           <AtsKeywordMatcher />
           <AdviceView />

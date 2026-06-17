@@ -46,21 +46,21 @@ export const Modal = ({
   }
 
   return createPortal(
-    <div className={styles.modal} role="presentation" onMouseDown={onClose}>
+    <div className={styles.root} role="presentation" onMouseDown={onClose}>
       <section
         aria-modal="true"
-        className={styles.modal__content}
+        className={styles.root__content}
         role="dialog"
         aria-labelledby="modal-title"
         onMouseDown={onContentMouseDown}
       >
-        <header className={styles.modal__header}>
-          <h2 className={styles.modal__title} id="modal-title">
+        <header className={styles.root__header}>
+          <h2 className={styles.root__title} id="modal-title">
             {title}
           </h2>
           <Button
             aria-label="Закрыть окно"
-            className={styles.modal__closeButton}
+            className={styles.root__closeButton}
             size="small"
             variant="ghost"
             onClick={onClose}
@@ -68,9 +68,9 @@ export const Modal = ({
             <X aria-hidden size={18} />
           </Button>
         </header>
-        {description && <p className={styles.modal__description}>{description}</p>}
-        {children && <div className={styles.modal__body}>{children}</div>}
-        <footer className={styles.modal__actions}>
+        {description && <p className={styles.root__description}>{description}</p>}
+        {children && <div className={styles.root__body}>{children}</div>}
+        <footer className={styles.root__actions}>
           <Button size="medium" variant="secondary" onClick={onClose}>
             {cancelLabel}
           </Button>

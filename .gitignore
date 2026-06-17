@@ -6,3 +6,4 @@ dist
 *.local
 .playwright-mcp
 .DS_Store
+AGENTS.md

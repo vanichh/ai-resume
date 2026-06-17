@@ -5,8 +5,8 @@ import type { SelectProps } from './types';
 import styles from './Select.module.scss';
 
 const SELECT_SIZE_CLASS_NAMES = {
-  medium: styles.select_medium,
-  small: styles.select_small,
+  medium: styles.root_medium,
+  small: styles.root_small,
 };
 
 export const Select = ({
@@ -19,11 +19,11 @@ export const Select = ({
 }: SelectProps) => {
   return (
     <span
-      className={clsx(styles.select, SELECT_SIZE_CLASS_NAMES[size], className, {
-        [styles.select_fullWidth]: fullWidth,
+      className={clsx(styles.root, SELECT_SIZE_CLASS_NAMES[size], className, {
+        [styles.root_fullWidth]: fullWidth,
       })}
     >
-      <select className={styles.select__control} {...props}>
+      <select className={styles.root__control} {...props}>
         {placeholder ? (
           <option disabled hidden value="">
             {placeholder}

@@ -37,7 +37,7 @@ export const TranslationActions = ({ translation }: TranslationActionsProps) => 
   };
 
   return (
-    <div className={styles.translationActions}>
+    <div className={styles.root}>
       <Button aria-label="Копировать перевод" size="small" onClick={onCopyClick}>
         <Copy aria-hidden size={16} />
       </Button>

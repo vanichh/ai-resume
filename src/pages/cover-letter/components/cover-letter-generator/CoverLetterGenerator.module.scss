@@ -1,4 +1,4 @@
-.coverLetterGenerator {
+.root {
   min-width: 0;
   padding: 18px;
 
@@ -97,7 +97,7 @@
 }
 
 @include mediaMax(mobile) {
-  .coverLetterGenerator {
+  .root {
     &__header {
       display: grid;
     }

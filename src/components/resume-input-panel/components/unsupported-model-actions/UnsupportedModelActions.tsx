@@ -10,11 +10,11 @@ export const UnsupportedModelActions = ({ modelStatus }: UnsupportedModelActions
   }
 
   return (
-    <div className={styles.unsupportedModelActions}>
-      <a className={styles.unsupportedModelActions__action} href={CHROME_APP_URL}>
+    <div className={styles.root}>
+      <a className={styles.root__action} href={CHROME_APP_URL}>
         Открыть в Chrome
       </a>
-      <a className={styles.unsupportedModelActions__action} href={CHROME_DOWNLOAD_URL} rel="noreferrer" target="_blank">
+      <a className={styles.root__action} href={CHROME_DOWNLOAD_URL} rel="noreferrer" target="_blank">
         Скачать Chrome
       </a>
     </div>

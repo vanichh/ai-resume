@@ -38,7 +38,7 @@ export const AnalysisHistory = () => {
   return (
     <>
       <CollapsibleBlock
-        className={styles.analysisHistory}
+        className={styles.root}
         headerAction={
           history.length > 0 ? (
             <Button aria-label="Очистить историю анализа" size="small" onClick={onClearConfirmOpen}>
@@ -49,7 +49,7 @@ export const AnalysisHistory = () => {
         title="История анализов"
       >
         {history.length > 0 ? (
-          <ul className={styles.analysisHistory__list}>
+          <ul className={styles.root__list}>
             {history.map((item) => (
               <AnalysisHistoryItem
                 item={item}

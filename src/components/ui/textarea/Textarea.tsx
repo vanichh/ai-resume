@@ -7,8 +7,8 @@ import type { TextareaProps } from './types';
 import styles from './Textarea.module.scss';
 
 const TEXTAREA_VARIANT_CLASS_NAMES = {
-  code: styles.textarea_code,
-  default: styles.textarea_default,
+  code: styles.root_code,
+  default: styles.root_default,
 };
 
 export const Textarea = ({
@@ -27,8 +27,8 @@ export const Textarea = ({
 
   return (
     <textarea
-      className={clsx(styles.textarea, TEXTAREA_VARIANT_CLASS_NAMES[variant], className, {
-        [styles.textarea_fullWidth]: fullWidth,
+      className={clsx(styles.root, TEXTAREA_VARIANT_CLASS_NAMES[variant], className, {
+        [styles.root_fullWidth]: fullWidth,
       })}
       ref={ref}
       style={textareaStyle}

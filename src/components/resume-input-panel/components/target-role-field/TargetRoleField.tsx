@@ -13,11 +13,11 @@ export const TargetRoleField = ({ targetRole, onTargetRoleChange }: TargetRoleFi
 
   return (
     <>
-      <label className={styles.targetRoleField__label} htmlFor="target-role">
+      <label className={styles.root__label} htmlFor="target-role">
         Целевая роль или вакансия
       </label>
       <Textarea
-        className={styles.targetRoleField__input}
+        className={styles.root__input}
         id="target-role"
         minHeight={104}
         placeholder="Например: Senior Frontend Engineer, React/Vite, fintech"

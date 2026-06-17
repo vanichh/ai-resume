@@ -5,15 +5,15 @@ import type { ButtonProps } from './types';
 import styles from './Button.module.scss';
 
 const BUTTON_SIZE_CLASS_NAMES = {
-  large: styles.button_large,
-  medium: styles.button_medium,
-  small: styles.button_small,
+  large: styles.root_large,
+  medium: styles.root_medium,
+  small: styles.root_small,
 };
 
 const BUTTON_VARIANT_CLASS_NAMES = {
-  ghost: styles.button_ghost,
-  primary: styles.button_primary,
-  secondary: styles.button_secondary,
+  ghost: styles.root_ghost,
+  primary: styles.root_primary,
+  secondary: styles.root_secondary,
 };
 
 export const Button = ({
@@ -27,8 +27,8 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={clsx(styles.button, BUTTON_VARIANT_CLASS_NAMES[variant], BUTTON_SIZE_CLASS_NAMES[size], className, {
-        [styles.button_fullWidth]: fullWidth,
+      className={clsx(styles.root, BUTTON_VARIANT_CLASS_NAMES[variant], BUTTON_SIZE_CLASS_NAMES[size], className, {
+        [styles.root_fullWidth]: fullWidth,
       })}
       type={type}
       {...props}

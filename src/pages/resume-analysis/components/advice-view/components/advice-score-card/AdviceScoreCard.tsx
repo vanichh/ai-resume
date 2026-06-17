@@ -4,15 +4,15 @@ import styles from './AdviceScoreCard.module.scss';
 
 export const AdviceScoreCard = ({ advice }: AdviceScoreCardProps) => {
   return (
-    <article className={styles.adviceScoreCard}>
-      <h2 className={styles.adviceScoreCard__title}>Оценка</h2>
+    <article className={styles.root}>
+      <h2 className={styles.root__title}>Оценка</h2>
       {advice ? (
         <>
-          <strong className={styles.adviceScoreCard__value}>{advice.score}/100</strong>
-          <p className={styles.adviceScoreCard__description}>{advice.targetRole}</p>
+          <strong className={styles.root__value}>{advice.score}/100</strong>
+          <p className={styles.root__description}>{advice.targetRole}</p>
         </>
       ) : (
-        <p className={styles.adviceScoreCard__description}>Оценка появится после анализа.</p>
+        <p className={styles.root__description}>Оценка появится после анализа.</p>
       )}
     </article>
   );

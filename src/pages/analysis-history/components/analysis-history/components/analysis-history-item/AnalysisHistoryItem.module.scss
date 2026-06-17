@@ -1,4 +1,4 @@
-.analysisHistoryItem {
+.root {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
@@ -72,7 +72,7 @@
 }
 
 @include mediaMax(mobile) {
-  .analysisHistoryItem {
+  .root {
     grid-template-columns: minmax(0, 1fr);
   }
 }

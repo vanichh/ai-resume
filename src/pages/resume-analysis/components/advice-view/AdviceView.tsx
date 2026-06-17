@@ -22,7 +22,7 @@ export const AdviceView = () => {
   };
 
   return (
-    <section className={styles.adviceView}>
+    <section className={styles.root}>
       <AdviceScoreCard advice={advice} />
       <ScoreBreakdown />
       <SectionScoreList scores={advice?.sectionScores ?? []} />

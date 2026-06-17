@@ -1,4 +1,4 @@
-.translationPage {
+.root {
   display: grid;
   grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
   align-items: start;
@@ -28,13 +28,13 @@
 }
 
 @include mediaMax(desktop) {
-  .translationPage {
+  .root {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @include mediaMax(mobile) {
-  .translationPage {
+  .root {
     gap: 14px;
 
     width: 100%;

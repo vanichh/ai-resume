@@ -1,4 +1,4 @@
-.homePreview {
+.root {
   display: grid;
   align-self: start;
   gap: 26px;
@@ -124,13 +124,13 @@
 }
 
 @include mediaMax(desktop) {
-  .homePreview {
+  .root {
     max-width: 100%;
   }
 }
 
 @include mediaMax(mobile) {
-  .homePreview {
+  .root {
     padding: 16px;
 
     &__score {

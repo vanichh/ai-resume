@@ -1,4 +1,4 @@
-.homePage {
+.root {
   display: grid;
   grid-template-columns: minmax(0, 820px) minmax(380px, 470px);
   align-items: start;
@@ -12,14 +12,14 @@
 }
 
 @include mediaMax(desktop) {
-  .homePage {
+  .root {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
   }
 }
 
 @include mediaMax(mobile) {
-  .homePage {
+  .root {
     gap: 32px;
 
     width: 100%;

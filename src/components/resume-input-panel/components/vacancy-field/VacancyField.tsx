@@ -13,11 +13,11 @@ export const VacancyField = ({ vacancyText, onVacancyTextChange }: VacancyFieldP
 
   return (
     <>
-      <label className={styles.vacancyField__label} htmlFor="vacancy-text">
+      <label className={styles.root__label} htmlFor="vacancy-text">
         Текст вакансии
       </label>
       <Textarea
-        className={styles.vacancyField__input}
+        className={styles.root__input}
         id="vacancy-text"
         minHeight={104}
         placeholder="Вставьте описание вакансии для сверки ключевых слов ATS"

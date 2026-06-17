@@ -1,4 +1,4 @@
-.vacancyComparison {
+.root {
   min-width: 0;
 
   &__subtitle {
@@ -18,7 +18,7 @@
 }
 
 @include mediaMax(compact) {
-  .vacancyComparison {
+  .root {
     &__list {
       grid-template-columns: minmax(0, 1fr);
     }

@@ -22,12 +22,12 @@ export const TranslationPage = () => {
   const { translation } = useResumeStore(useShallow(selectTranslationPageState));
 
   return (
-    <section className={styles.translationPage}>
+    <section className={styles.root}>
       <TranslationControlPanel />
-      <div className={styles.translationPage__content}>
+      <div className={styles.root__content}>
         <Suspense
           fallback={
-            <div className={styles.translationPage__loader}>
+            <div className={styles.root__loader}>
               <Loader label="Загрузка страницы перевода" />
             </div>
           }

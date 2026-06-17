@@ -24,16 +24,16 @@ export const ResumeTranslationPreview = () => {
   }
 
   return (
-    <div className={styles.resumeTranslationPreview}>
-      <div className={styles.resumeTranslationPreview__header}>
-        <h2 className={styles.resumeTranslationPreview__title}>Перевод резюме</h2>
-        <div className={styles.resumeTranslationPreview__meta}>
+    <div className={styles.root}>
+      <div className={styles.root__header}>
+        <h2 className={styles.root__title}>Перевод резюме</h2>
+        <div className={styles.root__meta}>
           <span>{RESUME_TRANSLATION_LANGUAGE_LABELS[translation.language]}</span>
           <TranslationActions translation={translation} />
         </div>
       </div>
       <Textarea
-        className={styles.resumeTranslationPreview__text}
+        className={styles.root__text}
         minHeight={300}
         variant="code"
         value={translation.text}

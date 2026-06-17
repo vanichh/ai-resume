@@ -24,29 +24,24 @@ export const UnsupportedBrowserPage = () => {
   }
 
   return (
-    <section className={styles.unsupportedBrowserPage}>
-      <div className={styles.unsupportedBrowserPage__content}>
-        <p className={styles.unsupportedBrowserPage__eyebrow}>Локальная AI-модель недоступна</p>
-        <h1 className={styles.unsupportedBrowserPage__title}>{MODEL_STATUS_TITLE[modelStatus]}</h1>
-        <p className={styles.unsupportedBrowserPage__description}>{MODEL_STATUS_DESCRIPTION[modelStatus]}</p>
-        <div className={styles.unsupportedBrowserPage__actions}>
-          <a
-            className={styles.unsupportedBrowserPage__primaryLink}
-            href={CHROME_DOWNLOAD_URL}
-            rel="noreferrer"
-            target="_blank"
-          >
+    <section className={styles.root}>
+      <div className={styles.root__content}>
+        <p className={styles.root__eyebrow}>Локальная AI-модель недоступна</p>
+        <h1 className={styles.root__title}>{MODEL_STATUS_TITLE[modelStatus]}</h1>
+        <p className={styles.root__description}>{MODEL_STATUS_DESCRIPTION[modelStatus]}</p>
+        <div className={styles.root__actions}>
+          <a className={styles.root__primaryLink} href={CHROME_DOWNLOAD_URL} rel="noreferrer" target="_blank">
             Скачать Chrome
           </a>
-          <a className={styles.unsupportedBrowserPage__secondaryLink} href={CHROME_APP_URL}>
+          <a className={styles.root__secondaryLink} href={CHROME_APP_URL}>
             Открыть в Chrome
           </a>
-          <Button className={styles.unsupportedBrowserPage__checkButton} size="large" onClick={onCheckModelClick}>
+          <Button className={styles.root__checkButton} size="large" onClick={onCheckModelClick}>
             <RotateCw aria-hidden size={18} />
             Проверить модель
           </Button>
         </div>
-        <p className={styles.unsupportedBrowserPage__note}>
+        <p className={styles.root__note}>
           Прямой загрузки модели из приложения нет: Chrome скачивает её сам при первом обращении к LanguageModel API.
         </p>
       </div>

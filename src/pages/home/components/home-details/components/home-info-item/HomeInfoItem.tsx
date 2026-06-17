@@ -8,11 +8,11 @@ export const HomeInfoItem = ({ item }: HomeInfoItemProps) => {
   const { description, icon, title } = item;
 
   return (
-    <li className={styles.homeInfoItem}>
+    <li className={styles.root}>
       <HomeIcon name={icon} />
-      <div className={styles.homeInfoItem__text}>
-        <h3 className={styles.homeInfoItem__title}>{title}</h3>
-        <p className={styles.homeInfoItem__description}>{description}</p>
+      <div className={styles.root__text}>
+        <h3 className={styles.root__title}>{title}</h3>
+        <p className={styles.root__description}>{description}</p>
       </div>
     </li>
   );

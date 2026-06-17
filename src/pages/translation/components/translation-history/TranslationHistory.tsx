@@ -13,27 +13,21 @@ export const TranslationHistory = () => {
   const { activeId, history, selectTranslation } = useResumeStore(useShallow(selectTranslationHistoryState));
 
   return (
-    <CollapsibleBlock className={styles.translationHistory} title="История переводов">
+    <CollapsibleBlock className={styles.root} title="История переводов">
       {history.length > 0 ? (
-        <ul className={styles.translationHistory__list}>
-          {history.map((translation) => {
-            const onTranslationClick = () => {
-              selectTranslation(translation.id);
-            };
-
-            return (
-              <li key={translation.id}>
-                <Button
-                  size="medium"
-                  variant={translation.id === activeId ? 'primary' : 'secondary'}
-                  onClick={onTranslationClick}
-                >
-                  {RESUME_TRANSLATION_LANGUAGE_LABELS[translation.language]} ·{' '}
-                  {RESUME_TRANSLATION_TONE_LABELS[translation.tone]}
-                </Button>
-              </li>
-            );
-          })}
+        <ul className={styles.root__list}>
+          {history.map((translation) => (
+            <li key={translation.id}>
+              <Button
+                size="medium"
+                variant={translation.id === activeId ? 'primary' : 'secondary'}
+                onClick={() => selectTranslation(translation.id)}
+              >
+                {RESUME_TRANSLATION_LANGUAGE_LABELS[translation.language]} ·{' '}
+                {RESUME_TRANSLATION_TONE_LABELS[translation.tone]}
+              </Button>
+            </li>
+          ))}
         </ul>
       ) : (
         <EmptyState

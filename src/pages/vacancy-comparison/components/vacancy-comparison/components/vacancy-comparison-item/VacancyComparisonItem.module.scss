@@ -1,4 +1,4 @@
-.vacancyComparisonItem {
+.root {
   display: grid;
   gap: 10px;
 
@@ -79,7 +79,7 @@
 }
 
 @include mediaMax(mobile) {
-  .vacancyComparisonItem {
+  .root {
     &__header {
       grid-template-columns: minmax(0, 1fr);
     }

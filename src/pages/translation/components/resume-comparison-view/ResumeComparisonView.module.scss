@@ -1,4 +1,4 @@
-.resumeComparisonView {
+.root {
   min-width: 0;
 
   border: 1px solid getColor(border);
@@ -59,7 +59,7 @@
 }
 
 @include mediaMax(tablet) {
-  .resumeComparisonView {
+  .root {
     &__columns {
       grid-template-columns: 1fr;
     }

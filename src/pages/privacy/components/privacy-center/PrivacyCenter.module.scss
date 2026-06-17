@@ -1,4 +1,4 @@
-.privacyCenter {
+.root {
   min-width: 0;
 
   &__subtitle {
@@ -44,7 +44,7 @@
 }
 
 @include mediaMax(mobile) {
-  .privacyCenter {
+  .root {
     &__item {
       display: grid;
     }

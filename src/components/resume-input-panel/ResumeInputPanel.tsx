@@ -18,13 +18,13 @@ import { VacancyField } from './components/vacancy-field';
 import styles from './ResumeInputPanel.module.scss';
 
 const STATUS_CLASS_NAMES: Record<AppStatusType, string> = {
-  analyzing: styles.resumeInput__primaryButtonStatus_analyzing,
-  done: styles.resumeInput__primaryButtonStatus_done,
-  error: styles.resumeInput__primaryButtonStatus_error,
+  analyzing: styles.root__primaryButtonStatus_analyzing,
+  done: styles.root__primaryButtonStatus_done,
+  error: styles.root__primaryButtonStatus_error,
   idle: '',
-  parsing: styles.resumeInput__primaryButtonStatus_parsing,
-  ready: styles.resumeInput__primaryButtonStatus_ready,
-  translating: styles.resumeInput__primaryButtonStatus_translating,
+  parsing: styles.root__primaryButtonStatus_parsing,
+  ready: styles.root__primaryButtonStatus_ready,
+  translating: styles.root__primaryButtonStatus_translating,
 };
 
 export const ResumeInputPanel = () => {
@@ -51,7 +51,7 @@ export const ResumeInputPanel = () => {
   };
 
   return (
-    <div className={styles.resumeInput}>
+    <div className={styles.root}>
       <ResumeInputHeader />
       <TargetRoleField targetRole={targetRole} onTargetRoleChange={setTargetRole} />
       <VacancyField vacancyText={vacancyText} onVacancyTextChange={setVacancyText} />
@@ -59,15 +59,15 @@ export const ResumeInputPanel = () => {
       <UnsupportedModelActions modelStatus={modelStatus} />
 
       <Button
-        className={styles.resumeInput__primaryButton}
+        className={styles.root__primaryButton}
         disabled={!canAnalyze}
         fullWidth
         size="large"
         variant="primary"
         onClick={onAnalyzeClick}
       >
-        <span className={styles.resumeInput__primaryButtonText}>Получить рекомендации</span>
-        <span className={clsx(styles.resumeInput__primaryButtonStatus, STATUS_CLASS_NAMES[status])}>
+        <span className={styles.root__primaryButtonText}>Получить рекомендации</span>
+        <span className={clsx(styles.root__primaryButtonStatus, STATUS_CLASS_NAMES[status])}>
           {STATUS_LABELS[status]}
         </span>
       </Button>

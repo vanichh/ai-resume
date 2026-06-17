@@ -14,16 +14,16 @@ export const ResumeComparisonView = () => {
   }
 
   return (
-    <section className={styles.resumeComparisonView}>
-      <h2 className={styles.resumeComparisonView__title}>Оригинал / перевод</h2>
-      <div className={styles.resumeComparisonView__columns}>
-        <div className={styles.resumeComparisonView__column}>
-          <span className={styles.resumeComparisonView__label}>Оригинал</span>
-          <pre className={styles.resumeComparisonView__text}>{resumeText}</pre>
+    <section className={styles.root}>
+      <h2 className={styles.root__title}>Оригинал / перевод</h2>
+      <div className={styles.root__columns}>
+        <div className={styles.root__column}>
+          <span className={styles.root__label}>Оригинал</span>
+          <pre className={styles.root__text}>{resumeText}</pre>
         </div>
-        <div className={styles.resumeComparisonView__column}>
-          <span className={styles.resumeComparisonView__label}>Перевод</span>
-          <pre className={styles.resumeComparisonView__text}>{translation.text}</pre>
+        <div className={styles.root__column}>
+          <span className={styles.root__label}>Перевод</span>
+          <pre className={styles.root__text}>{translation.text}</pre>
         </div>
       </div>
     </section>

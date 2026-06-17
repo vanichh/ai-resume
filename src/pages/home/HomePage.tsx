@@ -6,7 +6,7 @@ import styles from './HomePage.module.scss';
 
 export const HomePage = () => {
   return (
-    <section className={styles.homePage}>
+    <section className={styles.root}>
       <HomeHero />
       <HomePreview />
       <HomeDetails />

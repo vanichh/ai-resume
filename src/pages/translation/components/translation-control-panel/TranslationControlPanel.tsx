@@ -33,10 +33,10 @@ export const TranslationControlPanel = () => {
   };
 
   return (
-    <aside className={styles.translationControlPanel}>
-      <div className={styles.translationControlPanel__header}>
-        <h1 className={styles.translationControlPanel__title}>Перевод резюме</h1>
-        <p className={styles.translationControlPanel__subtitle}>
+    <aside className={styles.root}>
+      <div className={styles.root__header}>
+        <h1 className={styles.root__title}>Перевод резюме</h1>
+        <p className={styles.root__subtitle}>
           Загрузите резюме и выберите язык, тон и формат перевода для ATS и рекрутеров.
         </p>
       </div>

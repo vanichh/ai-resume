@@ -47,10 +47,10 @@ export const VacancyComparisonItem = ({
   };
 
   return (
-    <article className={styles.vacancyComparisonItem}>
-      <div className={styles.vacancyComparisonItem__header}>
+    <article className={styles.root}>
+      <div className={styles.root__header}>
         <input
-          className={styles.vacancyComparisonItem__titleInput}
+          className={styles.root__titleInput}
           placeholder="Название вакансии"
           type="text"
           value={item.title}
@@ -61,25 +61,25 @@ export const VacancyComparisonItem = ({
         </Button>
       </div>
       <Textarea
-        className={styles.vacancyComparisonItem__textarea}
+        className={styles.root__textarea}
         minHeight={130}
         placeholder="Вставьте текст вакансии"
         value={item.vacancyText}
         onChange={onTextInputChange}
       />
-      <div className={styles.vacancyComparisonItem__result}>
-        <span className={styles.vacancyComparisonItem__status}>{VACANCY_COMPARISON_STATUS_LABELS[item.status]}</span>
+      <div className={styles.root__result}>
+        <span className={styles.root__status}>{VACANCY_COMPARISON_STATUS_LABELS[item.status]}</span>
         {item.advice && (
           <>
-            <strong className={styles.vacancyComparisonItem__score}>{item.advice.score}/100</strong>
-            <p className={styles.vacancyComparisonItem__summary}>{item.advice.summary}</p>
+            <strong className={styles.root__score}>{item.advice.score}/100</strong>
+            <p className={styles.root__summary}>{item.advice.summary}</p>
             {item.advice.missingKeywords.length > 0 && (
-              <p className={styles.vacancyComparisonItem__keywords}>
+              <p className={styles.root__keywords}>
                 Нет ключевых слов: {item.advice.missingKeywords.slice(0, 6).join(', ')}
               </p>
             )}
             <Button
-              className={styles.vacancyComparisonItem__selectButton}
+              className={styles.root__selectButton}
               disabled={!canSelectResult}
               size="medium"
               onClick={onSelectClick}
@@ -88,7 +88,7 @@ export const VacancyComparisonItem = ({
             </Button>
           </>
         )}
-        {item.error && <p className={styles.vacancyComparisonItem__error}>{item.error}</p>}
+        {item.error && <p className={styles.root__error}>{item.error}</p>}
       </div>
       <Modal
         confirmLabel="Удалить"

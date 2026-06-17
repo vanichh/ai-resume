@@ -28,7 +28,7 @@ export const App = () => {
   const modelProgressLayout = NARROW_MODEL_PROGRESS_ROUTES.has(pathname) ? 'narrow' : 'wide';
 
   return (
-    <main className={styles.app}>
+    <main className={styles.root}>
       <AppNavigation theme={theme} onThemeToggle={onThemeToggle} />
       <ModelDownloadProgress layout={modelProgressLayout} />
       <Routes>

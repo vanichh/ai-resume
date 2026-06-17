@@ -15,17 +15,17 @@ export const ScoreBreakdown = () => {
   const items = getScoreBreakdownItems(advice, atsMatch);
 
   return (
-    <CollapsibleBlock className={styles.scoreBreakdown} title="Детализация оценки">
+    <CollapsibleBlock className={styles.root} title="Детализация оценки">
       {items.length > 0 ? (
-        <ul className={styles.scoreBreakdown__list}>
+        <ul className={styles.root__list}>
           {items.map((item) => (
-            <li className={styles.scoreBreakdown__item} key={item.label}>
-              <div className={styles.scoreBreakdown__header}>
+            <li className={styles.root__item} key={item.label}>
+              <div className={styles.root__header}>
                 <span>{item.label}</span>
                 <strong>{item.value}/100</strong>
               </div>
-              <div className={styles.scoreBreakdown__track} aria-hidden="true">
-                <span className={styles.scoreBreakdown__bar} style={{ width: `${item.value}%` }} />
+              <div className={styles.root__track} aria-hidden="true">
+                <span className={styles.root__bar} style={{ width: `${item.value}%` }} />
               </div>
             </li>
           ))}

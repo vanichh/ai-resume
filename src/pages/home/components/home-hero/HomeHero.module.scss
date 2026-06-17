@@ -1,4 +1,4 @@
-.homeHero {
+.root {
   display: grid;
   gap: 24px;
 
@@ -114,7 +114,7 @@
 }
 
 @include mediaMax(mobile) {
-  .homeHero {
+  .root {
     &__title {
       font-size: fontSize(26px);
     }

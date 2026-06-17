@@ -1,4 +1,4 @@
-.appNavigation {
+.root {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -222,7 +222,7 @@
 }
 
 @include mediaMax(desktop) {
-  .appNavigation {
+  .root {
     &__inner {
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 12px;
@@ -324,7 +324,7 @@
         transform: scaleY(0.4);
       }
 
-      &.appNavigation__link_active {
+      &.root__link_active {
         background: getColor(accentSurface);
 
         &::after {
@@ -336,7 +336,7 @@
 }
 
 @include mediaMax(mobile) {
-  .appNavigation {
+  .root {
     width: calc(100% + 24px);
     margin: -12px -12px 16px;
     padding: 10px 12px;

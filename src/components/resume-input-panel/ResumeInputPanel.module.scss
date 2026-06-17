@@ -1,4 +1,4 @@
-.resumeInput {
+.root {
   position: sticky;
   top: 98px;
 
@@ -41,7 +41,7 @@
 
       color: getColor(disabledText);
 
-      .resumeInput__primaryButtonStatus {
+      .root__primaryButtonStatus {
         border-color: getColor(focusPanelBorderDisabled);
         background: getColor(whiteAlpha32);
 
@@ -106,7 +106,7 @@
 }
 
 @include mediaMax(desktop) {
-  .resumeInput {
+  .root {
     position: static;
     top: auto;
   }

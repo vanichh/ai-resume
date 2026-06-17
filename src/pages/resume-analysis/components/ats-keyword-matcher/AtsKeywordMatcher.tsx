@@ -12,16 +12,16 @@ export const AtsKeywordMatcher = () => {
   }
 
   return (
-    <section className={styles.atsKeywordMatcher}>
-      <h2 className={styles.atsKeywordMatcher__title}>Ключевые слова ATS</h2>
-      <p className={styles.atsKeywordMatcher__summary}>
+    <section className={styles.root}>
+      <h2 className={styles.root__title}>Ключевые слова ATS</h2>
+      <p className={styles.root__summary}>
         {match.score}/100 · найдено {match.matchedCount} · не хватает {match.missingCount}
       </p>
-      <div className={styles.atsKeywordMatcher__keywords}>
+      <div className={styles.root__keywords}>
         {match.keywords.map((keyword) => (
           <span
-            className={clsx(styles.atsKeywordMatcher__keyword, {
-              [styles.atsKeywordMatcher__keyword_matched]: keyword.matched,
+            className={clsx(styles.root__keyword, {
+              [styles.root__keyword_matched]: keyword.matched,
             })}
             key={keyword.keyword}
           >

@@ -20,18 +20,13 @@ export const ModelDownloadProgress = ({ layout = 'wide' }: ModelDownloadProgress
   const isNarrowLayout = layout === 'narrow';
 
   return (
-    <aside
-      className={clsx(styles.modelDownloadProgress, {
-        [styles.modelDownloadProgress_narrow]: isNarrowLayout,
-      })}
-      aria-live="polite"
-    >
-      <div className={styles.modelDownloadProgress__header}>
-        <span className={styles.modelDownloadProgress__title}>Загрузка локальной модели</span>
-        <strong className={styles.modelDownloadProgress__value}>{progressValue}%</strong>
+    <aside className={clsx(styles.root, { [styles.root_narrow]: isNarrowLayout })} aria-live="polite">
+      <div className={styles.root__header}>
+        <span className={styles.root__title}>Загрузка локальной модели</span>
+        <strong className={styles.root__value}>{progressValue}%</strong>
       </div>
       <progress
-        className={styles.modelDownloadProgress__bar}
+        className={styles.root__bar}
         max={100}
         value={progressValue}
         aria-label="Прогресс загрузки локальной модели"
