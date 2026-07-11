@@ -1,0 +1,1 @@
+export { CorrectedResumePage } from './CorrectedResumePage';

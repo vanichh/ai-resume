@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { HomeInfoItem } from './components/home-info-item';
 
 import { HOME_CAPABILITIES, HOME_USE_CASES, HOME_WORKFLOW } from '../../common/constants';
@@ -5,15 +7,14 @@ import { HOME_CAPABILITIES, HOME_USE_CASES, HOME_WORKFLOW } from '../../common/c
 import styles from './HomeDetails.module.scss';
 
 export const HomeDetails = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.root}>
       <section className={styles.root__section}>
         <div className={styles.root__sectionHeader}>
-          <h2 className={styles.root__sectionTitle}>Что можно сделать на сайте</h2>
-          <p className={styles.root__sectionDescription}>
-            Это не просто форма загрузки резюме. Внутри собраны основные шаги подготовки отклика: анализ, адаптация под
-            вакансию, перевод, сравнение ролей и экспорт результата.
-          </p>
+          <h2 className={styles.root__sectionTitle}>{t('home.capabilitiesTitle')}</h2>
+          <p className={styles.root__sectionDescription}>{t('home.capabilitiesText')}</p>
         </div>
         <ul className={styles.root__infoGrid}>
           {HOME_CAPABILITIES.map((item) => (
@@ -23,11 +24,8 @@ export const HomeDetails = () => {
       </section>
       <section className={styles.root__section}>
         <div className={styles.root__sectionHeader}>
-          <h2 className={styles.root__sectionTitle}>Как проходит работа</h2>
-          <p className={styles.root__sectionDescription}>
-            Сценарий рассчитан на быстрые итерации: загрузили резюме, уточнили цель, получили правки и сразу проверили
-            следующую версию.
-          </p>
+          <h2 className={styles.root__sectionTitle}>{t('home.processTitle')}</h2>
+          <p className={styles.root__sectionDescription}>{t('home.processText')}</p>
         </div>
         <ul className={styles.root__workflow}>
           {HOME_WORKFLOW.map((item) => (
@@ -37,11 +35,8 @@ export const HomeDetails = () => {
       </section>
       <section className={styles.root__section}>
         <div className={styles.root__sectionHeader}>
-          <h2 className={styles.root__sectionTitle}>Когда особенно полезно</h2>
-          <p className={styles.root__sectionDescription}>
-            Сервис помогает не переписывать резюме вслепую, а принимать решения по конкретной роли и требованиям
-            вакансии.
-          </p>
+          <h2 className={styles.root__sectionTitle}>{t('home.useCasesTitle')}</h2>
+          <p className={styles.root__sectionDescription}>{t('home.useCasesText')}</p>
         </div>
         <ul className={styles.root__useCases}>
           {HOME_USE_CASES.map((item) => (

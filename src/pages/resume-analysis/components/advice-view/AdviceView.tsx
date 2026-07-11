@@ -1,5 +1,7 @@
 import { Copy } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
+import { APP_ROUTES } from '@common/constants/routes';
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 import { Button } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
@@ -13,6 +15,7 @@ import { SectionScoreList } from './components/section-score-list';
 import styles from './AdviceView.module.scss';
 
 export const AdviceView = () => {
+  const navigate = useNavigate();
   const advice = useResumeStore((state) => state.advice);
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
   const missingKeywords = advice?.missingKeywords ?? [];
@@ -21,9 +24,22 @@ export const AdviceView = () => {
     void copyToClipboardWithNotification(missingKeywords.join(', '), 'Ключевые слова скопированы.');
   };
 
+  const onCorrectedResumeClick = () => {
+    void navigate(APP_ROUTES.correctedResume);
+  };
+
   return (
     <section className={styles.root}>
       <AdviceScoreCard advice={advice} />
+      <Button
+        className={styles.root__correctedResumeAction}
+        disabled={!advice}
+        fullWidth
+        variant="primary"
+        onClick={onCorrectedResumeClick}
+      >
+        Посмотреть исправленное резюме
+      </Button>
       <ScoreBreakdown />
       <SectionScoreList scores={advice?.sectionScores ?? []} />
       <AdviceBlock

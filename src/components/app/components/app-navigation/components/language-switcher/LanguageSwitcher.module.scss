@@ -1,0 +1,38 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  height: 36px;
+  padding: 0 10px;
+
+  border-radius: 8px;
+  background: getColor(surfaceBase);
+
+  color: getColor(slateText);
+
+  &__label {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+
+  &__select {
+    border: 0;
+    background: transparent;
+
+    color: inherit;
+    font: inherit;
+    font-size: fontSize(14px);
+    font-weight: 800;
+
+    cursor: pointer;
+    outline: 0;
+  }
+}

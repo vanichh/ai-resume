@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 import { createAppSlice } from './slices/appSlice';
 import { createComparisonSlice } from './slices/comparisonSlice';
+import { createCorrectedResumeSlice } from './slices/correctedResumeSlice';
 import { createCoverLetterSlice } from './slices/coverLetterSlice';
 import { createHistorySlice } from './slices/historySlice';
 import { createResumeSlice } from './slices/resumeSlice';
@@ -10,6 +11,7 @@ import type { ResumeStateType, ResumeStoreType } from './types';
 
 const initialState: ResumeStateType = {
   advice: null,
+  analysisStage: null,
   analysisHistory: [],
   comparisonVacancies: [],
   coverLetter: null,
@@ -18,6 +20,8 @@ const initialState: ResumeStateType = {
   coverLetterStatus: 'idle',
   coverLetterTone: 'business',
   coverLetterVariantsCount: 1,
+  correctedResumeStatus: 'idle',
+  correctedResumeText: '',
   downloadProgress: null,
   error: '',
   fileName: '',
@@ -42,4 +46,5 @@ export const useResumeStore = create<ResumeStoreType>((...storeApi) => ({
   ...createComparisonSlice(...storeApi),
   ...createTranslationSlice(...storeApi),
   ...createCoverLetterSlice(...storeApi),
+  ...createCorrectedResumeSlice(...storeApi),
 }));

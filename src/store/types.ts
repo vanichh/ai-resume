@@ -1,5 +1,6 @@
 import type {
   AppStatusType,
+  CorrectedResumeStatusType,
   CoverLetterCompanyType,
   CoverLetterLengthType,
   CoverLetterStatusType,
@@ -8,6 +9,7 @@ import type {
   ModelStatusType,
   ResumeAdviceType,
   ResumeAnalysisHistoryItemType,
+  ResumeAnalysisStageType,
   ResumeTranslationLanguageType,
   ResumeTranslationToneType,
   ResumeTranslationType,
@@ -16,6 +18,7 @@ import type {
 
 export type ResumeStateType = {
   advice: ResumeAdviceType | null;
+  analysisStage: ResumeAnalysisStageType | null;
   analysisHistory: ResumeAnalysisHistoryItemType[];
   comparisonVacancies: VacancyComparisonItemType[];
   coverLetter: CoverLetterType | null;
@@ -24,6 +27,8 @@ export type ResumeStateType = {
   coverLetterStatus: CoverLetterStatusType;
   coverLetterTone: CoverLetterToneType;
   coverLetterVariantsCount: number;
+  correctedResumeStatus: CorrectedResumeStatusType;
+  correctedResumeText: string;
   downloadProgress: number | null;
   error: string;
   fileName: string;
@@ -51,10 +56,16 @@ export type AppActionsType = {
 
 export type ResumeActionsType = {
   analyze: () => Promise<void>;
+  cancelAnalysis: () => void;
   parseFile: (file: File) => Promise<void>;
   setResumeText: (value: string) => void;
   setTargetRole: (value: string) => void;
   setVacancyText: (value: string) => void;
+};
+
+export type CorrectedResumeActionsType = {
+  generateCorrectedResume: () => Promise<void>;
+  setCorrectedResumeText: (value: string) => void;
 };
 
 export type HistoryActionsType = {
@@ -96,4 +107,5 @@ export type ResumeStoreType = ResumeStateType &
   HistoryActionsType &
   ComparisonActionsType &
   CoverLetterActionsType &
+  CorrectedResumeActionsType &
   TranslationActionsType;

@@ -1,5 +1,5 @@
 import { DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE } from '@common/constants';
-import type { ModelStatusType, ResumeAdviceType } from '@common/types';
+import type { ModelStatusType, ResumeAdviceType, ResumeAnalysisStageType } from '@common/types';
 
 import { DEFAULT_TARGET_ROLE, RESPONSE_SCHEMA, SYSTEM_PROMPT } from './common/constants';
 import { parseAdvice } from './common/utils/parseAdvice';
@@ -19,12 +19,15 @@ export const analyzeResume = async (
   resumeText: string,
   targetInput: string,
   onDownloadProgress?: (progress: number) => void,
+  signal?: AbortSignal,
+  onStageChange?: (stage: ResumeAnalysisStageType) => void,
 ): Promise<ResumeAdviceType> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
 
   const target = targetInput.trim() || DEFAULT_TARGET_ROLE;
+  onStageChange?.('preparing');
   const preparedResume = prepareResumeForPrompt(resumeText);
 
   const session = await globalThis.LanguageModel.create({
@@ -35,6 +38,7 @@ export const analyzeResume = async (
         content: SYSTEM_PROMPT,
       },
     ],
+    signal,
     monitor(monitor) {
       monitor.addEventListener('downloadprogress', (event) => {
         const progressEvent = event as ProgressEvent;
@@ -44,6 +48,7 @@ export const analyzeResume = async (
   });
 
   try {
+    onStageChange?.('analyzing');
     const response = await session.prompt(
       [
         {
@@ -62,9 +67,10 @@ export const analyzeResume = async (
           ].join('\n'),
         },
       ],
-      { responseConstraint: RESPONSE_SCHEMA },
+      { responseConstraint: RESPONSE_SCHEMA, signal },
     );
 
+    onStageChange?.('formatting');
     return parseAdvice(response);
   } finally {
     session.destroy();

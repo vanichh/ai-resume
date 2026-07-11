@@ -1,0 +1,90 @@
+name: Create release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Resolve release metadata
+        id: release
+        run: |
+          VERSION="v$(node -p "require('./package.json').version")"
+          NOTES_FILE="release-notes/${VERSION}.md"
+
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "package.json contains an invalid release version: $VERSION"
+            exit 1
+          fi
+
+          if [[ ! -f "$NOTES_FILE" ]]; then
+            echo "Release description not found: $NOTES_FILE"
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "notes_file=$NOTES_FILE" >> "$GITHUB_OUTPUT"
+
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release $VERSION already exists. Nothing to publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.release.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Check project
+        if: steps.release.outputs.exists == 'false'
+        run: |
+          npm run lint
+          npm run format:check
+
+      - name: Build application
+        if: steps.release.outputs.exists == 'false'
+        run: npm run build
+
+      - name: Pack release artifact
+        if: steps.release.outputs.exists == 'false'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: zip -r "ai-resume-${VERSION}.zip" dist
+
+      - name: Create GitHub release
+        if: steps.release.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTES_FILE: ${{ steps.release.outputs.notes_file }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          gh release create "$VERSION" \
+            "ai-resume-${VERSION}.zip" \
+            --target "$GITHUB_SHA" \
+            --title "$VERSION" \
+            --notes-file "$NOTES_FILE"

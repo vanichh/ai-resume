@@ -3,7 +3,7 @@ import { canUseModel } from './common/utils/canUseModel';
 import type { ResumeStoreType } from './types';
 
 export const selectCanAnalyze = ({ modelStatus, resumeText, status }: ResumeStoreType) => {
-  return status === 'ready' && resumeText.length > 0 && canUseModel(modelStatus);
+  return (status === 'ready' || status === 'error') && resumeText.length > 0 && canUseModel(modelStatus);
 };
 
 export const selectCanTranslate = ({ modelStatus, resumeText, status }: ResumeStoreType) => {

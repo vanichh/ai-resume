@@ -3,8 +3,10 @@ import type { ResumeStoreType } from '@store/types';
 
 export const selectResumeInputPanelState = (state: ResumeStoreType) => ({
   advice: state.advice,
+  analysisStage: state.analysisStage,
   analyze: state.analyze,
   canAnalyze: selectCanAnalyze(state),
+  cancelAnalysis: state.cancelAnalysis,
   fileName: state.fileName,
   modelStatus: state.modelStatus,
   parseFile: state.parseFile,

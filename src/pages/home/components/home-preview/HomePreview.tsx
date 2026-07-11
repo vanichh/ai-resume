@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Sparkles } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { HOME_PREVIEW_STEPS } from '../../common/constants';
 import type { HomePreviewStepType } from '../../types';
@@ -13,10 +14,12 @@ const HOME_PREVIEW_PROGRESS_CLASS_NAMES: Record<HomePreviewStepType['progress'],
 };
 
 export const HomePreview = () => {
+  const { t } = useTranslation();
+
   return (
-    <aside className={styles.root} aria-label="Пример результата анализа">
+    <aside className={styles.root} aria-label={t('home.previewAria')}>
       <div className={styles.root__header}>
-        <span className={styles.root__label}>Оценка резюме</span>
+        <span className={styles.root__label}>{t('home.score')}</span>
         <strong className={styles.root__score}>82/100</strong>
       </div>
       <p className={styles.root__role}>Lead Frontend Developer</p>
@@ -37,7 +40,7 @@ export const HomePreview = () => {
         <span className={styles.root__adviceIcon}>
           <Sparkles aria-hidden size={18} />
         </span>
-        Усилить профиль под целевую роль, добавить больше метрик и вынести React, Next.js, FSD в верхнюю часть резюме.
+        {t('home.previewText')}
       </div>
     </aside>
   );

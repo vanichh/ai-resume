@@ -7,6 +7,8 @@ import { App } from '@components/app';
 
 import './common/styles/main.scss';
 
+import './i18n';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>

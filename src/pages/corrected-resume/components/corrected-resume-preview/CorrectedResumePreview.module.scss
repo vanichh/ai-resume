@@ -1,0 +1,51 @@
+.root {
+  display: grid;
+  gap: 16px;
+
+  min-width: 0;
+  padding: 18px;
+
+  border: 1px solid getColor(border);
+  border-radius: 8px;
+  background: getColor(surface);
+
+  @include panelShadow;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: getColor(primaryText);
+    font-size: fontSize(22px);
+  }
+
+  &__subtitle {
+    margin: 6px 0 0;
+
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+  }
+
+  &__textarea {
+    width: 100%;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@include mediaMax(mobile) {
+  .root__header {
+    display: grid;
+    gap: 14px;
+  }
+}

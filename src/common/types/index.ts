@@ -1,4 +1,6 @@
 export type AppStatusType = 'idle' | 'parsing' | 'ready' | 'analyzing' | 'translating' | 'done' | 'error';
+export type ResumeAnalysisStageType = 'preparing' | 'analyzing' | 'formatting';
+export type CorrectedResumeStatusType = 'idle' | 'generating' | 'done' | 'error';
 
 export type AppThemeType = 'dark' | 'light';
 

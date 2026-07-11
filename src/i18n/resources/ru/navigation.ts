@@ -1,0 +1,16 @@
+export const navigation = {
+  aria: 'Основная навигация',
+  subtitle: 'Анализ резюме и вакансий',
+  developer: 'Разработчик',
+  analysis: 'Анализ',
+  correctedResume: 'Исправленное резюме',
+  history: 'История',
+  comparison: 'Сравнение',
+  coverLetter: 'Письмо',
+  translation: 'Перевод',
+  privacy: 'Приватность',
+  lightTheme: 'Включить светлую тему',
+  darkTheme: 'Включить темную тему',
+  openMenu: 'Открыть меню',
+  closeMenu: 'Закрыть меню',
+} as const;

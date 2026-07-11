@@ -10,24 +10,49 @@ import { persistWorkspace } from '../common/utils/persistWorkspace';
 import { resetComparisonResults } from '../common/utils/resetComparisonResults';
 import type { ResumeActionsType } from '../types';
 
+let analysisAbortController: AbortController | null = null;
+
 export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set, get) => ({
   async analyze() {
     const state = get();
     const { fileName, resumeText, targetRole, vacancyText } = state;
 
+    analysisAbortController?.abort();
+    const abortController = new AbortController();
+    analysisAbortController = abortController;
+
     set({
       advice: null,
+      analysisStage: 'preparing',
       coverLetter: null,
       coverLetterStatus: 'idle',
+      correctedResumeStatus: 'idle',
+      correctedResumeText: '',
       downloadProgress: null,
       error: '',
       status: 'analyzing',
     });
 
     try {
-      const advice = await analyzeResume(resumeText, getAnalysisTarget(targetRole, vacancyText), (downloadProgress) => {
-        set({ downloadProgress });
-      });
+      const advice = await analyzeResume(
+        resumeText,
+        getAnalysisTarget(targetRole, vacancyText),
+        (downloadProgress) => {
+          if (analysisAbortController === abortController) {
+            set({ downloadProgress });
+          }
+        },
+        abortController.signal,
+        (analysisStage) => {
+          if (analysisAbortController === abortController) {
+            set({ analysisStage });
+          }
+        },
+      );
+
+      if (abortController.signal.aborted || analysisAbortController !== abortController) {
+        return;
+      }
       const historyItem = {
         id: createId(),
         advice,
@@ -57,18 +82,43 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
 
         return {
           advice: nextState.advice,
+          analysisStage: null,
           analysisHistory: nextState.analysisHistory,
           downloadProgress: null,
           status: nextState.status,
         };
       });
     } catch (caught) {
+      if (abortController.signal.aborted) {
+        return;
+      }
+
       set({
+        analysisStage: null,
         downloadProgress: null,
         error: getErrorMessage(caught, 'Не удалось получить рекомендации.'),
         status: 'error',
       });
+    } finally {
+      if (analysisAbortController === abortController) {
+        analysisAbortController = null;
+      }
     }
+  },
+
+  cancelAnalysis() {
+    if (!analysisAbortController) {
+      return;
+    }
+
+    analysisAbortController.abort();
+    analysisAbortController = null;
+    set((state) => ({
+      analysisStage: null,
+      downloadProgress: null,
+      error: '',
+      status: state.resumeText ? ('ready' as const) : ('idle' as const),
+    }));
   },
 
   async parseFile(file) {
@@ -81,6 +131,8 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       fileName: file.name,
       status: 'parsing',
       translation: null,
+      correctedResumeStatus: 'idle',
+      correctedResumeText: '',
     });
 
     try {
@@ -123,6 +175,8 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
         comparisonVacancies: resetComparisonResults(state),
         coverLetter: null,
         coverLetterStatus: 'idle' as const,
+        correctedResumeStatus: 'idle' as const,
+        correctedResumeText: '',
         resumeText,
         status: resumeText ? ('ready' as const) : ('idle' as const),
         translation: null,

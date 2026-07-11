@@ -1,0 +1,22 @@
+export const home = {
+  badge: 'AI resume analysis',
+  titleBefore: 'Review your resume for a specific role before',
+  titleAccent: 'applying',
+  description:
+    'AI Resume Review quickly shows how well your resume fits a vacancy, highlighting weak points, missing keywords, and concrete copy improvements.',
+  start: 'Start analysis',
+  privacy: 'How data is stored',
+  previewAria: 'Analysis result example',
+  score: 'Resume score',
+  previewText:
+    'Strengthen the summary for the target role, add more metrics, and move React, Next.js, and FSD higher in the resume.',
+  capabilitiesTitle: 'What you can do',
+  capabilitiesText:
+    'More than a resume upload form: analyze and tailor a resume, translate it, compare roles, and export the result.',
+  processTitle: 'How it works',
+  processText:
+    'The workflow is built for quick iterations: upload a resume, define the goal, apply improvements, and review the next version.',
+  useCasesTitle: 'When it is useful',
+  useCasesText:
+    'Make decisions based on a specific role and vacancy requirements instead of rewriting your resume blindly.',
+} as const;

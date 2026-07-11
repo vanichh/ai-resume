@@ -1,4 +1,5 @@
 import { AnalysisHistoryPage } from '@pages/analysis-history';
+import { CorrectedResumePage } from '@pages/corrected-resume';
 import { CoverLetterPage } from '@pages/cover-letter';
 import { HomePage } from '@pages/home';
 import { PrivacyPage } from '@pages/privacy';
@@ -37,6 +38,7 @@ export const App = () => {
           <Route path={APP_ROUTES.resumeAnalysis} element={<ResumeAnalysisPage />} />
           <Route path={APP_ROUTES.analysisHistory} element={<AnalysisHistoryPage />} />
           <Route path={APP_ROUTES.coverLetter} element={<CoverLetterPage />} />
+          <Route path={APP_ROUTES.correctedResume} element={<CorrectedResumePage />} />
           <Route path={APP_ROUTES.privacy} element={<PrivacyPage />} />
           <Route path={APP_ROUTES.translation} element={<TranslationPage />} />
           <Route path={APP_ROUTES.vacancyComparison} element={<VacancyComparisonPage />} />

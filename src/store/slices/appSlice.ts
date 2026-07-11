@@ -8,6 +8,7 @@ import type { AppActionsType, ResumeStateType } from '../types';
 
 const clearedWorkspaceState: Omit<ResumeStateType, 'modelHint' | 'modelStatus'> = {
   advice: null,
+  analysisStage: null,
   analysisHistory: [],
   comparisonVacancies: [],
   coverLetter: null,
@@ -16,6 +17,8 @@ const clearedWorkspaceState: Omit<ResumeStateType, 'modelHint' | 'modelStatus'> 
   coverLetterStatus: 'idle' as const,
   coverLetterTone: 'business' as const,
   coverLetterVariantsCount: 1,
+  correctedResumeStatus: 'idle' as const,
+  correctedResumeText: '',
   downloadProgress: null,
   error: '',
   fileName: '',

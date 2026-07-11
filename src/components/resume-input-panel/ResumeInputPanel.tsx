@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 import type { AppStatusType } from '@common/types';
@@ -9,6 +10,7 @@ import { STATUS_LABELS } from './common/constants';
 import { selectResumeInputPanelState } from './common/selectors';
 
 import { ExportActions } from './components/export-actions';
+import { ResumeAnalysisProgress } from './components/resume-analysis-progress';
 import { ResumeFileDropZone } from './components/resume-file-drop-zone';
 import { ResumeInputHeader } from './components/resume-input-header';
 import { TargetRoleField } from './components/target-role-field';
@@ -28,10 +30,13 @@ const STATUS_CLASS_NAMES: Record<AppStatusType, string> = {
 };
 
 export const ResumeInputPanel = () => {
+  const { t } = useTranslation();
   const {
     advice,
+    analysisStage,
     analyze,
     canAnalyze,
+    cancelAnalysis,
     fileName,
     modelStatus,
     parseFile,
@@ -47,8 +52,16 @@ export const ResumeInputPanel = () => {
   };
 
   const onAnalyzeClick = () => {
+    if (status === 'analyzing') {
+      cancelAnalysis();
+      return;
+    }
+
     void analyze();
   };
+
+  const isAnalyzing = status === 'analyzing';
+  const analysisActionKey = status === 'error' ? 'analysis.retryAction' : 'analysis.action';
 
   return (
     <div className={styles.root}>
@@ -60,17 +73,21 @@ export const ResumeInputPanel = () => {
 
       <Button
         className={styles.root__primaryButton}
-        disabled={!canAnalyze}
+        disabled={!canAnalyze && !isAnalyzing}
         fullWidth
         size="large"
         variant="primary"
         onClick={onAnalyzeClick}
       >
-        <span className={styles.root__primaryButtonText}>Получить рекомендации</span>
+        <span className={styles.root__primaryButtonText}>
+          {t(isAnalyzing ? 'analysis.cancelAction' : analysisActionKey)}
+        </span>
         <span className={clsx(styles.root__primaryButtonStatus, STATUS_CLASS_NAMES[status])}>
           {STATUS_LABELS[status]}
         </span>
       </Button>
+
+      {isAnalyzing && analysisStage && <ResumeAnalysisProgress currentStage={analysisStage} />}
 
       {advice && <ExportActions advice={advice} />}
     </div>
