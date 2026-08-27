@@ -1,8 +1,9 @@
-import { analysis } from './analysis';
-import { common } from './common';
-import { home } from './home';
-import { language } from './language';
-import { navigation } from './navigation';
+import analysis from './analysis.json';
+import common from './common.json';
+import footer from './footer.json';
+import home from './home.json';
+import language from './language.json';
+import navigation from './navigation.json';
 
 export const en = {
   language,
@@ -10,4 +11,5 @@ export const en = {
   home,
   analysis,
   common,
+  footer,
 } as const;

@@ -99,7 +99,12 @@ export const CoverLetterGenerator = () => {
           <h2 className={styles.root__title}>Сопроводительное письмо</h2>
           <p className={styles.root__subtitle}>Генерация под текущую роль, вакансию и анализ резюме.</p>
         </div>
-        <Button disabled={!canGenerateCoverLetter} size="medium" onClick={onGenerateClick}>
+        <Button
+          disabled={!canGenerateCoverLetter}
+          loading={coverLetterStatus === 'generating'}
+          size="medium"
+          onClick={onGenerateClick}
+        >
           {coverLetterStatus === 'generating' ? 'Генерация...' : 'Сгенерировать'}
         </Button>
       </div>

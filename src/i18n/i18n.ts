@@ -18,6 +18,7 @@ const getInitialLanguage = (): SupportedLanguageType => {
 };
 
 void i18n.use(initReactI18next).init({
+  defaultNS: 'translation',
   fallbackLng: 'ru',
   interpolation: { escapeValue: false },
   lng: getInitialLanguage(),

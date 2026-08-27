@@ -1,3 +1,5 @@
 import type { ResumeStoreType } from '@store/types';
 
-export const selectModelDownloadProgress = (state: ResumeStoreType) => state.downloadProgress;
+export const selectModelDownloadProgress = ({ downloadProgress, modelStatus }: ResumeStoreType) => {
+  return modelStatus === 'available' ? null : downloadProgress;
+};

@@ -6,6 +6,41 @@ export type AppThemeType = 'dark' | 'light';
 
 export type LanguageModelLanguageCodeType = 'de' | 'en' | 'es' | 'fr' | 'ja';
 
+export type BrowserTranslationLanguageCodeType =
+  | 'ar'
+  | 'bg'
+  | 'cs'
+  | 'da'
+  | 'de'
+  | 'el'
+  | 'en'
+  | 'es'
+  | 'fi'
+  | 'fr'
+  | 'he'
+  | 'hi'
+  | 'hr'
+  | 'hu'
+  | 'id'
+  | 'it'
+  | 'ja'
+  | 'ko'
+  | 'lt'
+  | 'nl'
+  | 'no'
+  | 'pl'
+  | 'pt'
+  | 'ro'
+  | 'sk'
+  | 'sl'
+  | 'sv'
+  | 'th'
+  | 'tr'
+  | 'uk'
+  | 'vi'
+  | 'zh'
+  | 'zh-Hant';
+
 export type ModelStatusType = 'available' | 'checking' | 'downloadable' | 'downloading' | 'unavailable' | 'unsupported';
 
 export type ResumeTranslationLanguageType =
@@ -140,4 +175,23 @@ export type AtsMatchType = {
   matchedCount: number;
   missingCount: number;
   score: number;
+};
+
+export type AtsAuditCheckStatusType = 'failed' | 'passed' | 'skipped' | 'warning';
+
+export type AtsAuditCheckType = {
+  description: string;
+  earnedPoints: number;
+  id: string;
+  label: string;
+  maxPoints: number;
+  status: AtsAuditCheckStatusType;
+};
+
+export type AtsAuditType = {
+  checks: AtsAuditCheckType[];
+  failedCount: number;
+  passedCount: number;
+  score: number;
+  warningCount: number;
 };

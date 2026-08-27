@@ -75,6 +75,9 @@ export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType
           (downloadProgress) => {
             set({ downloadProgress });
           },
+          undefined,
+          undefined,
+          get().markLanguageModelReady,
         );
         set((state) => {
           const nextState = {

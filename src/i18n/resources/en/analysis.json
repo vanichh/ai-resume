@@ -1,0 +1,26 @@
+{
+  "title": "Resume review in your browser",
+  "subtitle": "Upload a resume and describe the target role to get actionable improvements.",
+  "action": "Get recommendations",
+  "retryAction": "Retry generation",
+  "cancelAction": "Cancel generation",
+  "filePrompt": "Choose PDF, DOCX, TXT, or MD",
+  "noFile": "No file selected",
+  "target": "Target role or vacancy",
+  "targetPlaceholder": "For example: Senior Frontend Engineer, React/Vite, fintech",
+  "vacancy": "Job description",
+  "vacancyPlaceholder": "Paste the vacancy requirements and responsibilities",
+  "resumeText": "Resume text",
+  "resumePlaceholder": "The extracted text will appear here after upload.",
+  "characters": "characters",
+  "copyResume": "Copy resume",
+  "copiedResume": "Resume copied.",
+  "expand": "Expand the full resume text",
+  "collapse": "Collapse resume text",
+  "progress": {
+    "title": "Document processing",
+    "preparing": "Preparing the text",
+    "analyzing": "Analyzing the content",
+    "formatting": "Formatting recommendations"
+  }
+}

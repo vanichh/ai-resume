@@ -101,6 +101,7 @@ export const createTranslationSlice: ResumeSliceCreatorType<TranslationActionsTy
         (downloadProgress) => {
           set({ downloadProgress });
         },
+        get().markLanguageModelReady,
       );
 
       set((state) => {

@@ -1,0 +1,85 @@
+.root {
+  width: 100%;
+  margin-top: 30px;
+  padding: 22px 28px;
+
+  border-top: 1px solid getColor(borderDivider);
+  background: getColor(surface);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 100%;
+    max-width: 1480px;
+    margin: 0 auto;
+  }
+
+  &__copyright {
+    margin: 0;
+
+    color: getColor(mutedText);
+    font-size: fontSize(14px);
+    font-weight: 600;
+  }
+
+  &__telegramLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    min-height: 38px;
+    padding: 0 14px;
+
+    border-radius: 8px;
+    background: getColor(accent);
+
+    color: getColor(whiteText);
+    font-size: fontSize(14px);
+    font-weight: 800;
+    text-decoration: none;
+
+    transition:
+      background 0.16s ease,
+      transform 0.16s ease;
+
+    @include controlFocus;
+
+    &:hover {
+      background: getColor(accentHover);
+
+      transform: translateY(-1px);
+    }
+  }
+
+  &__telegramIcon {
+    flex: 0 0 auto;
+  }
+
+  &__telegramHandle {
+    opacity: 0.8;
+  }
+}
+
+@include mediaMax(mobile) {
+  .root {
+    width: calc(100% + 24px);
+    margin: 20px -12px -12px;
+    padding: 18px 12px;
+
+    &__inner {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+    }
+
+    &__telegramLink {
+      justify-content: center;
+
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+}

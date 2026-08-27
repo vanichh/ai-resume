@@ -8,6 +8,7 @@ export const selectTranslationControlPanelState = (state: ResumeStoreType) => ({
   parseFile: state.parseFile,
   setTranslationLanguage: state.setTranslationLanguage,
   setTranslationTone: state.setTranslationTone,
+  status: state.status,
   translate: state.translate,
   translationLanguage: state.translationLanguage,
   translationTone: state.translationTone,

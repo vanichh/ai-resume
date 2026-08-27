@@ -50,6 +50,7 @@ export type AppActionsType = {
   clearError: () => void;
   clearSuccessMessage: () => void;
   clearWorkspace: () => void;
+  markLanguageModelReady: () => void;
   restoreWorkspace: () => void;
   showSuccessMessage: (message: string) => void;
 };

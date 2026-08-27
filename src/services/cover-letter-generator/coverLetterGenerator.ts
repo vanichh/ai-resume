@@ -16,6 +16,7 @@ export const generateCoverLetter = async (
   vacancyText: string,
   options: CoverLetterGenerationOptionsType,
   onDownloadProgress?: (progress: number) => void,
+  onModelReady?: () => void,
 ): Promise<CoverLetterType> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
@@ -36,6 +37,7 @@ export const generateCoverLetter = async (
       });
     },
   });
+  onModelReady?.();
 
   try {
     const normalizedOptions = {

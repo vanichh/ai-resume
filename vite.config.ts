@@ -1,13 +1,15 @@
-import { URL, fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-
-const getSourcePath = (path: string): string => fileURLToPath(new URL(path, import.meta.url));
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/ai-resume/' : '/',
-  plugins: [react()],
+  plugins: [
+    react(),
+    tsconfigPaths({ root: fileURLToPath(new URL('.', import.meta.url)), projects: ['./tsconfig.app.json'] }),
+  ],
 
   build: {
     chunkSizeWarningLimit: 550,
@@ -17,20 +19,10 @@ export default defineConfig(({ mode }) => ({
     devSourcemap: true,
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "@common/styles/mixins" as *;\n',
+        additionalData: '@use "common/styles/mixins" as *;\n',
+        loadPaths: [fileURLToPath(new URL('./src', import.meta.url))],
         quietDeps: true,
       },
-    },
-  },
-
-  resolve: {
-    alias: {
-      '@common': getSourcePath('./src/common'),
-      '@components': getSourcePath('./src/components'),
-      '@i18n': getSourcePath('./src/i18n'),
-      '@pages': getSourcePath('./src/pages'),
-      '@services': getSourcePath('./src/services'),
-      '@store': getSourcePath('./src/store'),
     },
   },
 

@@ -7,6 +7,7 @@ export type ButtonSizeType = 'small' | 'medium' | 'large';
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   fullWidth?: boolean;
+  loading?: boolean;
   size?: ButtonSizeType;
   variant?: ButtonVariantType;
 };

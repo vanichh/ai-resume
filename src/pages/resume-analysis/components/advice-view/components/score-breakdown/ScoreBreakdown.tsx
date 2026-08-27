@@ -1,6 +1,6 @@
 import { Gauge } from 'lucide-react';
 
-import { useAtsMatch } from '@common/hooks/useAtsMatch';
+import { useAtsAudit } from '@common/hooks/useAtsAudit';
 import { CollapsibleBlock, EmptyState } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
@@ -10,9 +10,9 @@ import styles from './ScoreBreakdown.module.scss';
 
 export const ScoreBreakdown = () => {
   const advice = useResumeStore((state) => state.advice);
-  const atsMatch = useAtsMatch();
+  const atsAudit = useAtsAudit();
 
-  const items = getScoreBreakdownItems(advice, atsMatch);
+  const items = getScoreBreakdownItems(advice, atsAudit);
 
   return (
     <CollapsibleBlock className={styles.root} title="Детализация оценки">

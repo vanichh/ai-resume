@@ -48,6 +48,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
             set({ analysisStage });
           }
         },
+        get().markLanguageModelReady,
       );
 
       if (abortController.signal.aborted || analysisAbortController !== abortController) {

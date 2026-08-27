@@ -9,6 +9,7 @@ export const generateCorrectedResume = async (
   targetRole: string,
   vacancyText: string,
   onDownloadProgress?: (progress: number) => void,
+  onModelReady?: () => void,
 ): Promise<string> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
@@ -23,6 +24,7 @@ export const generateCorrectedResume = async (
       });
     },
   });
+  onModelReady?.();
 
   try {
     return (

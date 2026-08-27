@@ -51,7 +51,12 @@ export const CorrectedResumePreview = () => {
           <h1 className={styles.root__title}>Исправленное резюме</h1>
           <p className={styles.root__subtitle}>Проверьте результат, внесите финальные правки и скачайте документ.</p>
         </div>
-        <Button disabled={!canGenerate} variant="primary" onClick={onGenerateClick}>
+        <Button
+          disabled={!canGenerate}
+          loading={correctedResumeStatus === 'generating'}
+          variant="primary"
+          onClick={onGenerateClick}
+        >
           {correctedResumeStatus === 'generating'
             ? 'Создание...'
             : correctedResumeText

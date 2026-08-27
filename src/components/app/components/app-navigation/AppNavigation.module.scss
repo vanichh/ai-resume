@@ -161,15 +161,15 @@
     }
   }
 
-  &__themeButton,
-  &__developerLink {
+  &__themeButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
 
+    width: 44px;
     height: 36px;
-    padding: 0 14px;
+    padding: 0;
 
     border: 1px solid transparent;
     border-radius: 8px;
@@ -196,28 +196,6 @@
 
       transform: translateY(-1px);
     }
-  }
-
-  &__themeButton {
-    width: 44px;
-    padding: 0;
-  }
-
-  &__developerLink {
-    background: getColor(accent);
-
-    color: getColor(whiteText);
-    text-decoration: none;
-
-    &:hover {
-      background: getColor(accentHover);
-
-      color: getColor(whiteText);
-    }
-  }
-
-  &__developerIcon {
-    flex: 0 0 auto;
   }
 }
 
@@ -254,10 +232,6 @@
 
     &__actions {
       gap: 8px;
-    }
-
-    &__developerLink {
-      display: none;
     }
 
     &__menu {

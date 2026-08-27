@@ -1,4 +1,8 @@
-import type { LanguageModelLanguageCodeType, ResumeTranslationLanguageType } from '../types';
+import type {
+  BrowserTranslationLanguageCodeType,
+  LanguageModelLanguageCodeType,
+  ResumeTranslationLanguageType,
+} from '../types';
 
 export const RESUME_TRANSLATION_LANGUAGE_OPTIONS: Array<{
   label: string;
@@ -203,4 +207,42 @@ export const RESUME_TRANSLATION_LANGUAGE_MODEL_OUTPUT_CODES: Partial<
   german: 'de',
   japanese: 'ja',
   spanish: 'es',
+};
+
+export const RESUME_TRANSLATION_BROWSER_LANGUAGE_CODES: Partial<
+  Record<ResumeTranslationLanguageType, BrowserTranslationLanguageCodeType>
+> = {
+  arabic: 'ar',
+  bulgarian: 'bg',
+  chineseSimplified: 'zh',
+  chineseTraditional: 'zh-Hant',
+  croatian: 'hr',
+  czech: 'cs',
+  danish: 'da',
+  dutch: 'nl',
+  english: 'en',
+  finnish: 'fi',
+  french: 'fr',
+  german: 'de',
+  greek: 'el',
+  hebrew: 'he',
+  hindi: 'hi',
+  hungarian: 'hu',
+  indonesian: 'id',
+  italian: 'it',
+  japanese: 'ja',
+  korean: 'ko',
+  lithuanian: 'lt',
+  norwegian: 'no',
+  polish: 'pl',
+  portuguese: 'pt',
+  romanian: 'ro',
+  slovak: 'sk',
+  slovenian: 'sl',
+  spanish: 'es',
+  swedish: 'sv',
+  thai: 'th',
+  turkish: 'tr',
+  ukrainian: 'uk',
+  vietnamese: 'vi',
 };

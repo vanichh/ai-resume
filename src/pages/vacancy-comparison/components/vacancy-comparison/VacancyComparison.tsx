@@ -15,6 +15,7 @@ export const VacancyComparison = () => {
     analyzeComparison,
     canCompare,
     comparisonVacancies,
+    isComparing,
     removeComparisonVacancy,
     selectComparisonVacancy,
     setComparisonVacancyText,
@@ -50,8 +51,15 @@ export const VacancyComparison = () => {
           ))}
         </div>
       )}
-      <Button disabled={!canCompare} fullWidth size="large" variant="primary" onClick={onAnalyzeComparisonClick}>
-        Сравнить с вакансиями
+      <Button
+        disabled={!canCompare}
+        fullWidth
+        loading={isComparing}
+        size="large"
+        variant="primary"
+        onClick={onAnalyzeComparisonClick}
+      >
+        {isComparing ? 'Сравнение...' : 'Сравнить с вакансиями'}
       </Button>
     </CollapsibleBlock>
   );

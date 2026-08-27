@@ -4,6 +4,10 @@ export const AdviceView = lazy(() =>
   import('../components/advice-view').then((module) => ({ default: module.AdviceView })),
 );
 
+export const AtsAuditReport = lazy(() =>
+  import('../components/ats-audit-report').then((module) => ({ default: module.AtsAuditReport })),
+);
+
 export const AtsKeywordMatcher = lazy(() =>
   import('../components/ats-keyword-matcher').then((module) => ({ default: module.AtsKeywordMatcher })),
 );

@@ -1,5 +1,6 @@
 import {
   DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE,
+  RESUME_TRANSLATION_BROWSER_LANGUAGE_CODES,
   RESUME_TRANSLATION_LANGUAGE_MODEL_OUTPUT_CODES,
   RESUME_TRANSLATION_LANGUAGE_PROMPT_NAMES,
   RESUME_TRANSLATION_TONE_PROMPT_INSTRUCTIONS,
@@ -15,13 +16,15 @@ import {
 import { buildTranslationPromptContent } from './common/utils/buildTranslationPromptContent';
 import { isTranslationLikelyUnchanged } from './common/utils/isTranslationLikelyUnchanged';
 import { splitResumeForTranslation } from './common/utils/splitResumeForTranslation';
+import { translateWithBrowserApi } from './common/utils/translateWithBrowserApi';
 
-export const translateResume = async (
-  resumeText: string,
+const translateWithLanguageModel = async (
+  resumeChunks: string[],
   language: ResumeTranslationLanguageType,
   tone: ResumeTranslationToneType,
   onDownloadProgress?: (progress: number) => void,
-): Promise<ResumeTranslationType> => {
+  onModelReady?: () => void,
+): Promise<string> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
   }
@@ -46,11 +49,11 @@ export const translateResume = async (
       });
     },
   });
+  onModelReady?.();
 
   try {
     const targetLanguage = RESUME_TRANSLATION_LANGUAGE_PROMPT_NAMES[language];
     const toneInstruction = RESUME_TRANSLATION_TONE_PROMPT_INSTRUCTIONS[tone];
-    const resumeChunks = splitResumeForTranslation(resumeText);
     const translatedChunks: string[] = [];
 
     for (const [chunkIndex, resumeChunk] of resumeChunks.entries()) {
@@ -85,14 +88,42 @@ export const translateResume = async (
       translatedChunks.push(translatedChunk);
     }
 
-    return {
-      id: createId(),
-      language,
-      tone,
-      text: translatedChunks.join('\n\n'),
-      createdAt: new Date().toISOString(),
-    };
+    return translatedChunks.join('\n\n');
   } finally {
     session.destroy();
   }
+};
+
+export const translateResume = async (
+  resumeText: string,
+  language: ResumeTranslationLanguageType,
+  tone: ResumeTranslationToneType,
+  onDownloadProgress?: (progress: number) => void,
+  onModelReady?: () => void,
+): Promise<ResumeTranslationType> => {
+  const resumeChunks = splitResumeForTranslation(resumeText);
+  const browserTargetLanguage = RESUME_TRANSLATION_BROWSER_LANGUAGE_CODES[language];
+  let translatedText: string | null = null;
+
+  if (tone === 'formal' && browserTargetLanguage) {
+    try {
+      translatedText = await translateWithBrowserApi(resumeChunks, browserTargetLanguage, onDownloadProgress);
+    } catch {
+      translatedText = null;
+    }
+
+    if (translatedText && isTranslationLikelyUnchanged(resumeText, translatedText, language)) {
+      translatedText = null;
+    }
+  }
+
+  translatedText ??= await translateWithLanguageModel(resumeChunks, language, tone, onDownloadProgress, onModelReady);
+
+  return {
+    id: createId(),
+    language,
+    tone,
+    text: translatedText,
+    createdAt: new Date().toISOString(),
+  };
 };

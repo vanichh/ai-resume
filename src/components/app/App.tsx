@@ -15,6 +15,7 @@ import { useAppTheme } from '@common/hooks/useAppTheme';
 import { NARROW_MODEL_PROGRESS_ROUTES } from './common/constants';
 import { useAppBootstrap } from './common/hooks/useAppBootstrap';
 
+import { AppFooter } from './components/app-footer';
 import { AppNavigation } from './components/app-navigation';
 import { AppToast } from './components/app-toast';
 import { ModelDownloadProgress } from './components/model-download-progress';
@@ -31,22 +32,25 @@ export const App = () => {
   return (
     <main className={styles.root}>
       <AppNavigation theme={theme} onThemeToggle={onThemeToggle} />
-      <ModelDownloadProgress layout={modelProgressLayout} />
-      <Routes>
-        <Route path={APP_ROUTES.home} element={<HomePage />} />
-        <Route element={<ModelGuardRoute />}>
-          <Route path={APP_ROUTES.resumeAnalysis} element={<ResumeAnalysisPage />} />
-          <Route path={APP_ROUTES.analysisHistory} element={<AnalysisHistoryPage />} />
-          <Route path={APP_ROUTES.coverLetter} element={<CoverLetterPage />} />
-          <Route path={APP_ROUTES.correctedResume} element={<CorrectedResumePage />} />
-          <Route path={APP_ROUTES.privacy} element={<PrivacyPage />} />
-          <Route path={APP_ROUTES.translation} element={<TranslationPage />} />
-          <Route path={APP_ROUTES.vacancyComparison} element={<VacancyComparisonPage />} />
-        </Route>
-        <Route path={APP_ROUTES.unsupportedBrowser} element={<UnsupportedBrowserPage />} />
-        <Route path="*" element={<Navigate replace to={APP_ROUTES.home} />} />
-      </Routes>
+      <div className={styles.root__content}>
+        <ModelDownloadProgress layout={modelProgressLayout} />
+        <Routes>
+          <Route path={APP_ROUTES.home} element={<HomePage />} />
+          <Route element={<ModelGuardRoute />}>
+            <Route path={APP_ROUTES.resumeAnalysis} element={<ResumeAnalysisPage />} />
+            <Route path={APP_ROUTES.analysisHistory} element={<AnalysisHistoryPage />} />
+            <Route path={APP_ROUTES.coverLetter} element={<CoverLetterPage />} />
+            <Route path={APP_ROUTES.correctedResume} element={<CorrectedResumePage />} />
+            <Route path={APP_ROUTES.privacy} element={<PrivacyPage />} />
+            <Route path={APP_ROUTES.translation} element={<TranslationPage />} />
+            <Route path={APP_ROUTES.vacancyComparison} element={<VacancyComparisonPage />} />
+          </Route>
+          <Route path={APP_ROUTES.unsupportedBrowser} element={<UnsupportedBrowserPage />} />
+          <Route path="*" element={<Navigate replace to={APP_ROUTES.home} />} />
+        </Routes>
+      </div>
       <AppToast />
+      <AppFooter />
     </main>
   );
 };

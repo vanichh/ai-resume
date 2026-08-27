@@ -7,12 +7,11 @@ import { NavLink } from 'react-router-dom';
 
 import { APP_ROUTES } from '@common/constants/routes';
 
-import { APP_NAVIGATION_ICONS, APP_NAVIGATION_LINKS, TELEGRAM_URL } from './common/constants';
+import { APP_NAVIGATION_ICONS, APP_NAVIGATION_LINKS } from './common/constants';
 import { useLockDocumentScroll } from './common/hooks/useLockDocumentScroll';
 
 import { LanguageSwitcher } from './components/language-switcher';
 import { ProjectIcon } from './components/project-icon';
-import { TelegramIcon } from './components/telegram-icon';
 
 import type { AppNavigationLinkStateType, AppNavigationLinkType, AppNavigationProps } from './types';
 
@@ -92,16 +91,6 @@ export const AppNavigation = ({ theme, onThemeToggle }: AppNavigationProps) => {
           >
             {isMenuOpen ? <X aria-hidden size={18} /> : <Menu aria-hidden size={18} />}
           </button>
-          <a
-            className={styles.root__developerLink}
-            href={TELEGRAM_URL}
-            rel="noreferrer"
-            target="_blank"
-            onClick={onNavigationLinkClick}
-          >
-            <TelegramIcon className={styles.root__developerIcon} />
-            {t('navigation.developer')}
-          </a>
         </div>
       </div>
     </nav>

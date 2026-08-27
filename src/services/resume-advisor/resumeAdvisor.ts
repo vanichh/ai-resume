@@ -21,6 +21,7 @@ export const analyzeResume = async (
   onDownloadProgress?: (progress: number) => void,
   signal?: AbortSignal,
   onStageChange?: (stage: ResumeAnalysisStageType) => void,
+  onModelReady?: () => void,
 ): Promise<ResumeAdviceType> => {
   if (!globalThis.LanguageModel) {
     throw new Error('LanguageModel API недоступен в этом браузере.');
@@ -46,6 +47,7 @@ export const analyzeResume = async (
       });
     },
   });
+  onModelReady?.();
 
   try {
     onStageChange?.('analyzing');

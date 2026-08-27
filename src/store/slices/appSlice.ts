@@ -66,6 +66,14 @@ export const createAppSlice: ResumeSliceCreatorType<AppActionsType> = (set) => (
     set(clearedWorkspaceState);
   },
 
+  markLanguageModelReady() {
+    set({
+      downloadProgress: null,
+      modelHint: '',
+      modelStatus: 'available',
+    });
+  },
+
   restoreWorkspace() {
     const stored = loadResumeWorkspace();
     set({

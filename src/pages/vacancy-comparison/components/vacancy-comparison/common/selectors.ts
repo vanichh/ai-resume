@@ -6,6 +6,7 @@ export const selectVacancyComparisonState = (state: ResumeStoreType) => ({
   analyzeComparison: state.analyzeComparison,
   canCompare: selectCanCompareVacancies(state),
   comparisonVacancies: state.comparisonVacancies,
+  isComparing: state.comparisonVacancies.some((vacancy) => vacancy.status === 'analyzing'),
   removeComparisonVacancy: state.removeComparisonVacancy,
   selectComparisonVacancy: state.selectComparisonVacancy,
   setComparisonVacancyText: state.setComparisonVacancyText,

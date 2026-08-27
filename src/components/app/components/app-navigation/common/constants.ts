@@ -59,5 +59,3 @@ export const APP_NAVIGATION_LINKS: AppNavigationLinkType[] = [
     path: APP_ROUTES.privacy,
   },
 ];
-
-export const TELEGRAM_URL = 'https://t.me/vanichh';

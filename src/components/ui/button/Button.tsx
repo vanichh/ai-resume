@@ -19,7 +19,9 @@ const BUTTON_VARIANT_CLASS_NAMES = {
 export const Button = ({
   children,
   className = '',
+  disabled = false,
   fullWidth = false,
+  loading = false,
   size = 'medium',
   type = 'button',
   variant = 'secondary',
@@ -30,9 +32,12 @@ export const Button = ({
       className={clsx(styles.root, BUTTON_VARIANT_CLASS_NAMES[variant], BUTTON_SIZE_CLASS_NAMES[size], className, {
         [styles.root_fullWidth]: fullWidth,
       })}
+      aria-busy={loading || undefined}
+      disabled={disabled || loading}
       type={type}
       {...props}
     >
+      {loading && <span className={styles.root__loader} aria-hidden="true" />}
       {children}
     </button>
   );

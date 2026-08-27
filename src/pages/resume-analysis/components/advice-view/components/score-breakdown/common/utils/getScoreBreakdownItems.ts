@@ -1,16 +1,16 @@
-import type { AtsMatchType, ResumeAdviceType } from '@common/types';
+import type { AtsAuditType, ResumeAdviceType } from '@common/types';
 import { getResumeSectionTitle } from '@common/utils/getResumeSectionTitle';
 
 import type { ScoreBreakdownItemType } from '../../types';
 
-const ATS_KEYWORDS_LABEL = 'Ключевые слова ATS';
+const ATS_AUDIT_LABEL = 'ATS-совместимость';
 
 export const getScoreBreakdownItems = (
   advice: ResumeAdviceType | null,
-  atsMatch: AtsMatchType,
+  atsAudit: AtsAuditType,
 ): ScoreBreakdownItemType[] => {
   const sectionScoreItems = getSectionScoreItems(advice);
-  const atsScoreItem = getAtsScoreItem(atsMatch);
+  const atsScoreItem = getAtsScoreItem(atsAudit);
 
   return atsScoreItem ? [...sectionScoreItems, atsScoreItem] : sectionScoreItems;
 };
@@ -26,13 +26,13 @@ const getSectionScoreItems = (advice: ResumeAdviceType | null): ScoreBreakdownIt
   }));
 };
 
-const getAtsScoreItem = (atsMatch: AtsMatchType): ScoreBreakdownItemType | null => {
-  if (atsMatch.keywords.length === 0) {
+const getAtsScoreItem = (atsAudit: AtsAuditType): ScoreBreakdownItemType | null => {
+  if (atsAudit.checks.length === 0) {
     return null;
   }
 
   return {
-    label: ATS_KEYWORDS_LABEL,
-    value: atsMatch.score,
+    label: ATS_AUDIT_LABEL,
+    value: atsAudit.score,
   };
 };

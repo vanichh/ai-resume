@@ -22,6 +22,7 @@ export const createCorrectedResumeSlice: ResumeSliceCreatorType<CorrectedResumeA
         targetRole,
         vacancyText,
         (downloadProgress) => set({ downloadProgress }),
+        get().markLanguageModelReady,
       );
       set({ correctedResumeStatus: 'done', correctedResumeText, downloadProgress: null });
     } catch (caught) {

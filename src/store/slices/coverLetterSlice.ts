@@ -47,6 +47,7 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
         (downloadProgress) => {
           set({ downloadProgress });
         },
+        get().markLanguageModelReady,
       );
 
       set((state) => {

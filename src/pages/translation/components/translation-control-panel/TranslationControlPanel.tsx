@@ -19,6 +19,7 @@ export const TranslationControlPanel = () => {
     parseFile,
     setTranslationLanguage,
     setTranslationTone,
+    status,
     translate,
     translationLanguage,
     translationTone,
@@ -32,6 +33,8 @@ export const TranslationControlPanel = () => {
     void translate();
   };
 
+  const isTranslating = status === 'translating';
+
   return (
     <aside className={styles.root}>
       <div className={styles.root__header}>
@@ -44,8 +47,15 @@ export const TranslationControlPanel = () => {
       <UnsupportedModelActions modelStatus={modelStatus} />
       <TranslationLanguageField language={translationLanguage} onLanguageChange={setTranslationLanguage} />
       <TranslationToneField tone={translationTone} onToneChange={setTranslationTone} />
-      <Button disabled={!canTranslate} fullWidth size="large" variant="primary" onClick={onTranslateClick}>
-        Перевести резюме
+      <Button
+        disabled={!canTranslate}
+        fullWidth
+        loading={isTranslating}
+        size="large"
+        variant="primary"
+        onClick={onTranslateClick}
+      >
+        {isTranslating ? 'Перевод...' : 'Перевести резюме'}
       </Button>
     </aside>
   );

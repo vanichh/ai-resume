@@ -13,14 +13,14 @@
     "noUnusedParameters": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
-      "@common/*": ["src/common/*"],
-      "@components/*": ["src/components/*"],
-      "@i18n/*": ["src/i18n/*"],
-      "@pages/*": ["src/pages/*"],
-      "@services/*": ["src/services/*"],
-      "@store/*": ["src/store/*"]
+      "@common/*": ["./src/common/*"],
+      "@components/*": ["./src/components/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@services/*": ["./src/services/*"],
+      "@store/*": ["./src/store/*"]
     },
     "isolatedModules": true,
     "moduleDetection": "force",

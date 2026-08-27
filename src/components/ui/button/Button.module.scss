@@ -1,6 +1,20 @@
 .root {
   @include controlButtonBase;
 
+  &__loader {
+    flex: 0 0 auto;
+
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid currentColor;
+    border-radius: 50%;
+
+    animation: button-loader-spin 0.72s linear infinite;
+
+    border-right-color: transparent;
+  }
+
   &_small {
     @include controlButtonSizeSmall;
   }
@@ -27,5 +41,11 @@
 
   &_ghost {
     @include controlButtonGhost;
+  }
+}
+
+@keyframes button-loader-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
