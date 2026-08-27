@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import { TELEGRAM_HANDLE, TELEGRAM_URL } from './common/constants';
-
-import { TelegramIcon } from './components/telegram-icon';
+import { APP_ROUTES } from '@common/constants/routes';
 
 import styles from './AppFooter.module.scss';
 
@@ -14,10 +13,11 @@ export const AppFooter = () => {
     <footer className={styles.root}>
       <div className={styles.root__inner}>
         <p className={styles.root__copyright}>{t('footer.copyright', { year: currentYear })}</p>
-        <a className={styles.root__telegramLink} href={TELEGRAM_URL} rel="noreferrer" target="_blank">
-          <TelegramIcon className={styles.root__telegramIcon} />
-          <span className={styles.root__telegramHandle}>{TELEGRAM_HANDLE}</span>
-        </a>
+        <div className={styles.root__links}>
+          <Link className={styles.root__aboutLink} to={APP_ROUTES.aboutProject}>
+            {t('footer.aboutProject')}
+          </Link>
+        </div>
       </div>
     </footer>
   );

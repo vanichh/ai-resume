@@ -1,4 +1,5 @@
 export const APP_ROUTES = {
+  aboutProject: '/about-project',
   home: '/',
   resumeAnalysis: '/resume-analysis',
   analysisHistory: '/analysis-history',

@@ -1,7 +1,7 @@
 export const normalizeText = (value: string): string => {
   return value
-    .replace(/\r/g, '\n')
-    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\r\n?/g, '\n')
+    .replace(/[ \t]+$/gm, '')
     .replace(/\n{3,}/g, '\n\n')
-    .trim();
+    .replace(/^\n+|\n+$/g, '');
 };

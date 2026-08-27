@@ -1,3 +1,5 @@
 {
-  "copyright": "© {{year}} AI Resume Review"
+  "aboutProject": "О проекте",
+  "copyright": "© {{year}} AI Resume Review",
+  "telegram": "{{handle}}"
 }

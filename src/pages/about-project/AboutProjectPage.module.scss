@@ -1,0 +1,117 @@
+.root {
+  width: 100%;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    width: min(960px, 100%);
+    margin: 0 auto;
+    padding: 24px 0;
+  }
+
+  &__eyebrow {
+    margin: 0;
+
+    color: getColor(accent);
+    font-size: fontSize(12px);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+
+    color: getColor(appText);
+    font-size: fontSize(26px);
+  }
+
+  &__lead,
+  &__note,
+  &__cardText {
+    margin: 0;
+
+    color: getColor(mutedText);
+    font-size: fontSize(16px);
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 20px 22px;
+
+    border: 1px solid getColor(borderDivider);
+    border-radius: 16px;
+    background: getColor(surface);
+  }
+
+  &__contactsTitle {
+    margin: 0;
+
+    color: getColor(appText);
+    font-size: fontSize(18px);
+  }
+
+  &__contactList {
+    display: grid;
+    gap: 8px;
+
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  &__contactItem {
+    color: getColor(mutedText);
+  }
+
+  &__contactLabel {
+    color: getColor(appText);
+    font-weight: 700;
+  }
+
+  &__link {
+    color: getColor(accentText);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 20px 22px;
+
+    border: 1px solid getColor(borderDivider);
+    border-radius: 16px;
+    background: getColor(surface);
+
+    box-shadow: 0 8px 18px getColor(workspaceShadowSoft);
+  }
+
+  &__cardTitle {
+    margin: 0;
+
+    color: getColor(appText);
+    font-size: fontSize(18px);
+  }
+}
+
+@include mediaMax(tablet) {
+  .root {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

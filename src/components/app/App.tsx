@@ -1,3 +1,4 @@
+import { AboutProjectPage } from '@pages/about-project';
 import { AnalysisHistoryPage } from '@pages/analysis-history';
 import { CorrectedResumePage } from '@pages/corrected-resume';
 import { CoverLetterPage } from '@pages/cover-letter';
@@ -36,6 +37,7 @@ export const App = () => {
         <ModelDownloadProgress layout={modelProgressLayout} />
         <Routes>
           <Route path={APP_ROUTES.home} element={<HomePage />} />
+          <Route path={APP_ROUTES.aboutProject} element={<AboutProjectPage />} />
           <Route element={<ModelGuardRoute />}>
             <Route path={APP_ROUTES.resumeAnalysis} element={<ResumeAnalysisPage />} />
             <Route path={APP_ROUTES.analysisHistory} element={<AnalysisHistoryPage />} />

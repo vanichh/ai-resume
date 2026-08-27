@@ -236,15 +236,39 @@ export const calculateAtsAudit = (resumeText: string, vacancyText: string): AtsA
     getLengthCheck(resumeText),
     getKeywordCheck(resumeText, vacancyText),
   ];
-  const includedChecks = checks.filter((check) => check.status !== 'skipped');
-  const earnedPoints = includedChecks.reduce((total, check) => total + check.earnedPoints, 0);
-  const maxPoints = includedChecks.reduce((total, check) => total + check.maxPoints, 0);
+  const { earnedPoints, failedCount, maxPoints, passedCount, warningCount } = checks.reduce(
+    (summary, check) => {
+      if (check.status === 'skipped') {
+        return summary;
+      }
+
+      summary.earnedPoints += check.earnedPoints;
+      summary.maxPoints += check.maxPoints;
+
+      if (check.status === 'failed') {
+        summary.failedCount += 1;
+      } else if (check.status === 'passed') {
+        summary.passedCount += 1;
+      } else if (check.status === 'warning') {
+        summary.warningCount += 1;
+      }
+
+      return summary;
+    },
+    {
+      earnedPoints: 0,
+      failedCount: 0,
+      maxPoints: 0,
+      passedCount: 0,
+      warningCount: 0,
+    },
+  );
 
   return {
     checks,
-    failedCount: checks.filter((check) => check.status === 'failed').length,
-    passedCount: checks.filter((check) => check.status === 'passed').length,
+    failedCount,
+    passedCount,
     score: maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0,
-    warningCount: checks.filter((check) => check.status === 'warning').length,
+    warningCount,
   };
 };
