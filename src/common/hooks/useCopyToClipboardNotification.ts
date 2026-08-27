@@ -1,12 +1,13 @@
+import { useTranslation } from 'react-i18next';
+
 import { copyToClipboard } from '@common/utils/copyToClipboard';
 import { useResumeStore } from '@store/resumeStore';
 
-const DEFAULT_SUCCESS_MESSAGE = 'Скопировано.';
-
 export const useCopyToClipboardNotification = () => {
+  const { t } = useTranslation();
   const showSuccessMessage = useResumeStore((state) => state.showSuccessMessage);
 
-  const copyWithNotification = async (value: string, successMessage = DEFAULT_SUCCESS_MESSAGE) => {
+  const copyWithNotification = async (value: string, successMessage = t('common.copied')) => {
     await copyToClipboard(value);
     showSuccessMessage(successMessage);
   };

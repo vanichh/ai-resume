@@ -6,7 +6,6 @@ import type { AppStatusType } from '@common/types';
 import { Button } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
-import { STATUS_LABELS } from './common/constants';
 import { selectResumeInputPanelState } from './common/selectors';
 
 import { ExportActions } from './components/export-actions';
@@ -83,7 +82,7 @@ export const ResumeInputPanel = () => {
           {t(isAnalyzing ? 'analysis.cancelAction' : analysisActionKey)}
         </span>
         <span className={clsx(styles.root__primaryButtonStatus, STATUS_CLASS_NAMES[status])}>
-          {STATUS_LABELS[status]}
+          {t(`analysis.status.${status}`)}
         </span>
       </Button>
 

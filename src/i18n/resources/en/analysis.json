@@ -17,6 +17,139 @@
   "copiedResume": "Resume copied.",
   "expand": "Expand the full resume text",
   "collapse": "Collapse resume text",
+  "workspaceLoading": "Loading workspace",
+  "status": {
+    "idle": "Upload a resume",
+    "parsing": "Reading file",
+    "ready": "Ready for analysis",
+    "analyzing": "Analyzing",
+    "translating": "Translating",
+    "done": "Recommendations ready",
+    "error": "Needs attention"
+  },
+  "unsupportedModel": {
+    "openChrome": "Open in Chrome",
+    "downloadChrome": "Download Chrome"
+  },
+  "export": {
+    "title": "Download recommendations",
+    "copy": "Copy recommendations",
+    "copied": "Recommendations copied."
+  },
+  "atsKeywords": {
+    "title": "ATS keywords",
+    "summary": "{{score}}/100 · found {{matchedCount}} · missing {{missingCount}}"
+  },
+  "sectionScores": {
+    "title": "Section scores",
+    "emptyTitle": "Sections have not been scored yet",
+    "emptyDescription": "Scores for the key resume sections will appear here after analysis."
+  },
+  "advice": {
+    "correctedResumeAction": "View corrected resume",
+    "emptyTitle": "No data yet",
+    "missingKeywordsCopied": "Keywords copied.",
+    "score": {
+      "title": "Score",
+      "empty": "The score will appear after analysis."
+    },
+    "summary": {
+      "title": "Summary",
+      "empty": "Run the analysis to get a concise assessment of your profile."
+    },
+    "rewrittenSummary": {
+      "title": "New summary",
+      "empty": "A stronger version of your summary section will appear here after analysis."
+    },
+    "strengths": {
+      "title": "Strengths",
+      "empty": "The analysis will highlight the strong signals already working in your resume."
+    },
+    "gaps": {
+      "title": "Gaps",
+      "empty": "Weak points such as unsupported skills, gaps, and unclear wording will appear here."
+    },
+    "missingKeywords": {
+      "title": "Missing keywords",
+      "empty": "Add a job description and run the analysis to see missing ATS terms.",
+      "copy": "Copy missing keywords"
+    },
+    "bulletImprovements": {
+      "title": "Experience bullet improvements",
+      "empty": "Targeted improvements for your bullet points will appear here after analysis."
+    },
+    "actions": {
+      "title": "What to improve",
+      "empty": "The next steps for strengthening your resume will appear here."
+    },
+    "rewriteComparison": {
+      "title": "Before / after",
+      "before": "Before",
+      "after": "After",
+      "emptyTitle": "No comparisons yet",
+      "emptyDescription": "Targeted rewrites will appear here after analysis."
+    }
+  },
+  "atsAudit": {
+    "title": "Deterministic ATS audit",
+    "subtitle": "A structure and readability check performed without an AI model.",
+    "summary": "Passed: {{passedCount}} · warnings: {{warningCount}} · errors: {{failedCount}}",
+    "notIncluded": "Not included",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone",
+      "professional-link": "Professional link",
+      "summary-section": "Professional summary",
+      "experience-section": "Work experience",
+      "skills-section": "Skills",
+      "education-section": "Education",
+      "dates": "Dates",
+      "bullets": "Experience bullet points",
+      "metrics": "Measurable results",
+      "length": "Resume length",
+      "vacancy-keywords": "Job keywords"
+    },
+    "messages": {
+      "emailFound": "An ATS-readable email address was found.",
+      "emailMissing": "Add an email address to the contact information section.",
+      "phoneFound": "A phone number was found.",
+      "phoneMissing": "Add a phone number with the country code.",
+      "linkFound": "A profile or portfolio link was found.",
+      "linkMissing": "Add a LinkedIn, GitHub, or portfolio link.",
+      "summaryFound": "The summary section uses a standard heading.",
+      "summaryMissing": "Add a Summary or Profile section with a standard heading.",
+      "experienceFound": "The experience section uses a standard heading.",
+      "experienceMissing": "Add a Work Experience or Professional Experience section.",
+      "skillsFound": "The skills section uses a standard heading.",
+      "skillsMissing": "Add a dedicated Skills section.",
+      "educationFound": "The education section uses a standard heading.",
+      "educationMissing": "Add an Education section if applicable.",
+      "datesFound": "Distinct year values found: {{count}}.",
+      "datesMissing": "Use explicit years or date ranges for experience and education.",
+      "bulletsFound": "Bullet points found: {{count}}.",
+      "bulletsMissing": "Format responsibilities and achievements as a bulleted list.",
+      "metricsFound": "Lines with measurable results: {{count}}.",
+      "metricsMissing": "Add percentages, volumes, or numbers of projects and users.",
+      "lengthRecommended": "{{count}} words — suitable for automated parsing.",
+      "lengthOutsideRange": "{{count}} words. The recommended range is 250–1,200 words.",
+      "keywordsMissingVacancy": "Add a job description to enable keyword coverage analysis.",
+      "keywordsCoverage": "Job keyword coverage: {{score}}% ({{matchedCount}} of {{totalCount}})."
+    }
+  },
+  "scoreBreakdown": {
+    "title": "Score breakdown",
+    "atsCompatibility": "ATS compatibility",
+    "emptyTitle": "The score breakdown will appear after analysis",
+    "emptyDescription": "Add a resume and job description to see the ATS and text quality contributions.",
+    "sections": {
+      "education": "Education",
+      "experience": "Experience",
+      "keywords": "Keywords",
+      "metrics": "Metrics",
+      "skills": "Skills",
+      "summary": "Summary"
+    }
+  },
   "progress": {
     "title": "Document processing",
     "preparing": "Preparing the text",

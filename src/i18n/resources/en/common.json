@@ -8,5 +8,7 @@
   "copy": "Copy",
   "copied": "Copied.",
   "loading": "Loading",
-  "noData": "No data yet"
+  "noData": "No data yet",
+  "expandBlock": "Expand section",
+  "collapseBlock": "Collapse section"
 }

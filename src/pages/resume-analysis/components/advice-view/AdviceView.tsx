@@ -1,4 +1,5 @@
 import { Copy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { APP_ROUTES } from '@common/constants/routes';
@@ -15,13 +16,14 @@ import { SectionScoreList } from './components/section-score-list';
 import styles from './AdviceView.module.scss';
 
 export const AdviceView = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const advice = useResumeStore((state) => state.advice);
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
   const missingKeywords = advice?.missingKeywords ?? [];
 
   const onMissingKeywordsCopyClick = () => {
-    void copyToClipboardWithNotification(missingKeywords.join(', '), 'Ключевые слова скопированы.');
+    void copyToClipboardWithNotification(missingKeywords.join(', '), t('analysis.advice.missingKeywordsCopied'));
   };
 
   const onCorrectedResumeClick = () => {
@@ -38,43 +40,43 @@ export const AdviceView = () => {
         variant="primary"
         onClick={onCorrectedResumeClick}
       >
-        Посмотреть исправленное резюме
+        {t('analysis.advice.correctedResumeAction')}
       </Button>
       <ScoreBreakdown />
       <SectionScoreList scores={advice?.sectionScores ?? []} />
       <AdviceBlock
-        title="Кратко"
+        title={t('analysis.advice.summary.title')}
         values={advice ? [advice.summary] : []}
-        empty="Запустите анализ, чтобы получить короткое резюме по качеству профиля."
+        empty={t('analysis.advice.summary.empty')}
         wide
       />
       <AdviceBlock
-        title="Новый профиль"
+        title={t('analysis.advice.rewrittenSummary.title')}
         values={advice ? [advice.rewrittenSummary] : []}
-        empty="После анализа здесь появится более сильная версия блока summary."
+        empty={t('analysis.advice.rewrittenSummary.empty')}
         wide
       />
       <RewriteComparisonList suggestions={advice?.rewriteSuggestions ?? []} />
       <AdviceBlock
         wide
-        title="Сильные стороны"
+        title={t('analysis.advice.strengths.title')}
         values={advice?.strengths ?? []}
-        empty="Анализ выделит сильные сигналы, которые уже работают в резюме."
+        empty={t('analysis.advice.strengths.empty')}
       />
       <AdviceBlock
         wide
-        title="Пробелы"
+        title={t('analysis.advice.gaps.title')}
         values={advice?.gaps ?? []}
-        empty="Здесь появятся слабые места: недоказанные навыки, разрывы и неясные формулировки."
+        empty={t('analysis.advice.gaps.empty')}
       />
       <AdviceBlock
-        title="Недостающие ключевые слова"
+        title={t('analysis.advice.missingKeywords.title')}
         values={missingKeywords}
-        empty="Добавьте описание вакансии и запустите анализ, чтобы увидеть недостающие ATS-термины."
+        empty={t('analysis.advice.missingKeywords.empty')}
         headerAction={
           missingKeywords.length > 0 ? (
             <Button
-              aria-label="Скопировать недостающие ключевые слова"
+              aria-label={t('analysis.advice.missingKeywords.copy')}
               size="small"
               onClick={onMissingKeywordsCopyClick}
             >
@@ -85,15 +87,15 @@ export const AdviceView = () => {
         wide
       />
       <AdviceBlock
-        title="Правки пунктов опыта"
+        title={t('analysis.advice.bulletImprovements.title')}
         values={advice?.bulletImprovements ?? []}
-        empty="После анализа здесь появятся точечные правки bullet points."
+        empty={t('analysis.advice.bulletImprovements.empty')}
         wide
       />
       <AdviceBlock
-        title="Что улучшить"
+        title={t('analysis.advice.actions.title')}
         values={advice?.actions ?? []}
-        empty="Здесь будет список следующих действий по усилению резюме."
+        empty={t('analysis.advice.actions.empty')}
         wide
       />
     </section>

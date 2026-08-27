@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 import { CollapsibleBlock, EmptyState } from '@components/ui';
 
@@ -14,6 +15,8 @@ export const AdviceBlock = ({
   headerAction,
   wide = false,
 }: AdviceBlockProps) => {
+  const { t } = useTranslation();
+
   return (
     <CollapsibleBlock
       className={clsx(styles.root, {
@@ -32,7 +35,7 @@ export const AdviceBlock = ({
           ))}
         </ul>
       ) : (
-        <EmptyState description={empty} title="Данных пока нет" />
+        <EmptyState description={empty} title={t('analysis.advice.emptyTitle')} />
       )}
     </CollapsibleBlock>
   );

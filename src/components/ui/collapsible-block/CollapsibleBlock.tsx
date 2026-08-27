@@ -2,6 +2,7 @@ import { useId, useState } from 'react';
 
 import clsx from 'clsx';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import type { CollapsibleBlockProps } from './types';
 
@@ -16,6 +17,7 @@ export const CollapsibleBlock = ({
   headerAction,
   title,
 }: CollapsibleBlockProps) => {
+  const { t } = useTranslation();
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
   const contentId = useId();
 
@@ -30,7 +32,7 @@ export const CollapsibleBlock = ({
         <div className={styles.root__actions}>
           {headerAction}
           <Button
-            aria-label={isCollapsed ? 'Развернуть блок' : 'Свернуть блок'}
+            aria-label={t(isCollapsed ? 'common.expandBlock' : 'common.collapseBlock')}
             aria-controls={contentId}
             aria-expanded={!isCollapsed}
             className={styles.root__toggle}

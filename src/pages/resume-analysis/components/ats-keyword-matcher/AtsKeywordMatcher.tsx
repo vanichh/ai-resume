@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 import { useAtsMatch } from '@common/hooks/useAtsMatch';
 
 import styles from './AtsKeywordMatcher.module.scss';
 
 export const AtsKeywordMatcher = () => {
+  const { t } = useTranslation();
   const match = useAtsMatch();
 
   if (match.keywords.length === 0) {
@@ -13,9 +15,13 @@ export const AtsKeywordMatcher = () => {
 
   return (
     <section className={styles.root}>
-      <h2 className={styles.root__title}>Ключевые слова ATS</h2>
+      <h2 className={styles.root__title}>{t('analysis.atsKeywords.title')}</h2>
       <p className={styles.root__summary}>
-        {match.score}/100 · найдено {match.matchedCount} · не хватает {match.missingCount}
+        {t('analysis.atsKeywords.summary', {
+          matchedCount: match.matchedCount,
+          missingCount: match.missingCount,
+          score: match.score,
+        })}
       </p>
       <div className={styles.root__keywords}>
         {match.keywords.map((keyword) => (

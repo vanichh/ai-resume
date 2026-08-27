@@ -179,13 +179,53 @@ export type AtsMatchType = {
 
 export type AtsAuditCheckStatusType = 'failed' | 'passed' | 'skipped' | 'warning';
 
+export type AtsAuditCheckIdType =
+  | 'bullets'
+  | 'dates'
+  | 'education-section'
+  | 'email'
+  | 'experience-section'
+  | 'length'
+  | 'metrics'
+  | 'phone'
+  | 'professional-link'
+  | 'skills-section'
+  | 'summary-section'
+  | 'vacancy-keywords';
+
+export type AtsAuditCheckMessageType =
+  | 'bulletsFound'
+  | 'bulletsMissing'
+  | 'datesFound'
+  | 'datesMissing'
+  | 'educationFound'
+  | 'educationMissing'
+  | 'emailFound'
+  | 'emailMissing'
+  | 'experienceFound'
+  | 'experienceMissing'
+  | 'keywordsCoverage'
+  | 'keywordsMissingVacancy'
+  | 'lengthOutsideRange'
+  | 'lengthRecommended'
+  | 'linkFound'
+  | 'linkMissing'
+  | 'metricsFound'
+  | 'metricsMissing'
+  | 'phoneFound'
+  | 'phoneMissing'
+  | 'skillsFound'
+  | 'skillsMissing'
+  | 'summaryFound'
+  | 'summaryMissing';
+
 export type AtsAuditCheckType = {
-  description: string;
   earnedPoints: number;
-  id: string;
-  label: string;
+  id: AtsAuditCheckIdType;
   maxPoints: number;
+  message: AtsAuditCheckMessageType;
   status: AtsAuditCheckStatusType;
+  values?: Record<string, number>;
 };
 
 export type AtsAuditType = {

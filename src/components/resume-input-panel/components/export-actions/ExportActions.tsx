@@ -1,4 +1,5 @@
 import { Copy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 import { Button } from '@components/ui';
@@ -9,6 +10,7 @@ import type { ExportActionsProps } from './types';
 import styles from './ExportActions.module.scss';
 
 export const ExportActions = ({ advice }: ExportActionsProps) => {
+  const { t } = useTranslation();
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
 
   const onMarkdownDownloadClick = () => {
@@ -24,12 +26,12 @@ export const ExportActions = ({ advice }: ExportActionsProps) => {
   };
 
   const onCopyClick = () => {
-    void copyToClipboardWithNotification(JSON.stringify(advice, null, 2), 'Рекомендации скопированы.');
+    void copyToClipboardWithNotification(JSON.stringify(advice, null, 2), t('analysis.export.copied'));
   };
 
   return (
     <>
-      <p className={styles.root__title}>Скачать рекомендации</p>
+      <p className={styles.root__title}>{t('analysis.export.title')}</p>
       <div className={styles.root__row}>
         <Button fullWidth size="large" onClick={onMarkdownDownloadClick}>
           MD
@@ -40,7 +42,7 @@ export const ExportActions = ({ advice }: ExportActionsProps) => {
         <Button fullWidth size="large" onClick={onReportHtmlDownloadClick}>
           PDF HTML
         </Button>
-        <Button aria-label="Копировать рекомендации" fullWidth size="large" onClick={onCopyClick}>
+        <Button aria-label={t('analysis.export.copy')} fullWidth size="large" onClick={onCopyClick}>
           <Copy aria-hidden size={18} />
         </Button>
       </div>

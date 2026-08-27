@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 import { Copy, Maximize2, Minimize2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
@@ -19,6 +20,7 @@ import styles from './ResumePreview.module.scss';
 const COMPACT_TEXT_HEIGHT = 240;
 
 export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProps) => {
+  const { i18n, t } = useTranslation();
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
   const [isTextExpanded, setIsTextExpanded] = useState(defaultTextExpanded);
   const [expandedTextHeight, setExpandedTextHeight] = useState<number | null>(null);
@@ -26,7 +28,7 @@ export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProp
   const { resumeText, setResumeText } = useResumeStore(useShallow(selectResumePreviewState));
 
   const onCopyClick = () => {
-    void copyToClipboardWithNotification(resumeText, 'Резюме скопировано.');
+    void copyToClipboardWithNotification(resumeText, t('analysis.copiedResume'));
   };
 
   const onDocDownloadClick = () => {
@@ -60,16 +62,18 @@ export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProp
       className={styles.root}
       headerAction={
         <div className={styles.root__actions}>
-          <span>{resumeText.length.toLocaleString('ru-RU')} символов</span>
+          <span>
+            {resumeText.length.toLocaleString(i18n.resolvedLanguage)} {t('analysis.characters')}
+          </span>
           <Button
-            aria-label={isTextExpanded ? 'Свернуть текст резюме' : 'Раскрыть текст резюме полностью'}
+            aria-label={t(isTextExpanded ? 'analysis.collapse' : 'analysis.expand')}
             aria-pressed={isTextExpanded}
             size="small"
             onClick={onTextExpandToggleClick}
           >
             {isTextExpanded ? <Minimize2 aria-hidden size={16} /> : <Maximize2 aria-hidden size={16} />}
           </Button>
-          <Button aria-label="Копировать резюме" disabled={!resumeText} size="small" onClick={onCopyClick}>
+          <Button aria-label={t('analysis.copyResume')} disabled={!resumeText} size="small" onClick={onCopyClick}>
             <Copy aria-hidden size={16} />
           </Button>
           <Button disabled={!resumeText} size="small" onClick={onDocDownloadClick}>
@@ -80,13 +84,13 @@ export const ResumePreview = ({ defaultTextExpanded = false }: ResumePreviewProp
           </Button>
         </div>
       }
-      title="Текст резюме"
+      title={t('analysis.resumeText')}
     >
       <Textarea
         className={clsx(styles.root__text, {
           [styles.root__text_expanded]: isTextExpanded,
         })}
-        placeholder="После загрузки здесь появится извлеченный текст."
+        placeholder={t('analysis.resumePlaceholder')}
         ref={textareaRef}
         style={isTextExpanded && expandedTextHeight ? { height: expandedTextHeight } : undefined}
         variant="code"

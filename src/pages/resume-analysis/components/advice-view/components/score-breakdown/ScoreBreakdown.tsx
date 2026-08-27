@@ -1,4 +1,5 @@
 import { Gauge } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { useAtsAudit } from '@common/hooks/useAtsAudit';
 import { CollapsibleBlock, EmptyState } from '@components/ui';
@@ -9,13 +10,24 @@ import { getScoreBreakdownItems } from './common/utils/getScoreBreakdownItems';
 import styles from './ScoreBreakdown.module.scss';
 
 export const ScoreBreakdown = () => {
+  const { t } = useTranslation();
   const advice = useResumeStore((state) => state.advice);
   const atsAudit = useAtsAudit();
 
-  const items = getScoreBreakdownItems(advice, atsAudit);
+  const items = getScoreBreakdownItems(advice, atsAudit, {
+    atsAudit: t('analysis.scoreBreakdown.atsCompatibility'),
+    sections: {
+      education: t('analysis.scoreBreakdown.sections.education'),
+      experience: t('analysis.scoreBreakdown.sections.experience'),
+      keywords: t('analysis.scoreBreakdown.sections.keywords'),
+      metrics: t('analysis.scoreBreakdown.sections.metrics'),
+      skills: t('analysis.scoreBreakdown.sections.skills'),
+      summary: t('analysis.scoreBreakdown.sections.summary'),
+    },
+  });
 
   return (
-    <CollapsibleBlock className={styles.root} title="Детализация оценки">
+    <CollapsibleBlock className={styles.root} title={t('analysis.scoreBreakdown.title')}>
       {items.length > 0 ? (
         <ul className={styles.root__list}>
           {items.map((item) => (
@@ -32,9 +44,9 @@ export const ScoreBreakdown = () => {
         </ul>
       ) : (
         <EmptyState
-          description="Добавьте резюме и описание вакансии, чтобы увидеть вклад ATS и качества текста."
+          description={t('analysis.scoreBreakdown.emptyDescription')}
           icon={<Gauge aria-hidden size={18} />}
-          title="Детализация появится после анализа"
+          title={t('analysis.scoreBreakdown.emptyTitle')}
         />
       )}
     </CollapsibleBlock>
