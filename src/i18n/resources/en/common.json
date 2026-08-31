@@ -1,4 +1,5 @@
 {
+  "appTitle": "AI Resume Review — in-browser resume analysis",
   "cancel": "Cancel",
   "confirm": "Confirm",
   "close": "Close",
@@ -10,5 +11,7 @@
   "loading": "Loading",
   "noData": "No data yet",
   "expandBlock": "Expand section",
-  "collapseBlock": "Collapse section"
+  "collapseBlock": "Collapse section",
+  "closeDialog": "Close dialog",
+  "closeNotification": "Close notification"
 }

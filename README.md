@@ -99,7 +99,7 @@ npm run preview
 
 Prettier отвечает за форматирование и сортировку импортов.
 
-- `pre-commit`: запускает `npm run lint` и `npm run format:check`.
+- `pre-commit`: запускает lint, typecheck, Stylelint, проверку форматирования и тесты.
 - `pre-push`: запускает `npm run build`.
 
 Husky устанавливается автоматически через `prepare` script после `npm install`.

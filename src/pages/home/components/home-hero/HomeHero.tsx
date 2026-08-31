@@ -31,12 +31,12 @@ export const HomeHero = () => {
         </Link>
       </div>
       <ul className={styles.root__features}>
-        {HOME_FEATURES.map(({ description, icon, title }) => (
-          <li key={title} className={styles.root__feature}>
+        {HOME_FEATURES.map(({ descriptionKey, icon, titleKey }) => (
+          <li key={titleKey} className={styles.root__feature}>
             <HomeIcon name={icon} />
             <div className={styles.root__featureText}>
-              <h2 className={styles.root__featureTitle}>{title}</h2>
-              <p className={styles.root__featureDescription}>{description}</p>
+              <h2 className={styles.root__featureTitle}>{t(titleKey)}</h2>
+              <p className={styles.root__featureDescription}>{t(descriptionKey)}</p>
             </div>
           </li>
         ))}

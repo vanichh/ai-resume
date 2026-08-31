@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { generateCorrectedResume } from '@services/corrected-resume-generator';
 
 import type { ResumeSliceCreatorType } from './types';
@@ -29,7 +31,7 @@ export const createCorrectedResumeSlice: ResumeSliceCreatorType<CorrectedResumeA
       set({
         correctedResumeStatus: 'error',
         downloadProgress: null,
-        error: getErrorMessage(caught, 'Не удалось создать исправленное резюме.'),
+        error: getErrorMessage(caught, i18n.t('workspace.errors.correctedResume')),
       });
     }
   },

@@ -13,11 +13,14 @@ import type {
 } from '@common/types';
 
 export type StoredResumeWorkspaceType = {
+  activeAnalysisId: string | null;
   advice: ResumeAdviceType | null;
   analysisHistory: ResumeAnalysisHistoryItemType[];
   comparisonVacancies: VacancyComparisonItemType[];
   coverLetter: CoverLetterType | null;
+  coverLetterCompanyName: string;
   coverLetterCompanyType: CoverLetterCompanyType;
+  coverLetterHistory: CoverLetterType[];
   coverLetterLength: CoverLetterLengthType;
   coverLetterTone: CoverLetterToneType;
   coverLetterVariantsCount: number;

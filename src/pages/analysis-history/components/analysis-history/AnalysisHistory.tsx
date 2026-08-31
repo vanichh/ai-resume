@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Clock3, Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 import { Button, CollapsibleBlock, EmptyState, Modal } from '@components/ui';
@@ -13,6 +14,7 @@ import { AnalysisHistoryItem } from './components/analysis-history-item';
 import styles from './AnalysisHistory.module.scss';
 
 export const AnalysisHistory = () => {
+  const { t } = useTranslation();
   const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
   const {
     clearAnalysisHistory,
@@ -41,12 +43,12 @@ export const AnalysisHistory = () => {
         className={styles.root}
         headerAction={
           history.length > 0 ? (
-            <Button aria-label="Очистить историю анализа" size="small" onClick={onClearConfirmOpen}>
+            <Button aria-label={t('workspace.history.clearAria')} size="small" onClick={onClearConfirmOpen}>
               <Trash2 aria-hidden size={16} />
             </Button>
           ) : null
         }
-        title="История анализов"
+        title={t('workspace.history.title')}
       >
         {history.length > 0 ? (
           <ul className={styles.root__list}>
@@ -62,17 +64,17 @@ export const AnalysisHistory = () => {
           </ul>
         ) : (
           <EmptyState
-            description="После первого анализа здесь появятся сохраненные результаты и заметки."
+            description={t('workspace.history.emptyDescription')}
             icon={<Clock3 aria-hidden size={18} />}
-            title="История пока пустая"
+            title={t('workspace.history.emptyTitle')}
           />
         )}
       </CollapsibleBlock>
       <Modal
-        confirmLabel="Очистить"
-        description="История анализов будет удалена без возможности восстановления."
+        confirmLabel={t('common.clear')}
+        description={t('workspace.history.clearDescription')}
         isOpen={isClearConfirmOpen}
-        title="Очистить историю?"
+        title={t('workspace.history.clearTitle')}
         onClose={onClearConfirmClose}
         onConfirm={onClearConfirm}
       />

@@ -13,5 +13,82 @@
   "processTitle": "How it works",
   "processText": "The workflow is built for quick iterations: upload a resume, define the goal, apply improvements, and review the next version.",
   "useCasesTitle": "When it is useful",
-  "useCasesText": "Make decisions based on a specific role and vacancy requirements instead of rewriting your resume blindly."
+  "useCasesText": "Make decisions based on a specific role and vacancy requirements instead of rewriting your resume blindly.",
+  "features": {
+    "local": {
+      "title": "Runs locally",
+      "description": "Resume text stays in the browser and is not sent to an external server."
+    },
+    "target": {
+      "title": "Evaluates role fit",
+      "description": "Compares the resume with the target position, ATS keywords, and vacancy requirements."
+    },
+    "application": {
+      "title": "Supports applications",
+      "description": "Prepares recommendations, translations, vacancy comparisons, and cover letters."
+    }
+  },
+  "previewSteps": {
+    "profile": "Profile",
+    "keywords": "Keywords",
+    "metrics": "Metrics"
+  },
+  "capabilities": {
+    "analysis": {
+      "title": "Resume analysis",
+      "description": "Review the overall score, summary, experience, education, skills, keywords, and metrics."
+    },
+    "recommendations": {
+      "title": "Text recommendations",
+      "description": "See weak points, strengths, missing keywords, and targeted rewrite suggestions."
+    },
+    "ats": {
+      "title": "ATS and vacancy",
+      "description": "Paste a vacancy, compare keyword coverage, and identify what is missing for the role."
+    },
+    "translation": {
+      "title": "Resume translation",
+      "description": "Translate the resume in a formal, concise, ATS-friendly, or recruiter-friendly tone."
+    },
+    "comparison": {
+      "title": "Vacancy comparison",
+      "description": "Compare several vacancies to see which one best fits the current resume."
+    },
+    "coverLetter": {
+      "title": "Cover letter",
+      "description": "Prepare a draft from the resume and vacancy, then tailor it for a specific application."
+    }
+  },
+  "workflow": {
+    "upload": {
+      "title": "1. Upload a file",
+      "description": "PDF, DOCX, TXT, and MD are supported. Text is extracted directly in the browser."
+    },
+    "target": {
+      "title": "2. Define the goal",
+      "description": "Add a role or vacancy to make the recommendations specific and actionable."
+    },
+    "improvements": {
+      "title": "3. Apply improvements",
+      "description": "Use the score, recommendations, exports, and analysis history for the next iteration."
+    },
+    "iterate": {
+      "title": "4. Improve the resume",
+      "description": "Refine key sections and increase the chances of a response."
+    }
+  },
+  "useCases": {
+    "application": {
+      "title": "Before applying",
+      "description": "Quickly check how closely the resume matches a vacancy."
+    },
+    "translation": {
+      "title": "Before translating",
+      "description": "Prepare an English version without losing structure or key wording."
+    },
+    "roleChange": {
+      "title": "Before changing roles",
+      "description": "Identify which skills and achievements should be emphasized for a new position."
+    }
+  }
 }

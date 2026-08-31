@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import type { CoverLetterVariantType } from '@common/types';
 import { createId } from '@common/utils/createId';
 
@@ -11,6 +13,6 @@ export const parseCoverLetterVariants = (text: string): CoverLetterVariantType[]
     .map((variantText, index) => ({
       id: createId(),
       text: variantText,
-      title: `Вариант ${index + 1}`,
+      title: i18n.t('workspace.coverLetter.variantTitle', { count: index + 1 }),
     }));
 };

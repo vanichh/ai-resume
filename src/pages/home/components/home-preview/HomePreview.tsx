@@ -24,10 +24,10 @@ export const HomePreview = () => {
       </div>
       <p className={styles.root__role}>Lead Frontend Developer</p>
       <ul className={styles.root__steps}>
-        {HOME_PREVIEW_STEPS.map(({ progress, score, title }) => (
-          <li key={title} className={styles.root__step}>
+        {HOME_PREVIEW_STEPS.map(({ progress, score, titleKey }) => (
+          <li key={titleKey} className={styles.root__step}>
             <div className={styles.root__stepHeader}>
-              <span>{title}</span>
+              <span>{t(titleKey)}</span>
               <strong>{score}</strong>
             </div>
             <div className={styles.root__track}>

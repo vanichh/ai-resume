@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { Languages } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 import { EmptyState, Loader } from '@components/ui';
@@ -19,6 +20,7 @@ import { TranslationControlPanel } from './components/translation-control-panel'
 import styles from './TranslationPage.module.scss';
 
 export const TranslationPage = () => {
+  const { t } = useTranslation();
   const { translation } = useResumeStore(useShallow(selectTranslationPageState));
 
   return (
@@ -28,7 +30,7 @@ export const TranslationPage = () => {
         <Suspense
           fallback={
             <div className={styles.root__loader}>
-              <Loader label="Загрузка страницы перевода" />
+              <Loader label={t('workspace.translation.pageLoading')} />
             </div>
           }
         >
@@ -36,9 +38,9 @@ export const TranslationPage = () => {
             <ResumeTranslationPreview />
           ) : (
             <EmptyState
-              description="Загрузите резюме, выберите язык и запустите перевод."
+              description={t('workspace.translation.emptyDescription')}
               icon={<Languages aria-hidden size={18} />}
-              title="Перевод появится здесь"
+              title={t('workspace.translation.emptyTitle')}
             />
           )}
           <TranslationHistory />

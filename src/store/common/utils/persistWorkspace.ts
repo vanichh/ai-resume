@@ -4,11 +4,14 @@ import type { ResumeStoreType } from '../../types';
 
 export const persistWorkspace = (state: ResumeStoreType): void => {
   saveResumeWorkspace({
+    activeAnalysisId: state.activeAnalysisId,
     advice: state.advice,
     analysisHistory: state.analysisHistory,
     comparisonVacancies: state.comparisonVacancies,
     coverLetter: state.coverLetter,
+    coverLetterCompanyName: state.coverLetterCompanyName,
     coverLetterCompanyType: state.coverLetterCompanyType,
+    coverLetterHistory: state.coverLetterHistory,
     coverLetterLength: state.coverLetterLength,
     coverLetterTone: state.coverLetterTone,
     coverLetterVariantsCount: state.coverLetterVariantsCount,

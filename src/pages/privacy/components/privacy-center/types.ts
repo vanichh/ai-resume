@@ -1,13 +1,21 @@
 export type PrivacyStorageItemType = {
-  label: string;
+  labelKey:
+    | 'workspace.privacy.items.comparisons'
+    | 'workspace.privacy.items.coverLetter'
+    | 'workspace.privacy.items.history'
+    | 'workspace.privacy.items.resume'
+    | 'workspace.privacy.items.size'
+    | 'workspace.privacy.items.translations';
   value: string | number;
 };
 
 export type GetPrivacyStorageItemsParamsType = {
   analysisHistoryCount: number;
   comparisonVacanciesCount: number;
-  hasCoverLetter: boolean;
+  coverLetterHistoryCount: number;
   resumeText: string;
+  saved: string;
+  notSaved: string;
   storageSize: string;
   translationHistoryCount: number;
 };

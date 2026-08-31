@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import {
   DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE,
   RESUME_TRANSLATION_BROWSER_LANGUAGE_CODES,
@@ -8,11 +10,7 @@ import {
 import type { ResumeTranslationLanguageType, ResumeTranslationToneType, ResumeTranslationType } from '@common/types';
 import { createId } from '@common/utils/createId';
 
-import {
-  TRANSLATION_MAX_ATTEMPTS,
-  TRANSLATION_SYSTEM_PROMPT,
-  UNCHANGED_TRANSLATION_ERROR_MESSAGE,
-} from './common/constants';
+import { TRANSLATION_MAX_ATTEMPTS, TRANSLATION_SYSTEM_PROMPT } from './common/constants';
 import { buildTranslationPromptContent } from './common/utils/buildTranslationPromptContent';
 import { isTranslationLikelyUnchanged } from './common/utils/isTranslationLikelyUnchanged';
 import { splitResumeForTranslation } from './common/utils/splitResumeForTranslation';
@@ -26,7 +24,7 @@ const translateWithLanguageModel = async (
   onModelReady?: () => void,
 ): Promise<string> => {
   if (!globalThis.LanguageModel) {
-    throw new Error('LanguageModel API недоступен в этом браузере.');
+    throw new Error(i18n.t('workspace.errors.languageModelUnavailable'));
   }
 
   const session = await globalThis.LanguageModel.create({
@@ -82,7 +80,7 @@ const translateWithLanguageModel = async (
       }
 
       if (isTranslationLikelyUnchanged(resumeChunk, translatedChunk, language)) {
-        throw new Error(UNCHANGED_TRANSLATION_ERROR_MESSAGE);
+        throw new Error(i18n.t('workspace.errors.unchangedTranslation'));
       }
 
       translatedChunks.push(translatedChunk);

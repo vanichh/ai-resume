@@ -1,21 +1,19 @@
 import type { ModelStatusType } from '@common/types';
 
-export const MODEL_STATUS_TITLE: Record<ModelStatusType, string> = {
-  available: 'Модель доступна',
-  checking: 'Проверяем поддержку браузера',
-  downloadable: 'Chrome готов скачать модель',
-  downloading: 'Chrome скачивает модель',
-  unavailable: 'Модель недоступна в текущем Chrome',
-  unsupported: 'Нужен Chrome с LanguageModel API',
-};
+export const MODEL_STATUS_TITLE = {
+  available: 'workspace.unsupported.titles.available',
+  checking: 'workspace.unsupported.titles.checking',
+  downloadable: 'workspace.unsupported.titles.downloadable',
+  downloading: 'workspace.unsupported.titles.downloading',
+  unavailable: 'workspace.unsupported.titles.unavailable',
+  unsupported: 'workspace.unsupported.titles.unsupported',
+} as const satisfies Record<ModelStatusType, string>;
 
-export const MODEL_STATUS_DESCRIPTION: Record<ModelStatusType, string> = {
-  available: 'Можно вернуться к работе с резюме.',
-  checking: 'Подождите несколько секунд или запустите повторную проверку.',
-  downloadable: 'Откройте приложение в поддерживаемом Chrome и запустите анализ: браузер сам начнет загрузку модели.',
-  downloading: 'Дождитесь завершения загрузки модели в Chrome.',
-  unavailable:
-    'LanguageModel API есть, но модель недоступна для текущего профиля, устройства или настроек Chrome. Обновите Chrome и проверьте доступность встроенной AI-модели.',
-  unsupported:
-    'Текущий браузер не предоставляет LanguageModel API. Для локального анализа резюме откройте приложение в Chrome с поддержкой встроенной AI-модели.',
-};
+export const MODEL_STATUS_DESCRIPTION = {
+  available: 'workspace.unsupported.descriptions.available',
+  checking: 'workspace.unsupported.descriptions.checking',
+  downloadable: 'workspace.unsupported.descriptions.downloadable',
+  downloading: 'workspace.unsupported.descriptions.downloading',
+  unavailable: 'workspace.unsupported.descriptions.unavailable',
+  unsupported: 'workspace.unsupported.descriptions.unsupported',
+} as const satisfies Record<ModelStatusType, string>;

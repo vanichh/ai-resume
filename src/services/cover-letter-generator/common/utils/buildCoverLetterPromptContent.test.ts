@@ -5,8 +5,10 @@ import type { ResumeAdviceType } from '@common/types';
 import { buildCoverLetterPromptContent } from './buildCoverLetterPromptContent';
 
 const options = {
+  companyName: 'Acme',
   companyType: 'startup' as const,
   length: 'short' as const,
+  sourceAnalysisId: 'analysis-1',
   tone: 'confident' as const,
   variantsCount: 2,
 };
@@ -29,6 +31,7 @@ describe('buildCoverLetterPromptContent', () => {
     const output = buildCoverLetterPromptContent('Resume text', advice, '', 'Vacancy text', options);
 
     expect(output).toContain('Generate 2 distinct variants.');
+    expect(output).toContain('Address the letter to this company: Acme.');
     expect(output).toContain('---VARIANT---');
     expect(output).toContain('Target role: Fallback role');
     expect(output).toContain('"actions": [\n    "Add metrics"\n  ]');

@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { createId } from '@common/utils/createId';
 import { analyzeResume } from '@services/resume-advisor';
 
@@ -26,7 +28,7 @@ export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType
             advice: null,
             error: '',
             status: 'idle' as const,
-            title: `Вакансия ${state.comparisonVacancies.length + 1}`,
+            title: i18n.t('workspace.comparison.defaultTitle', { count: state.comparisonVacancies.length + 1 }),
             vacancyText: '',
           },
         ],
@@ -110,7 +112,7 @@ export const createComparisonSlice: ResumeSliceCreatorType<ComparisonActionsType
                 ? {
                     ...item,
                     advice: null,
-                    error: getErrorMessage(caught, 'Не удалось сравнить с вакансией.'),
+                    error: getErrorMessage(caught, i18n.t('workspace.errors.comparison')),
                     status: 'error' as const,
                   }
                 : item,

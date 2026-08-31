@@ -1,7 +1,10 @@
+import { i18n } from '@i18n/index';
+
 import { generateCoverLetter as createCoverLetter } from '@services/cover-letter-generator';
 
 import type { ResumeSliceCreatorType } from './types';
 
+import { COVER_LETTER_HISTORY_LIMIT } from '../common/constants';
 import { canUseModel } from '../common/utils/canUseModel';
 import { getErrorMessage } from '../common/utils/getErrorMessage';
 import { persistWorkspace } from '../common/utils/persistWorkspace';
@@ -12,6 +15,8 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
     const state = get();
     const {
       advice,
+      activeAnalysisId,
+      coverLetterCompanyName,
       coverLetterCompanyType,
       coverLetterLength,
       coverLetterTone,
@@ -39,8 +44,10 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
         targetRole,
         vacancyText,
         {
+          companyName: coverLetterCompanyName,
           companyType: coverLetterCompanyType,
           length: coverLetterLength,
+          sourceAnalysisId: activeAnalysisId,
           tone: coverLetterTone,
           variantsCount: coverLetterVariantsCount,
         },
@@ -54,6 +61,10 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
         const nextState = {
           ...state,
           coverLetter,
+          coverLetterHistory: [
+            coverLetter,
+            ...state.coverLetterHistory.filter((item) => item.id !== coverLetter.id),
+          ].slice(0, COVER_LETTER_HISTORY_LIMIT),
           coverLetterStatus: 'done' as const,
         };
 
@@ -61,6 +72,7 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
 
         return {
           coverLetter: nextState.coverLetter,
+          coverLetterHistory: nextState.coverLetterHistory,
           coverLetterStatus: nextState.coverLetterStatus,
           downloadProgress: null,
         };
@@ -69,9 +81,90 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
       set({
         coverLetterStatus: 'error',
         downloadProgress: null,
-        error: getErrorMessage(caught, 'Не удалось сгенерировать сопроводительное письмо.'),
+        error: getErrorMessage(caught, i18n.t('workspace.errors.coverLetter')),
       });
     }
+  },
+
+  removeCoverLetter(id) {
+    set((state) => {
+      const isActiveCoverLetter = state.coverLetter?.id === id;
+      const nextState = {
+        ...state,
+        coverLetter: isActiveCoverLetter ? null : state.coverLetter,
+        coverLetterHistory: state.coverLetterHistory.filter((item) => item.id !== id),
+        coverLetterStatus: isActiveCoverLetter ? ('idle' as const) : state.coverLetterStatus,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetter: nextState.coverLetter,
+        coverLetterHistory: nextState.coverLetterHistory,
+        coverLetterStatus: nextState.coverLetterStatus,
+      };
+    });
+  },
+
+  selectCoverLetter(id) {
+    const currentState = get();
+    const coverLetter = currentState.coverLetterHistory.find((item) => item.id === id);
+    if (!coverLetter) {
+      return;
+    }
+    const sourceAnalysis = currentState.analysisHistory.find((item) => item.id === coverLetter.sourceAnalysisId);
+
+    set((state) => {
+      const nextState = {
+        ...state,
+        activeAnalysisId: sourceAnalysis?.id ?? null,
+        advice: sourceAnalysis?.advice ?? null,
+        coverLetter,
+        coverLetterCompanyName: coverLetter.companyName,
+        coverLetterCompanyType: coverLetter.companyType,
+        coverLetterLength: coverLetter.length,
+        coverLetterStatus: 'done' as const,
+        coverLetterTone: coverLetter.tone,
+        fileName: sourceAnalysis?.fileName ?? state.fileName,
+        resumeText: sourceAnalysis?.resumeText ?? state.resumeText,
+        status: sourceAnalysis ? ('done' as const) : state.resumeText ? ('ready' as const) : ('idle' as const),
+        targetRole: coverLetter.targetRole,
+        vacancyText: coverLetter.vacancyText,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        activeAnalysisId: nextState.activeAnalysisId,
+        advice: nextState.advice,
+        coverLetter: nextState.coverLetter,
+        coverLetterCompanyName: nextState.coverLetterCompanyName,
+        coverLetterCompanyType: nextState.coverLetterCompanyType,
+        coverLetterLength: nextState.coverLetterLength,
+        coverLetterStatus: nextState.coverLetterStatus,
+        coverLetterTone: nextState.coverLetterTone,
+        fileName: nextState.fileName,
+        resumeText: nextState.resumeText,
+        status: nextState.status,
+        targetRole: nextState.targetRole,
+        vacancyText: nextState.vacancyText,
+      };
+    });
+  },
+
+  setCoverLetterCompanyName(coverLetterCompanyName) {
+    set((state) => {
+      const nextState = {
+        ...state,
+        coverLetterCompanyName,
+      };
+
+      persistWorkspace(nextState);
+
+      return {
+        coverLetterCompanyName: nextState.coverLetterCompanyName,
+      };
+    });
   },
 
   setCoverLetterCompanyType(coverLetterCompanyType) {
@@ -114,7 +207,7 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
         {
           id: state.coverLetter.id,
           text: state.coverLetter.text,
-          title: 'Вариант 1',
+          title: i18n.t('workspace.coverLetter.variantTitle', { count: 1 }),
         },
       ];
       const nextState = {
@@ -131,12 +224,29 @@ export const createCoverLetterSlice: ResumeSliceCreatorType<CoverLetterActionsTy
               : variant,
           ),
         },
+        coverLetterHistory: state.coverLetterHistory.map((item) =>
+          item.id === state.coverLetter?.id
+            ? {
+                ...item,
+                text,
+                variants: variants.map((variant, index) =>
+                  index === 0
+                    ? {
+                        ...variant,
+                        text,
+                      }
+                    : variant,
+                ),
+              }
+            : item,
+        ),
       };
 
       persistWorkspace(nextState);
 
       return {
         coverLetter: nextState.coverLetter,
+        coverLetterHistory: nextState.coverLetterHistory,
       };
     });
   },

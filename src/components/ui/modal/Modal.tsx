@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { X } from 'lucide-react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 import type { ModalProps } from './types';
 
@@ -11,9 +12,9 @@ import { Button } from '../button';
 import styles from './Modal.module.scss';
 
 export const Modal = ({
-  cancelLabel = 'Отмена',
+  cancelLabel,
   children,
-  confirmLabel = 'Подтвердить',
+  confirmLabel,
   confirmVariant = 'primary',
   description,
   isOpen,
@@ -21,6 +22,7 @@ export const Modal = ({
   onClose,
   onConfirm,
 }: ModalProps) => {
+  const { t } = useTranslation();
   const onContentMouseDown = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
   };
@@ -59,7 +61,7 @@ export const Modal = ({
             {title}
           </h2>
           <Button
-            aria-label="Закрыть окно"
+            aria-label={t('common.closeDialog')}
             className={styles.root__closeButton}
             size="small"
             variant="ghost"
@@ -72,11 +74,11 @@ export const Modal = ({
         {children && <div className={styles.root__body}>{children}</div>}
         <footer className={styles.root__actions}>
           <Button size="medium" variant="secondary" onClick={onClose}>
-            {cancelLabel}
+            {cancelLabel ?? t('common.cancel')}
           </Button>
           {onConfirm && (
             <Button size="medium" variant={confirmVariant} onClick={onConfirm}>
-              {confirmLabel}
+              {confirmLabel ?? t('common.confirm')}
             </Button>
           )}
         </footer>

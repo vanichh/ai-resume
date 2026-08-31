@@ -4,7 +4,7 @@ export const selectPrivacyCenterState = (state: ResumeStoreType) => ({
   analysisHistoryCount: state.analysisHistory.length,
   clearWorkspace: state.clearWorkspace,
   comparisonVacanciesCount: state.comparisonVacancies.length,
-  coverLetter: state.coverLetter,
+  coverLetterHistoryCount: state.coverLetterHistory.length,
   resumeText: state.resumeText,
   translationHistoryCount: state.translationHistory.length,
 });

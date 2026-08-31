@@ -8,12 +8,14 @@ export const createHistorySlice: ResumeSliceCreatorType<HistoryActionsType> = (s
     set((state) => {
       const nextState = {
         ...state,
+        activeAnalysisId: null,
         analysisHistory: [],
       };
 
       persistWorkspace(nextState);
 
       return {
+        activeAnalysisId: nextState.activeAnalysisId,
         analysisHistory: nextState.analysisHistory,
       };
     });
@@ -23,12 +25,14 @@ export const createHistorySlice: ResumeSliceCreatorType<HistoryActionsType> = (s
     set((state) => {
       const nextState = {
         ...state,
+        activeAnalysisId: state.activeAnalysisId === id ? null : state.activeAnalysisId,
         analysisHistory: state.analysisHistory.filter((item) => item.id !== id),
       };
 
       persistWorkspace(nextState);
 
       return {
+        activeAnalysisId: nextState.activeAnalysisId,
         analysisHistory: nextState.analysisHistory,
       };
     });
@@ -44,6 +48,7 @@ export const createHistorySlice: ResumeSliceCreatorType<HistoryActionsType> = (s
     set((state) => {
       const nextState = {
         ...state,
+        activeAnalysisId: item.id,
         advice: item.advice,
         fileName: item.fileName,
         resumeText: item.resumeText,
@@ -56,6 +61,7 @@ export const createHistorySlice: ResumeSliceCreatorType<HistoryActionsType> = (s
       persistWorkspace(nextState);
 
       return {
+        activeAnalysisId: nextState.activeAnalysisId,
         advice: nextState.advice,
         fileName: nextState.fileName,
         resumeText: nextState.resumeText,

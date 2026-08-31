@@ -1,5 +1,8 @@
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 
+import { APP_ROUTES } from '@common/constants/routes';
 import { Button, CollapsibleBlock } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
@@ -10,6 +13,8 @@ import { VacancyComparisonItem } from './components/vacancy-comparison-item';
 import styles from './VacancyComparison.module.scss';
 
 export const VacancyComparison = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const {
     addComparisonVacancy,
     analyzeComparison,
@@ -26,17 +31,22 @@ export const VacancyComparison = () => {
     void analyzeComparison();
   };
 
+  const onComparisonVacancySelect = (id: string) => {
+    selectComparisonVacancy(id);
+    void navigate(APP_ROUTES.resumeAnalysis);
+  };
+
   return (
     <CollapsibleBlock
       className={styles.root}
       headerAction={
         <Button disabled={comparisonVacancies.length >= 4} size="medium" onClick={addComparisonVacancy}>
-          Добавить
+          {t('common.add')}
         </Button>
       }
-      title="Сравнение вакансий"
+      title={t('workspace.comparison.title')}
     >
-      <p className={styles.root__subtitle}>До 4 вакансий для одного резюме.</p>
+      <p className={styles.root__subtitle}>{t('workspace.comparison.subtitle')}</p>
       {comparisonVacancies.length > 0 && (
         <div className={styles.root__list}>
           {comparisonVacancies.map((item) => (
@@ -44,7 +54,7 @@ export const VacancyComparison = () => {
               item={item}
               key={item.id}
               onRemove={removeComparisonVacancy}
-              onSelect={selectComparisonVacancy}
+              onSelect={onComparisonVacancySelect}
               onTextChange={setComparisonVacancyText}
               onTitleChange={setComparisonVacancyTitle}
             />
@@ -59,7 +69,7 @@ export const VacancyComparison = () => {
         variant="primary"
         onClick={onAnalyzeComparisonClick}
       >
-        {isComparing ? 'Сравнение...' : 'Сравнить с вакансиями'}
+        {isComparing ? t('workspace.comparison.comparing') : t('workspace.comparison.compare')}
       </Button>
     </CollapsibleBlock>
   );

@@ -3,33 +3,35 @@ import type { GetPrivacyStorageItemsParamsType, PrivacyStorageItemType } from '.
 export const getPrivacyStorageItems = ({
   analysisHistoryCount,
   comparisonVacanciesCount,
-  hasCoverLetter,
+  coverLetterHistoryCount,
+  notSaved,
   resumeText,
+  saved,
   storageSize,
   translationHistoryCount,
 }: GetPrivacyStorageItemsParamsType): PrivacyStorageItemType[] => [
   {
-    label: 'Текст резюме',
-    value: resumeText ? 'сохранен' : 'не сохранен',
+    labelKey: 'workspace.privacy.items.resume',
+    value: resumeText ? saved : notSaved,
   },
   {
-    label: 'История анализов',
+    labelKey: 'workspace.privacy.items.history',
     value: analysisHistoryCount,
   },
   {
-    label: 'Переводы',
+    labelKey: 'workspace.privacy.items.translations',
     value: translationHistoryCount,
   },
   {
-    label: 'Сравнения вакансий',
+    labelKey: 'workspace.privacy.items.comparisons',
     value: comparisonVacanciesCount,
   },
   {
-    label: 'Сопроводительное письмо',
-    value: hasCoverLetter ? 'сохранено' : 'не сохранено',
+    labelKey: 'workspace.privacy.items.coverLetter',
+    value: coverLetterHistoryCount,
   },
   {
-    label: 'Размер данных',
+    labelKey: 'workspace.privacy.items.size',
     value: storageSize,
   },
 ];

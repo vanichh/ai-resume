@@ -1,6 +1,7 @@
 import type { ChangeEvent } from 'react';
 
 import { Copy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 import {
@@ -25,16 +26,19 @@ import { selectCoverLetterGeneratorState } from './common/selectors';
 import styles from './CoverLetterGenerator.module.scss';
 
 export const CoverLetterGenerator = () => {
+  const { t } = useTranslation();
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
   const {
     canGenerateCoverLetter,
     coverLetter,
+    coverLetterCompanyName,
     coverLetterCompanyType,
     coverLetterLength,
     coverLetterStatus,
     coverLetterTone,
     coverLetterVariantsCount,
     generateCoverLetter,
+    setCoverLetterCompanyName,
     setCoverLetterCompanyType,
     setCoverLetterLength,
     setCoverLetterText,
@@ -42,6 +46,22 @@ export const CoverLetterGenerator = () => {
     setCoverLetterVariantsCount,
   } = useResumeStore(useShallow(selectCoverLetterGeneratorState));
   const coverLetterVariants = coverLetter?.variants ?? [];
+  const toneOptions = COVER_LETTER_TONE_OPTIONS.map((option) => ({
+    label: t(`workspace.coverLetter.tones.${option.value}`),
+    value: option.value,
+  }));
+  const lengthOptions = COVER_LETTER_LENGTH_OPTIONS.map((option) => ({
+    label: t(`workspace.coverLetter.lengths.${option.value}`),
+    value: option.value,
+  }));
+  const companyOptions = COVER_LETTER_COMPANY_OPTIONS.map((option) => ({
+    label: t(`workspace.coverLetter.companyTypes.${option.value}`),
+    value: option.value,
+  }));
+  const variantsCountOptions = COVER_LETTER_VARIANTS_COUNT_OPTIONS.map((option) => ({
+    label: t(option.labelKey),
+    value: option.value,
+  }));
 
   const onGenerateClick = () => {
     void generateCoverLetter();
@@ -59,6 +79,10 @@ export const CoverLetterGenerator = () => {
     setCoverLetterCompanyType(event.target.value as CoverLetterCompanyType);
   };
 
+  const onCompanyNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCoverLetterCompanyName(event.target.value);
+  };
+
   const onVariantsCountChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setCoverLetterVariantsCount(Number(event.target.value));
   };
@@ -72,7 +96,7 @@ export const CoverLetterGenerator = () => {
       return;
     }
 
-    void copyToClipboardWithNotification(coverLetter.text, 'Письмо скопировано.');
+    void copyToClipboardWithNotification(coverLetter.text, t('workspace.coverLetter.copied'));
   };
 
   const onTextDownloadClick = () => {
@@ -83,10 +107,10 @@ export const CoverLetterGenerator = () => {
     downloadCoverLetterText(coverLetter.text);
   };
 
-  const renderCoverLetterVariant = ({ id, text, title }: CoverLetterVariantType) => {
+  const renderCoverLetterVariant = ({ id, text }: CoverLetterVariantType, index: number) => {
     return (
       <article className={styles.root__variant} key={id}>
-        <h3 className={styles.root__variantTitle}>{title}</h3>
+        <h3 className={styles.root__variantTitle}>{t('workspace.coverLetter.variantTitle', { count: index + 1 })}</h3>
         <p className={styles.root__variantText}>{text}</p>
       </article>
     );
@@ -96,8 +120,8 @@ export const CoverLetterGenerator = () => {
     <section className={styles.root}>
       <div className={styles.root__header}>
         <div>
-          <h2 className={styles.root__title}>Сопроводительное письмо</h2>
-          <p className={styles.root__subtitle}>Генерация под текущую роль, вакансию и анализ резюме.</p>
+          <h2 className={styles.root__title}>{t('workspace.coverLetter.title')}</h2>
+          <p className={styles.root__subtitle}>{t('workspace.coverLetter.subtitle')}</p>
         </div>
         <Button
           disabled={!canGenerateCoverLetter}
@@ -105,30 +129,37 @@ export const CoverLetterGenerator = () => {
           size="medium"
           onClick={onGenerateClick}
         >
-          {coverLetterStatus === 'generating' ? 'Генерация...' : 'Сгенерировать'}
+          {coverLetterStatus === 'generating'
+            ? t('workspace.coverLetter.generating')
+            : t('workspace.coverLetter.generate')}
         </Button>
       </div>
       <div className={styles.root__settings}>
         <label className={styles.root__field}>
-          <span className={styles.root__label}>Тон письма</span>
-          <Select options={COVER_LETTER_TONE_OPTIONS} value={coverLetterTone} onChange={onToneChange} />
-        </label>
-        <label className={styles.root__field}>
-          <span className={styles.root__label}>Длина письма</span>
-          <Select options={COVER_LETTER_LENGTH_OPTIONS} value={coverLetterLength} onChange={onLengthChange} />
-        </label>
-        <label className={styles.root__field}>
-          <span className={styles.root__label}>Тип компании</span>
-          <Select
-            options={COVER_LETTER_COMPANY_OPTIONS}
-            value={coverLetterCompanyType}
-            onChange={onCompanyTypeChange}
+          <span className={styles.root__label}>{t('workspace.coverLetter.companyName')}</span>
+          <input
+            className={styles.root__input}
+            placeholder={t('workspace.coverLetter.companyNamePlaceholder')}
+            value={coverLetterCompanyName}
+            onChange={onCompanyNameChange}
           />
         </label>
         <label className={styles.root__field}>
-          <span className={styles.root__label}>Варианты</span>
+          <span className={styles.root__label}>{t('workspace.coverLetter.tone')}</span>
+          <Select options={toneOptions} value={coverLetterTone} onChange={onToneChange} />
+        </label>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>{t('workspace.coverLetter.length')}</span>
+          <Select options={lengthOptions} value={coverLetterLength} onChange={onLengthChange} />
+        </label>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>{t('workspace.coverLetter.companyType')}</span>
+          <Select options={companyOptions} value={coverLetterCompanyType} onChange={onCompanyTypeChange} />
+        </label>
+        <label className={styles.root__field}>
+          <span className={styles.root__label}>{t('workspace.coverLetter.variants')}</span>
           <Select
-            options={COVER_LETTER_VARIANTS_COUNT_OPTIONS}
+            options={variantsCountOptions}
             value={String(coverLetterVariantsCount)}
             onChange={onVariantsCountChange}
           />
@@ -147,7 +178,7 @@ export const CoverLetterGenerator = () => {
             onChange={onCoverLetterTextChange}
           />
           <div className={styles.root__actions}>
-            <Button aria-label="Копировать сопроводительное письмо" size="small" onClick={onCopyClick}>
+            <Button aria-label={t('workspace.coverLetter.copyAria')} size="small" onClick={onCopyClick}>
               <Copy aria-hidden size={16} />
             </Button>
             <Button size="small" onClick={onTextDownloadClick}>

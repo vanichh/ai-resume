@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE } from '@common/constants';
 import type { ModelStatusType, ResumeAdviceType, ResumeAnalysisStageType } from '@common/types';
 
@@ -24,10 +26,11 @@ export const analyzeResume = async (
   onModelReady?: () => void,
 ): Promise<ResumeAdviceType> => {
   if (!globalThis.LanguageModel) {
-    throw new Error('LanguageModel API недоступен в этом браузере.');
+    throw new Error(i18n.t('workspace.errors.languageModelUnavailable'));
   }
 
   const target = targetInput.trim() || DEFAULT_TARGET_ROLE;
+  const outputLanguage = i18n.resolvedLanguage === 'en' ? 'English' : 'Russian';
   onStageChange?.('preparing');
   const preparedResume = prepareResumeForPrompt(resumeText);
 
@@ -56,14 +59,15 @@ export const analyzeResume = async (
         {
           role: 'user',
           content: [
-            `Целевая роль или вакансия: ${target}`,
-            'Проанализируй резюме ниже под эту цель.',
-            'Верни только JSON по схеме: score, targetRole, sectionScores, summary, strengths, gaps, missingKeywords, rewrittenSummary, rewriteSuggestions, bulletImprovements, actions.',
-            'score: число 0-100, насколько резюме готово под цель.',
-            'sectionScores: оцени отдельные секции Профиль, Опыт, Образование, Навыки, Ключевые слова, Метрики с коротким прикладным comment.',
-            'Рекомендации должны быть применимы к тексту резюме, без общих фраз.',
-            'rewriteSuggestions: дай пары original/improved/reason для самых слабых исходных фрагментов резюме.',
-            'bulletImprovements: перепиши слабые пункты опыта в формате action + impact + metric, если метрик нет - предложи где их добавить.',
+            `Target role or vacancy: ${target}`,
+            'Analyze the resume below against this target.',
+            `Write every user-facing JSON value in ${outputLanguage}.`,
+            'Return only JSON matching the schema: score, targetRole, sectionScores, summary, strengths, gaps, missingKeywords, rewrittenSummary, rewriteSuggestions, bulletImprovements, actions.',
+            'score: a number from 0 to 100 indicating how ready the resume is for the target.',
+            'sectionScores: score Profile, Experience, Education, Skills, Keywords, and Metrics with a short actionable comment.',
+            'Recommendations must apply directly to the resume text and avoid generic advice.',
+            'rewriteSuggestions: provide original/improved/reason pairs for the weakest source fragments.',
+            'bulletImprovements: rewrite weak experience bullets as action + impact + metric; if metrics are missing, suggest where to add them.',
             '',
             preparedResume,
           ].join('\n'),

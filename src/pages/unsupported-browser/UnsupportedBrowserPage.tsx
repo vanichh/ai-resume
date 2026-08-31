@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { RotateCw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -15,6 +16,7 @@ import { selectUnsupportedBrowserPageState } from './common/selectors';
 import styles from './UnsupportedBrowserPage.module.scss';
 
 export const UnsupportedBrowserPage = () => {
+  const { t } = useTranslation();
   const [isCheckingModel, setIsCheckingModel] = useState(false);
   const { checkModelStatus, modelStatus } = useResumeStore(useShallow(selectUnsupportedBrowserPageState));
 
@@ -32,15 +34,15 @@ export const UnsupportedBrowserPage = () => {
   return (
     <section className={styles.root}>
       <div className={styles.root__content}>
-        <p className={styles.root__eyebrow}>Локальная AI-модель недоступна</p>
-        <h1 className={styles.root__title}>{MODEL_STATUS_TITLE[modelStatus]}</h1>
-        <p className={styles.root__description}>{MODEL_STATUS_DESCRIPTION[modelStatus]}</p>
+        <p className={styles.root__eyebrow}>{t('workspace.unsupported.eyebrow')}</p>
+        <h1 className={styles.root__title}>{t(MODEL_STATUS_TITLE[modelStatus])}</h1>
+        <p className={styles.root__description}>{t(MODEL_STATUS_DESCRIPTION[modelStatus])}</p>
         <div className={styles.root__actions}>
           <a className={styles.root__primaryLink} href={CHROME_DOWNLOAD_URL} rel="noreferrer" target="_blank">
-            Скачать Chrome
+            {t('workspace.unsupported.downloadChrome')}
           </a>
           <a className={styles.root__secondaryLink} href={CHROME_APP_URL}>
-            Открыть в Chrome
+            {t('workspace.unsupported.openChrome')}
           </a>
           <Button
             className={styles.root__checkButton}
@@ -49,12 +51,10 @@ export const UnsupportedBrowserPage = () => {
             onClick={onCheckModelClick}
           >
             <RotateCw aria-hidden size={18} />
-            {isCheckingModel ? 'Проверка...' : 'Проверить модель'}
+            {isCheckingModel ? t('workspace.unsupported.checking') : t('workspace.unsupported.check')}
           </Button>
         </div>
-        <p className={styles.root__note}>
-          Прямой загрузки модели из приложения нет: Chrome скачивает её сам при первом обращении к LanguageModel API.
-        </p>
+        <p className={styles.root__note}>{t('workspace.unsupported.note')}</p>
       </div>
     </section>
   );

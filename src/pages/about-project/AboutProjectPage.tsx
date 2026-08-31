@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { SecondaryPageLayout } from '@components/layouts/secondary-page-layout';
 
 import styles from './AboutProjectPage.module.scss';
@@ -11,53 +13,45 @@ const workLinks = [
   {
     label: 'HeadHunter',
     href: 'https://hh.ru/resume/f8413244ff08cfd4a30039ed1f6c334a633134',
-    text: 'Резюме',
+    textKey: 'workspace.about.resumeLink',
   },
-];
+] as const;
 
 const features = [
   {
-    title: 'Анализ резюме',
-    description: 'Проверяем структуру, контактные данные, длину текста, разделы и ключевые слова под вакансию.',
+    key: 'analysis',
   },
   {
-    title: 'Сравнение с вакансией',
-    description: 'Подсвечиваем совпадения по навыкам и показываем, где нужно улучшить описание опыта.',
+    key: 'comparison',
   },
   {
-    title: 'Генерация сопроводительного',
-    description: 'Помогаем быстро собрать сопроводительное письмо на основе вашей цели и вакансии.',
+    key: 'coverLetter',
   },
   {
-    title: 'Локальная работа',
-    description: 'Сервис сохраняет данные в браузере и помогает держать процесс приватным и прозрачным.',
+    key: 'local',
   },
-];
+] as const;
 
 export const AboutProjectPage = () => {
+  const { t } = useTranslation();
+
   return (
     <SecondaryPageLayout className={styles.root}>
       <section className={styles.root__content}>
         <p className={styles.root__eyebrow}>AI Resume Review</p>
-        <h1 className={styles.root__title}>О проекте</h1>
-        <p className={styles.root__lead}>
-          AI Resume Review — это инструмент для кандидатов, которые хотят быстро понять, насколько резюме готово к
-          вакансии и что лучше улучшить перед отправкой.
-        </p>
+        <h1 className={styles.root__title}>{t('workspace.about.title')}</h1>
+        <p className={styles.root__lead}>{t('workspace.about.lead')}</p>
 
-        <p className={styles.root__lead}>
-          Я — опытный разработчик, и меня можно нанять для работы над продуктами, интерфейсами, внутренними
-          инструментами и системами, где важны ясная архитектура, качество кода и внимательное отношение к задачам.
-        </p>
+        <p className={styles.root__lead}>{t('workspace.about.hire')}</p>
 
         <div className={styles.root__contacts}>
-          <h2 className={styles.root__contactsTitle}>Контакты</h2>
+          <h2 className={styles.root__contactsTitle}>{t('workspace.about.contacts')}</h2>
           <ul className={styles.root__contactList}>
-            {workLinks.map(({ href, label, text }) => (
-              <li className={styles.root__contactItem} key={label}>
-                <span className={styles.root__contactLabel}>{label}:</span>{' '}
-                <a className={styles.root__link} href={href} rel="noreferrer" target="_blank">
-                  {text}
+            {workLinks.map((link) => (
+              <li className={styles.root__contactItem} key={link.label}>
+                <span className={styles.root__contactLabel}>{link.label}:</span>{' '}
+                <a className={styles.root__link} href={link.href} rel="noreferrer" target="_blank">
+                  {'textKey' in link ? t(link.textKey) : link.text}
                 </a>
               </li>
             ))}
@@ -65,19 +59,15 @@ export const AboutProjectPage = () => {
         </div>
 
         <div className={styles.root__grid}>
-          {features.map(({ description, title }) => (
-            <article className={styles.root__card} key={title}>
-              <h2 className={styles.root__cardTitle}>{title}</h2>
-              <p className={styles.root__cardText}>{description}</p>
+          {features.map(({ key }) => (
+            <article className={styles.root__card} key={key}>
+              <h2 className={styles.root__cardTitle}>{t(`workspace.about.features.${key}.title`)}</h2>
+              <p className={styles.root__cardText}>{t(`workspace.about.features.${key}.description`)}</p>
             </article>
           ))}
         </div>
 
-        <p className={styles.root__note}>
-          Проект создан, чтобы сделать процесс поиска работы понятнее: меньше ручной проверки, больше ясности по сильным
-          и слабым местам резюме. Если вам нужен опытный разработчик для реализации интерфейсов, продуктов и инженерных
-          решений — буду рад рассмотреть предложение.
-        </p>
+        <p className={styles.root__note}>{t('workspace.about.note')}</p>
       </section>
     </SecondaryPageLayout>
   );

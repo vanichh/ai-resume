@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { createId } from '@common/utils/createId';
 import { analyzeResume } from '@services/resume-advisor';
 
@@ -22,6 +24,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
     analysisAbortController = abortController;
 
     set({
+      activeAnalysisId: null,
       advice: null,
       analysisStage: 'preparing',
       coverLetter: null,
@@ -68,6 +71,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       set((state) => {
         const nextState = {
           ...state,
+          activeAnalysisId: historyItem.id,
           advice,
           analysisHistory: [
             historyItem,
@@ -82,6 +86,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
         persistWorkspace(nextState);
 
         return {
+          activeAnalysisId: nextState.activeAnalysisId,
           advice: nextState.advice,
           analysisStage: null,
           analysisHistory: nextState.analysisHistory,
@@ -97,7 +102,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       set({
         analysisStage: null,
         downloadProgress: null,
-        error: getErrorMessage(caught, 'Не удалось получить рекомендации.'),
+        error: getErrorMessage(caught, i18n.t('workspace.errors.analysis')),
         status: 'error',
       });
     } finally {
@@ -124,6 +129,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
 
   async parseFile(file) {
     set({
+      activeAnalysisId: null,
       advice: null,
       coverLetter: null,
       coverLetterStatus: 'idle',
@@ -140,7 +146,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       const { parseResumeFile } = await import('@services/resume-parser');
       const resumeText = await parseResumeFile(file);
       if (resumeText.length < MIN_RESUME_TEXT_LENGTH) {
-        throw new Error('В файле слишком мало текста для нормального анализа.');
+        throw new Error(i18n.t('workspace.errors.fileTooShort'));
       }
 
       set((currentState) => {
@@ -161,7 +167,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       });
     } catch (caught) {
       set({
-        error: getErrorMessage(caught, 'Не удалось прочитать файл.'),
+        error: getErrorMessage(caught, i18n.t('workspace.errors.fileRead')),
         resumeText: '',
         status: 'error',
       });
@@ -172,6 +178,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
     set((state) => {
       const nextState = {
         ...state,
+        activeAnalysisId: null,
         advice: null,
         comparisonVacancies: resetComparisonResults(state),
         coverLetter: null,
@@ -186,6 +193,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       persistWorkspace(nextState);
 
       return {
+        activeAnalysisId: nextState.activeAnalysisId,
         advice: nextState.advice,
         comparisonVacancies: nextState.comparisonVacancies,
         coverLetter: nextState.coverLetter,
@@ -201,6 +209,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
     set((state) => {
       const nextState = {
         ...state,
+        activeAnalysisId: null,
         advice: null,
         coverLetter: null,
         coverLetterStatus: 'idle' as const,
@@ -211,6 +220,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       persistWorkspace(nextState);
 
       return {
+        activeAnalysisId: nextState.activeAnalysisId,
         advice: nextState.advice,
         coverLetter: nextState.coverLetter,
         coverLetterStatus: nextState.coverLetterStatus,
@@ -224,6 +234,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
     set((state) => {
       const nextState = {
         ...state,
+        activeAnalysisId: null,
         advice: null,
         coverLetter: null,
         coverLetterStatus: 'idle' as const,
@@ -234,6 +245,7 @@ export const createResumeSlice: ResumeSliceCreatorType<ResumeActionsType> = (set
       persistWorkspace(nextState);
 
       return {
+        activeAnalysisId: nextState.activeAnalysisId,
         advice: nextState.advice,
         coverLetter: nextState.coverLetter,
         coverLetterStatus: nextState.coverLetterStatus,

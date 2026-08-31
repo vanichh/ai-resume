@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import clsx from 'clsx';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import type { ToastProps } from './types';
 
@@ -17,6 +18,7 @@ const TOAST_VARIANT_CLASS_NAMES = {
 };
 
 export const Toast = ({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onClose, variant }: ToastProps) => {
+  const { t } = useTranslation();
   useEffect(() => {
     if (!message || autoCloseDelay <= 0) {
       return;
@@ -35,7 +37,7 @@ export const Toast = ({ autoCloseDelay = DEFAULT_AUTO_CLOSE_DELAY, message, onCl
     <div className={clsx(styles.root, TOAST_VARIANT_CLASS_NAMES[variant])} role="alert">
       <p className={styles.root__message}>{message}</p>
       <Button
-        aria-label="Закрыть уведомление"
+        aria-label={t('common.closeNotification')}
         className={styles.root__closeButton}
         size="small"
         variant="ghost"

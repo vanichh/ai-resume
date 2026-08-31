@@ -1,7 +1,7 @@
 import { Languages } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
-import { RESUME_TRANSLATION_LANGUAGE_LABELS, RESUME_TRANSLATION_TONE_LABELS } from '@common/constants';
 import { Button, CollapsibleBlock, EmptyState } from '@components/ui';
 import { useResumeStore } from '@store/resumeStore';
 
@@ -10,10 +10,11 @@ import { selectTranslationHistoryState } from './common/selectors';
 import styles from './TranslationHistory.module.scss';
 
 export const TranslationHistory = () => {
+  const { t } = useTranslation();
   const { activeId, history, selectTranslation } = useResumeStore(useShallow(selectTranslationHistoryState));
 
   return (
-    <CollapsibleBlock className={styles.root} title="История переводов">
+    <CollapsibleBlock className={styles.root} title={t('workspace.translation.historyTitle')}>
       {history.length > 0 ? (
         <ul className={styles.root__list}>
           {history.map((translation) => (
@@ -23,17 +24,17 @@ export const TranslationHistory = () => {
                 variant={translation.id === activeId ? 'primary' : 'secondary'}
                 onClick={() => selectTranslation(translation.id)}
               >
-                {RESUME_TRANSLATION_LANGUAGE_LABELS[translation.language]} ·{' '}
-                {RESUME_TRANSLATION_TONE_LABELS[translation.tone]}
+                {t(`workspace.translation.languages.${translation.language}`)} ·{' '}
+                {t(`workspace.translation.tones.${translation.tone}`)}
               </Button>
             </li>
           ))}
         </ul>
       ) : (
         <EmptyState
-          description="Переведите резюме, чтобы быстро возвращаться к предыдущим версиям."
+          description={t('workspace.translation.historyEmptyDescription')}
           icon={<Languages aria-hidden size={18} />}
-          title="Переводов пока нет"
+          title={t('workspace.translation.historyEmptyTitle')}
         />
       )}
     </CollapsibleBlock>

@@ -18,7 +18,7 @@ export const HomeDetails = () => {
         </div>
         <ul className={styles.root__infoGrid}>
           {HOME_CAPABILITIES.map((item) => (
-            <HomeInfoItem key={item.title} item={item} />
+            <HomeInfoItem key={item.titleKey} item={item} />
           ))}
         </ul>
       </section>
@@ -29,7 +29,7 @@ export const HomeDetails = () => {
         </div>
         <ul className={styles.root__workflow}>
           {HOME_WORKFLOW.map((item) => (
-            <HomeInfoItem key={item.title} item={item} />
+            <HomeInfoItem key={item.titleKey} item={item} />
           ))}
         </ul>
       </section>
@@ -40,7 +40,7 @@ export const HomeDetails = () => {
         </div>
         <ul className={styles.root__useCases}>
           {HOME_USE_CASES.map((item) => (
-            <HomeInfoItem key={item.title} item={item} />
+            <HomeInfoItem key={item.titleKey} item={item} />
           ))}
         </ul>
       </section>

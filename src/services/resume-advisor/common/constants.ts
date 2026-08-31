@@ -1,9 +1,9 @@
-export const DEFAULT_TARGET_ROLE = 'роль не указана, оцени универсально для IT/knowledge work вакансий';
+export const DEFAULT_TARGET_ROLE = 'No target role specified; evaluate broadly for IT and knowledge-work vacancies.';
 
 export const MAX_PROMPT_RESUME_LENGTH = 24000;
 
 export const SYSTEM_PROMPT =
-  'Ты senior career advisor. Анализируй резюме прагматично: конкретика, пробелы, приоритетные улучшения. Отвечай на русском.';
+  'You are a senior career advisor. Analyze resumes pragmatically with specific gaps and prioritized improvements.';
 
 export const RESPONSE_SCHEMA = {
   type: 'object',

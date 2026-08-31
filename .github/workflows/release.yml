@@ -70,6 +70,10 @@ jobs:
         if: steps.release.outputs.exists == 'false'
         run: npm run build
 
+      - name: Deploy GitHub Pages
+        if: steps.release.outputs.exists == 'false'
+        run: npm run deploy
+
       - name: Pack release artifact
         if: steps.release.outputs.exists == 'false'
         env:

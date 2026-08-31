@@ -8,6 +8,10 @@ export const SUPPORTED_LANGUAGES = ['ru', 'en'] as const;
 export type SupportedLanguageType = (typeof SUPPORTED_LANGUAGES)[number];
 
 const getInitialLanguage = (): SupportedLanguageType => {
+  if (typeof window === 'undefined') {
+    return 'ru';
+  }
+
   const storedLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY);
 
   if (storedLanguage === 'ru' || storedLanguage === 'en') {
@@ -26,11 +30,23 @@ void i18n.use(initReactI18next).init({
   supportedLngs: SUPPORTED_LANGUAGES,
 });
 
-document.documentElement.lang = i18n.resolvedLanguage ?? i18n.language;
+const updateDocumentLanguage = (language: string): void => {
+  if (typeof document === 'undefined') {
+    return;
+  }
+
+  document.documentElement.lang = language;
+  document.title = i18n.t('common.appTitle');
+};
+
+updateDocumentLanguage(i18n.resolvedLanguage ?? i18n.language);
 
 i18n.on('languageChanged', (language) => {
-  localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
-  document.documentElement.lang = language;
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+  }
+
+  updateDocumentLanguage(language);
 });
 
 export { i18n };

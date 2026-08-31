@@ -4,6 +4,7 @@ import footer from './footer.json';
 import home from './home.json';
 import language from './language.json';
 import navigation from './navigation.json';
+import workspace from './workspace.json';
 
 export const en = {
   language,
@@ -12,4 +13,5 @@ export const en = {
   analysis,
   common,
   footer,
+  workspace,
 } as const;

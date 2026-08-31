@@ -1,4 +1,5 @@
 import { Copy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { useCopyToClipboardNotification } from '@common/hooks/useCopyToClipboardNotification';
 import { Button } from '@components/ui';
@@ -14,10 +15,11 @@ import type { TranslationActionsProps } from './types';
 import styles from './TranslationActions.module.scss';
 
 export const TranslationActions = ({ translation }: TranslationActionsProps) => {
+  const { t } = useTranslation();
   const copyToClipboardWithNotification = useCopyToClipboardNotification();
 
   const onCopyClick = () => {
-    void copyToClipboardWithNotification(translation.text, 'Перевод скопирован.');
+    void copyToClipboardWithNotification(translation.text, t('workspace.translation.copied'));
   };
 
   const onTextDownloadClick = () => {
@@ -38,7 +40,7 @@ export const TranslationActions = ({ translation }: TranslationActionsProps) => 
 
   return (
     <div className={styles.root}>
-      <Button aria-label="Копировать перевод" size="small" onClick={onCopyClick}>
+      <Button aria-label={t('workspace.translation.copyAria')} size="small" onClick={onCopyClick}>
         <Copy aria-hidden size={16} />
       </Button>
       <Button size="small" onClick={onTextDownloadClick}>

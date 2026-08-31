@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { DEFAULT_LANGUAGE_MODEL_OUTPUT_CODE } from '@common/constants';
 import type { ResumeAdviceType } from '@common/types';
 
@@ -12,7 +14,7 @@ export const generateCorrectedResume = async (
   onModelReady?: () => void,
 ): Promise<string> => {
   if (!globalThis.LanguageModel) {
-    throw new Error('LanguageModel API недоступен в этом браузере.');
+    throw new Error(i18n.t('workspace.errors.languageModelUnavailable'));
   }
 
   const session = await globalThis.LanguageModel.create({
@@ -32,10 +34,10 @@ export const generateCorrectedResume = async (
         {
           role: 'user',
           content: [
-            `Целевая роль: ${targetRole || advice.targetRole}`,
-            vacancyText ? `Вакансия:\n${vacancyText}` : '',
-            `Рекомендации:\n${JSON.stringify(advice)}`,
-            `Исходное резюме:\n${resumeText}`,
+            `Target role: ${targetRole || advice.targetRole}`,
+            vacancyText ? `Vacancy:\n${vacancyText}` : '',
+            `Recommendations:\n${JSON.stringify(advice)}`,
+            `Source resume:\n${resumeText}`,
           ]
             .filter(Boolean)
             .join('\n\n'),

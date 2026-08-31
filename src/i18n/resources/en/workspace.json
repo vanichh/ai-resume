@@ -1,0 +1,275 @@
+{
+  "modelDownload": {
+    "title": "Downloading the local model",
+    "progressAria": "Local model download progress"
+  },
+  "modelHints": {
+    "unsupported": "This browser does not provide the LanguageModel API.",
+    "unavailable": "The model is unavailable on this device or in the current Chrome profile.",
+    "downloadable": "Chrome may download the local model when the first analysis starts.",
+    "downloading": "Chrome is downloading the local model."
+  },
+  "messages": {
+    "workspaceCleared": "Local data cleared."
+  },
+  "errors": {
+    "analysis": "Could not generate recommendations.",
+    "fileTooShort": "The file contains too little text for a reliable analysis.",
+    "fileRead": "Could not read the file.",
+    "fileFormat": "PDF, DOCX, TXT, and MD are supported.",
+    "comparison": "Could not compare the resume with the vacancy.",
+    "translation": "Could not translate the resume.",
+    "unchangedTranslation": "The model returned the original text instead of a translation. Retry or choose another language.",
+    "coverLetter": "Could not generate the cover letter.",
+    "correctedResume": "Could not generate the corrected resume.",
+    "languageModelUnavailable": "The LanguageModel API is unavailable in this browser.",
+    "unexpectedModelResponse": "The model returned an unexpected response format."
+  },
+  "export": {
+    "reportTitle": "Resume recommendations: {{role}}",
+    "score": "Score: {{score}}/100",
+    "sectionScores": "Section scores",
+    "summary": "Summary",
+    "newProfile": "New profile",
+    "beforeAfter": "Before / after",
+    "before": "Before",
+    "after": "After",
+    "reason": "Reason",
+    "strengths": "Strengths",
+    "gaps": "Gaps",
+    "missingKeywords": "Missing keywords",
+    "bulletImprovements": "Experience bullet improvements",
+    "actions": "Actions",
+    "sourceFragment": "Source fragment",
+    "improvedFragment": "Improved version"
+  },
+  "about": {
+    "title": "About the project",
+    "lead": "AI Resume Review helps candidates quickly understand how ready their resume is for a vacancy and what to improve before applying.",
+    "hire": "I am an experienced developer available for product, interface, internal tool, and system development where clear architecture, code quality, and thoughtful execution matter.",
+    "contacts": "Contacts",
+    "resumeLink": "Resume",
+    "note": "The project makes job searching clearer: less manual checking and more insight into resume strengths and weaknesses. If you need an experienced developer for interfaces, products, or engineering solutions, I would be glad to discuss the opportunity.",
+    "features": {
+      "analysis": {
+        "title": "Resume analysis",
+        "description": "Check structure, contact details, text length, sections, and vacancy-specific keywords."
+      },
+      "comparison": {
+        "title": "Vacancy comparison",
+        "description": "Highlight skill matches and identify where the experience description needs improvement."
+      },
+      "coverLetter": {
+        "title": "Cover letter generation",
+        "description": "Quickly prepare a cover letter based on your target role and vacancy."
+      },
+      "local": {
+        "title": "Local processing",
+        "description": "Keep data in the browser for a private and transparent workflow."
+      }
+    }
+  },
+  "history": {
+    "title": "Analysis history",
+    "clearAria": "Clear analysis history",
+    "emptyTitle": "No analysis history yet",
+    "emptyDescription": "Saved results and notes will appear here after the first analysis.",
+    "clearTitle": "Clear history?",
+    "clearDescription": "The analysis history will be permanently deleted.",
+    "noRole": "No role",
+    "removeAria": "Delete analysis",
+    "notePlaceholder": "Analysis note",
+    "removeTitle": "Delete analysis?",
+    "removeDescription": "The analysis will be permanently deleted from history."
+  },
+  "correctedResume": {
+    "title": "Corrected resume",
+    "subtitle": "Review the result, make final edits, and download the document.",
+    "generating": "Generating...",
+    "regenerate": "Generate again",
+    "generate": "Generate resume",
+    "copied": "Corrected resume copied.",
+    "copyAria": "Copy corrected resume",
+    "missingAdviceTitle": "Analyze the resume first",
+    "missingAdviceDescription": "The corrected version is generated from the analysis recommendations.",
+    "emptyTitle": "No corrected version yet",
+    "emptyDescription": "Facts and experience will stay unchanged while structure and wording improve."
+  },
+  "coverLetter": {
+    "pageLoading": "Loading resume text",
+    "title": "Cover letter",
+    "subtitle": "Generate a letter from the current role, vacancy, and resume analysis.",
+    "generating": "Generating...",
+    "generate": "Generate",
+    "tone": "Letter tone",
+    "length": "Letter length",
+    "companyName": "Company",
+    "companyNamePlaceholder": "Company name",
+    "companyType": "Company type",
+    "variants": "Variants",
+    "variantTitle": "Variant {{count}}",
+    "copied": "Cover letter copied.",
+    "copyAria": "Copy cover letter",
+    "historyTitle": "Cover letter history",
+    "historyEmptyTitle": "No cover letters yet",
+    "historyEmptyDescription": "Generated letters and vacancy settings will be saved here.",
+    "historyUntitled": "Cover letter",
+    "historyNoRole": "No role",
+    "historyNoVacancy": "No vacancy description",
+    "historyLinkedAnalysis": "Linked to resume analysis",
+    "historyRemoveAria": "Delete cover letter",
+    "historyRemoveTitle": "Delete cover letter?",
+    "historyRemoveDescription": "The cover letter will be permanently deleted from history.",
+    "variantCounts": {
+      "one": "1 variant",
+      "two": "2 variants",
+      "three": "3 variants"
+    },
+    "tones": {
+      "formal": "Formal",
+      "business": "Business",
+      "friendly": "Friendly",
+      "confident": "Confident",
+      "short": "Concise"
+    },
+    "lengths": {
+      "short": "Short (5-7 sentences)",
+      "standard": "Standard",
+      "detailed": "Detailed"
+    },
+    "companyTypes": {
+      "startup": "Startup",
+      "bank": "Bank",
+      "enterprise": "Enterprise",
+      "product": "Product company",
+      "outsourcing": "Outsourcing"
+    }
+  },
+  "translation": {
+    "pageLoading": "Loading translation page",
+    "title": "Resume translation",
+    "subtitle": "Upload a resume and choose the language and tone for an ATS- and recruiter-friendly translation.",
+    "language": "Translation language",
+    "tone": "Translation tone",
+    "translating": "Translating...",
+    "translate": "Translate resume",
+    "emptyTitle": "The translation will appear here",
+    "emptyDescription": "Upload a resume, choose a language, and start the translation.",
+    "historyTitle": "Translation history",
+    "historyEmptyTitle": "No translations yet",
+    "historyEmptyDescription": "Translate a resume to quickly return to previous versions.",
+    "comparisonTitle": "Original / translation",
+    "original": "Original",
+    "translated": "Translation",
+    "copied": "Translation copied.",
+    "copyAria": "Copy translation",
+    "tones": {
+      "atsFriendly": "ATS-friendly",
+      "formal": "Formal",
+      "concise": "Concise",
+      "recruiterFriendly": "Recruiter-friendly"
+    },
+    "languages": {
+      "arabic": "Arabic",
+      "bulgarian": "Bulgarian",
+      "chineseSimplified": "Simplified Chinese",
+      "chineseTraditional": "Traditional Chinese",
+      "croatian": "Croatian",
+      "czech": "Czech",
+      "danish": "Danish",
+      "dutch": "Dutch",
+      "english": "English",
+      "estonian": "Estonian",
+      "finnish": "Finnish",
+      "french": "French",
+      "german": "German",
+      "greek": "Greek",
+      "hebrew": "Hebrew",
+      "hindi": "Hindi",
+      "hungarian": "Hungarian",
+      "indonesian": "Indonesian",
+      "italian": "Italian",
+      "japanese": "Japanese",
+      "korean": "Korean",
+      "latvian": "Latvian",
+      "lithuanian": "Lithuanian",
+      "norwegian": "Norwegian",
+      "polish": "Polish",
+      "portuguese": "Portuguese",
+      "romanian": "Romanian",
+      "serbian": "Serbian",
+      "slovak": "Slovak",
+      "slovenian": "Slovenian",
+      "spanish": "Spanish",
+      "swedish": "Swedish",
+      "thai": "Thai",
+      "turkish": "Turkish",
+      "ukrainian": "Ukrainian",
+      "vietnamese": "Vietnamese"
+    }
+  },
+  "privacy": {
+    "title": "Privacy",
+    "subtitle": "Data is stored only in this browser's local storage.",
+    "clearAria": "Clear all data",
+    "clearTitle": "Clear all data?",
+    "clearDescription": "All local application data will be permanently deleted.",
+    "saved": "saved",
+    "notSaved": "not saved",
+    "savedFeminine": "saved",
+    "notSavedFeminine": "not saved",
+    "items": {
+      "resume": "Resume text",
+      "history": "Analysis history",
+      "translations": "Translations",
+      "comparisons": "Vacancy comparisons",
+      "coverLetter": "Cover letters",
+      "size": "Data size"
+    }
+  },
+  "comparison": {
+    "pageLoading": "Loading resume text",
+    "title": "Vacancy comparison",
+    "defaultTitle": "Vacancy {{count}}",
+    "subtitle": "Compare up to 4 vacancies against one resume.",
+    "compare": "Compare vacancies",
+    "comparing": "Comparing...",
+    "vacancyTitlePlaceholder": "Vacancy title",
+    "vacancyTextPlaceholder": "Paste the vacancy text",
+    "removeAria": "Delete vacancy",
+    "missingKeywords": "Missing keywords: {{keywords}}",
+    "openResult": "Open result",
+    "removeTitle": "Delete vacancy?",
+    "removeDescription": "The vacancy and comparison result will be permanently deleted.",
+    "statuses": {
+      "idle": "Waiting for analysis",
+      "analyzing": "Analyzing",
+      "done": "Done",
+      "error": "Error"
+    }
+  },
+  "unsupported": {
+    "eyebrow": "Local AI model unavailable",
+    "downloadChrome": "Download Chrome",
+    "openChrome": "Open in Chrome",
+    "checking": "Checking...",
+    "check": "Check model",
+    "note": "The model cannot be downloaded directly from the application. Chrome downloads it on the first LanguageModel API request.",
+    "titles": {
+      "available": "Model available",
+      "checking": "Checking browser support",
+      "downloadable": "Chrome is ready to download the model",
+      "downloading": "Chrome is downloading the model",
+      "unavailable": "Model unavailable in this Chrome profile",
+      "unsupported": "Chrome with LanguageModel API is required"
+    },
+    "descriptions": {
+      "available": "You can return to your resume workspace.",
+      "checking": "Wait a few seconds or run the check again.",
+      "downloadable": "Open the application in a supported Chrome browser and start an analysis to begin downloading the model.",
+      "downloading": "Wait for Chrome to finish downloading the model.",
+      "unavailable": "The LanguageModel API exists, but the model is unavailable for the current profile, device, or Chrome settings. Update Chrome and check built-in AI model availability.",
+      "unsupported": "This browser does not provide the LanguageModel API. Open the application in a Chrome version with built-in AI model support."
+    }
+  }
+}

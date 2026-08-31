@@ -4,6 +4,3 @@ export const TRANSLATION_SYSTEM_PROMPT =
 export const TRANSLATION_CHUNK_MAX_LENGTH = 4500;
 
 export const TRANSLATION_MAX_ATTEMPTS = 2;
-
-export const UNCHANGED_TRANSLATION_ERROR_MESSAGE =
-  'Модель вернула исходный текст вместо перевода. Повторите перевод или выберите другой язык.';

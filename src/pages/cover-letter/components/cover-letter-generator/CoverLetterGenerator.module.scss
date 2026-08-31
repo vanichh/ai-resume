@@ -31,7 +31,7 @@
 
   &__settings {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
 
     margin-top: 14px;
@@ -48,6 +48,28 @@
     color: getColor(slateText);
     font-size: fontSize(12px);
     font-weight: 800;
+  }
+
+  &__input {
+    width: 100%;
+    min-height: var(--control-height-medium);
+    padding: 0 12px;
+
+    border: 1px solid getColor(border);
+    border-radius: var(--control-radius);
+    background: getColor(surfaceBase);
+
+    color: getColor(primaryText);
+
+    transition: var(--control-transition);
+
+    outline: none;
+
+    @include controlFocus;
+
+    &::placeholder {
+      color: getColor(mutedText);
+    }
   }
 
   &__variants {

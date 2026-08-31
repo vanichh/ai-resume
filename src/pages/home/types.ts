@@ -1,3 +1,20 @@
+type HomeFeatureTranslationKeyType = 'home.features.application' | 'home.features.local' | 'home.features.target';
+
+type HomeInfoItemTranslationKeyType =
+  | 'home.capabilities.analysis'
+  | 'home.capabilities.ats'
+  | 'home.capabilities.comparison'
+  | 'home.capabilities.coverLetter'
+  | 'home.capabilities.recommendations'
+  | 'home.capabilities.translation'
+  | 'home.useCases.application'
+  | 'home.useCases.roleChange'
+  | 'home.useCases.translation'
+  | 'home.workflow.improvements'
+  | 'home.workflow.iterate'
+  | 'home.workflow.target'
+  | 'home.workflow.upload';
+
 export type HomeIconType =
   | 'briefcase'
   | 'fileText'
@@ -12,19 +29,19 @@ export type HomeIconType =
   | 'upload';
 
 export type HomeFeatureType = {
-  description: string;
+  descriptionKey: `${HomeFeatureTranslationKeyType}.description`;
   icon: HomeIconType;
-  title: string;
+  titleKey: `${HomeFeatureTranslationKeyType}.title`;
 };
 
 export type HomeInfoItemType = {
-  description: string;
+  descriptionKey: `${HomeInfoItemTranslationKeyType}.description`;
   icon: HomeIconType;
-  title: string;
+  titleKey: `${HomeInfoItemTranslationKeyType}.title`;
 };
 
 export type HomePreviewStepType = {
   progress: 'high' | 'medium' | 'low';
   score: string;
-  title: string;
+  titleKey: 'home.previewSteps.keywords' | 'home.previewSteps.metrics' | 'home.previewSteps.profile';
 };

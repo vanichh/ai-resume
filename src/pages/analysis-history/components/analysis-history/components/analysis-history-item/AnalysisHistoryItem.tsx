@@ -2,6 +2,7 @@ import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 import { Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Modal, Textarea } from '@components/ui';
 
@@ -12,9 +13,10 @@ import type { AnalysisHistoryItemProps } from './types';
 import styles from './AnalysisHistoryItem.module.scss';
 
 export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: AnalysisHistoryItemProps) => {
+  const { t, i18n } = useTranslation();
   const [isRemoveConfirmOpen, setIsRemoveConfirmOpen] = useState(false);
-  const createdAt = formatAnalysisHistoryDate(item.createdAt);
-  const title = item.targetRole || item.advice.targetRole || 'Без роли';
+  const createdAt = formatAnalysisHistoryDate(item.createdAt, i18n.resolvedLanguage);
+  const title = item.targetRole || item.advice.targetRole || t('workspace.history.noRole');
 
   const onSelectClick = () => {
     onSelect(item.id);
@@ -48,7 +50,7 @@ export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: 
         {item.fileName && <span className={styles.root__meta}>{item.fileName}</span>}
       </Button>
       <Button
-        aria-label="Удалить анализ"
+        aria-label={t('workspace.history.removeAria')}
         className={styles.root__removeButton}
         size="small"
         onClick={onRemoveConfirmOpen}
@@ -58,15 +60,15 @@ export const AnalysisHistoryItem = ({ item, onNoteChange, onRemove, onSelect }: 
       <Textarea
         className={styles.root__note}
         minHeight={72}
-        placeholder="Заметка к анализу"
+        placeholder={t('workspace.history.notePlaceholder')}
         value={item.note}
         onChange={onNoteInputChange}
       />
       <Modal
-        confirmLabel="Удалить"
-        description="Анализ будет удален из истории без возможности восстановления."
+        confirmLabel={t('common.delete')}
+        description={t('workspace.history.removeDescription')}
         isOpen={isRemoveConfirmOpen}
-        title="Удалить анализ?"
+        title={t('workspace.history.removeTitle')}
         onClose={onRemoveConfirmClose}
         onConfirm={onRemoveConfirm}
       />

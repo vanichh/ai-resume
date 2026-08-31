@@ -17,12 +17,15 @@ import type {
 } from '@common/types';
 
 export type ResumeStateType = {
+  activeAnalysisId: string | null;
   advice: ResumeAdviceType | null;
   analysisStage: ResumeAnalysisStageType | null;
   analysisHistory: ResumeAnalysisHistoryItemType[];
   comparisonVacancies: VacancyComparisonItemType[];
   coverLetter: CoverLetterType | null;
+  coverLetterCompanyName: string;
   coverLetterCompanyType: CoverLetterCompanyType;
+  coverLetterHistory: CoverLetterType[];
   coverLetterLength: CoverLetterLengthType;
   coverLetterStatus: CoverLetterStatusType;
   coverLetterTone: CoverLetterToneType;
@@ -87,6 +90,9 @@ export type ComparisonActionsType = {
 
 export type CoverLetterActionsType = {
   generateCoverLetter: () => Promise<void>;
+  removeCoverLetter: (id: string) => void;
+  selectCoverLetter: (id: string) => void;
+  setCoverLetterCompanyName: (value: string) => void;
   setCoverLetterCompanyType: (value: CoverLetterCompanyType) => void;
   setCoverLetterLength: (value: CoverLetterLengthType) => void;
   setCoverLetterText: (value: string) => void;

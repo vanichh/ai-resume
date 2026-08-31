@@ -1,3 +1,6 @@
+import { i18n } from '@i18n/index';
+
+import type { CoverLetterType } from '@common/types';
 import { clearResumeWorkspace, loadResumeWorkspace } from '@common/utils/resumeWorkspaceStorage';
 import { getLanguageModelStatus } from '@services/resume-advisor';
 
@@ -7,12 +10,15 @@ import { MODEL_HINTS } from '../common/constants';
 import type { AppActionsType, ResumeStateType } from '../types';
 
 const clearedWorkspaceState: Omit<ResumeStateType, 'modelHint' | 'modelStatus'> = {
+  activeAnalysisId: null,
   advice: null,
   analysisStage: null,
   analysisHistory: [],
   comparisonVacancies: [],
   coverLetter: null,
+  coverLetterCompanyName: '',
   coverLetterCompanyType: 'product' as const,
+  coverLetterHistory: [],
   coverLetterLength: 'standard' as const,
   coverLetterStatus: 'idle' as const,
   coverLetterTone: 'business' as const,
@@ -24,7 +30,7 @@ const clearedWorkspaceState: Omit<ResumeStateType, 'modelHint' | 'modelStatus'> 
   fileName: '',
   resumeText: '',
   status: 'idle' as const,
-  successMessage: 'Локальные данные очищены.',
+  successMessage: '',
   targetRole: '',
   translation: null,
   translationHistory: [],
@@ -33,18 +39,24 @@ const clearedWorkspaceState: Omit<ResumeStateType, 'modelHint' | 'modelStatus'> 
   vacancyText: '',
 };
 
+const normalizeCoverLetter = (coverLetter: CoverLetterType): CoverLetterType => ({
+  ...coverLetter,
+  companyName: coverLetter.companyName ?? '',
+  sourceAnalysisId: coverLetter.sourceAnalysisId ?? null,
+});
+
 export const createAppSlice: ResumeSliceCreatorType<AppActionsType> = (set) => ({
   async checkModelStatus() {
     try {
       const modelStatus = await getLanguageModelStatus();
 
       set({
-        modelHint: MODEL_HINTS[modelStatus] ?? '',
+        modelHint: MODEL_HINTS[modelStatus] ? i18n.t(MODEL_HINTS[modelStatus]) : '',
         modelStatus,
       });
     } catch {
       set({
-        modelHint: MODEL_HINTS.unavailable,
+        modelHint: i18n.t(MODEL_HINTS.unavailable),
         modelStatus: 'unavailable',
       });
     }
@@ -63,7 +75,7 @@ export const createAppSlice: ResumeSliceCreatorType<AppActionsType> = (set) => (
 
   clearWorkspace() {
     clearResumeWorkspace();
-    set(clearedWorkspaceState);
+    set({ ...clearedWorkspaceState, successMessage: i18n.t('workspace.messages.workspaceCleared') });
   },
 
   markLanguageModelReady() {
@@ -76,15 +88,22 @@ export const createAppSlice: ResumeSliceCreatorType<AppActionsType> = (set) => (
 
   restoreWorkspace() {
     const stored = loadResumeWorkspace();
+    const coverLetter = stored.coverLetter ? normalizeCoverLetter(stored.coverLetter) : null;
+    const coverLetterHistory = (stored.coverLetterHistory ?? (coverLetter ? [coverLetter] : [])).map(
+      normalizeCoverLetter,
+    );
     set({
+      activeAnalysisId: stored.activeAnalysisId ?? null,
       analysisHistory: stored.analysisHistory?.map((item) => ({ ...item, note: item.note ?? '' })) ?? [],
       resumeText: stored.resumeText ?? '',
       advice: stored.advice ?? null,
       comparisonVacancies: stored.comparisonVacancies ?? [],
-      coverLetter: stored.coverLetter ?? null,
+      coverLetter,
+      coverLetterCompanyName: stored.coverLetterCompanyName ?? coverLetter?.companyName ?? '',
       coverLetterCompanyType: stored.coverLetterCompanyType ?? 'product',
+      coverLetterHistory,
       coverLetterLength: stored.coverLetterLength ?? 'standard',
-      coverLetterStatus: stored.coverLetter ? 'done' : 'idle',
+      coverLetterStatus: coverLetter ? 'done' : 'idle',
       coverLetterTone: stored.coverLetterTone ?? 'business',
       coverLetterVariantsCount: stored.coverLetterVariantsCount ?? 1,
       status: stored.advice ? 'done' : stored.resumeText ? 'ready' : 'idle',

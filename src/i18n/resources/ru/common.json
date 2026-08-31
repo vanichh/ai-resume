@@ -1,4 +1,5 @@
 {
+  "appTitle": "AI Resume Review — анализ резюме в браузере",
   "cancel": "Отмена",
   "confirm": "Подтвердить",
   "close": "Закрыть",
@@ -10,5 +11,7 @@
   "loading": "Загрузка",
   "noData": "Данных пока нет",
   "expandBlock": "Развернуть блок",
-  "collapseBlock": "Свернуть блок"
+  "collapseBlock": "Свернуть блок",
+  "closeDialog": "Закрыть окно",
+  "closeNotification": "Закрыть уведомление"
 }

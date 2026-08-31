@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { translateResume } from '@services/resume-translator';
 
 import type { ResumeSliceCreatorType } from './types';
@@ -127,7 +129,7 @@ export const createTranslationSlice: ResumeSliceCreatorType<TranslationActionsTy
     } catch (caught) {
       set({
         downloadProgress: null,
-        error: getErrorMessage(caught, 'Не удалось перевести резюме.'),
+        error: getErrorMessage(caught, i18n.t('workspace.errors.translation')),
         status: 'error',
       });
     }

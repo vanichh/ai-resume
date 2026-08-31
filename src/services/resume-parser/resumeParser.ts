@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import { TEXT_LIKE_EXTENSIONS } from './common/constants';
 import { normalizeText } from './common/utils/normalizeText';
 
@@ -20,5 +22,5 @@ export const parseResumeFile = async (file: File): Promise<string> => {
     return normalizeText(await file.text());
   }
 
-  throw new Error('Поддерживаются PDF, DOCX, TXT и MD.');
+  throw new Error(i18n.t('workspace.errors.fileFormat'));
 };

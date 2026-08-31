@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 import { getResumeWorkspaceStorageSize } from '@common/utils/resumeWorkspaceStorage';
@@ -21,12 +22,13 @@ const formatStorageSize = (bytes: number): string => {
 };
 
 export const PrivacyCenter = () => {
+  const { t } = useTranslation();
   const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
   const {
     analysisHistoryCount,
     clearWorkspace,
     comparisonVacanciesCount,
-    coverLetter,
+    coverLetterHistoryCount,
     resumeText,
     translationHistoryCount,
   } = useResumeStore(useShallow(selectPrivacyCenterState));
@@ -34,8 +36,10 @@ export const PrivacyCenter = () => {
   const storageItems = getPrivacyStorageItems({
     analysisHistoryCount,
     comparisonVacanciesCount,
-    hasCoverLetter: Boolean(coverLetter),
+    coverLetterHistoryCount,
+    notSaved: t('workspace.privacy.notSaved'),
     resumeText,
+    saved: t('workspace.privacy.saved'),
     storageSize,
     translationHistoryCount,
   });
@@ -58,27 +62,27 @@ export const PrivacyCenter = () => {
       <CollapsibleBlock
         className={styles.root}
         headerAction={
-          <Button aria-label="Очистить все данные" size="small" onClick={onClearConfirmOpen}>
+          <Button aria-label={t('workspace.privacy.clearAria')} size="small" onClick={onClearConfirmOpen}>
             <Trash2 aria-hidden size={16} />
           </Button>
         }
-        title="Приватность"
+        title={t('workspace.privacy.title')}
       >
-        <p className={styles.root__subtitle}>Данные сохраняются только в локальном хранилище браузера.</p>
+        <p className={styles.root__subtitle}>{t('workspace.privacy.subtitle')}</p>
         <dl className={styles.root__list}>
-          {storageItems.map(({ label, value }) => (
-            <div className={styles.root__item} key={label}>
-              <dt>{label}</dt>
+          {storageItems.map(({ labelKey, value }) => (
+            <div className={styles.root__item} key={labelKey}>
+              <dt>{t(labelKey)}</dt>
               <dd>{value}</dd>
             </div>
           ))}
         </dl>
       </CollapsibleBlock>
       <Modal
-        confirmLabel="Очистить"
-        description="Все локальные данные приложения будут удалены без возможности восстановления."
+        confirmLabel={t('common.clear')}
+        description={t('workspace.privacy.clearDescription')}
         isOpen={isClearConfirmOpen}
-        title="Очистить все данные?"
+        title={t('workspace.privacy.clearTitle')}
         onClose={onClearConfirmClose}
         onConfirm={onClearConfirm}
       />

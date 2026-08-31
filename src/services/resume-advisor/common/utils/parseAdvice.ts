@@ -1,3 +1,5 @@
+import { i18n } from '@i18n/index';
+
 import type { ResumeAdviceType } from '@common/types';
 
 export const parseAdvice = (response: string): ResumeAdviceType => {
@@ -16,7 +18,7 @@ export const parseAdvice = (response: string): ResumeAdviceType => {
     !Array.isArray(parsed.bulletImprovements) ||
     !Array.isArray(parsed.actions)
   ) {
-    throw new Error('Модель вернула неожиданный формат ответа.');
+    throw new Error(i18n.t('workspace.errors.unexpectedModelResponse'));
   }
 
   return {

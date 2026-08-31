@@ -136,9 +136,11 @@ export type CoverLetterVariantType = {
 
 export type CoverLetterType = {
   id: string;
+  companyName: string;
   createdAt: string;
   companyType: CoverLetterCompanyType;
   length: CoverLetterLengthType;
+  sourceAnalysisId: string | null;
   targetRole: string;
   tone: CoverLetterToneType;
   vacancyText: string;

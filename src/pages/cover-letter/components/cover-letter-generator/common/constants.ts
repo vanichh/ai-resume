@@ -1,5 +1,5 @@
 export const COVER_LETTER_VARIANTS_COUNT_OPTIONS = [
-  { label: '1 вариант', value: '1' },
-  { label: '2 варианта', value: '2' },
-  { label: '3 варианта', value: '3' },
-];
+  { labelKey: 'workspace.coverLetter.variantCounts.one', value: '1' },
+  { labelKey: 'workspace.coverLetter.variantCounts.two', value: '2' },
+  { labelKey: 'workspace.coverLetter.variantCounts.three', value: '3' },
+] as const;

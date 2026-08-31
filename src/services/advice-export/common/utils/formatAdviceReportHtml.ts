@@ -1,9 +1,11 @@
+import { i18n } from '@i18n/index';
+
 import type { ResumeAdviceType } from '@common/types';
 
 export const formatAdviceReportHtml = (advice: ResumeAdviceType): string => {
   return [
     '<!doctype html>',
-    '<html lang="ru">',
+    `<html lang="${i18n.resolvedLanguage ?? i18n.language}">`,
     '<head>',
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -19,15 +21,15 @@ export const formatAdviceReportHtml = (advice: ResumeAdviceType): string => {
     '</div>',
     `<strong class="score">${advice.score}/100</strong>`,
     '</section>',
-    reportSection('Краткая оценка', `<p>${escapeHtml(advice.summary)}</p>`),
-    reportSection('Оценки по разделам', formatSectionScores(advice)),
-    reportSection('Новый профиль', `<p>${escapeHtml(advice.rewrittenSummary)}</p>`),
-    reportSection('До / после', formatRewriteSuggestions(advice)),
-    reportSection('Сильные стороны', formatList(advice.strengths)),
-    reportSection('Пробелы', formatList(advice.gaps)),
-    reportSection('Недостающие ключевые слова', formatTags(advice.missingKeywords)),
-    reportSection('Правки пунктов опыта', formatList(advice.bulletImprovements)),
-    reportSection('Действия', formatList(advice.actions)),
+    reportSection(i18n.t('workspace.export.summary'), `<p>${escapeHtml(advice.summary)}</p>`),
+    reportSection(i18n.t('workspace.export.sectionScores'), formatSectionScores(advice)),
+    reportSection(i18n.t('workspace.export.newProfile'), `<p>${escapeHtml(advice.rewrittenSummary)}</p>`),
+    reportSection(i18n.t('workspace.export.beforeAfter'), formatRewriteSuggestions(advice)),
+    reportSection(i18n.t('workspace.export.strengths'), formatList(advice.strengths)),
+    reportSection(i18n.t('workspace.export.gaps'), formatList(advice.gaps)),
+    reportSection(i18n.t('workspace.export.missingKeywords'), formatTags(advice.missingKeywords)),
+    reportSection(i18n.t('workspace.export.bulletImprovements'), formatList(advice.bulletImprovements)),
+    reportSection(i18n.t('workspace.export.actions'), formatList(advice.actions)),
     '</main>',
     '</body>',
     '</html>',
@@ -53,9 +55,9 @@ const formatRewriteSuggestions = (advice: ResumeAdviceType): string => {
   return `<div class="rewriteList">${advice.rewriteSuggestions
     .map(
       (suggestion) =>
-        `<article class="rewriteItem"><h3>Исходный фрагмент</h3><p>${escapeHtml(
+        `<article class="rewriteItem"><h3>${escapeHtml(i18n.t('workspace.export.sourceFragment'))}</h3><p>${escapeHtml(
           suggestion.original,
-        )}</p><h3>Улучшенный вариант</h3><p>${escapeHtml(suggestion.improved)}</p><p class="note">${escapeHtml(
+        )}</p><h3>${escapeHtml(i18n.t('workspace.export.improvedFragment'))}</h3><p>${escapeHtml(suggestion.improved)}</p><p class="note">${escapeHtml(
           suggestion.reason,
         )}</p></article>`,
     )

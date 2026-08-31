@@ -10,12 +10,15 @@ import { createTranslationSlice } from './slices/translationSlice';
 import type { ResumeStateType, ResumeStoreType } from './types';
 
 const initialState: ResumeStateType = {
+  activeAnalysisId: null,
   advice: null,
   analysisStage: null,
   analysisHistory: [],
   comparisonVacancies: [],
   coverLetter: null,
+  coverLetterCompanyName: '',
   coverLetterCompanyType: 'product',
+  coverLetterHistory: [],
   coverLetterLength: 'standard',
   coverLetterStatus: 'idle',
   coverLetterTone: 'business',

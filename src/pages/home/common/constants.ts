@@ -3,18 +3,18 @@ import type { HomeFeatureType, HomeInfoItemType, HomePreviewStepType } from '../
 export const HOME_FEATURES = [
   {
     icon: 'lock',
-    title: 'Работает локально',
-    description: 'Текст резюме остается в браузере, без отправки на внешний сервер.',
+    titleKey: 'home.features.local.title',
+    descriptionKey: 'home.features.local.description',
   },
   {
     icon: 'target',
-    title: 'Оценивает под роль',
-    description: 'Сверяет резюме с целевой позицией, ATS-словами и требованиями вакансии.',
+    titleKey: 'home.features.target.title',
+    descriptionKey: 'home.features.target.description',
   },
   {
     icon: 'send',
-    title: 'Помогает с откликом',
-    description: 'Готовит рекомендации, перевод, сравнение вакансий и сопроводительное письмо.',
+    titleKey: 'home.features.application.title',
+    descriptionKey: 'home.features.application.description',
   },
 ] as const satisfies readonly HomeFeatureType[];
 
@@ -22,95 +22,90 @@ export const HOME_PREVIEW_STEPS = [
   {
     progress: 'high',
     score: '82/100',
-    title: 'Профиль',
+    titleKey: 'home.previewSteps.profile',
   },
   {
     progress: 'medium',
     score: '74/100',
-    title: 'Ключевые слова',
+    titleKey: 'home.previewSteps.keywords',
   },
   {
     progress: 'low',
     score: '68/100',
-    title: 'Метрики',
+    titleKey: 'home.previewSteps.metrics',
   },
 ] as const satisfies readonly HomePreviewStepType[];
 
 export const HOME_CAPABILITIES = [
   {
     icon: 'scanSearch',
-    title: 'Разбор резюме',
-    description:
-      'Сервис показывает общий score, оценивает профиль, опыт, образование, навыки, ключевые слова и метрики.',
+    titleKey: 'home.capabilities.analysis.title',
+    descriptionKey: 'home.capabilities.analysis.description',
   },
   {
     icon: 'sparkles',
-    title: 'Рекомендации по тексту',
-    description:
-      'Вы получаете слабые места, сильные стороны, missing keywords и варианты, как переписать фрагменты резюме.',
+    titleKey: 'home.capabilities.recommendations.title',
+    descriptionKey: 'home.capabilities.recommendations.description',
   },
   {
     icon: 'target',
-    title: 'ATS и вакансия',
-    description:
-      'Можно вставить текст вакансии, сверить совпадения по ключевым словам и понять, чего не хватает для конкретной роли.',
+    titleKey: 'home.capabilities.ats.title',
+    descriptionKey: 'home.capabilities.ats.description',
   },
   {
     icon: 'languages',
-    title: 'Перевод резюме',
-    description:
-      'Отдельный раздел помогает перевести резюме в выбранном тоне: формально, кратко, ATS-friendly или для рекрутера.',
+    titleKey: 'home.capabilities.translation.title',
+    descriptionKey: 'home.capabilities.translation.description',
   },
   {
     icon: 'gitCompare',
-    title: 'Сравнение вакансий',
-    description: 'Добавьте несколько вакансий и сравните, под какую из них текущее резюме выглядит сильнее.',
+    titleKey: 'home.capabilities.comparison.title',
+    descriptionKey: 'home.capabilities.comparison.description',
   },
   {
     icon: 'mail',
-    title: 'Сопроводительное письмо',
-    description:
-      'На основе резюме и вакансии можно подготовить черновик письма, который проще доработать под конкретный отклик.',
+    titleKey: 'home.capabilities.coverLetter.title',
+    descriptionKey: 'home.capabilities.coverLetter.description',
   },
 ] as const satisfies readonly HomeInfoItemType[];
 
 export const HOME_WORKFLOW = [
   {
     icon: 'upload',
-    title: '1. Загрузите файл',
-    description: 'Поддерживаются PDF, DOCX, TXT и MD. Текст извлекается прямо в браузере.',
+    titleKey: 'home.workflow.upload.title',
+    descriptionKey: 'home.workflow.upload.description',
   },
   {
     icon: 'target',
-    title: '2. Укажите цель',
-    description: 'Добавьте роль или вакансию, чтобы рекомендации были не общими, а прикладными.',
+    titleKey: 'home.workflow.target.title',
+    descriptionKey: 'home.workflow.target.description',
   },
   {
     icon: 'fileText',
-    title: '3. Заберите правки',
-    description: 'Используйте score, рекомендации, экспорт и историю анализов для следующей итерации резюме.',
+    titleKey: 'home.workflow.improvements.title',
+    descriptionKey: 'home.workflow.improvements.description',
   },
   {
     icon: 'sparkles',
-    title: '4. Улучшайте резюме',
-    description: 'Вносите правки, усиливайте ключевые блоки и повышайте шансы на отклик.',
+    titleKey: 'home.workflow.iterate.title',
+    descriptionKey: 'home.workflow.iterate.description',
   },
 ] as const satisfies readonly HomeInfoItemType[];
 
 export const HOME_USE_CASES = [
   {
     icon: 'send',
-    title: 'Перед отправкой отклика',
-    description: 'Быстро проверить, насколько резюме совпадает с описанием вакансии.',
+    titleKey: 'home.useCases.application.title',
+    descriptionKey: 'home.useCases.application.description',
   },
   {
     icon: 'languages',
-    title: 'Перед переводом резюме',
-    description: 'Подготовить англоязычную версию без потери структуры и ключевых формулировок.',
+    titleKey: 'home.useCases.translation.title',
+    descriptionKey: 'home.useCases.translation.description',
   },
   {
     icon: 'briefcase',
-    title: 'Перед сменой роли',
-    description: 'Понять, какие навыки и достижения стоит поднять выше для новой позиции.',
+    titleKey: 'home.useCases.roleChange.title',
+    descriptionKey: 'home.useCases.roleChange.description',
   },
 ] as const satisfies readonly HomeInfoItemType[];

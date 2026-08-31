@@ -1,0 +1,67 @@
+.root {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+
+  min-width: 0;
+
+  &__selectButton {
+    display: block;
+
+    min-width: 0;
+
+    text-align: left;
+  }
+
+  &__removeButton {
+    align-self: stretch;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    min-width: 0;
+
+    font-size: fontSize(12px);
+  }
+
+  &__header strong {
+    overflow: hidden;
+
+    font-size: fontSize(14px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__header span {
+    flex: none;
+
+    color: getColor(mutedText);
+    font-weight: 500;
+  }
+
+  &__meta,
+  &__source {
+    display: block;
+
+    margin-top: 5px;
+    overflow: hidden;
+
+    font-size: fontSize(12px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__source {
+    color: getColor(accentText);
+    font-weight: 700;
+  }
+}
+
+@include mediaMax(mobile) {
+  .root {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
