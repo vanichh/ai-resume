@@ -72,10 +72,12 @@ jobs:
 
       - name: Deploy GitHub Pages
         if: steps.release.outputs.exists == 'false'
+        env:
+          REPOSITORY_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          npm run deploy
+          npm run deploy -- --repo "$REPOSITORY_URL" --silent
 
       - name: Pack release artifact
         if: steps.release.outputs.exists == 'false'
