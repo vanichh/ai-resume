@@ -1,0 +1,5 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/parsePdf-2tWKoWSG.js","assets/index-Cd7YTYM4.js","assets/index-CgtjbcTW.css","assets/parseDocx-DLdpMMqc.js"])))=>i.map(i=>d[i]);
+import{_ as o,m as a}from"./index-Cd7YTYM4.js";const s=new Set(["txt","md","markdown"]),p=t=>t.replace(/\r\n?/g,`
+`).replace(/[ \t]+$/gm,"").replace(/\n{3,}/g,`
+
+`).replace(/^\n+|\n+$/g,""),c=async t=>{const e=t.name.split(".").pop()?.toLowerCase()??"";if(t.type==="application/pdf"||e==="pdf"){const{parsePdf:r}=await o(async()=>{const{parsePdf:n}=await import("./parsePdf-2tWKoWSG.js");return{parsePdf:n}},__vite__mapDeps([0,1,2]));return r(t)}if(t.type==="application/vnd.openxmlformats-officedocument.wordprocessingml.document"||e==="docx"){const{parseDocx:r}=await o(async()=>{const{parseDocx:n}=await import("./parseDocx-DLdpMMqc.js");return{parseDocx:n}},__vite__mapDeps([3,1,2]));return r(t)}if(t.type.startsWith("text/")||s.has(e))return p(await t.text());throw new Error(a.t("workspace.errors.fileFormat"))},_=Object.freeze(Object.defineProperty({__proto__:null,parseResumeFile:c},Symbol.toStringTag,{value:"Module"}));export{_ as i,p as n};
